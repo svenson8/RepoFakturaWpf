@@ -31,7 +31,7 @@ namespace FakturaWpf
         private void MainWindow1_Closed(object sender, EventArgs e)
         {
             Environment.Exit(-1);
-            ///sdsdasasa
+            ///sdsd
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -54,8 +54,10 @@ namespace FakturaWpf
             {
                 Title = " Dane użytkownika uprzywilejowanego",
                 Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
-               // Height = 450,
-               // Width = 800,
+                 Height = 420,
+                 Width = 580,
+                MaximizeBox = false,
+                Resizable = false,
                 Content = new UserEdit()
             });
 

@@ -138,6 +138,9 @@
   <ItemGroup>
     <Resource Include="Resources\tlo.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\anuluj16.ico" />
+    <Resource Include="Resources\zapisz16.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

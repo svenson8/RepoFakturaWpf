@@ -4,11 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Users"
-             mc:Ignorable="d" Height="438.85" Width="676.847">
+             mc:Ignorable="d" Height="368.103" Width="562.276" >
     <DockPanel >
-        <TabControl x:Name="tabControl">
+        <TabControl DockPanel.Dock="Top" x:Name="tabControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <TabItem Header="Dane szczegółowe użytkownika">
-                <Grid Background="#FFE5E5E5"/>
+                
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Nazwa:"  Grid.Row="1" Grid.Column="0" Margin="100,0,0,0"></Label>
+                    <TextBox x:Name="TX_Name" Grid.Row="1" Grid.Column="0" Width="200" Height="20" Margin="0,0,0,0"></TextBox>
+                    
+                    <Label Content="Hasło:"  Grid.Row="2" Grid.Column="0" Margin="105,0,0,0"></Label>
+                    <TextBox x:Name="TX_Passsword" Grid.Row="2" Grid.Column="0" Width="200" Height="20" Margin="170,0,0,0"></TextBox>
+
+                    <Label Content="Powtórz hasło:"  Grid.Row="3" Grid.Column="0" Margin="60,0,0,0"></Label>
+                    <TextBox x:Name="TX_Passsword_rep" Grid.Row="3" Grid.Column="0" Width="200" Height="20" Margin="170,0,0,0"></TextBox>
+
+                    <Label Content="Imię:"  Grid.Row="4" Grid.Column="0" Margin="110,0,0,0"></Label>
+                    <TextBox x:Name="TX_Name_Us" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="170,0,0,0"></TextBox>
+
+                    <Label Content="Nazwisko:"  Grid.Row="5" Grid.Column="0" Margin="85,0,0,0"></Label>
+                    <TextBox x:Name="TX_Surname" Grid.Row="5" Grid.Column="0" Width="200" Height="20" Margin="170,0,0,0"></TextBox>
+
+                    <Label Content="Telefon:"  Grid.Row="6" Grid.Column="0" Margin="95,0,0,0"></Label>
+                    <TextBox x:Name="TX_Phone" Grid.Row="6" Grid.Column="0" Width="200" Height="20" Margin="170,0,0,0"></TextBox>
+
+                    <Label Content="(***) Wypełnienie tych pól jest wymagane"  Grid.Row="7" Grid.Column="0" Margin="20,100,0,0" ></Label>
+
+                    <Button x:Name="button" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" 
+                             Width="130" Height="28" FontSize="14">
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Image Source="/FakturaWpf;component/Resources/zapisz16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
+                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">F5 Zapisz</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="button2" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" Margin="415,5,0,0" VerticalAlignment="Top" 
+                             Width="130" Height="28" FontSize="14">
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Image Source="/FakturaWpf;component/Resources/anuluj16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
+                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Esc Anuluj</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5"/>
