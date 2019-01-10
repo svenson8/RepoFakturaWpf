@@ -31,7 +31,7 @@ namespace FakturaWpf
         private void MainWindow1_Closed(object sender, EventArgs e)
         {
             Environment.Exit(-1);
-            ///sdsd
+            ///sdsdasasa
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
