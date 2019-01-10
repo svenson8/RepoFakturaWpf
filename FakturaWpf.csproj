@@ -50,7 +50,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPF.MDI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\WPF.MDI.dll</HintPath>
+      <HintPath>MyDlls\WPF.MDI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
