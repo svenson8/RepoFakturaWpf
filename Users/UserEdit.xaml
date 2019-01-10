@@ -19,7 +19,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -42,9 +42,9 @@
                     <Label Content="Telefon:"  Grid.Row="6" Grid.Column="0" Margin="95,0,0,0"></Label>
                     <TextBox x:Name="TX_Phone" Grid.Row="6" Grid.Column="0" Width="200" Height="20" Margin="170,0,0,0"></TextBox>
 
-                    <Label Content="(***) Wypełnienie tych pól jest wymagane"  Grid.Row="7" Grid.Column="0" Margin="20,100,0,0" ></Label>
+                    <Label Content="(***) Wypełnienie tych pól jest wymagane"  Grid.Row="7" Grid.Column="0" Margin="20,95,0,0" Foreground="DimGray"></Label>
 
-                    <Button x:Name="button" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" 
+                    <Button x:Name="button" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" 
                              Width="130" Height="28" FontSize="14">
                         <StackPanel Orientation="Horizontal" Margin="0">
                             <Image Source="/FakturaWpf;component/Resources/zapisz16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
@@ -52,7 +52,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="button2" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" Margin="415,5,0,0" VerticalAlignment="Top" 
+                    <Button x:Name="button2" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" Margin="415,10,0,0" VerticalAlignment="Top" 
                              Width="130" Height="28" FontSize="14">
                         <StackPanel Orientation="Horizontal" Margin="0">
                             <Image Source="/FakturaWpf;component/Resources/anuluj16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
