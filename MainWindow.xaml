@@ -1,0 +1,62 @@
+﻿<Window x:Name="MainWindow1" x:Class="FakturaWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FakturaWpf"
+        xmlns:mdi="clr-namespace:WPF.MDI;assembly=WPF.MDI"
+        mc:Ignorable="d"
+        Title="Faktura 1.0" Height="482.773" Width="835.294" Closed="MainWindow1_Closed" Icon="Resources/faktura.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Dokumenty handlowe">
+                <MenuItem Header="_Dokumenty sprzedaży" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Image Source="Resources/faktura sprzedazy16.ico" />
+                </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+            <MenuItem Header="Administracja">
+                <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/faktura sprzedazy16.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarPanel DockPanel.Dock="Top">
+            <ToolBar x:Name="ToolBarMain">
+                <Button Content="Faktura" />
+                <Button Content="Sprzedaż" />
+                <Button Content="Zakup" />
+            </ToolBar>
+        </ToolBarPanel>
+        <TreeView DockPanel.Dock="Left" x:Name="treeView">
+            <TreeView.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFBFE6BF" Offset="1"/>
+                    <GradientStop Color="#FFD9F0D9" Offset="0.141"/>
+                    <GradientStop Color="#FFE4F0E4" Offset="0.348"/>
+                </LinearGradientBrush>
+            </TreeView.Background>
+            <TreeViewItem Header="AKTYWNE OKNA">
+                <TreeViewItem Header="Okno1"></TreeViewItem>
+                <TreeViewItem Header="Okno2"></TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Width="736">
+                <TextBlock Name="lblCursorPosition" />
+            </StatusBarItem>
+        </StatusBar>
+        <mdi:MdiContainer x:Name="MdiMain" Theme="Aero" DockPanel.Dock="Right">
+            <mdi:MdiContainer.Background>
+                <ImageBrush ImageSource="Resources/tlo.jpg"/>
+            </mdi:MdiContainer.Background>
+        </mdi:MdiContainer>
+        
+
+    </DockPanel>
+</Window>

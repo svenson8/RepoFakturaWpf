@@ -1,0 +1,19 @@
+﻿<UserControl x:Name="WIN_UserEdit" x:Class="FakturaWpf.Users.UserEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FakturaWpf.Users"
+             mc:Ignorable="d" Height="438.85" Width="676.847">
+    <DockPanel >
+        <TabControl x:Name="tabControl">
+            <TabItem Header="Dane szczegółowe użytkownika">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem" Visibility="Hidden">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+    </DockPanel>
+</UserControl>
