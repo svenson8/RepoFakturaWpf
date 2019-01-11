@@ -21,7 +21,7 @@ namespace FakturaWpf
             string pathf = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
             if (!File.Exists(pathf))
             {
-                Various.Error("Brak pliku cinfig.ini", "Błąd");
+                Various.Error("Brak pliku config.ini", "Błąd");
                 return false;
             }
 
@@ -30,14 +30,36 @@ namespace FakturaWpf
                                 ";password=" + ini.IniReadValue("Settings", "Password") +
                                 ";server=" + ini.IniReadValue("Settings", "Server") +
                                 ";Trusted_Connection=" + ini.IniReadValue("Settings", "Trusted") +
-                                ";database=" + ini.IniReadValue("Settings", "Database") +
                                 ";connection timeout=" + ini.IniReadValue("Settings", "Timeout");
                                 //MultipleActiveResultSets = True
 
-            conn = new SqlConnection(ConnectionString);
+           
+
+
+
+            if (NewConnect) {
+                CheckOrCreateDB(ini.IniReadValue("Settings", "Database"));
+            } else
+                return false;
+
+            return true;
+        }
+
+        private static Boolean NewConnect(string database = "")
+        {
+            if (database != String.Empty)
+              ConnectionString += ";database=" + database;
+
+            if (conn != null)
+            {
+                conn.Dispose();
+                conn = new SqlConnection(ConnectionString)
+            }
+
             try
             {
-                conn.Open();                
+                conn.Open();
+                CheckOrCreateDB(ini.IniReadValue("Settings", "Database"));
             }
             catch (Exception e)
             {
@@ -45,7 +67,53 @@ namespace FakturaWpf
                 return false;
             }
 
-            return true;
+
+        }
+
+        private static void CheckOrCreateDB(string database)
+        {
+            NQueryReader nq = new NQueryReader("SELECT * FROM master.dbo.sysdatabases where name = '" + database + "'");
+            Boolean exist = false;
+            
+            while (nq.NReader.Read())
+            {
+                exist = true;
+            }
+            nq.NReader.Close();
+
+            if (!exist)
+            {
+             if (Various.Question("Baza danych: "+database+" nie istnieje. Czy utworzyć ?", "Pytanie"))
+                {
+                     NQuery nQ = new NQuery("CREATE DATABASE "+database);
+                     if (nQ.WellDone) {
+                        Various.InfoOk("Baza " + database + " utworozna pomyślnie", "Potwierdzenie");
+                        ConnectionString += ";database=" + database;
+                        if (conn != null)
+                        {
+                            conn.Dispose();
+                            conn = new SqlConnection(ConnectionString);
+                            try
+                            {
+                                conn.Open();
+                                UserClass.ThisTableCheck();
+                                UserClass us = new UserClass(0, "admin", "a");
+                                us.SaveUser();
+                            }
+                            catch (Exception e)
+                            {
+                                Various.Error(e.Message, "Błąd");
+                                Environment.Exit(-1);
+                            }
+
+                        }
+
+                    } else
+                        Environment.Exit(-1);
+                } else
+                    Environment.Exit(-1);
+            } else
+                ConnectionString += ";database=" + database;
         }
 
         public static Boolean TableCheck(string tableName, List<Params> list)
@@ -58,6 +126,17 @@ namespace FakturaWpf
                 exist = true;                
             }
             nq.NReader.Close();
+
+            if (!exist)
+            {
+                NQuery nQ = new NQuery("create table " + tableName + "( " +
+                                       "[ID][int] IDENTITY(1, 1) NOT NULL, " +
+                                       "CONSTRAINT[PK_" + tableName + "] PRIMARY KEY CLUSTERED " +
+                                       "( [ID] ASC ) " +
+                                       ") ON [PRIMARY] ");
+                if (nQ.WellDone)
+                    exist = true;
+            }
 
             if (exist)
             {

@@ -36,10 +36,10 @@
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Anuluj</TextBlock>
             </StackPanel>
         </Button>            
-        <TextBox x:Name="TB_LOGIN" HorizontalAlignment="Left" Height="23" Margin="159,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.ColumnSpan="2" FontSize="14" Text="seb"/>
+        <TextBox x:Name="TB_LOGIN" HorizontalAlignment="Left" Height="23" Margin="159,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.ColumnSpan="2" FontSize="14" Text="admin"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="79,72,0,0" TextWrapping="Wrap" Text="Login:" VerticalAlignment="Top" Height="22" Width="51" FontSize="14"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="79,120,0,0" TextWrapping="Wrap" Text="Hasło:" VerticalAlignment="Top" Height="22" Width="51" FontSize="14"/>
-        <PasswordBox x:Name="TB_HASLO" HorizontalAlignment="Left" Margin="159,121,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="209" Password="123"/>
+        <PasswordBox x:Name="TB_HASLO" HorizontalAlignment="Left" Margin="159,121,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="209" Password="a"/>
 
     </Grid>
 </Window>

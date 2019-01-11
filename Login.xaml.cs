@@ -26,7 +26,20 @@ namespace FakturaWpf
                 Environment.Exit(-1);
             }
 
+            if (!CheckDbStructure())
+            {
+                Environment.Exit(-1);
+            }
+
             InitializeComponent();
+        }
+
+        private Boolean CheckDbStructure()
+        {
+            Boolean result;
+            result = UserClass.ThisTableCheck();
+
+            return result;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

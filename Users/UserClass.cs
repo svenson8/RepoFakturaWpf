@@ -22,6 +22,20 @@ namespace FakturaWpf
 
         public const string TABLENAME = "Tlogin";
 
+        public UserClass(int id, string nazwa, string haslo, string imie="", string nazwisko="", DateTime dataw=default(DateTime), string telefon="")
+        {
+            this.ID = id;
+            this.NAZWA = nazwa;
+            this.HASLO = haslo;
+            this.IMIE = imie;
+            this.NAZWISKO = nazwisko;
+            this.DATAW = dataw;
+            this.TELEFON = telefon;
+
+            if (this.DATAW == default(DateTime))
+                this.DATAW = DateTime.Now;
+        }
+
         public static Boolean ThisTableCheck()
         {
             List<Params> list = new List<Params>();
