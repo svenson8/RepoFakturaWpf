@@ -33,11 +33,8 @@ namespace FakturaWpf
                                 ";connection timeout=" + ini.IniReadValue("Settings", "Timeout");
                                 //MultipleActiveResultSets = True
 
-           
-
-
-
-            if (NewConnect) {
+          
+            if (NewConnect()) {
                 CheckOrCreateDB(ini.IniReadValue("Settings", "Database"));
             } else
                 return false;
@@ -52,14 +49,15 @@ namespace FakturaWpf
 
             if (conn != null)
             {
-                conn.Dispose();
-                conn = new SqlConnection(ConnectionString)
+                conn.Dispose();                
             }
+
+            conn = new SqlConnection(ConnectionString);
 
             try
             {
                 conn.Open();
-                CheckOrCreateDB(ini.IniReadValue("Settings", "Database"));
+                return true;
             }
             catch (Exception e)
             {
@@ -74,7 +72,7 @@ namespace FakturaWpf
         {
             NQueryReader nq = new NQueryReader("SELECT * FROM master.dbo.sysdatabases where name = '" + database + "'");
             Boolean exist = false;
-            
+
             while (nq.NReader.Read())
             {
                 exist = true;
@@ -83,38 +81,32 @@ namespace FakturaWpf
 
             if (!exist)
             {
-             if (Various.Question("Baza danych: "+database+" nie istnieje. Czy utworzyć ?", "Pytanie"))
+                if (Various.Question("Baza danych: " + database + " nie istnieje. Czy utworzyć ?", "Pytanie"))
                 {
-                     NQuery nQ = new NQuery("CREATE DATABASE "+database);
-                     if (nQ.WellDone) {
+                    NQuery nQ = new NQuery("CREATE DATABASE " + database);
+                    if (nQ.WellDone)
+                    {
                         Various.InfoOk("Baza " + database + " utworozna pomyślnie", "Potwierdzenie");
-                        ConnectionString += ";database=" + database;
-                        if (conn != null)
+
+                        if (NewConnect(database))
                         {
-                            conn.Dispose();
-                            conn = new SqlConnection(ConnectionString);
-                            try
-                            {
-                                conn.Open();
-                                UserClass.ThisTableCheck();
-                                UserClass us = new UserClass(0, "admin", "a");
-                                us.SaveUser();
-                            }
-                            catch (Exception e)
-                            {
-                                Various.Error(e.Message, "Błąd");
-                                Environment.Exit(-1);
-                            }
-
+                            UserClass.ThisTableCheck();
+                            UserClass us = new UserClass(0, "admin", "a");
+                            us.SaveUser();
                         }
-
-                    } else
+                        else
+                            Environment.Exit(-1);
+                    }
+                    else
                         Environment.Exit(-1);
-                } else
+                }
+                else
                     Environment.Exit(-1);
-            } else
-                ConnectionString += ";database=" + database;
+            }
+            else
+                NewConnect(database);
         }
+
 
         public static Boolean TableCheck(string tableName, List<Params> list)
         {
