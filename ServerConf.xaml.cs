@@ -43,7 +43,7 @@ namespace FakturaWpf
             {
                 Title = "Konfiguracja połączenia",
                 Width = 520,
-                Height = 280,
+                Height = 320,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Content = new ServerConf()
             };
