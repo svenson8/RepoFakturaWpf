@@ -62,5 +62,10 @@ namespace FakturaWpf
             });
 
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(-1);
+        }
     }
 }

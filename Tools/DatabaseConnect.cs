@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.IO;
 using System.Data;
+using System.Windows;
 
 namespace FakturaWpf
 {
@@ -21,8 +22,9 @@ namespace FakturaWpf
             string pathf = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
             if (!File.Exists(pathf))
             {
-                Various.Error("Brak pliku config.ini", "Błąd");
-                return false;
+                Various.Error("Brak pliku config.ini", "Błąd");             
+                ServerConf.ShowAsDialog();          
+                return false;  
             }
 
             IniFile ini = new IniFile(pathf);

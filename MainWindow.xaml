@@ -16,7 +16,7 @@
                 </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Exit" />
+                <MenuItem Header="_Exit" Click="MenuItem_Click_2" />
             </MenuItem>
             <MenuItem Header="Administracja">
                 <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">
