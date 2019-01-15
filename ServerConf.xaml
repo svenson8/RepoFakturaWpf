@@ -13,23 +13,26 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="TX_Server" Grid.Row="1" Grid.Column="0" Width="200" Height="20" Margin="30,15,0,0"></TextBox>
+        <TextBox x:Name="TX_Server" Grid.Row="1" Grid.Column="0" Width="200" Height="20" Margin="30,15,0,0" Text="{Binding SERVER, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <ComboBox x:Name="CB_Srever" Grid.Row="2" Grid.Column="0" Height="20" Margin="165,10,135,10" SelectionChanged="CB_Srever_SelectionChanged" />
 
         <Label Content="Uzytkownik:"  Grid.Row="3" Grid.Column="0" Margin="90,5,0,0"></Label>
         <TextBox x:Name="TX_User" Grid.Row="3" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding ID}"></TextBox>
 
         <Label Content="Hasło:"  Grid.Row="4" Grid.Column="0" Margin="120,5,0,0"></Label>
-        <TextBox x:Name="TX_Passsword" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding PASSWORD}"></TextBox>
+        <TextBox x:Name="TX_Passsword" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding Password}"></TextBox>
 
         <Label Content="Baza danych:"  Grid.Row="5" Grid.Column="0" Margin="85,5,0,0"></Label>
         <TextBox x:Name="TX_Database" Grid.Row="5" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding DATABASE}"></TextBox>
-
+        
+        <Button Content="Testuj połaczenie"  Grid.Row="6" Grid.Column="0" Margin="160,14,118,4"></Button>
+        
         <Button x:Name="button" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" 
                              Width="130" Height="28" FontSize="14" Click="button_Click">
             <StackPanel Orientation="Horizontal" Margin="0">

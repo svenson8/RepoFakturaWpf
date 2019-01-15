@@ -24,7 +24,7 @@ namespace FakturaWpf
     {
         public static string pathFile;
         private ServerClass server = null;
-        public static Boolean start;
+        public static Boolean wRead;
 
 
         public ServerConf()
@@ -48,20 +48,20 @@ namespace FakturaWpf
 
         }
 
-        public static Boolean ShowServerConf(Boolean atStart)
+        public static Boolean ShowServerConf(Boolean read)
         {
             Window window = new Window
             {
                 Title = "Konfiguracja połączenia",
                 Width = 520,
-                Height = 325,
+                Height = 365,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Content = new ServerConf()
             };
 
-            ServerConf.start = atStart;
+            ServerConf.wRead = read;
 
-            if (atStart)
+            if (read)
             {
                 if (window.ShowDialog() == true)
                     return true;
@@ -85,7 +85,8 @@ namespace FakturaWpf
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            Various.InfoOk(server.ID);
+            server.SaveToFile();
+            Various.InfoOk(server.SERVER);
         }
     }
 
@@ -96,9 +97,14 @@ namespace FakturaWpf
         public string SERVER { get; set; }
         public string DATABASE { get; set; }
 
-        private void Mys()
+
+       
+        public void SaveToFile()
         {
-          //  ServerConf.pathFile
+            IniFile ini = new IniFile(ServerConf.pathFile);
+            ini.IniWriteValue("Settings", "Id", this.ID);
+            ini.IniWriteValue("Settings", "Password", this.Password);
+            ini.IniWriteValue("Settings", "Server", this.SERVER);
         }
 
     }
