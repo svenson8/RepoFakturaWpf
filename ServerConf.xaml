@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-    <Grid Background="#FFE5E5E5">
+    <Grid Background="#FFE5E5E5" Name="gridServer">
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
             <RowDefinition Height="50" />
@@ -19,19 +19,19 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TextBox x:Name="TX_Server" Grid.Row="1" Grid.Column="0" Width="200" Height="20" Margin="30,15,0,0"></TextBox>
-        <ComboBox x:Name="CB_Srever" Grid.Row="2" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0"></ComboBox>
+        <ComboBox x:Name="CB_Srever" Grid.Row="2" Grid.Column="0" Height="20" Margin="165,10,135,10" SelectionChanged="CB_Srever_SelectionChanged" />
 
         <Label Content="Uzytkownik:"  Grid.Row="3" Grid.Column="0" Margin="90,5,0,0"></Label>
-        <TextBox x:Name="TX_User" Grid.Row="3" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0"></TextBox>
+        <TextBox x:Name="TX_User" Grid.Row="3" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding ID}"></TextBox>
 
         <Label Content="Hasło:"  Grid.Row="4" Grid.Column="0" Margin="120,5,0,0"></Label>
-        <TextBox x:Name="TX_Passsword" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0"></TextBox>
+        <TextBox x:Name="TX_Passsword" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding PASSWORD}"></TextBox>
 
         <Label Content="Baza danych:"  Grid.Row="5" Grid.Column="0" Margin="85,5,0,0"></Label>
-        <TextBox x:Name="TX_Name_Us" Grid.Row="5" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0"></TextBox>
+        <TextBox x:Name="TX_Database" Grid.Row="5" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding DATABASE}"></TextBox>
 
         <Button x:Name="button" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" 
-                             Width="130" Height="28" FontSize="14">
+                             Width="130" Height="28" FontSize="14" Click="button_Click">
             <StackPanel Orientation="Horizontal" Margin="0">
                 <Image Source="/FakturaWpf;component/Resources/zapisz16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">F5 Zapisz</TextBlock>
@@ -46,9 +46,9 @@
             </StackPanel>
         </Button>
         <GroupBox x:Name="groupBox" Header="Serwer" HorizontalAlignment="Left" Height="88" Margin="85,0,0,0" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" Width="297">
-            <StackPanel HorizontalAlignment="Stretch" Margin="0,0,221,0">
-                <RadioButton x:Name="RB_Hand" Content="Wpisz:"  Margin="0,10,0,0"/>
-                <RadioButton x:Name="RB_Choice" Content="Wybierz:"  Margin="0,22,0,0"/>
+            <StackPanel HorizontalAlignment="Stretch" Margin="0,0,213,0">
+                <Label x:Name="LB_Hand" Content="Nazwa:"  Margin="23,3,0,0"/>
+                <Label x:Name="LB_Choice" Content="Znalezione:"  Margin="0,11,0,0"/>
             </StackPanel>
         </GroupBox>
     </Grid>

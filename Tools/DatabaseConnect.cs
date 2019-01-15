@@ -22,8 +22,8 @@ namespace FakturaWpf
             string pathf = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
             if (!File.Exists(pathf))
             {
-                Various.Error("Brak pliku config.ini", "Błąd");             
-                ServerConf.ShowAsDialog();          
+                Various.Error("Brak pliku config.ini", "Błąd");
+                ServerConf.ShowServerConf(true);          
                 return false;  
             }
 
