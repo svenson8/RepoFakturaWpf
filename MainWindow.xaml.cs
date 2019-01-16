@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FakturaWpf.Documents;
 using FakturaWpf.Users;
+using FakturaWpf.Tools;
 using WPF.MDI;
 
 namespace FakturaWpf
@@ -45,7 +46,7 @@ namespace FakturaWpf
                 Content = new DocumentList()
             });
 
-
+          
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -65,7 +66,12 @@ namespace FakturaWpf
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(-1);
+            //Environment.Exit(-1);
+            MyProgressBar pg = new MyProgressBar("Postęp akcji", 100);
+            pg.Show();
+            pg.UpdateBar(2);
+            pg.UpdateBar(4);
+
         }
     }
 }

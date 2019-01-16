@@ -26,13 +26,19 @@
         <TextBox x:Name="TX_User" Grid.Row="3" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding ID}"></TextBox>
 
         <Label Content="Hasło:"  Grid.Row="4" Grid.Column="0" Margin="120,5,0,0"></Label>
-        <TextBox x:Name="TX_Passsword" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding Password}"></TextBox>
+        <PasswordBox x:Name="TX_Passsword" Grid.Row="4" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" ></PasswordBox>
 
         <Label Content="Baza danych:"  Grid.Row="5" Grid.Column="0" Margin="85,5,0,0"></Label>
         <TextBox x:Name="TX_Database" Grid.Row="5" Grid.Column="0" Width="200" Height="20" Margin="30,0,0,0" Text="{Binding DATABASE}"></TextBox>
-        
-        <Button Content="Testuj połaczenie"  Grid.Row="6" Grid.Column="0" Margin="160,14,118,4"></Button>
-        
+
+        <Button x:Name="buttonTest" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" Margin="165,10,135,0" VerticalAlignment="Top" 
+                             Width="200" Height="23" FontSize="13" Click="buttonTest_Click">
+            <StackPanel Orientation="Horizontal" Margin="0">
+                <Image Source="/FakturaWpf;component/Resources/connect.png" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Testuj połączenie</TextBlock>
+            </StackPanel>
+        </Button>
+
         <Button x:Name="button" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" 
                              Width="130" Height="28" FontSize="14" Click="button_Click">
             <StackPanel Orientation="Horizontal" Margin="0">
@@ -42,7 +48,7 @@
         </Button>
 
         <Button x:Name="button2" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" Margin="370,30,0,0" VerticalAlignment="Top" 
-                             Width="130" Height="28" FontSize="14">
+                             Width="130" Height="28" FontSize="14" Click="button2_Click">
             <StackPanel Orientation="Horizontal" Margin="0">
                 <Image Source="/FakturaWpf;component/Resources/anuluj16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Esc Anuluj</TextBlock>

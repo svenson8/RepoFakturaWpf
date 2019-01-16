@@ -61,7 +61,10 @@
     <Compile Include="Documents\DocumentList.xaml.cs">
       <DependentUpon>DocumentList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServerConf.xaml.cs">
+    <Compile Include="Tools\MyProgressBar.xaml.cs">
+      <DependentUpon>MyProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ServerConf.xaml.cs">
       <DependentUpon>ServerConf.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\DatabaseConnect.cs" />
@@ -93,7 +96,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ServerConf.xaml">
+    <Page Include="Tools\MyProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\ServerConf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +155,9 @@
   <ItemGroup>
     <Resource Include="Resources\anuluj16.ico" />
     <Resource Include="Resources\zapisz16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\connect.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

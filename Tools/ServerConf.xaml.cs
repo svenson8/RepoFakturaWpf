@@ -25,6 +25,7 @@ namespace FakturaWpf
         public static string pathFile;
         private ServerClass server = null;
         public static Boolean wRead;
+        public static Window window;
 
 
         public ServerConf()
@@ -34,6 +35,11 @@ namespace FakturaWpf
             InitializeComponent();
             InitBinding();
 
+            FindServers(); 
+        }
+
+        private void FindServers()
+        {
             DataTable table = System.Data.Sql.SqlDataSourceEnumerator.Instance.GetDataSources();
             foreach (DataRow server in table.Rows)
             {
@@ -48,9 +54,15 @@ namespace FakturaWpf
 
         }
 
+        private void SetPassword(Boolean toObject)
+        {
+            if (toObject)
+              server.Password = TX_Passsword.Password;
+        }
+
         public static Boolean ShowServerConf(Boolean read)
         {
-            Window window = new Window
+            window = new Window
             {
                 Title = "Konfiguracja połączenia",
                 Width = 520,
@@ -85,8 +97,22 @@ namespace FakturaWpf
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            server.SaveToFile();
-            Various.InfoOk(server.SERVER);
+            SetPassword(true);
+            server.SaveToFile();            
+            Various.InfoOk("Konfiguracja połączenia do serwera zapisana pomyślnie");
+            window.DialogResult = true;
+        }
+
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            SetPassword(true);
+            if (server.TestConnect())
+                Various.InfoOk("Połączono pomyślnie", "Informacja");
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            window.DialogResult = false;
         }
     }
 
@@ -96,15 +122,27 @@ namespace FakturaWpf
         public string Password { get; set; }
         public string SERVER { get; set; }
         public string DATABASE { get; set; }
-
-
        
         public void SaveToFile()
         {
             IniFile ini = new IniFile(ServerConf.pathFile);
-            ini.IniWriteValue("Settings", "Id", this.ID);
+            ini.IniWriteValue("Settings", "Id",       this.ID);
             ini.IniWriteValue("Settings", "Password", this.Password);
-            ini.IniWriteValue("Settings", "Server", this.SERVER);
+            ini.IniWriteValue("Settings", "Server",   this.SERVER);
+            ini.IniWriteValue("Settings", "Database", this.DATABASE);
+        }
+
+        public Boolean TestConnect()
+        {
+            BuildConnectionstring(this.ID,
+                                  this.Password,
+                                  this.SERVER);
+
+            if (NewConnect(this.DATABASE))
+                return true;
+            else
+                return false;
+                                 
         }
 
     }

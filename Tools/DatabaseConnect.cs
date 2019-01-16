@@ -13,8 +13,10 @@ namespace FakturaWpf
     public class DatabaseConnect
     {
         public static string ConnectionString = "";
-
         public static SqlConnection conn;
+        public const string Trusted = "false";
+        public const string Timeout = "30";
+
 
         public static Boolean Connect()
         {
@@ -23,17 +25,14 @@ namespace FakturaWpf
             if (!File.Exists(pathf))
             {
                 Various.Error("Brak pliku config.ini", "Błąd");
-                ServerConf.ShowServerConf(true);          
+                if (!ServerConf.ShowServerConf(true))          
                 return false;  
             }
 
             IniFile ini = new IniFile(pathf);
-            ConnectionString = @"user id =" + ini.IniReadValue("Settings", "Id") +
-                                ";password=" + ini.IniReadValue("Settings", "Password") +
-                                ";server=" + ini.IniReadValue("Settings", "Server") +
-                                ";Trusted_Connection=" + ini.IniReadValue("Settings", "Trusted") +
-                                ";connection timeout=" + ini.IniReadValue("Settings", "Timeout");
-                                //MultipleActiveResultSets = True
+            BuildConnectionstring(ini.IniReadValue("Settings", "Id"),
+                                  ini.IniReadValue("Settings", "Password"),
+                                  ini.IniReadValue("Settings", "Server"));
 
           
             if (NewConnect()) {
@@ -44,9 +43,20 @@ namespace FakturaWpf
             return true;
         }
 
-        private static Boolean NewConnect(string database = "")
+        public static void BuildConnectionstring(string id,string pass, string ser)
         {
-            if (database != String.Empty)
+
+            ConnectionString = @"user id =" + id +
+                               ";password=" + pass +
+                               ";server=" + ser +
+                               ";Trusted_Connection=" +Trusted +
+                               ";connection timeout="+ Timeout;
+        }                      //MultipleActiveResultSets = True
+
+
+        public static Boolean NewConnect(string database = "")
+        {
+            if ((database != String.Empty) && (database != null))
               ConnectionString += ";database=" + database;
 
             if (conn != null)
