@@ -16,6 +16,7 @@ using FakturaWpf.Documents;
 using FakturaWpf.Users;
 using FakturaWpf.Tools;
 using WPF.MDI;
+using System.ComponentModel;
 
 namespace FakturaWpf
 {
@@ -28,6 +29,7 @@ namespace FakturaWpf
         {
             InitializeComponent();
         }
+
 
         private void MainWindow1_Closed(object sender, EventArgs e)
         {
@@ -64,14 +66,20 @@ namespace FakturaWpf
 
         }
 
+
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
             //Environment.Exit(-1);
             MyProgressBar pg = new MyProgressBar("Postęp akcji", 100);
-            pg.Show();
-            pg.UpdateBar(2);
-            pg.UpdateBar(4);
+           pg.Show();
+
+
+
+
 
         }
+
+
+        
     }
 }
