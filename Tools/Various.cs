@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace FakturaWpf
 {
@@ -51,6 +52,12 @@ namespace FakturaWpf
                 return false;
             }
         } 
+
+        public static void DoEvents()
+        {
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                        new Action(delegate { }));
+        }
     }
 
 

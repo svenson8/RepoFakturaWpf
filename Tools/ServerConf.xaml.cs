@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Tools;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Sql;
@@ -40,11 +41,15 @@ namespace FakturaWpf
 
         private void FindServers()
         {
+            MyProgressBar pg = new MyProgressBar("Wyszukiwanie serwerów ...", 100);
+            pg.Show();
+            pg.Step(50);
             DataTable table = System.Data.Sql.SqlDataSourceEnumerator.Instance.GetDataSources();
             foreach (DataRow server in table.Rows)
             {
                 CB_Srever.Items.Add(server[table.Columns["ServerName"]].ToString());
             }
+            pg.Step(new int[] { 90, 100 });
         }
 
         private void InitBinding()

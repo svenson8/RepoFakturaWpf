@@ -69,13 +69,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            //Environment.Exit(-1);
-            MyProgressBar pg = new MyProgressBar("Postęp akcji", 100);
-           pg.Show();
-
-
-
-
+            Environment.Exit(-1);
 
         }
 

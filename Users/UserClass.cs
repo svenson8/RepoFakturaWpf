@@ -19,10 +19,12 @@ namespace FakturaWpf
         public string   NAZWISKO { get; set; }
         public DateTime DATAW    { get; set; }
         public string   TELEFON  { get; set; }
+        public DateTime DMODDATE { get; set; }
 
         public const string TABLENAME = "Tlogin";
 
-        public UserClass(int id, string nazwa, string haslo, string imie="", string nazwisko="", DateTime dataw=default(DateTime), string telefon="")
+        public UserClass(int id, string nazwa, string haslo, string imie="", string nazwisko="", 
+                         DateTime dataw=default(DateTime), string telefon="", DateTime dmdate = default(DateTime))
         {
             this.ID = id;
             this.NAZWA = nazwa;
@@ -31,9 +33,13 @@ namespace FakturaWpf
             this.NAZWISKO = nazwisko;
             this.DATAW = dataw;
             this.TELEFON = telefon;
+            this.DMODDATE = dmdate;
 
             if (this.DATAW == default(DateTime))
                 this.DATAW = DateTime.Now;
+
+            if (this.DMODDATE == default(DateTime))
+                this.DMODDATE = DateTime.Now;
         }
 
         public static Boolean ThisTableCheck()
@@ -46,6 +52,7 @@ namespace FakturaWpf
             list.Add(new Params("NAZWISKO", SqlDbType.VarChar, 50));
             list.Add(new Params("DATAW",    SqlDbType.DateTime, 0));
             list.Add(new Params("TELEFON",  SqlDbType.VarChar, 50));
+            list.Add(new Params("DMODDATE", SqlDbType.DateTime, 0));
 
             return TableCheck(TABLENAME, list);
         }
@@ -85,7 +92,6 @@ namespace FakturaWpf
              list.Add(new Params("@NW", SqlDbType.VarChar,   this.NAZWA));
              list.Add(new Params("@IM", SqlDbType.VarChar,   this.IMIE));
              list.Add(new Params("@NZ", SqlDbType.VarChar,   this.NAZWISKO));
-             list.Add(new Params("@DW", SqlDbType.DateTime,  this.DATAW));
              list.Add(new Params("@HS", SqlDbType.VarChar,   this.HASLO));
              list.Add(new Params("@TL", SqlDbType.VarChar,   this.TELEFON));
 
@@ -93,11 +99,11 @@ namespace FakturaWpf
 
              if (New)
              {
-                sqlpyt = "insert into "+TABLENAME+" (NAZWA, IMIE, NAZWISKO, DATAW, HASLO, TELEFON) values (@NW, @IM, @NZ, @DW, @HS, @TL)"; 
+                sqlpyt = "insert into "+TABLENAME+" (NAZWA, IMIE, NAZWISKO, HASLO, TELEFON) values (@NW, @IM, @NZ, @HS, @TL)"; 
              }
              else
              {
-                 sqlpyt = "update "+TABLENAME+" set NAZWA =@NW, IMIE = @IM, NAZWISKO = @NZ, HASLO = @HS, DATAW = @DW, TELEFON = @TL where ID = @ID";
+                 sqlpyt = "update "+TABLENAME+" set NAZWA =@NW, IMIE = @IM, NAZWISKO = @NZ, HASLO = @HS, TELEFON = @TL where ID = @ID";
              }
 
              NQuery nQ = new NQuery(sqlpyt, list); 
@@ -109,7 +115,7 @@ namespace FakturaWpf
         {
             List<Params> list = new List<Params>();
             list.Add(new Params("@ID", SqlDbType.Int, Id));
-            NQueryReader nQ = new NQueryReader("select ID,NAZWA,IMIE,NAZWISKO,HASLO,DATAW,TELEFON from "+TABLENAME+" where ID = @ID", list);
+            NQueryReader nQ = new NQueryReader("select ID,NAZWA,IMIE,NAZWISKO,HASLO,DATAW,TELEFON,DMODDATE from "+TABLENAME+" where ID = @ID", list);
 
             while (nQ.NReader.Read())
             {
@@ -119,7 +125,8 @@ namespace FakturaWpf
                 this.NAZWISKO = nQ.NReader.GetString(3);
                 this.HASLO    = nQ.NReader.GetString(4);
                 this.DATAW    = nQ.NReader.GetDateTime(5);
-                this.TELEFON = nQ.NReader.GetString(6);
+                this.TELEFON  = nQ.NReader.GetString(6);
+                this.DATAW    = nQ.NReader.GetDateTime(5);
                 nQ.NReader.Close();
                 return;
             }

@@ -64,6 +64,7 @@
     <Compile Include="Tools\MyProgressBar.xaml.cs">
       <DependentUpon>MyProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\Scripts.cs" />
     <Compile Include="Tools\ServerConf.xaml.cs">
       <DependentUpon>ServerConf.xaml</DependentUpon>
     </Compile>
@@ -75,6 +76,9 @@
     <Compile Include="Users\UserClass.cs" />
     <Compile Include="Users\UserEdit.xaml.cs">
       <DependentUpon>UserEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserList.xaml.cs">
+      <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
     <Page Include="Documents\DocumentList.xaml">
       <SubType>Designer</SubType>
@@ -105,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Users\UserEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users\UserList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

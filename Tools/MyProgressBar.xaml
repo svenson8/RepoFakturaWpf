@@ -12,6 +12,6 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Label x:Name="lab_title" Grid.Row="0" Content="Tekst postępu" HorizontalAlignment="Center"/>
-        <ProgressBar x:Name="my_progcontrol" Grid.Row="1" Height="50" Minimum="0" Maximum="100" Value="{Binding WorkerState}"></ProgressBar>
+        <ProgressBar x:Name="my_progcontrol" Grid.Row="1" Height="50" Minimum="0" Maximum="100"></ProgressBar>
     </Grid>
 </Window>

@@ -14,14 +14,15 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Windows.Media.Animation;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace FakturaWpf.Tools
 {
     /// <summary>
     /// Logika interakcji dla klasy ProgressBar.xaml
     /// </summary>
-    
-    public partial class MyProgressBar : Window//, INotifyPropertyChanged
+
+    public partial class MyProgressBar : Window
     {
 
         public MyProgressBar(string _name, int max)
@@ -31,65 +32,44 @@ namespace FakturaWpf.Tools
             lab_title.Content = _name;
             my_progcontrol.Maximum = max;
 
-
-            DataContext = this;
         }
 
-        public void Step(int i, Boolean message = false)
+        public void Step(int[] arr, Boolean message = false) // few steps
         {
+            foreach (int i in arr)
+            {
+                my_progcontrol.Value = i;
+                DoAndDelay();
+            }
+
+            CheckMessageAndClose(arr.Last(), message);
+
+        }
+
+        public void Step(int i, Boolean message = false) // one step
+        {
+
             my_progcontrol.Value = i;
+            DoAndDelay();
+
+            CheckMessageAndClose(i, message);
+
         }
 
-            /*  
-                private BackgroundWorker _bgWorker = new BackgroundWorker();
-                private int _workerState;
-
-                public event PropertyChangedEventHandler PropertyChanged;
-
-                public int WorkerState
-                {
-                    get { return _workerState; }
-                    set
-                    {
-
-                        _workerState = value;
-                        if (PropertyChanged != null)
-                            PropertyChanged(this, new PropertyChangedEventArgs("WorkerState"));
-
-                    }
-                }
-                public MyProgressBar(string _name, int max)
-                {
-                    InitializeComponent();
-
-                    lab_title.Content = _name;
-                    my_progcontrol.Maximum = max;
-
-
-                   DataContext = this;
-                }
-
-                public void Step(int i, Boolean message = false)
-                {
-                    _bgWorker.DoWork += (s, e) =>
-                    {
-                          for (int j = 1; j < 100; j++)
-                          {
-                           System.Threading.Thread.Sleep(100);
-                            WorkerState = j;
-                         }
-
-
-                    };
-
-                    if (i == Convert.ToInt32(my_progcontrol.Maximum) && message==true)
-                        Various.InfoOk("Wykonano");
-
-
-                   if (!_bgWorker.IsBusy)
-                       _bgWorker.RunWorkerAsync();
-
-
-               }*/
+        private void DoAndDelay()
+        {
+            Various.DoEvents();
+            System.Threading.Thread.Sleep(100);
         }
+
+        private void CheckMessageAndClose(int last, Boolean mess)
+        {
+            if (last== Convert.ToInt32(my_progcontrol.Maximum))
+            {
+                if (mess == true)
+                    Various.InfoOk("Wykonano");
+                this.Close();
+            }
+        }
+    }
 }
