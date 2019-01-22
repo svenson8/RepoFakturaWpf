@@ -24,5 +24,20 @@ namespace FakturaWpf.Tools
             else
                 return false;
         }
+
+        public static Boolean UserUpdateTrigger()
+        {
+            NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER TloginAFterUpdate ON TLogin " +
+                                   "AFTER UPDATE " +
+                                   "AS " +
+                                   "UPDATE Tlogin " +
+                                   "SET DMODDATE = GETDATE() " +
+                                   "WHERE ID IN(SELECT DISTINCT ID FROM Inserted) ");
+
+            if (nQ.WellDone)
+                return true;
+            else
+                return false;
+        }
     }
 }

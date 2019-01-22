@@ -56,5 +56,6 @@
                 <ImageBrush ImageSource="Resources/tlo.jpg"/>
             </mdi:MdiContainer.Background>
         </mdi:MdiContainer>
+        
     </DockPanel>
 </Window>

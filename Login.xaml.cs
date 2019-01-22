@@ -40,6 +40,7 @@ namespace FakturaWpf
             Boolean result;
             result  = UserClass.ThisTableCheck();
             result = Scripts.UserInsertTrigger();
+            result = Scripts.UserUpdateTrigger();
 
             return result;
         }

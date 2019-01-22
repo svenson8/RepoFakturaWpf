@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Threading;
+using System.Windows.Controls;
 
 namespace FakturaWpf
 {
@@ -57,6 +58,15 @@ namespace FakturaWpf
         {
             Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
                                         new Action(delegate { }));
+        }
+
+        public static void SetAutoColumnWidth(DataGrid myGrid, int[] arr)
+        {
+            foreach (int i in arr)
+            {
+                myGrid.Columns[i].Width =
+                new DataGridLength(1, DataGridLengthUnitType.Star);
+            }            
         }
     }
 

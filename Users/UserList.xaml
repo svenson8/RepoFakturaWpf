@@ -4,9 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Users"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+
+    <DockPanel TextOptions.TextFormattingMode="Ideal">
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="CH_Active" Content="Pokaż nieaktywnych" Grid.Row="0" Grid.Column="0" Width="130" Margin="5,5,0,0"/>
+            <Label Content="Login:"  Grid.Row="0" Grid.Column="1" Margin="50,0,0,0"></Label>
+            <TextBox x:Name="TX_Login" Grid.Row="0" Grid.Column="1" Width="100" Height="20" Margin="100,0,0,0"></TextBox>
+            <Label Content="Imię:"  Grid.Row="0" Grid.Column="2" Margin="20,0,0,0"></Label>
+            <TextBox x:Name="TX_Name" Grid.Row="0" Grid.Column="2" Width="120" Height="20" Margin="70,0,0,0"></TextBox>
+
+            <Label Content="Nazwisko:"  Grid.Row="0" Grid.Column="3" Margin="20,0,0,0"></Label>
+            <TextBox x:Name="TX_Surname" Grid.Row="0" Grid.Column="3" Width="120" Height="20" Margin="90,0,0,0"></TextBox>
+        </Grid>
+        <DataGrid DockPanel.Dock="Top" x:Name="DG_User" Height="301"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding NAZWA}" Header="Login" Width="100"/>
+                <DataGridTextColumn Binding="{Binding IMIE}" Header="Imię" Width="140" />
+                <DataGridTextColumn Binding="{Binding NAZWISKO}" Header="Nazwisko" Width="200"/>
+                <DataGridTextColumn Binding="{Binding DATAW}"  Header="Data wprow." Width="80"/>
+                <DataGridTextColumn Binding="{Binding DMODDATE}" Header="Data ostat. &#x0a;zmiany" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <Button x:Name="button" HorizontalAlignment="Left" Margin="36,0,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                Width="141" Height="25" FontSize="14">
+                <StackPanel Orientation="Horizontal" Margin="0">
+                    <Image Source="/FakturaWpf;component/Resources/zapisz16.ico" Height="20" Width="25" HorizontalAlignment="Left" Margin="0,0,15,0"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Zaloguj</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </DockPanel>
 </UserControl>

@@ -55,14 +55,13 @@ namespace FakturaWpf
         {
             MdiMain.Children.Add(new MdiChild()
             {
-                Title = " Dane użytkownika uprzywilejowanego",
+                Title = "Lista użytkowników",
                 Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
-                 Height = 420,
-                 Width = 580,
-                MaximizeBox = false,
-                Resizable = false,
-                Content = new UserEdit()
+                Height = 420,
+                Width = 760,                
+            Content = new UserList()
             });
+
 
         }
 
