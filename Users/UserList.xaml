@@ -28,11 +28,7 @@
             <TextBox x:Name="TX_Surname" Grid.Row="0" Grid.Column="3" Width="120" Height="20" Margin="90,0,0,0"></TextBox>
         </Grid>
         <DataGrid DockPanel.Dock="Top" x:Name="DG_User" Height="301"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" RowStyle="{StaticResource MyGridRowStyle}"
-                                                                                                        CellStyle="{StaticResource MyGridCellStyle}"
-                                                                                                        VerticalGridLinesBrush="{StaticResource GridLine}"
-                                                                                                        HorizontalGridLinesBrush="{StaticResource GridLine}">
-
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" Style="{StaticResource MyGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding NAZWA}" Header="Login" Width="100"/>
                 <DataGridTextColumn Binding="{Binding IMIE}" Header="Imię" Width="140" />
