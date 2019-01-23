@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Users"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
+
     <DockPanel TextOptions.TextFormattingMode="Ideal">
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
@@ -27,7 +28,10 @@
             <TextBox x:Name="TX_Surname" Grid.Row="0" Grid.Column="3" Width="120" Height="20" Margin="90,0,0,0"></TextBox>
         </Grid>
         <DataGrid DockPanel.Dock="Top" x:Name="DG_User" Height="301"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False">
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" RowStyle="{StaticResource MyGridRowStyle}"
+                                                                                                        CellStyle="{StaticResource MyGridCellStyle}"
+                                                                                                        VerticalGridLinesBrush="{StaticResource GridLine}"
+                                                                                                        HorizontalGridLinesBrush="{StaticResource GridLine}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding NAZWA}" Header="Login" Width="100"/>
@@ -37,6 +41,7 @@
                 <DataGridTextColumn Binding="{Binding DMODDATE}" Header="Data ostat. &#x0a;zmiany" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
+
         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
             <Button x:Name="button" HorizontalAlignment="Left" Margin="36,0,0,0" Grid.Row="1" VerticalAlignment="Top" 
                 Width="141" Height="25" FontSize="14">
