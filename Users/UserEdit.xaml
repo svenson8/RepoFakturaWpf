@@ -7,7 +7,7 @@
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <DockPanel >
         <TabControl DockPanel.Dock="Top" x:Name="tabControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TabItem Header="Dane szczegółowe użytkownika">
+            <TabItem Header="Dane szczegółowe użytkownika" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
@@ -18,35 +18,36 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Nazwa:"  Grid.Row="1" Grid.Column="0" Margin="100,0,0,0"></Label>
-                    <TextBox x:Name="TX_Name" Grid.Row="1" Grid.Column="0" Height="20" Margin="172,3,219,3"/>
-                    <Label Content="***"  Grid.Row="1" Grid.Column="0" Margin="325,0,0,0" Foreground="DimGray"/>
+                    <TextBox x:Name="TX_Name" Grid.Row="1" Grid.Column="0" Height="20" Margin="172,3,200,3" MaxLength="30"/>
+                    <Label Content="***"  Grid.Row="1" Grid.Column="0" Margin="350,0,0,0" Foreground="DimGray"/>
                     <CheckBox x:Name="CH_Active" Content="Aktywny" Grid.Row="1" Grid.Column="0" Margin="400,5,0,0" />
 
                     <Label Content="Hasło:"  Grid.Row="2" Grid.Column="0" Margin="105,0,0,0"></Label>
-                    <Label Content="***"  Grid.Row="2" Grid.Column="0" Margin="325,0,0,0" Foreground="DimGray"/>
-                    <TextBox x:Name="TX_Passsword" Grid.Row="2" Grid.Column="0" Height="20" Margin="172,3,219,3"/>
+                    <Label Content="***"  Grid.Row="2" Grid.Column="0" Margin="350,0,0,0" Foreground="DimGray"/>
+                    <TextBox x:Name="TX_Passsword" Grid.Row="2" Grid.Column="0" Height="20" Margin="172,3,200,3" MaxLength="30"/>
 
                     <Label Content="Powtórz hasło:"  Grid.Row="3" Grid.Column="0" Margin="60,0,0,0"></Label>
-                    <Label Content="***"  Grid.Row="3" Grid.Column="0" Margin="325,0,0,0" Foreground="DimGray"/>
-                    <TextBox x:Name="TX_Passsword_rep" Grid.Row="3" Grid.Column="0" Height="20" Margin="172,3,219,3"/>
+                    <Label Content="***"  Grid.Row="3" Grid.Column="0" Margin="350,0,0,0" Foreground="DimGray"/>
+                    <TextBox x:Name="TX_Passsword_rep" Grid.Row="3" Grid.Column="0" Height="20" Margin="172,3,200,3" MaxLength="30"/>
 
                     <Label Content="Imię:"  Grid.Row="4" Grid.Column="0" Margin="110,0,0,0"></Label>
-                    <TextBox x:Name="TX_Name_Us" Grid.Row="4" Grid.Column="0" Height="20" Margin="172,3,99,3"/>
+                    <TextBox x:Name="TX_Name_Us" Grid.Row="4" Grid.Column="0" Height="20" Margin="172,3,71,3" MaxLength="50"/>
 
                     <Label Content="Nazwisko:"  Grid.Row="5" Grid.Column="0" Margin="85,0,0,0"></Label>
-                    <TextBox x:Name="TX_Surname" Grid.Row="5" Grid.Column="0" Height="20" Margin="172,3,99,3"/>
+                    <TextBox x:Name="TX_Surname" Grid.Row="5" Grid.Column="0" Height="20" Margin="172,3,71,3" MaxLength="50"/>
 
                     <Label Content="Telefon:"  Grid.Row="6" Grid.Column="0" Margin="95,0,0,0"></Label>
-                    <TextBox x:Name="TX_Phone" Grid.Row="6" Grid.Column="0" Height="20" Margin="172,3,219,3"/>
+                    <TextBox x:Name="TX_Phone" Grid.Row="6" Grid.Column="0" Height="20" Margin="172,3,200,3" MaxLength="20"/>
 
-                    <Label Content="(***) Wypełnienie tych pól jest wymagane"  Grid.Row="7" Grid.Column="0" Margin="20,95,0,0" Foreground="DimGray"></Label>
+                    <Label Content="(***) Wypełnienie tych pól jest wymagane" Grid.Row="7" Grid.Column="0" Margin="20,95,0,0" Foreground="DimGray"
+                           VerticalAlignment="Bottom"></Label>
 
                     <Button x:Name="button" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" 
                              Width="130" Height="28" FontSize="13">

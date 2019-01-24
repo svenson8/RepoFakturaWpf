@@ -73,7 +73,7 @@ namespace FakturaWpf.Users
              mdiParent.Children.Add(new MdiChild()
             {
                 Title = "Dane użytkownika",
-                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
+                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura.ico")),
                 Height = 395,
                 Width = 565,
                 Content = new UserEdit()
