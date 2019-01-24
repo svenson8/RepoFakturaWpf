@@ -57,9 +57,9 @@ namespace FakturaWpf
             {
                 Title = "Lista użytkowników",
                 Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
-                Height = 420,
+                Height = 450,
                 Width = 760,                
-            Content = new UserList()
+                Content = new UserList(MdiMain)
             });
 
 

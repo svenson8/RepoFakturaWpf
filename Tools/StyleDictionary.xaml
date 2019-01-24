@@ -7,6 +7,12 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="HorizontalGridLinesBrush" Value="LightGray" />
         <Setter Property="VerticalGridLinesBrush" Value="LightGray" />
+        <Setter Property="CanUserAddRows" Value="false"/>
+        <Setter Property="AutoGenerateColumns" Value="false"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="AlternationCount" Value="2" />
+        <Setter Property="Background" Value="White"/>
 
         <Setter Property="CellStyle">
             <Setter.Value>
@@ -25,6 +31,9 @@
             <Setter.Value>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="#FFF0F0F0"></Setter>
+                        </Trigger>                        
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#FFF7F7C1"/>
                             <Setter Property="Foreground" Value="Black"/>
@@ -37,6 +46,7 @@
             <Setter.Value>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontWeight"  Value="Bold" />
+                    <Setter Property="VerticalContentAlignment" Value="Top"/>
                 </Style>
             </Setter.Value>
         </Setter>

@@ -171,5 +171,20 @@
   <ItemGroup>
     <Resource Include="Resources\connect.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dodaj16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\usun16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\modyfikuj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\drukuj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
