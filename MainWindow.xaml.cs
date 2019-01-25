@@ -28,6 +28,7 @@ namespace FakturaWpf
         public MainWindow()
         {
             InitializeComponent();
+            MdiControl.FindMainContainer();
         }
 
 
@@ -59,7 +60,7 @@ namespace FakturaWpf
                 Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
                 Height = 450,
                 Width = 760,                
-                Content = new UserList(MdiMain)
+                Content = new UserList()
             });
 
 

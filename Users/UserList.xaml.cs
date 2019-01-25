@@ -25,22 +25,17 @@ namespace FakturaWpf.Users
 
     public partial class UserList : UserControl
     {
-        private MdiContainer mdiParent;
 
-        public UserList(MdiContainer mdi)
+        private DataTable dt;
+        private const string ChildName = "UC_UserList";
+
+        public UserList()
         {
             InitializeComponent();
-            this.mdiParent = mdi;
 
-         //   Point NewLoc = Screen.FromControl(this).WorkingArea.Location,
             LoadData();
 
 
-
-             /*      < DataGridTextColumn.Header >
-                        < TextBlock Text = "Login" FontWeight = "Bold" TextAlignment = "Center" />
-     
-                         </ DataGridTextColumn.Header > */
         }
 
         void LoadData()
@@ -58,26 +53,46 @@ namespace FakturaWpf.Users
 
             NQueryReader nq = new NQueryReader(sques);
 
-            DataTable dt = new DataTable();
+            dt = new DataTable();
             dt.Load(nq.NReader);
             DG_User.ItemsSource = dt.AsDataView();
 
             Various.SetAutoColumnWidth(DG_User, new int[] { 1, 2 });
 
-
+            DG_User.SelectedIndex = 0;
 
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-             mdiParent.Children.Add(new MdiChild()
+            //UserClass customer = (UserClass)DG_User.SelectedItem;  
+
+            int id = 0;
+
+            if (((Button)sender).Name.Equals("btnMod"))
             {
-                Title = "Dane użytkownika",
-                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura.ico")),
-                Height = 395,
-                Width = 565,
-                Content = new UserEdit()
-            });
+                try
+                {
+                    id = Convert.ToInt32(((DataRowView)DG_User.SelectedItem)[0]);
+                }
+                catch
+                {
+                    id = -1;
+                }
+            }
+
+            if (id >= 0)
+            {
+                MdiControl.mdParent.Children.Add(new MdiChild()
+                {
+                    Title = "Dane użytkownika",
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura.ico")),
+                    Height = 395,
+                    Width = 565,
+                    Name = UserEdit.ChildName,
+                    Content = new UserEdit(id)
+                });
+            }
         }
 
         private void button5_Click(object sender, RoutedEventArgs e)

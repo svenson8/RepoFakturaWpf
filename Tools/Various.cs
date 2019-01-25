@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Controls;
+using WPF.MDI;
 
 namespace FakturaWpf
 {
@@ -68,8 +69,57 @@ namespace FakturaWpf
                 new DataGridLength(1, DataGridLengthUnitType.Star);
             }            
         }
+
+       /* public static void CloseMDi(string name)
+        {
+            MdiContainer mdParent = null;
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(MainWindow))
+                {
+                    mdParent = (window as MainWindow).MdiMain;
+                }
+            }
+
+            foreach (MdiChild mdc in mdParent.Children)
+            {
+                if (mdc.Name.Equals(name))
+                    mdParent.Children.Remove(mdc);
+            } 
+        }  */
     }
 
+    public class MdiControl
+    {
+        public static MdiContainer mdParent = null;
+
+        public static void FindMainContainer()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(MainWindow))
+                {
+                    mdParent = (window as MainWindow).MdiMain;
+                }
+            }
+        }
+
+        public static void CloseMdi(string name)
+        {
+            FindMainContainer();
+            foreach (MdiChild mdc in mdParent.Children)
+            {
+                if (mdc.Name.Equals(name))
+                {
+                    mdParent.Children.Remove(mdc);
+                    break;
+                }
+            }
+        }
+            
+
+    }
 
     public class IniFile
     {

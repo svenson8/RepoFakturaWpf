@@ -20,11 +20,12 @@ namespace FakturaWpf
         public DateTime DATAW    { get; set; }
         public string   TELEFON  { get; set; }
         public DateTime DMODDATE { get; set; }
+        public string   ACTIVE   { get; set; }
 
         public const string TABLENAME = "Tlogin";
 
-        public UserClass(int id, string nazwa, string haslo, string imie="", string nazwisko="", 
-                         DateTime dataw=default(DateTime), string telefon="", DateTime dmdate = default(DateTime))
+        public UserClass(int id, string nazwa="", string haslo="", string imie="", string nazwisko="", 
+                         DateTime dataw=default(DateTime), string telefon="", DateTime dmdate = default(DateTime), string active="T")
         {
             this.ID = id;
             this.NAZWA = nazwa;
@@ -34,6 +35,7 @@ namespace FakturaWpf
             this.DATAW = dataw;
             this.TELEFON = telefon;
             this.DMODDATE = dmdate;
+            this.ACTIVE = active;
 
             if (this.DATAW == default(DateTime))
                 this.DATAW = DateTime.Now;
@@ -53,6 +55,7 @@ namespace FakturaWpf
             list.Add(new Params("DATAW",    SqlDbType.DateTime, 0));
             list.Add(new Params("TELEFON",  SqlDbType.VarChar, 50));
             list.Add(new Params("DMODDATE", SqlDbType.DateTime, 0));
+            list.Add(new Params("ACTIVE",   SqlDbType.VarChar,  1));
 
             return TableCheck(TABLENAME, list);
         }
@@ -94,16 +97,17 @@ namespace FakturaWpf
              list.Add(new Params("@NZ", SqlDbType.VarChar,   this.NAZWISKO));
              list.Add(new Params("@HS", SqlDbType.VarChar,   this.HASLO));
              list.Add(new Params("@TL", SqlDbType.VarChar,   this.TELEFON));
+             list.Add(new Params("@AC", SqlDbType.VarChar,   this.ACTIVE));
 
             string sqlpyt = "";
 
              if (New)
              {
-                sqlpyt = "insert into "+TABLENAME+" (NAZWA, IMIE, NAZWISKO, HASLO, TELEFON) values (@NW, @IM, @NZ, @HS, @TL)"; 
+                sqlpyt = "insert into "+TABLENAME+" (NAZWA, IMIE, NAZWISKO, HASLO, TELEFON, ACTIVE) values (@NW, @IM, @NZ, @HS, @TL, @AC)"; 
              }
              else
              {
-                 sqlpyt = "update "+TABLENAME+" set NAZWA =@NW, IMIE = @IM, NAZWISKO = @NZ, HASLO = @HS, TELEFON = @TL where ID = @ID";
+                 sqlpyt = "update "+TABLENAME+" set NAZWA =@NW, IMIE = @IM, NAZWISKO = @NZ, HASLO = @HS, TELEFON = @TL, ACTIVE = @AC where ID = @ID";
              }
 
              NQuery nQ = new NQuery(sqlpyt, list); 
@@ -115,7 +119,7 @@ namespace FakturaWpf
         {
             List<Params> list = new List<Params>();
             list.Add(new Params("@ID", SqlDbType.Int, Id));
-            NQueryReader nQ = new NQueryReader("select ID,NAZWA,IMIE,NAZWISKO,HASLO,DATAW,TELEFON,DMODDATE from "+TABLENAME+" where ID = @ID", list);
+            NQueryReader nQ = new NQueryReader("select ID,NAZWA,IMIE,NAZWISKO,HASLO,DATAW,TELEFON,DMODDATE, ACTIVE from "+TABLENAME+" where ID = @ID", list);
 
             while (nQ.NReader.Read())
             {
@@ -126,11 +130,12 @@ namespace FakturaWpf
                 this.HASLO    = nQ.NReader.GetString(4);
                 this.DATAW    = nQ.NReader.GetDateTime(5);
                 this.TELEFON  = nQ.NReader.GetString(6);
-                this.DATAW    = nQ.NReader.GetDateTime(5);
+                this.DMODDATE = nQ.NReader.GetDateTime(7);
+                this.ACTIVE   = nQ.NReader.GetString(8);
                 nQ.NReader.Close();
                 return;
             }
-
+       
         }
 
         public static Boolean DeleteUser(int Id)
