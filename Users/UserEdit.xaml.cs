@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,9 @@ namespace FakturaWpf.Users
     /// <summary>
     /// Logika interakcji dla klasy UserControl1.xaml
     /// </summary>
-    public partial class UserEdit : UserControl
+    public partial class UserEdit : UserControl, IMdiControl
     {
         private UserClass user;
-        public const string ChildName = "UC_UserEdit";
 
         public UserEdit(int id)
             
@@ -53,12 +53,28 @@ namespace FakturaWpf.Users
             else
                 Various.Warning("Błąd zapisu danych", "");
 
-            MdiControl.CloseMdi(UserEdit.ChildName);
+            Close();
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            MdiControl.CloseMdi(UserEdit.ChildName);
+            Close();
         }
+
+        public string ChildName()
+        {
+            return this.Name;
+        }
+
+        public void Close()
+        {
+            MdiControl.CloseMdi(ChildName());
+        }
+
+        public void OnRefresh()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

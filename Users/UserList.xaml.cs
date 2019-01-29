@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Tools;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -23,11 +24,11 @@ namespace FakturaWpf.Users
     /// </summary>
     /// 
 
-    public partial class UserList : UserControl
+    public partial class UserList : UserControl, IMdiControl
     {
 
         private DataTable dt;
-        private const string ChildName = "UC_UserList";
+
 
         public UserList()
         {
@@ -83,21 +84,28 @@ namespace FakturaWpf.Users
 
             if (id >= 0)
             {
-                MdiControl.mdParent.Children.Add(new MdiChild()
-                {
-                    Title = "Dane użytkownika",
-                    Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura.ico")),
-                    Height = 395,
-                    Width = 565,
-                    Name = UserEdit.ChildName,
-                    Content = new UserEdit(id)
-                });
+                MdiControl.AddChild(typeof(UserEdit), new object[] {id}, "Dane użytkownika", "faktura.ico", 395, 565);
             }
         }
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
+        }
+
+        public string ChildName()
+        {
+            return this.Name;
+        }
+
+        public void Close()
+        {
+            MdiControl.CloseMdi(ChildName());
+        }
+
+        public void OnRefresh()
+        {
+            throw new NotImplementedException();
         }
     }
 }

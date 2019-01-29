@@ -10,24 +10,19 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Controls;
 using WPF.MDI;
+using System.Windows.Media.Imaging;
+using FakturaWpf.Tools;
 
 namespace FakturaWpf
 {
     class Various
     {
-        /*
+       
         public static string QuotedStr(string val)
         {
             return "'" + val + "'";
         }
 
-        public static void SetGridHeaders(DataGridView dgv)
-        {
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 9.75F, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false;
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Gainsboro;
-        }
-        */
         public static void Warning(String comm, String title = "")
         {
             MessageBox.Show(comm, title, MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -70,24 +65,6 @@ namespace FakturaWpf
             }            
         }
 
-       /* public static void CloseMDi(string name)
-        {
-            MdiContainer mdParent = null;
-
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(MainWindow))
-                {
-                    mdParent = (window as MainWindow).MdiMain;
-                }
-            }
-
-            foreach (MdiChild mdc in mdParent.Children)
-            {
-                if (mdc.Name.Equals(name))
-                    mdParent.Children.Remove(mdc);
-            } 
-        }  */
     }
 
     public class MdiControl
@@ -116,6 +93,21 @@ namespace FakturaWpf
                     break;
                 }
             }
+        }
+
+        public static void AddChild(Type myClass, object[] args ,string title ,string iconame, int height, int width)
+        {
+            Object theObject = Activator.CreateInstance(myClass, args?.ToArray()); 
+
+            MdiControl.mdParent.Children.Add(new MdiChild()
+            {
+                Title = title,
+                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/"+iconame)),
+                Height = height,
+                Width = width,
+                Name = ((IMdiControl)theObject).ChildName(),
+                Content = (UserControl)theObject,
+            });
         }
             
 

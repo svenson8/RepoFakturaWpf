@@ -61,6 +61,7 @@
     <Compile Include="Documents\DocumentList.xaml.cs">
       <DependentUpon>DocumentList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\IMdiControl.cs" />
     <Compile Include="Tools\MyProgressBar.xaml.cs">
       <DependentUpon>MyProgressBar.xaml</DependentUpon>
     </Compile>

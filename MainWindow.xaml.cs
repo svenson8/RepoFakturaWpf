@@ -40,29 +40,13 @@ namespace FakturaWpf
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MdiMain.Children.Add(new MdiChild()
-            {
-                Title = " Lista dokumentów sprzedaży",
-                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
-                Height = 450,
-                Width = 800,
-                Content = new DocumentList()
-            });
-
+            MdiControl.AddChild(typeof(DocumentList), null, "Lista dokumentów sprzedaży", "faktura sprzedazy16.ico", 450, 800);
           
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            MdiMain.Children.Add(new MdiChild()
-            {
-                Title = "Lista użytkowników",
-                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/faktura sprzedazy16.ico")),
-                Height = 450,
-                Width = 760,                
-                Content = new UserList()
-            });
-
+            MdiControl.AddChild(typeof(UserList), null, "Lista uzytkowników", "faktura sprzedazy16.ico", 450, 760);
 
         }
 

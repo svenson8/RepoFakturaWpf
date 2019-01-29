@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +28,26 @@ namespace FakturaWpf.Documents
     /// <summary>
     /// Logika interakcji dla klasy UserControl1.xaml
     /// </summary>
-    public partial class DocumentList : UserControl
+    public partial class DocumentList : UserControl, IMdiControl
     {
         public DocumentList()
         {
             InitializeComponent();
+        }
+
+        public string ChildName()
+        {
+            return this.Name;
+        }
+
+        public void Close()
+        {
+            MdiControl.CloseMdi(ChildName());
+        }
+
+        public void OnRefresh()
+        {
+            throw new NotImplementedException();
         }
     }
 }
