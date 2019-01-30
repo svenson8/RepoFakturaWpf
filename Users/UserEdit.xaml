@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Users"
+             xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <DockPanel >
         <TabControl DockPanel.Dock="Top" x:Name="tabControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -49,21 +50,12 @@
                     <Label Content="(***) Wypełnienie tych pól jest wymagane" Grid.Row="7" Grid.Column="0" Margin="20,95,0,0" Foreground="DimGray"
                            VerticalAlignment="Bottom"></Label>
 
-                    <Button x:Name="button" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" 
-                             Width="130" Height="28" FontSize="13" Click="button_Click">
-                        <StackPanel Orientation="Horizontal" Margin="0">
-                            <Image Source="/FakturaWpf;component/Resources/zapisz16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
-                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">F5 Zapisz</TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <my:MyButton Grid.Row="8" Grid.Column="0" myText="F5 Zapisz" HorizontalAlignment="Left"   Width="130" Height="30" 
+                                 myImageSource="/FakturaWpf;component/Resources/zapisz16.ico" myClick="button_Click" myImageHeight="20" myImageWidth="20"/>
 
-                    <Button x:Name="button2" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" Margin="415,10,0,0" VerticalAlignment="Top" 
-                             Width="130" Height="28" FontSize="13" Click="button2_Click">
-                        <StackPanel Orientation="Horizontal" Margin="0">
-                            <Image Source="/FakturaWpf;component/Resources/anuluj16.ico" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,15,0"/>
-                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Esc Anuluj</TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <my:MyButton Grid.Row="8" Grid.Column="0" myText="Esc Anuluj" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="415,10,0,0" Width="130" Height="28" 
+                                 myImageSource="/FakturaWpf;component/Resources/anuluj16.ico" myClick="button2_Click" myImageHeight="20" myImageWidth="20"/>                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem" Visibility="Hidden">

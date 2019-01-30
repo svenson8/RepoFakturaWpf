@@ -41,26 +41,34 @@ namespace FakturaWpf.Users
 
         void LoadData()
         {
-            string sques = "Select* from TLogin where ID > 0";
+            try
+            {
 
-            if (TX_Login.Text != String.Empty)
-                sques += " and NAZWA like '%" + TX_Login.Text + "%'";
+                string sques = "Select* from TLogin where ID > 0";
 
-            if (TX_Name.Text != String.Empty)
-                sques += " and IMIE like '%" + TX_Name.Text + "%'";
+                if (TX_Login.Text != String.Empty)
+                    sques += " and NAZWA like '%" + TX_Login.Text + "%'";
 
-            if (TX_Surname.Text != String.Empty)
-                sques += " and NAZWISKO like '%" + TX_Surname.Text + "%'";
+                if (TX_Name.Text != String.Empty)
+                    sques += " and IMIE like '%" + TX_Name.Text + "%'";
 
-            NQueryReader nq = new NQueryReader(sques);
+                if (TX_Surname.Text != String.Empty)
+                    sques += " and NAZWISKO like '%" + TX_Surname.Text + "%'";
 
-            dt = new DataTable();
-            dt.Load(nq.NReader);
-            DG_User.ItemsSource = dt.AsDataView();
+                NQueryReader nq = new NQueryReader(sques);
 
-            Various.SetAutoColumnWidth(DG_User, new int[] { 1, 2 });
+                dt = new DataTable();
+                dt.Load(nq.NReader);
+                DG_User.ItemsSource = dt.AsDataView();
 
-            DG_User.SelectedIndex = 0;
+                Various.SetAutoColumnWidth(DG_User, new int[] { 1, 2 });
+
+                DG_User.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                Various.Warning(ex.Message, "Błąd");
+            }
 
         }
 

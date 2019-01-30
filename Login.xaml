@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FakturaWpf"
+        xmlns:my="clr-namespace:FakturaWpf.MyControls"
         mc:Ignorable="d"
         Title="Logowanie" Height="306.303" Width="478.571" FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="Resources/faktura.ico">
     <Window.Background>
@@ -21,21 +22,10 @@
             <RowDefinition Height="108*"/>
             <RowDefinition Height="17*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="button" HorizontalAlignment="Left" Margin="36,0,0,0" Grid.Row="1" VerticalAlignment="Top" 
-                Width="141" Height="34" FontSize="14" Click="button_Click">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <Image Source="Resources/lock.png" Height="25" Width="25" HorizontalAlignment="Left" Margin="0,0,15,0"/>
-                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Zaloguj</TextBlock>
-            </StackPanel>
-        </Button>
 
-        <Button x:Name="button1" Grid.Column="1" HorizontalAlignment="Left" Margin="52,0,0,0" Grid.Row="1" 
-                VerticalAlignment="Top" Width="141" Height="34" FontSize="14" Click="button1_Click">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <Image Source="Resources/exit.png" Height="25" Width="25" HorizontalAlignment="Left" Margin="0,0,15,0"/>
-                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">Anuluj</TextBlock>
-            </StackPanel>
-        </Button>            
+        <my:MyButton Grid.Row="1" myText="Zaloguj" Width="141" Height="34" myImageSource="/Resources/lock.png" myClick="button_Click" />
+        <my:MyButton Grid.Row="1" Grid.Column="1" myText="Anuluj" Width="141" Height="34" myImageSource="/Resources/exit.png" myClick="button1_Click" />
+       
         <TextBox x:Name="TB_LOGIN" HorizontalAlignment="Left" Height="23" Margin="159,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.ColumnSpan="2" FontSize="14" Text="admin"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="79,72,0,0" TextWrapping="Wrap" Text="Login:" VerticalAlignment="Top" Height="22" Width="51" FontSize="14"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="79,120,0,0" TextWrapping="Wrap" Text="Hasło:" VerticalAlignment="Top" Height="22" Width="51" FontSize="14"/>

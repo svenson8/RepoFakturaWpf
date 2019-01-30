@@ -61,6 +61,9 @@
     <Compile Include="Documents\DocumentList.xaml.cs">
       <DependentUpon>DocumentList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyControls\MyButton.xaml.cs">
+      <DependentUpon>MyButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\IMdiControl.cs" />
     <Compile Include="Tools\MyProgressBar.xaml.cs">
       <DependentUpon>MyProgressBar.xaml</DependentUpon>
@@ -98,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyControls\MyButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
