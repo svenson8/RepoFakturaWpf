@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="FakturaWpf.MyControls.MyControlPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FakturaWpf.MyControls"
+             mc:Ignorable="d">
+    <DockPanel>
+        <Button x:Name="btnIns" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top" 
+                Width="100" Height="25" FontSize="13" Click="button_Click">
+            <StackPanel Orientation="Horizontal" Margin="0">
+                <Image Source="/FakturaWpf;component/Resources/dodaj16.ico" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Ins Dodaj</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnMod" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top" 
+                Width="100" Height="25" FontSize="13" Click="button_Click">
+            <StackPanel Orientation="Horizontal" Margin="0">
+                <Image Source="/FakturaWpf;component/Resources/modyfikuj.png" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">F6 Zmień</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="button3" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top" 
+                Width="100" Height="25" FontSize="13">
+            <StackPanel Orientation="Horizontal" Margin="0">
+                <Image Source="/FakturaWpf;component/Resources/usun16.ico" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Del Usuń</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="button4" HorizontalAlignment="Right" Margin="300,5,0,0" VerticalAlignment="Top" 
+                Width="100" Height="25" FontSize="13">
+            <StackPanel Orientation="Horizontal" Margin="0">
+                <Image Source="/FakturaWpf;component/Resources/drukuj.png" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Drukuj</TextBlock>
+            </StackPanel>
+        </Button>
+    </DockPanel>
+</UserControl>

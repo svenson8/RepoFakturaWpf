@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FakturaWpf"
         xmlns:my="clr-namespace:FakturaWpf.MyControls"
         mc:Ignorable="d"
-        Title="Logowanie" Height="306.303" Width="478.571" FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="Resources/faktura.ico">
+        Title="Logowanie" Height="303.303" Width="478.571" FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="Resources/faktura.ico">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF70B8CD" Offset="0.091"/>
@@ -23,8 +23,8 @@
             <RowDefinition Height="17*"/>
         </Grid.RowDefinitions>
 
-        <my:MyButton Grid.Row="1" myText="Zaloguj" Width="141" Height="34" myImageSource="/Resources/lock.png" myClick="button_Click" />
-        <my:MyButton Grid.Row="1" Grid.Column="1" myText="Anuluj" Width="141" Height="34" myImageSource="/Resources/exit.png" myClick="button1_Click" />
+        <my:MyButton Grid.Row="1" myText="Zaloguj"  myImageSource="/Resources/lock.png" myClick="button_Click" />
+        <my:MyButton Grid.Row="1" Grid.Column="1" myText="Anuluj"  myImageSource="/Resources/exit.png" myClick="button1_Click" />
        
         <TextBox x:Name="TB_LOGIN" HorizontalAlignment="Left" Height="23" Margin="159,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.ColumnSpan="2" FontSize="14" Text="admin"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="79,72,0,0" TextWrapping="Wrap" Text="Login:" VerticalAlignment="Top" Height="22" Width="51" FontSize="14"/>

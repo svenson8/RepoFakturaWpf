@@ -48,7 +48,7 @@ namespace FakturaWpf.MyControls
 
         public static readonly DependencyProperty ImageWidthProperty =
             DependencyProperty.Register("myImageWidth", typeof(int),
-            typeof(MyButton), new FrameworkPropertyMetadata(24));
+            typeof(MyButton), new FrameworkPropertyMetadata(20));
 
         public int myImageWidth
         {
@@ -59,7 +59,7 @@ namespace FakturaWpf.MyControls
 
         public static readonly DependencyProperty ImageHeightProperty =
             DependencyProperty.Register("myImageHeight", typeof(int),
-            typeof(MyButton), new FrameworkPropertyMetadata(24));
+            typeof(MyButton), new FrameworkPropertyMetadata(20));
 
         public int myImageHeight
         {
@@ -67,6 +67,29 @@ namespace FakturaWpf.MyControls
             set { SetValue(ImageHeightProperty, value); }
 
         }
+
+/*
+        public static readonly DependencyProperty ButtonWidthProperty =
+            DependencyProperty.Register("myButtonWidth", typeof(int),
+            typeof(MyButton), new FrameworkPropertyMetadata(130));
+
+        public int myButtonWidth
+        {
+            get { return Convert.ToInt32(GetValue(ButtonWidthProperty)); }
+            set { SetValue(ButtonWidthProperty, value); }
+
+        } 
+
+        public static readonly DependencyProperty ButtonHeightProperty =
+            DependencyProperty.Register("myButtonHeight", typeof(int),
+            typeof(MyButton), new FrameworkPropertyMetadata(30));
+
+        public int myButtonHeight
+        {
+            get { return Convert.ToInt32(GetValue(ButtonHeightProperty)); }
+            set { SetValue(ButtonHeightProperty, value); }
+
+        } */
 
 
         public static readonly RoutedEvent ClickEvent =
