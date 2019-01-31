@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.MyControls;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -78,7 +79,7 @@ namespace FakturaWpf.Users
 
             int id = 0;
 
-            if (((Button)sender).Name.Equals("btnMod"))
+            if (((MyButton)sender).Name.Equals("btnMod"))
             {
                 try
                 {

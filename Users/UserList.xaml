@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Users"
+             xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
 
@@ -27,12 +28,8 @@
 
             <Label Content="Nazwisko:"  Grid.Row="2" Grid.Column="1" Margin="0,0,80,0" Grid.ColumnSpan="2"></Label>
             <TextBox x:Name="TX_Surname" Grid.Row="2" Grid.Column="1" Width="120" Height="20" Margin="70,5,80,0"></TextBox>
-            <Button x:Name="button5" Grid.Row="1" Grid.Column="2" Width="100" Height="25" FontSize="13" Margin="0,5,3,0" Click="button5_Click">
-                <StackPanel Orientation="Horizontal" Margin="0">
-                    <Image Source="/FakturaWpf;component/Resources/refresh.png" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">F3 Odśwież</TextBlock>
-                </StackPanel>
-            </Button>            
+            <my:MyButton myText="F3 Odśwież" myClick="button5_Click" Grid.Row="1" Grid.Column="2" myImageSource="/FakturaWpf;component/Resources/refresh.png"/>
+     
         </Grid>
         <DataGrid x:Name="DG_User" MinHeight="300" Height="Auto"  Style="{StaticResource MyGridStyle}" Margin="0,66,0,30">
             <DataGrid.Columns>
@@ -43,35 +40,15 @@
                 <DataGridTextColumn Binding="{Binding DMODDATE}" Header="Data ostat. &#x0a;zmiany" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DockPanel VerticalAlignment="Bottom" Margin="0,300,0,0">
-            <Button x:Name="btnIns" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top" 
-                Width="100" Height="25" FontSize="13" Click="button_Click">
-                <StackPanel Orientation="Horizontal" Margin="0">
-                    <Image Source="/FakturaWpf;component/Resources/dodaj16.ico" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Ins Dodaj</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="btnMod" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top" 
-                Width="100" Height="25" FontSize="13" Click="button_Click">
-                <StackPanel Orientation="Horizontal" Margin="0">
-                    <Image Source="/FakturaWpf;component/Resources/modyfikuj.png" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">F6 Zmień</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="button3" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top" 
-                Width="100" Height="25" FontSize="13">
-                <StackPanel Orientation="Horizontal" Margin="0">
-                    <Image Source="/FakturaWpf;component/Resources/usun16.ico" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Del Usuń</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="button4" HorizontalAlignment="Right" Margin="300,5,0,0" VerticalAlignment="Top" 
-                Width="100" Height="25" FontSize="13">
-                <StackPanel Orientation="Horizontal" Margin="0">
-                    <Image Source="/FakturaWpf;component/Resources/drukuj.png" Height="19" Width="25" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Drukuj</TextBlock>
-                </StackPanel>
-            </Button>
-        </DockPanel>
+
+
+          <DockPanel VerticalAlignment="Bottom" Margin="0,300,0,0">
+            <my:MyButton x:Name="btIns" myText="Ins Dodaj" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0"
+                         myImageSource="/FakturaWpf;component/Resources/dodaj16.ico"/>
+            <my:MyButton x:Name="btnMod" myText="F6 Zmień"  HorizontalAlignment="Left" Margin="3,5,0,0" 
+                         myImageSource="/FakturaWpf;component/Resources/modyfikuj.png"/>
+            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="/FakturaWpf;component/Resources/usun16.ico"/>
+            <my:MyButton myText="Del Usuń" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="/FakturaWpf;component/Resources/drukuj.png"/>
+        </DockPanel> 
     </Grid>
 </UserControl>
