@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using WPF.MDI;
 using System.Windows.Media.Imaging;
 using FakturaWpf.Tools;
+using System.Windows.Data;
 
 namespace FakturaWpf
 {
@@ -70,6 +71,7 @@ namespace FakturaWpf
     public class MdiControl
     {
         public static MdiContainer mdParent = null;
+        public static TreeView mainTree = null;
 
         public static void FindMainContainer()
         {
@@ -78,24 +80,33 @@ namespace FakturaWpf
                 if (window.GetType() == typeof(MainWindow))
                 {
                     mdParent = (window as MainWindow).MdiMain;
+                    mainTree = (window as MainWindow).mainTreeView;
                 }
             }
+        }
+
+        public static MdiChild FindChild(string childname)
+        {
+            if (mdParent == null)
+                FindMainContainer();
+
+            foreach (MdiChild mdc in mdParent.Children)
+            {
+                if (mdc.Name.Equals(childname))
+                {
+                    return mdc;
+                }
+            }
+
+            return null;
         }
 
         public static void CloseMdi(string name)
         {
-            FindMainContainer();
-            foreach (MdiChild mdc in mdParent.Children)
-            {
-                if (mdc.Name.Equals(name))
-                {
-                    mdParent.Children.Remove(mdc);
-                    break;
-                }
-            }
+             mdParent.Children.Remove(FindChild(name));
         }
 
-        public static void AddChild(Type myClass, object[] args ,string title ,string iconame, int height, int width)
+        public static void AddChild(Type myClass, object[] args ,string title ,string iconame, int height, int width, string parent="")
         {
             Object theObject = Activator.CreateInstance(myClass, args?.ToArray()); 
 
@@ -108,9 +119,70 @@ namespace FakturaWpf
                 Name = ((IMdiControl)theObject).ChildName(),
                 Content = (UserControl)theObject,
             });
-        }
-            
 
+            AddToTree(title, parent);
+        }
+
+        public static void RefreshMdi(string childname)
+        {
+            ((IMdiControl)(FindChild(childname)).Content).OnRefresh();
+        }
+
+        private static TreeViewItem FindTreeItem(string name)
+        {
+            if (mainTree.Items.Count > 0)
+            {
+
+                ItemCollection items = mainTree.Items;
+
+                foreach (TreeViewItem node in items)
+                {
+                    if (node.Header.Equals(name))
+                        return node;
+                }
+            }
+            return null;
+        }
+
+        private static void AddToTree(string name, string parent)
+        {
+            if (mainTree == null)
+                FindMainContainer();
+
+            if (parent.Equals(""))
+                parent = "AKTYWNE OKNA";
+
+            TreeViewItem newChild = new TreeViewItem();
+            newChild.Header = name;
+            FindTreeItem(parent).Items.Add(newChild);
+        }
+    }
+
+    public class YesNoToBooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            switch (value.ToString().ToUpper())
+            {
+                case "T":
+                    return true;
+                case "N":
+                    return false;
+            }
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value is bool)
+            {
+                if ((bool)value == true)
+                    return "T";
+                else
+                    return "N";
+            }
+            return "N";
+        }
     }
 
     public class IniFile

@@ -33,7 +33,7 @@
                 <Button Content="Zakup" />
             </ToolBar>
         </ToolBarPanel>
-        <TreeView DockPanel.Dock="Left" x:Name="treeView">
+        <TreeView DockPanel.Dock="Left" x:Name="mainTreeView" Width="130">
             <TreeView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFBFE6BF" Offset="1"/>
@@ -42,9 +42,7 @@
                 </LinearGradientBrush>
             </TreeView.Background>
             <TreeViewItem Header="AKTYWNE OKNA">
-                <TreeViewItem Header="Okno1"></TreeViewItem>
-                <TreeViewItem Header="Okno2"></TreeViewItem>
-            </TreeViewItem>
+            </TreeViewItem>       
         </TreeView>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem Width="736">

@@ -97,5 +97,51 @@
         </Style.Resources> 
     </Style>
 
+    <BitmapImage x:Key="ImgLock"    UriSource="/Resources/lock.png" />
+    <BitmapImage x:Key="ImgExit"    UriSource="/Resources/exit.png" />
+    <BitmapImage x:Key="ImgIns"     UriSource="/Resources/dodaj16.ico" />
+    <BitmapImage x:Key="ImgEdt"     UriSource="/Resources/modyfikuj.png" />
+    <BitmapImage x:Key="ImgDel"     UriSource="/Resources/usun16.ico" />
+    <BitmapImage x:Key="ImgPrint"   UriSource="/Resources/drukuj.png" />
+    <BitmapImage x:Key="ImgSave"    UriSource="/Resources/zapisz16.ico" />
+    <BitmapImage x:Key="ImgCancel"  UriSource="/Resources/anuluj16.ico"/>
+    <BitmapImage x:Key="ImgRefresh" UriSource="/Resources/refresh.png" />
+    <BitmapImage x:Key="ImgCut"     UriSource="/Resources/cut.png" />
+    <BitmapImage x:Key="ImgCopy"    UriSource="/Resources/copy.png" />
+    <BitmapImage x:Key="ImgPaste"   UriSource="/Resources/paste.png" />
 
+    <Style x:Key="MenuIcon" TargetType="Image">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+
+    <ContextMenu x:Key="MyClipboardContextMenu" >
+        <MenuItem Header="Wytnij" Command="Cut" InputGestureText="Ctrl+X">
+            <MenuItem.Icon>
+                <Image Source="{StaticResource ImgCut}" Style="{StaticResource MenuIcon}" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="Kopiuj" Command="Copy" InputGestureText="Ctrl+C">
+            <MenuItem.Icon>
+                <Image Source="{StaticResource ImgCopy}" Style="{StaticResource MenuIcon}" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="Wklej" Command="Paste" InputGestureText="Ctrl+V">
+            <MenuItem.Icon>
+                <Image Source="{StaticResource ImgPaste}" Style="{StaticResource MenuIcon}" />
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <Style TargetType="TextBox">
+       <Setter Property="ContextMenu" Value="{StaticResource MyClipboardContextMenu}" /> 
+    </Style>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="ContextMenu" Value="{StaticResource MyClipboardContextMenu}" />
+    </Style>
+
+
+    <local:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
+    
 </ResourceDictionary>

@@ -46,7 +46,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(UserList), null, "Lista uzytkowników", "faktura sprzedazy16.ico", 450, 760);
+            MdiControl.AddChild(typeof(UserList), null, "Lista uzytkowników", "faktura sprzedazy16.ico", 450, 765);
 
         }
 

@@ -28,7 +28,8 @@
                     <Label Content="Nazwa:"  Grid.Row="1" Grid.Column="0" Margin="100,0,0,0"></Label>
                     <TextBox x:Name="TX_Name" Grid.Row="1" Grid.Column="0" Height="20" Margin="172,3,200,3" MaxLength="30" Text="{Binding NAZWA}"/>
                     <Label Content="***"  Grid.Row="1" Grid.Column="0" Margin="350,0,0,0" Foreground="DimGray"/>
-                    <CheckBox x:Name="CH_Active" Content="Aktywny" Grid.Row="1" Grid.Column="0" Margin="400,5,0,0" />
+                    <CheckBox x:Name="CH_Active" Content="Aktywny" Grid.Row="1" Grid.Column="0" Margin="400,5,0,0" 
+                              IsChecked="{Binding ACTIVE, Converter={StaticResource YesNoToBooleanConverter}}"/>
 
                     <Label Content="Hasło:"  Grid.Row="2" Grid.Column="0" Margin="105,0,0,0"></Label>
                     <Label Content="***"  Grid.Row="2" Grid.Column="0" Margin="350,0,0,0" Foreground="DimGray"/>
@@ -51,10 +52,10 @@
                            VerticalAlignment="Bottom"></Label>
 
                     <my:MyButton Grid.Row="8" Grid.Column="0" myText="F5 Zapisz" HorizontalAlignment="Left" 
-                                 myImageSource="/FakturaWpf;component/Resources/zapisz16.ico" myClick="button_Click" myImageHeight="20" myImageWidth="20"/>
+                                 myImageSource="{StaticResource ImgSave}" myClick="button_Click" />
 
-                    <my:MyButton Grid.Row="8" Grid.Column="0" myText="Esc Anuluj" HorizontalAlignment="Right" Margin="440,0,2,0" 
-                                 myImageSource="/FakturaWpf;component/Resources/anuluj16.ico" myClick="button2_Click" myImageHeight="20" myImageWidth="20"/>                    
+                    <my:MyButton Grid.Row="8" Grid.Column="0" myText="Esc Anuluj" HorizontalAlignment="Right" 
+                                 Margin="440,0,2,0" myImageSource="{StaticResource ImgCancel}" myClick="button2_Click"/>                    
 
                 </Grid>
             </TabItem>

@@ -36,24 +36,42 @@ namespace FakturaWpf.Users
         {
             user = new UserClass(id);
             if (id > 0)
+            {
                 user.ReadUser(id);
+                TX_Passsword.Password     = user.HASLO;
+                TX_Passsword_rep.Password = user.HASLO;
+            }
 
             gridField.DataContext = user;
 
-            CH_Active.IsChecked = (user.ACTIVE.Equals("T")) ? true : false;
+        }
+
+        private Boolean CheckPassword()
+        {
+             if (! TX_Passsword.Password.Equals(TX_Passsword_rep.Password))
+            {
+                Various.Warning("Błędnie powtórzone hasło", "Ostrzeżenie");
+                return false;
+            }
+            user.HASLO = TX_Passsword.Password;
+            return true;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckPassword())
+            {
 
-            user.ACTIVE = (CH_Active.IsChecked == true) ? "T" : "F";
+                if (user.SaveUser())
+                {
+                    Various.InfoOk("Użytkownik zapisany", "Informacja");
+                    MdiControl.RefreshMdi("UC_UserList");
+                }
+                else
+                    Various.Warning("Błąd zapisu danych", "");
 
-            if (user.SaveUser())
-                Various.InfoOk("Użytkownik zapisany", "Informacja");
-            else
-                Various.Warning("Błąd zapisu danych", "");
-
-            Close();
+                Close();
+            }
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)

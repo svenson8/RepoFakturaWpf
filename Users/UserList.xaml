@@ -28,8 +28,8 @@
 
             <Label Content="Nazwisko:"  Grid.Row="2" Grid.Column="1" Margin="0,0,80,0" Grid.ColumnSpan="2"></Label>
             <TextBox x:Name="TX_Surname" Grid.Row="2" Grid.Column="1" Width="120" Height="20" Margin="70,5,80,0"></TextBox>
-            <my:MyButton myText="F3 Odśwież" myClick="button5_Click" Grid.Row="1" Grid.Column="2" myImageSource="/FakturaWpf;component/Resources/refresh.png"/>
-     
+            <my:MyButton myText="F3 Odśwież" myClick="button5_Click" Grid.Row="1" Grid.Column="2" myImageSource="{StaticResource ImgRefresh}" />
+
         </Grid>
         <DataGrid x:Name="DG_User" MinHeight="300" Height="Auto"  Style="{StaticResource MyGridStyle}" Margin="0,66,0,30">
             <DataGrid.Columns>
@@ -43,12 +43,10 @@
 
 
           <DockPanel VerticalAlignment="Bottom" Margin="0,300,0,0">
-            <my:MyButton x:Name="btIns" myText="Ins Dodaj" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0"
-                         myImageSource="/FakturaWpf;component/Resources/dodaj16.ico"/>
-            <my:MyButton x:Name="btnMod" myText="F6 Zmień"  HorizontalAlignment="Left" Margin="3,5,0,0" 
-                         myImageSource="/FakturaWpf;component/Resources/modyfikuj.png"/>
-            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="/FakturaWpf;component/Resources/usun16.ico"/>
-            <my:MyButton myText="Del Usuń" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="/FakturaWpf;component/Resources/drukuj.png"/>
+            <my:MyButton x:Name="btIns" myText="Ins Dodaj" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" />
+            <my:MyButton x:Name="btnMod" myText="F6 Zmień" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}"/>
+            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick"/>
+            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
         </DockPanel> 
     </Grid>
 </UserControl>

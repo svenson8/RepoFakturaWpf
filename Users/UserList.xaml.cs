@@ -73,6 +73,19 @@ namespace FakturaWpf.Users
 
         }
 
+        private void GetId(out int id)
+        {
+            try
+            {
+                id = Convert.ToInt32(((DataRowView)DG_User.SelectedItem)["ID"]);
+            }
+            catch
+            {
+                id = -1;
+            }
+          
+        }
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
             //UserClass customer = (UserClass)DG_User.SelectedItem;  
@@ -81,14 +94,7 @@ namespace FakturaWpf.Users
 
             if (((MyButton)sender).Name.Equals("btnMod"))
             {
-                try
-                {
-                    id = Convert.ToInt32(((DataRowView)DG_User.SelectedItem)[0]);
-                }
-                catch
-                {
-                    id = -1;
-                }
+                GetId(out id);
             }
 
             if (id >= 0)
@@ -114,7 +120,24 @@ namespace FakturaWpf.Users
 
         public void OnRefresh()
         {
-            throw new NotImplementedException();
+            LoadData();
+        }
+
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            GetId(out int id);
+
+            if (id > 0)
+            {
+                if (Various.Question("Czy na pewno usunąć użytkownika " + ((DataRowView)DG_User.SelectedItem)["NAZWA"], "Pytanie"))
+                  {
+                    if (UserClass.DeleteUser(id))
+                    {
+                        Various.InfoOk("Użytkownik usunięty");
+                        LoadData();
+                    }
+                  }
+            }
         }
     }
 }
