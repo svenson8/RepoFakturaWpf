@@ -101,47 +101,92 @@ namespace FakturaWpf
             return null;
         }
 
-        public static void CloseMdi(string name)
+        public static MdiChild FindChild(Type myClass)
         {
-             mdParent.Children.Remove(FindChild(name));
-        }
+            if (mdParent == null)
+                FindMainContainer();
 
-        public static void AddChild(Type myClass, object[] args ,string title ,string iconame, int height, int width, string parent="")
-        {
-            Object theObject = Activator.CreateInstance(myClass, args?.ToArray()); 
-
-            MdiControl.mdParent.Children.Add(new MdiChild()
+            foreach (MdiChild mdc in mdParent.Children)
             {
-                Title = title,
-                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/"+iconame)),
-                Height = height,
-                Width = width,
-                Name = ((IMdiControl)theObject).ChildName(),
-                Content = (UserControl)theObject,
-            });
-
-            AddToTree(title, parent);
-        }
-
-        public static void RefreshMdi(string childname)
-        {
-            ((IMdiControl)(FindChild(childname)).Content).OnRefresh();
-        }
-
-        private static TreeViewItem FindTreeItem(string name)
-        {
-            if (mainTree.Items.Count > 0)
-            {
-
-                ItemCollection items = mainTree.Items;
-
-                foreach (TreeViewItem node in items)
+                if (mdc.Content.GetType() == myClass)
                 {
-                    if (node.Header.Equals(name))
-                        return node;
+                    return mdc;
                 }
             }
+
             return null;
+        }
+
+
+        public static void CloseMdi(Type myClass, string treename)
+        {
+            mdParent.Children.Remove(FindChild(myClass));
+            RemoveTreeItem(treename);
+        }
+
+        public static void AddChild(Type myClass, object[] args, string title, string iconame, int height, int width, string parent = "")
+        {
+            Object theObject = Activator.CreateInstance(myClass, args?.ToArray());
+
+            MdiChild md = new MdiChild()
+            {
+                Title = title,
+                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/" + iconame)),
+                Height = height,
+                Width = width,
+                Content = (UserControl)theObject,
+            };
+
+            MdiControl.mdParent.Children.Add(md);
+            md.Closing += ((IMdiControl)theObject).Close;
+
+            AddToTree(((IMdiControl)theObject).TreeName(), parent);
+            ExpandRecursively(mainTree.Items, true);
+        }
+
+        public static void RefreshMdi(Type myClass)
+        {
+            MdiChild md = FindChild(myClass);
+
+            if (md != null)
+                ((IMdiControl)md.Content).OnRefresh();
+        }
+
+        private static void ExpandRecursively(ItemCollection itemsControl, bool expand)
+        {
+            foreach (TreeViewItem it in itemsControl)
+            {
+                it.IsExpanded = expand;
+
+                if (it.HasItems)
+                {
+                    ItemsControl ic = (ItemsControl)it;
+                    ExpandRecursively(it.Items, expand);
+                }
+            }
+        }
+
+        private static TreeViewItem FindTreeItem(ItemCollection items, string name)
+        {
+
+            TreeViewItem foundItem = null;
+
+            foreach (TreeViewItem it in items)
+            {
+                if (it.Header.Equals(name))
+                {
+                    foundItem = it;
+                    return foundItem;
+                }
+
+                if (it.HasItems)
+                {
+                    ItemsControl ic = (ItemsControl)it;
+                    foundItem = FindTreeItem(ic.Items, name); //Recursive call
+                }
+            }
+
+            return foundItem;
         }
 
         private static void AddToTree(string name, string parent)
@@ -154,8 +199,22 @@ namespace FakturaWpf
 
             TreeViewItem newChild = new TreeViewItem();
             newChild.Header = name;
-            FindTreeItem(parent).Items.Add(newChild);
+            FindTreeItem(mainTree.Items, parent).Items.Add(newChild);
         }
+
+        private static void RemoveTreeItem(string name)
+        {
+            TreeViewItem it = FindTreeItem(mainTree.Items, name);
+
+            if ((it!= null) && (it.Parent != null))
+            {
+                var parent = it.Parent as TreeViewItem;
+                if (parent != null)
+                {
+                    parent.Items.Remove(it);
+                }
+            }
+        } 
     }
 
     public class YesNoToBooleanConverter : IValueConverter

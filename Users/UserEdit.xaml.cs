@@ -24,6 +24,7 @@ namespace FakturaWpf.Users
     {
         private UserClass user;
 
+
         public UserEdit(int id)
             
         {
@@ -65,28 +66,24 @@ namespace FakturaWpf.Users
                 if (user.SaveUser())
                 {
                     Various.InfoOk("Użytkownik zapisany", "Informacja");
-                    MdiControl.RefreshMdi("UC_UserList");
+                    MdiControl.RefreshMdi(typeof(UserList));
                 }
                 else
                     Various.Warning("Błąd zapisu danych", "");
 
-                Close();
+                Close(sender , e);
             }
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Close(sender, e);
         }
 
-        public string ChildName()
-        {
-            return this.Name;
-        }
 
-        public void Close()
+        public void Close(object sender, RoutedEventArgs e)
         {
-            MdiControl.CloseMdi(ChildName());
+            MdiControl.CloseMdi(typeof(UserEdit), TreeName());
         }
 
         public void OnRefresh()
@@ -94,5 +91,9 @@ namespace FakturaWpf.Users
             throw new NotImplementedException();
         }
 
+        public string TreeName()
+        {
+            return "Dane użytkow.";
+        }
     }
 }

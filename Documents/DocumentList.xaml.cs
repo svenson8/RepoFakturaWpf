@@ -35,17 +35,19 @@ namespace FakturaWpf.Documents
             InitializeComponent();
         }
 
-        public string ChildName()
-        {
-            return this.Name;
-        }
 
-        public void Close()
+
+        public void Close(object sender, RoutedEventArgs e)
         {
-            MdiControl.CloseMdi(ChildName());
+            MdiControl.CloseMdi(typeof(DocumentList), TreeName());
         }
 
         public void OnRefresh()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string TreeName()
         {
             throw new NotImplementedException();
         }

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FakturaWpf.Tools
 {
-    interface IMdiControl
+
+    public interface IMdiControl
     {
-        string ChildName();
-        void Close();
+        
+        void Close(object sender, RoutedEventArgs e);
         void OnRefresh();
-                   
+        string TreeName();
+
     }
 }

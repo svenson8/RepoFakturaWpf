@@ -99,7 +99,7 @@ namespace FakturaWpf.Users
 
             if (id >= 0)
             {
-                MdiControl.AddChild(typeof(UserEdit), new object[] {id}, "Dane użytkownika", "faktura.ico", 395, 575);
+                MdiControl.AddChild(typeof(UserEdit), new object[] {id}, "Dane użytkownika", "faktura.ico", 395, 575, TreeName());
             }
         }
 
@@ -108,14 +108,9 @@ namespace FakturaWpf.Users
             LoadData();
         }
 
-        public string ChildName()
+        public void Close(object sender, RoutedEventArgs e)
         {
-            return this.Name;
-        }
-
-        public void Close()
-        {
-            MdiControl.CloseMdi(ChildName());
+            MdiControl.CloseMdi(typeof(UserList), TreeName());
         }
 
         public void OnRefresh()
@@ -129,7 +124,7 @@ namespace FakturaWpf.Users
 
             if (id > 0)
             {
-                if (Various.Question("Czy na pewno usunąć użytkownika " + ((DataRowView)DG_User.SelectedItem)["NAZWA"], "Pytanie"))
+                if (Various.Question("Czy na pewno usunąć użytkownika ?" + ((DataRowView)DG_User.SelectedItem)["NAZWA"], "Pytanie"))
                   {
                     if (UserClass.DeleteUser(id))
                     {
@@ -138,6 +133,11 @@ namespace FakturaWpf.Users
                     }
                   }
             }
+        }
+
+        public string TreeName()
+        {
+            return "Lista użytkow.";
         }
     }
 }
