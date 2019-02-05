@@ -57,7 +57,10 @@ namespace FakturaWpf
 
         }
 
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            ServerConf.ShowServerConf(false);
 
-        
+        }
     }
 }

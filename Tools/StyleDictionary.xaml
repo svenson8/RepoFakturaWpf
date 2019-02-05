@@ -109,6 +109,8 @@
     <BitmapImage x:Key="ImgCut"     UriSource="/Resources/cut.png" />
     <BitmapImage x:Key="ImgCopy"    UriSource="/Resources/copy.png" />
     <BitmapImage x:Key="ImgPaste"   UriSource="/Resources/paste.png" />
+    <BitmapImage x:Key="ImgUsers"   UriSource="/Resources/users.png" />
+    <BitmapImage x:Key="ImgConfig"  UriSource="/Resources/config.png" />
 
     <Style x:Key="MenuIcon" TargetType="Image">
         <Setter Property="Width" Value="16" />

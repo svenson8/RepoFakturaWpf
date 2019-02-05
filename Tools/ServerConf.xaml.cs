@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Sql;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,12 @@ namespace FakturaWpf
     {
         public static string pathFile;
         private ServerClass server = null;
-        public static Boolean wRead;
+        public static Boolean OnStart;
         public static Window window;
 
 
         public ServerConf()
         {
-
             pathFile = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
             InitializeComponent();
             InitBinding();
@@ -55,6 +55,13 @@ namespace FakturaWpf
         private void InitBinding()
         {
             server = new ServerClass();
+
+            if (!ServerConf.OnStart)
+            {
+                server.ReadFromToFile();
+                SetPassword(false);
+            }
+
             gridServer.DataContext = server;
 
         }
@@ -62,33 +69,44 @@ namespace FakturaWpf
         private void SetPassword(Boolean toObject)
         {
             if (toObject)
-              server.Password = TX_Passsword.Password;
+                server.Password = TX_Passsword.Password;
+            else
+                TX_Passsword.Password = server.Password;
         }
 
-        public static Boolean ShowServerConf(Boolean read)
+        public static Boolean ShowServerConf(Boolean onstart)
         {
+            ServerConf.OnStart = onstart;
+
             window = new Window
             {
                 Title = "Konfiguracja połączenia",
                 Width = 520,
                 Height = 365,
+              //  Icon = (Brush)A["MyButtonBackground"],
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Content = new ServerConf()
-            };
+                Content = new ServerConf(),
+             };
 
-            ServerConf.wRead = read;
 
-            if (read)
+            if (window.ShowDialog() == true)
             {
-                if (window.ShowDialog() == true)
-                    return true;
+                if (onstart)
+                  return true;
                 else
-                    return false;
-            } else
-            {
-                window.Show();
-                return true;
+                {
+                    if (Various.Question("Czy uruchomić aplikację ponownie ?", "Pytanie"))
+                    {
+                        Various.RestartApp();
+                        return true;
+                    }
+                    else
+                        return false;
+                }
             }
+            else
+                return false;
+
         }
 
         private void CB_Srever_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,6 +153,15 @@ namespace FakturaWpf
             ini.IniWriteValue("Settings", "Password", this.Password);
             ini.IniWriteValue("Settings", "Server",   this.SERVER);
             ini.IniWriteValue("Settings", "Database", this.DATABASE);
+        }
+
+        public void ReadFromToFile()
+        {
+            IniFile ini = new IniFile(ServerConf.pathFile);
+            this.ID = ini.IniReadValue("Settings", "Id");
+            this.Password = ini.IniReadValue("Settings", "Password");
+            this.SERVER = ini.IniReadValue("Settings", "Server");
+            this.DATABASE = ini.IniReadValue("Settings", "Database");
         }
 
         public Boolean TestConnect()

@@ -66,6 +66,12 @@ namespace FakturaWpf
             }            
         }
 
+        public static void RestartApp()
+        {
+            Application.Current.Shutdown();
+            System.Diagnostics.Process.Start(Environment.GetCommandLineArgs()[0]);
+        }
+
     }
 
     public class MdiControl

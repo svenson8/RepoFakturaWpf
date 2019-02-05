@@ -21,9 +21,14 @@
             <MenuItem Header="Administracja">
                 <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">
                     <MenuItem.Icon>
-                        <Image Source="Resources/faktura sprzedazy16.ico" />
+                        <Image Source="{StaticResource ImgUsers}"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="_Konfiguracja serwera" Click="MenuItem_Click_3" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgConfig}"/>
+                    </MenuItem.Icon>
+                </MenuItem>                
             </MenuItem>
         </Menu>
         <ToolBarPanel DockPanel.Dock="Top">
