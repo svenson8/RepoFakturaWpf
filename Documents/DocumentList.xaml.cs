@@ -49,7 +49,7 @@ namespace FakturaWpf.Documents
 
         public string TreeName()
         {
-            throw new NotImplementedException();
+            return "Lita dokum.";
         }
     }
 }

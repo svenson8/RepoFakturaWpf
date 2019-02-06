@@ -72,6 +72,11 @@ namespace FakturaWpf
             System.Diagnostics.Process.Start(Environment.GetCommandLineArgs()[0]);
         }
 
+        public static BitmapImage GetImageFromResources(string resname)
+        {
+            return Application.Current.TryFindResource(resname) as BitmapImage;
+        }
+
     }
 
     public class MdiControl

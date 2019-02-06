@@ -83,8 +83,8 @@ namespace FakturaWpf
                 Title = "Konfiguracja połączenia",
                 Width = 520,
                 Height = 365,
-              //  Icon = (Brush)A["MyButtonBackground"],
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Icon = Various.GetImageFromResources("ImgConfig"),
+                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Content = new ServerConf(),
              };
 
