@@ -66,6 +66,19 @@ namespace FakturaWpf
             }            
         }
 
+        public static void FillWithFiltrItems(ComboBox cb)
+        {
+            cb.Items.Clear();
+            cb.Items.Add("Wg początku nazwy");
+            cb.Items.Add("Wg fragmentu nazwy");
+            cb.Items.Add("Wg pesel");
+            cb.Items.Add("Wg NIPu");
+            cb.Items.Add("Wg miejscowości");
+            cb.Items.Add("Wg grupy");
+            cb.Items.Add("Wg fragmentu adresu");
+            cb.Items.Add("W kolejności wpisania");
+        }
+
         public static void RestartApp()
         {
             Application.Current.Shutdown();
@@ -142,7 +155,7 @@ namespace FakturaWpf
             MdiChild md = new MdiChild()
             {
                 Title = title,
-                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/" + iconame)),
+                Icon = Various.GetImageFromResources(iconame),
                 Height = height,
                 Width = width,
                 Content = (UserControl)theObject,

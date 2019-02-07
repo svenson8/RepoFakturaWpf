@@ -99,7 +99,7 @@ namespace FakturaWpf.Users
 
             if (id >= 0)
             {
-                MdiControl.AddChild(typeof(UserEdit), new object[] {id}, "Dane użytkownika", "faktura.ico", 395, 575, TreeName());
+                MdiControl.AddChild(typeof(UserEdit), new object[] {id}, "Dane użytkownika", "ImgFakt", 395, 575, TreeName());
             }
         }
 

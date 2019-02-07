@@ -6,17 +6,24 @@
         xmlns:local="clr-namespace:FakturaWpf"
         xmlns:mdi="clr-namespace:WPF.MDI;assembly=WPF.MDI"
         mc:Ignorable="d"
-        Title="Faktura 1.0" Height="482.773" Width="835.294" Closed="MainWindow1_Closed" Icon="Resources/faktura.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Faktura 1.0" Height="482.773" Width="835.294" Closed="MainWindow1_Closed" Icon="{StaticResource ImgFakt}" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Dokumenty handlowe">
                 <MenuItem Header="_Dokumenty sprzedaży" Click="MenuItem_Click">
                 <MenuItem.Icon>
-                    <Image Source="Resources/faktura sprzedazy16.ico" />
+                    <Image Source="{StaticResource ImgFaktura}" />
                 </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Exit" Click="MenuItem_Click_2" />
+            </MenuItem>
+            <MenuItem Header="_Słowniki">
+                <MenuItem Header="_Lista kontrahentów" Click="MenuItem_Click_4" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgCustomers}"/>
+                    </MenuItem.Icon>   
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Administracja">
                 <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">

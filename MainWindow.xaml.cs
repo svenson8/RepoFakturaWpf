@@ -17,6 +17,7 @@ using FakturaWpf.Users;
 using FakturaWpf.Tools;
 using WPF.MDI;
 using System.ComponentModel;
+using FakturaWpf.Customer;
 
 namespace FakturaWpf
 {
@@ -40,13 +41,13 @@ namespace FakturaWpf
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DocumentList), null, "Lista dokumentów sprzedaży", "faktura sprzedazy16.ico", 450, 800);
+            MdiControl.AddChild(typeof(DocumentList), null, "Lista dokumentów sprzedaży", "ImgFaktura", 450, 800);
           
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(UserList), null, "Lista uzytkowników", "faktura sprzedazy16.ico", 450, 765);
+            MdiControl.AddChild(typeof(UserList), null, "Lista uzytkowników", "ImgFaktura", 450, 765);
 
         }
 
@@ -61,6 +62,11 @@ namespace FakturaWpf
         {
             ServerConf.ShowServerConf(false);
 
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(CustomerList), null, "Lista kontrahentów", "ImgCustomers", 450, 700);
         }
     }
 }
