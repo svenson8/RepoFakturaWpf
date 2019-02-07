@@ -31,7 +31,13 @@ namespace FakturaWpf.Customer
         private void Prepare()
         {
             Various.SetAutoColumnWidth(DG_Customer, new int[] { 0, 3 });
-            Various.FillWithFiltrItems(CB_Choice);
+            Various.FillWithFiltrItems(CB_Choice.comboBox);
+        }
+
+
+        private void SelectChoice(object sender, SelectionChangedEventArgs e)
+        {
+           // Various.InfoOk(CB_Choice.comboBox.SelectedItem.ToString());
         }
 
         public void Close(object sender, RoutedEventArgs e)

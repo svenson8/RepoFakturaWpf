@@ -3,14 +3,6 @@
                     xmlns:local="clr-namespace:FakturaWpf">
 
     <Style x:Key="MyComboboxStyle" TargetType="ComboBox" BasedOn="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ComboBoxItem">

@@ -10,12 +10,11 @@
     
     <DockPanel LastChildFill="true">
         <Grid DockPanel.Dock="Top" Height="40" >
-            <ComboBox x:Name="CB_Choice" Style="{StaticResource MyComboboxStyle}" HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" Width="191"  />
-
-
+            <my:MyCombobox x:Name="CB_Choice"  HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" myComboWidth="190"  
+                           />
 
             <Label x:Name="label" Content="Szukaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            
+
         </Grid>            
         <DockPanel DockPanel.Dock="Bottom">
             <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" />
