@@ -7,20 +7,20 @@
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    
+
     <DockPanel LastChildFill="true">
         <Grid DockPanel.Dock="Top" Height="40" >
-            <my:MyCombobox x:Name="CB_Choice"  HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" myComboWidth="190"  
-                           />
-
+            <my:MyCombobox x:Name="CB_Choice"  HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" myComboWidth="190" mySelect="CB_Choice_mySelect" />
             <Label x:Name="label" Content="Szukaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <my:MyCombobox x:Name="CB_ChoiceGr"  HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" myComboWidth="190" />
+            <TextBox x:Name="TX_Search" HorizontalAlignment="Left" Height="23" Margin="528,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
 
-        </Grid>            
+        </Grid>
         <DockPanel DockPanel.Dock="Bottom">
-            <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" />
+            <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick" />
             <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}"/>
             <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}"/>
-            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>            
+            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
         </DockPanel>
         <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
             <DataGrid.Columns>

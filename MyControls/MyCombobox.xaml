@@ -7,7 +7,8 @@
              mc:Ignorable="d">
     <StackPanel>
         <Border  BorderBrush="DarkGray" BorderThickness="1" >
-            <ComboBox Width="{Binding ElementName=UC_Combobox, Path=myComboWidth}" Style="{StaticResource MyComboboxStyle}" x:Name="comboBox" SelectionChanged="ComboBox_SelectionChanged" />
+            <ComboBox Width="{Binding ElementName=UC_Combobox, Path=myComboWidth}" Style="{StaticResource MyComboboxStyle}" 
+                      x:Name="comboBox" SelectionChanged="ComboBox_SelectionChanged" />
         </Border>
     </StackPanel>
 </UserControl>

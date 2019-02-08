@@ -38,9 +38,9 @@ namespace FakturaWpf.MyControls
 
         public static readonly RoutedEvent SelectEvent =
             EventManager.RegisterRoutedEvent("mySelect", RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler), typeof(MyCombobox));
+            typeof(SelectionChangedEventHandler), typeof(MyCombobox));
 
-        public event RoutedEventHandler mySelect
+        public event SelectionChangedEventHandler mySelect
         {
             add { AddHandler(SelectEvent, value); }
             remove { RemoveHandler(SelectEvent, value); }
@@ -48,7 +48,7 @@ namespace FakturaWpf.MyControls
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(SelectEvent));
+            RaiseEvent(new SelectionChangedEventArgs(SelectEvent, e.RemovedItems, e.AddedItems));
         }
     }
 }
