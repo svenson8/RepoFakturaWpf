@@ -161,6 +161,20 @@ namespace FakturaWpf
 
             return result;
         }
+
+        public static SqlDbType GetSqlTypeFromVariable(Type type)
+        {            
+            if (type == typeof(string))
+              return SqlDbType.VarChar;
+
+            if (type == typeof(int))
+                return SqlDbType.Int;
+
+            if (type == typeof(DateTime))
+                return SqlDbType.DateTime;
+
+            return SqlDbType.Int;
+        }
     }
 
 

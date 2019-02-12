@@ -10,7 +10,7 @@ namespace FakturaWpf.Customer
 {
     class CustomerClass :DatabaseConnect
     {
-        /*  public int ID { get; set; }
+          public int ID { get; set; }
           public string KLINAZ { get; set; }
           public string KLINAZSKROT { get; set; }
           public string KLINIP { get; set; }
@@ -26,69 +26,88 @@ namespace FakturaWpf.Customer
           public string KLINRLOK { get; set; }
           public string KLIKOD { get; set; }
           public string KLIMIEJSC { get; set; }
-          public string KLIWOJID { get; set; }
-          public string KLIKRAJID { get; set; }
+          public int KLIWOJID { get; set; }
+          public int KLIKRAJID { get; set; }
           public string KLIUWAGI { get; set; }
           public string KLIPESEL { get; set; }
           public string KLIIMIE { get; set; }
           public string KLINAZWISKO { get; set; }
           public string KLIDOWOD { get; set; }
           public string KLDOWODWYD { get; set; }
-          public string KLIDOWODDATA { get; set; }
+          public DateTime KLIDOWODDATA { get; set; }
           public DateTime DATAW { get; set; }
           public DateTime DMODDATE { get; set; }
-          public string ACTIVE { get; set; } */
+          public string ACTIVE { get; set; }  
 
-        public string ACTIVE { get; set; }
-
-        public MyField ID = new MyField(null, SqlDbType.Int, 0);
-        public MyField KLINAZ = new MyField(null, SqlDbType.VarChar, 200);
 
         public const string TABLENAME = "TKlient";
 
         public Boolean ThisTableCheck()
         {
-            /*  List<Params> list = new List<Params>();
-              list.Add(new Params(nameof(ID), SqlDbType.Int, 0));
-              list.Add(new Params(nameof(KLINAZ), SqlDbType.VarChar, 50));
-              list.Add(new Params(nameof(KLINAZSKROT), SqlDbType.VarChar, 50));
-              list.Add(new Params(nameof(KLINIP), SqlDbType.VarChar, 50));
-              list.Add(new Params("NAZWISKO", SqlDbType.VarChar, 50));
-              list.Add(new Params("DATAW", SqlDbType.DateTime, 0));
-              list.Add(new Params("TELEFON", SqlDbType.VarChar, 50));
-              list.Add(new Params("DMODDATE", SqlDbType.DateTime, 0));
-              list.Add(new Params("ACTIVE", SqlDbType.VarChar, 1));  */
 
             List<Params> list = new List<Params>();
+            PropertyInfo[] property = typeof(CustomerClass).GetProperties();
 
-            FieldInfo[] fields = typeof(CustomerClass).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-            foreach (var field in fields)
+            foreach (PropertyInfo prop in property.Where(p => p.MemberType == MemberTypes.Property))
             {
-    // do something
 
-                Various.InfoOk(nameof(field));
+                list.Add(new Params(prop.Name,
+                                    GetSqlTypeFromVariable(prop.PropertyType),
+                                    GetLengthOfStringField(prop.Name)));               
             }
+                  
+
 
             return TableCheck(TABLENAME, list);
+            
         }
-
-    }
-
-    public class MyField
-    {
-        public object value;
-        public SqlDbType type;
-        public int lenght;
-
-        public MyField(object val, SqlDbType sqlt, int len)
+        private int GetLengthOfStringField(string name)
         {
-            this.value = val;
-            this.type = sqlt;
-            this.lenght = len;
-
+            switch (name)
+            {
+                case nameof(KLINAZ): return 200;
+                case nameof(KLINAZSKROT): return 100;
+                case nameof(KLINIP): return 11;
+                case nameof(KLIREGON): return 12;
+                case nameof(KLITEL1): return 20;
+                case nameof(KLITEL2): return 20;
+                case nameof(KLIFAX): return 20;
+                case nameof(KLIWWW): return 40;
+                case nameof(KLIMAIL): return 40;
+                case nameof(KLIBANK): return 100;
+                case nameof(KLIULICA): return 100;
+                case nameof(KLINRDOMU): return 10;
+                case nameof(KLINRLOK): return 10;
+                case nameof(KLIKOD): return 7;
+                case nameof(KLIMIEJSC): return 100;
+                case nameof(KLIUWAGI): return 1000;
+                case nameof(KLIPESEL): return 11;
+                case nameof(KLIIMIE): return 50;
+                case nameof(KLINAZWISKO): return 100;
+                case nameof(KLIDOWOD): return 10;
+                case nameof(KLDOWODWYD): return 100;
+                default: return 100;
+            }
         }
 
+        /*    private List<CustomerClass> ReadUsers()
+            {
+
+                NQueryReader nQ = new NQueryReader("select * from " + TABLENAME);
+
+                List<CustomerClass> U = new List<CustomerClass>();
+
+                while (nQ.NReader.Read())
+                {
+                    CustomerClass u = new CustomerClass();
+                    u.KLINAZ.value = "df";
+
+                    U.Add(u);
+                }
+            }  */
 
     }
+
+
 
 }
