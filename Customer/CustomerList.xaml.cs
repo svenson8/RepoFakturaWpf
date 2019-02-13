@@ -1,6 +1,7 @@
 ﻿using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace FakturaWpf.Customer
     /// </summary>
     public partial class CustomerList : UserControl, IMdiControl
     {
+        private List<CustomerClass> listU = null;
+
         public CustomerList()
         {
             InitializeComponent();
@@ -33,6 +36,8 @@ namespace FakturaWpf.Customer
             Various.SetAutoColumnWidth(DG_Customer, new int[] { 0, 3 });
             Various.FillWithFiltrItems(CB_Choice.comboBox);
             CB_Choice.comboBox.SelectedIndex = 0;
+
+            LoadData();
         }
 
         private void ComboSearchChange()
@@ -65,6 +70,17 @@ namespace FakturaWpf.Customer
         }
 
 
+        private void LoadData()
+        {
+            if (listU == null)
+            {
+                CustomerClass cl = new CustomerClass();
+                listU = cl.ReadUsers();
+            }
+
+            DG_Customer.ItemsSource = listU;
+        }
+
 
         public void Close(object sender, RoutedEventArgs e)
         {
@@ -88,8 +104,9 @@ namespace FakturaWpf.Customer
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
-            CustomerClass cl = new CustomerClass();
-            cl.ThisTableCheck();
+
         }
+
     }
+
 }

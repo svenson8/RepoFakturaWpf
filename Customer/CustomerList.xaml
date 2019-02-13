@@ -24,10 +24,20 @@
         </DockPanel>
         <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Nazwa" Width="200"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="NIP" Width="80"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Pesel" Width="80"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Adres" Width="200"/>
+                <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Nazwa" Width="200"/>
+                <DataGridTextColumn Binding="{Binding KLINIP}"  Header="NIP" Width="80"/>
+                <DataGridTextColumn Binding="{Binding KLIPESEL}"  Header="Pesel" Width="80"/>
+                <DataGridTextColumn Header="Adres" Width="200">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1} / {2}, {3} {4}">
+                        <Binding Path="KLIULICA" />
+                        <Binding Path="KLINRDOMU" />
+                        <Binding Path="KLINRLOK" />
+                        <Binding Path="KLIKOD" />
+                        <Binding Path="KLIMIEJSC" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.Customer;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace FakturaWpf
             result  = UserClass.ThisTableCheck();
             result = Scripts.UserInsertTrigger();
             result = Scripts.UserUpdateTrigger();
+            result = CustomerClass.ThisTableCheck();
 
             return result;
         }

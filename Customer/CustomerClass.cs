@@ -42,7 +42,7 @@ namespace FakturaWpf.Customer
 
         public const string TABLENAME = "TKlient";
 
-        public Boolean ThisTableCheck()
+        public static Boolean ThisTableCheck()
         {
 
             List<Params> list = new List<Params>();
@@ -61,7 +61,7 @@ namespace FakturaWpf.Customer
             return TableCheck(TABLENAME, list);
             
         }
-        private int GetLengthOfStringField(string name)
+        private static int GetLengthOfStringField(string name)
         {
             switch (name)
             {
@@ -90,21 +90,32 @@ namespace FakturaWpf.Customer
             }
         }
 
-        /*    private List<CustomerClass> ReadUsers()
+            public List<CustomerClass> ReadUsers()
             {
 
                 NQueryReader nQ = new NQueryReader("select * from " + TABLENAME);
 
-                List<CustomerClass> U = new List<CustomerClass>();
+                List<CustomerClass> listU = new List<CustomerClass>();
 
                 while (nQ.NReader.Read())
                 {
                     CustomerClass u = new CustomerClass();
-                    u.KLINAZ.value = "df";
+                    foreach (PropertyInfo propf in u.GetType().GetProperties())
+                    {
+                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    {
+                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                        propf.SetValue(u, nQ.NReader[propf.Name]);
+                    }
+                    }
 
-                    U.Add(u);
+                listU.Add(u);
                 }
-            }  */
+
+            return listU;
+            }
+
+
 
     }
 
