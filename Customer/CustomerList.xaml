@@ -7,7 +7,11 @@
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
+    
+    <UserControl.Resources>
+        <local:NameConverter x:Key="myNameConverter"/>
+    </UserControl.Resources>
+    
     <DockPanel LastChildFill="true">
         <Grid DockPanel.Dock="Top" Height="40" >
             <my:MyCombobox x:Name="CB_Choice"  HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" myComboWidth="190" mySelect="CB_Choice_mySelect" />
@@ -29,7 +33,7 @@
                 <DataGridTextColumn Binding="{Binding KLIPESEL}"  Header="Pesel" Width="80"/>
                 <DataGridTextColumn Header="Adres" Width="200">
                     <DataGridTextColumn.Binding>
-                        <MultiBinding StringFormat="{}{0} {1} / {2}, {3} {4}">
+                        <MultiBinding Converter="{StaticResource myNameConverter}">
                         <Binding Path="KLIULICA" />
                         <Binding Path="KLINRDOMU" />
                         <Binding Path="KLINRLOK" />
@@ -40,7 +44,5 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-
     </DockPanel>
 </UserControl>

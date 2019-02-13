@@ -17,11 +17,13 @@ using System.Windows.Shapes;
 
 namespace FakturaWpf.Customer
 {
+
     /// <summary>
     /// Logika interakcji dla klasy CustomerList.xaml
     /// </summary>
     public partial class CustomerList : UserControl, IMdiControl
     {
+
         private List<CustomerClass> listU = null;
 
         public CustomerList()
@@ -107,6 +109,28 @@ namespace FakturaWpf.Customer
 
         }
 
+
+
+    }
+
+    public class NameConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            string adress;
+
+            adress = (string)values[0] + " "+ values[1] + "/" + values[2] + ", " + values[3] +" "+ values[4];
+            if (adress.Length <= 5)
+                adress = "";
+
+            return adress;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            string[] splitValues = ((string)value).Split(' ');
+            return splitValues;
+        }
     }
 
 }
