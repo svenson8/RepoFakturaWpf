@@ -80,7 +80,32 @@ namespace FakturaWpf.Customer
                 listU = cl.ReadUsers();
             }
 
-            DG_Customer.ItemsSource = listU;
+            List<CustomerClass> lpom = listU;
+
+            if (TX_Search.Text.Length > 0)
+            {
+                switch (CB_Choice.comboBox.SelectedIndex)
+                {
+                    case 0:
+                        lpom = listU.Where(x => x.KLINAZ.ToUpper().StartsWith(TX_Search.Text.ToUpper())).ToList();
+                        break;
+                    case 1:
+                        lpom = listU.Where(x => x.KLINAZ.ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
+                        break;
+                    case 2:
+                        lpom = listU.Where(x => (x.KLIPESEL ?? "").ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
+                        break;
+
+                }
+            }
+
+
+
+
+            DG_Customer.ItemsSource = lpom;
+
+
+
         }
 
 
@@ -109,8 +134,10 @@ namespace FakturaWpf.Customer
 
         }
 
-
-
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
     }
 
     public class NameConverter : IMultiValueConverter

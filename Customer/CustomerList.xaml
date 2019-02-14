@@ -18,6 +18,7 @@
             <Label x:Name="label" Content="Szukaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <my:MyCombobox x:Name="CB_ChoiceGr"  HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" myComboWidth="190" />
             <TextBox x:Name="TX_Search" HorizontalAlignment="Left" Height="23" Margin="528,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+            <my:MyButton myText="F3 Odśwież" Margin="0,0,5,0"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}" myClick="MyButton_myClick" />
 
         </Grid>
         <DockPanel DockPanel.Dock="Bottom">
