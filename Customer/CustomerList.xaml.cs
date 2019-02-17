@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace FakturaWpf.Customer
 {
 
@@ -131,8 +132,15 @@ namespace FakturaWpf.Customer
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
+            GusApi.UslugaBIRzewnPublClient client = new GusApi.UslugaBIRzewnPublClient();
+            // var res = client.ZalogujAsync("abcde12345abcde12345");
+            client.Open();
+            var res = client.Zaloguj("abcde12345abcde12345");
 
-        }
+
+
+
+            }
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {

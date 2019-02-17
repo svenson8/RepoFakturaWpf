@@ -37,6 +37,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,6 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\GusApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Customer\CustomerClass.cs" />
     <Compile Include="Customer\CustomerList.xaml.cs">
       <DependentUpon>CustomerList.xaml</DependentUpon>
@@ -162,6 +169,32 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\GusApi\FakturaWpf.GusApi.GetValueResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GusApi\FakturaWpf.GusApi.PobierzCaptchaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GusApi\FakturaWpf.GusApi.SetValueResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GusApi\FakturaWpf.GusApi.SprawdzCaptchaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GusApi\UslugaBIRzewnPubl.wsdl" />
+    <None Include="Connected Services\GusApi\UslugaBIRzewnPubl_wsdl0.wsdl" />
+    <None Include="Connected Services\GusApi\UslugaBIRzewnPubl_xsd0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GusApi\UslugaBIRzewnPubl_xsd1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GusApi\UslugaBIRzewnPubl_xsd2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GusApi\UslugaBIRzewnPubl_xsd3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -226,6 +259,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\customers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\GusApi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GusApi\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GusApi\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GusApi\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
