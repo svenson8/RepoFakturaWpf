@@ -88,8 +88,7 @@ namespace FakturaWpf.Users
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            //UserClass customer = (UserClass)DG_User.SelectedItem;  
-
+ 
             int id = 0;
 
             if (((MyButton)sender).Name.Equals("btnMod"))

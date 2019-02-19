@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.MyControls;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -83,7 +84,7 @@ namespace FakturaWpf.Customer
 
             List<CustomerClass> lpom = listU;
 
-            if (TX_Search.Text.Length > 0)
+            if ((TX_Search.Text.Length > 0) || (CB_Choice.comboBox.SelectedIndex == 7))
             {
                 switch (CB_Choice.comboBox.SelectedIndex)
                 {
@@ -96,16 +97,31 @@ namespace FakturaWpf.Customer
                     case 2:
                         lpom = listU.Where(x => (x.KLIPESEL ?? "").ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
                         break;
-
+                    case 3:
+                        lpom = listU.Where(x => (x.KLINIP ?? "").ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
+                        break;
+                    case 4:
+                        lpom = listU.Where(x => (x.KLIMIEJSC ?? "").ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
+                        break;
+                    /*  case 5:
+                          lpom = listU.Where(x => (x.KLIPESEL ?? "").ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
+                          break;  */  // Grupa
+                    case 6:
+                        lpom = listU.Where(x => (x.KLIULICA ?? "").ToUpper().Contains(TX_Search.Text.ToUpper()) ||
+                                                (x.KLINRDOMU ?? "").ToUpper().Contains(TX_Search.Text.ToUpper()) ||
+                                                (x.KLINRLOK ?? "").ToUpper().Contains(TX_Search.Text.ToUpper()) ||
+                                                (x.KLIKOD ?? "").ToUpper().Contains(TX_Search.Text.ToUpper()) ||
+                                                (x.KLIMIEJSC ?? "").ToUpper().Contains(TX_Search.Text.ToUpper()) ).ToList();
+                        break;
+                    case 7:
+                        lpom = listU.OrderBy(x => x.ID).ToList();
+                        break;
                 }
             }
 
 
-
-
             DG_Customer.ItemsSource = lpom;
-
-
+            DG_Customer.SelectedIndex = 0;
 
         }
 
@@ -132,15 +148,23 @@ namespace FakturaWpf.Customer
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
-            GusApi.UslugaBIRzewnPublClient client = new GusApi.UslugaBIRzewnPublClient();
-            // var res = client.ZalogujAsync("abcde12345abcde12345");
-            client.Open();
-            var res = client.Zaloguj("abcde12345abcde12345");
+            CustomerClass customer = (CustomerClass)DG_Customer.SelectedItem;  
 
+            int id = 0;
+            var title = "Redagowanie danych ";
 
-
-
+            if (((MyButton)sender).Name.Equals("btnMod"))
+            {
+                id = customer.ID;
+                title += customer.KLINAZ; 
             }
+
+            if (id >= 0)
+            {
+                MdiControl.AddChild(typeof(CustomerEdit), new object[] { id }, title, "ImgFakt", 600, 700, TreeName());
+            }
+
+        }
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
