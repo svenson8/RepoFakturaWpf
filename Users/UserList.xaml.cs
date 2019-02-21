@@ -112,7 +112,7 @@ namespace FakturaWpf.Users
             MdiControl.CloseMdi(typeof(UserList), TreeName());
         }
 
-        public void OnRefresh()
+        public void OnRefresh(object obj = null)
         {
             LoadData();
         }

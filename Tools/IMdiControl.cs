@@ -12,7 +12,7 @@ namespace FakturaWpf.Tools
     {
         
         void Close(object sender, RoutedEventArgs e);
-        void OnRefresh();
+        void OnRefresh(object obj = null);
         string TreeName();
 
     }

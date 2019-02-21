@@ -34,6 +34,9 @@ namespace FakturaWpf.Customer
           public string KLINAZWISKO { get; set; }
           public string KLIDOWOD { get; set; }
           public string KLDOWODWYD { get; set; }
+          public string KLIGMINA { get; set; }
+          public string KLIPOWIAT { get; set; }
+          public string KLIPOCZTA { get; set; }
           public DateTime KLIDOWODDATA { get; set; }
           public DateTime DATAW { get; set; }
           public DateTime DMODDATE { get; set; }
@@ -41,6 +44,81 @@ namespace FakturaWpf.Customer
 
 
         public const string TABLENAME = "TKlient";
+
+        public CustomerClass(int id = 0)
+        {
+            this.ID = id;
+            if (this.ID > 0)
+                ReadCustomer();
+
+            this.DATAW = DateTime.Now;
+            this.DMODDATE = DateTime.Now;
+            this.KLIDOWODDATA = DateTime.Now;
+        }
+
+        void ReadCustomer()
+        {
+            NQueryReader nQ = new NQueryReader("select * from " + TABLENAME+" where ID="+this.ID.ToString());
+
+            while (nQ.NReader.Read())
+            {
+                foreach (PropertyInfo propf in this.GetType().GetProperties())
+                {
+                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    {
+                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                        propf.SetValue(this, nQ.NReader[propf.Name]);
+                    }
+                }
+            }
+        }
+
+        public Boolean SaveCustomer()
+        {
+
+            BuildSaveString bfs = new BuildSaveString(this.ID.Equals(0), TABLENAME);
+            
+            List<Params> list = new List<Params>();
+            PropertyInfo[] property = typeof(CustomerClass).GetProperties();
+
+            foreach (PropertyInfo prop in property.Where(p => p.MemberType == MemberTypes.Property))
+            {
+                if (prop.Name != nameof(this.ID))
+                {
+                    list.Add(new Params("@" + prop.Name,
+                                        GetSqlTypeFromVariable(prop.PropertyType),
+                                        prop.GetValue(this, null)));
+
+                    bfs.AddString(prop.Name);
+                }
+
+            }
+
+            NQuery nQ = new NQuery(bfs.GetResult(this.ID), list);
+            return (nQ.WellDone);            
+        }
+
+
+        public List<CustomerClass> ReadUsers()
+        {
+            NQueryReader nQ = new NQueryReader("select * from " + TABLENAME);
+            List<CustomerClass> listU = new List<CustomerClass>();
+
+            while (nQ.NReader.Read())
+            {
+                CustomerClass u = new CustomerClass();
+                foreach (PropertyInfo propf in u.GetType().GetProperties())
+                {
+                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    {
+                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                        propf.SetValue(u, nQ.NReader[propf.Name]);
+                    }
+                }
+                listU.Add(u);
+            }
+            return listU;
+        }
 
         public static Boolean ThisTableCheck()
         {
@@ -86,34 +164,13 @@ namespace FakturaWpf.Customer
                 case nameof(KLINAZWISKO): return 100;
                 case nameof(KLIDOWOD): return 10;
                 case nameof(KLDOWODWYD): return 100;
+                case nameof(KLIPOWIAT): return 100;
+                case nameof(KLIGMINA): return 100;
+                case nameof(KLIPOCZTA): return 100;
                 default: return 100;
             }
         }
 
-            public List<CustomerClass> ReadUsers()
-            {
-
-                NQueryReader nQ = new NQueryReader("select * from " + TABLENAME);
-
-                List<CustomerClass> listU = new List<CustomerClass>();
-
-                while (nQ.NReader.Read())
-                {
-                    CustomerClass u = new CustomerClass();
-                    foreach (PropertyInfo propf in u.GetType().GetProperties())
-                    {
-                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
-                    {
-                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
-                        propf.SetValue(u, nQ.NReader[propf.Name]);
-                    }
-                    }
-
-                listU.Add(u);
-                }
-
-            return listU;
-            }
 
 
 

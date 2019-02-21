@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Customer"
+             xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid>
+             d:DesignHeight="520" d:DesignWidth="700" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid x:Name="GR_Cus" Margin="0,10,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="245"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -25,14 +28,51 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="label" Content="NIP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" />
-        <Label x:Name="label1" Content="Regon" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" />
-        <Label x:Name="label2" Content="Nazwa" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" />
-        <Label x:Name="label3" Content="Nazwa skrócona" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3" />
+        <Label x:Name="label" Content="NIP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Width="29" />
+        <TextBox x:Name="TX_Nip" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="0" Margin="0,6,0,5" Text="{Binding KLINIP}"/>
+        <Label x:Name="label1" Content="Regon" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Width="44" />
+        <TextBox x:Name="TX_Regon" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="1" Margin="0,6,0,5" Text="{Binding KLIREGON}" />
+        <Label x:Name="label2" Content="Nazwa" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Width="45" />
+        <TextBox x:Name="TX_Name" HorizontalAlignment="Left" Width="533" Grid.Column="1" Grid.Row="2" Margin="0,6,-58,5" Grid.ColumnSpan="2" Text="{Binding KLINAZWA}"/>
+        <Label x:Name="label3" Content="Nazwa skrócona" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3" Width="96" />
+        <TextBox x:Name="TX_NameShort" HorizontalAlignment="Left" Width="533" Grid.Column="1" Grid.Row="3" Margin="0,6,-56,5" Grid.ColumnSpan="2" Text="{Binding KLINAZSKROT}"/>
+        <Label x:Name="label4" Content="Ulica" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4" Width="36" />
+        <TextBox x:Name="TX_Street" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="4" Margin="0,6,0,5" Text="{Binding KLIULICA}"/>
+        <TextBox x:Name="TX_Number" HorizontalAlignment="Left" Width="130" Grid.Column="2" Grid.Row="4" Margin="0,6,0,5" Text="{Binding KLINRDOMU}"/>
+        <TextBox x:Name="TX_NumberLok" HorizontalAlignment="Left" Width="130" Grid.Column="2" Grid.Row="4" Margin="155,6,0,5" Text="{Binding KLINRLOK}"/>
+        <Label x:Name="label5" Content="Miejscowość" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="5" Width="77" />
+        <TextBox x:Name="TX_PosCod" HorizontalAlignment="Left" Width="70" Grid.Column="1" Grid.Row="5" Margin="0,6,0,5" Text="{Binding KLIKOD}"/>
+        <TextBox x:Name="TX_City" HorizontalAlignment="Left" Width="440" Grid.Column="1" Grid.Row="5" Margin="90,6,0,5" Grid.ColumnSpan="2" Text="{Binding KLIMIEJSC}"/>
+        <Label x:Name="label6" Content="Gmina" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="6" Width="44" />
+        <TextBox x:Name="TX_Genue" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="6" Margin="0,6,0,5" Text="{Binding KLIGMINA}"/>
+        <TextBox x:Name="TX_Subcity" HorizontalAlignment="Left" Width="230" Grid.Column="2" Grid.Row="6" Margin="55,6,0,5" Text="{Binding KLIPOWIAT}"/>
+        <Label x:Name="label7" Content="Powiat" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="6" Width="45" />
+        <Label x:Name="label8" Content="Województwo" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="7" Width="85" />
+        <my:MyCombobox x:Name="CB_Province" myComboWidth="215" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" />
+        <Label x:Name="label9" Content="Poczta" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="7" Width="44" />
+        <TextBox x:Name="TX_Post" HorizontalAlignment="Left" Width="230" Grid.Column="2" Grid.Row="7" Margin="55,6,0,5" Text="{Binding KLIPOCZTA}"/>
+        <Label x:Name="labe20" Content="Państwo" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="8" Width="54" />
+        <my:MyCombobox x:Name="CB_Country" myComboWidth="215" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="8" />
+        <Label x:Name="labe21" Content="Nr Konta Bank." HorizontalAlignment="Right" Grid.Column="0" Grid.Row="9" Width="89" />
+        <TextBox x:Name="TX_Account" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="9" Margin="0,6,0,5" Text="{Binding KLIBANK}"/>
+        <Label x:Name="labe22" Content="Telefon 1" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="10" Width="58" />
+        <TextBox x:Name="TX_Phone1" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="10" Margin="0,6,0,5" Text="{Binding KLITEL1}"/>
+        <Label x:Name="labe23" Content="Fax" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="10" Width="27" Margin="15,0,0,0"/>
+        <TextBox x:Name="TX_Fax" HorizontalAlignment="Left" Width="230" Grid.Column="2" Grid.Row="10" Margin="55,6,0,5" Text="{Binding KLIFAX}"/>
+        <Label x:Name="labe24" Content="Telefon 2" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="11" Width="58" />
+        <TextBox x:Name="TX_Phone2" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="11" Margin="0,6,0,5" Text="{Binding KLITEL2}" />
+        <Label x:Name="labe25" Content="WWW" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="12" Width="44" />
+        <TextBox x:Name="TX_WWW" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="12" Margin="0,6,0,5" Text="{Binding KLIWWW}"/>
+        <Label x:Name="labe26" Content="E-mail" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="13" Width="43" />
+        <TextBox x:Name="TX_Email" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="13" Margin="0,6,0,5" Text="{Binding KLIMAIL}"/>
 
+        <my:MyButton Grid.Row="14" Grid.Column="0" myText="F5 Zapisz" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                 myImageSource="{StaticResource ImgSave}" myClick="MyButton_myClick" />
 
+        <my:MyButton Grid.Row="14" Grid.Column="2" myText="Esc Anuluj" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                  myImageSource="{StaticResource ImgCancel}"/>
 
     </Grid>
 </UserControl>

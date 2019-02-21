@@ -219,7 +219,7 @@ namespace FakturaWpf
                 foreach (Params p in list)
                 {
                       Sqlc.Parameters.Add(p.name, p.type);
-                      Sqlc.Parameters[p.name].Value = p.value;
+                      Sqlc.Parameters[p.name].Value = p.value ?? (object)DBNull.Value;
                 }
             }
         }
@@ -246,5 +246,55 @@ namespace FakturaWpf
         } 
     }
 
+    public class BuildSaveString
+    {
+        private string outstring;
+        private string tmps1;
+        private string tmps2;
+        private Boolean insert;
+
+        public BuildSaveString(Boolean ainsert, string table)
+        {
+            insert = ainsert;
+            if (insert)
+                outstring = "insert into " + table;
+            else
+                outstring = "update " + table + " set ";          
+        }
+
+        public void AddString(string add1)
+        {
+            if (insert)
+            {
+                if (tmps1 == null)
+                    tmps1 += " (";
+
+                if (tmps2 == null)
+                    tmps2 += "(";
+
+                tmps1 += add1 + ",";
+                tmps2 += "@"+add1 + ",";
+            } else
+            {
+                tmps1 += add1 + "=" + "@"+add1 + ",";
+            }
+
+        }
+
+        public string GetResult(int id=0)
+        {
+            tmps1 = tmps1.TrimEnd(',');
+
+            if (insert)
+            {
+                tmps2 = tmps2.TrimEnd(',');
+                return outstring + tmps1 + ") values " + tmps2 + ")";
+            } else
+            {
+                return outstring + tmps1 + " where ID = "+id.ToString();
+            }
+        }
+
+    }
 
 }

@@ -9,9 +9,9 @@ namespace FakturaWpf.Tools
     class Scripts :DatabaseConnect
     {
 
-        public static Boolean UserInsertTrigger()
+        public static Boolean InsertTrigger(string table)
         {
-            NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER TloginAFterInsert ON TLogin "+
+            NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER "+table+"AFterInsert ON "+table+" "+
                                    "FOR INSERT "+
                                    "AS "+
                                    "UPDATE TLogin "+
@@ -25,9 +25,9 @@ namespace FakturaWpf.Tools
                 return false;
         }
 
-        public static Boolean UserUpdateTrigger()
+        public static Boolean UpdateTrigger(string table)
         {
-            NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER TloginAFterUpdate ON TLogin " +
+            NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER "+table+"AFterUpdate ON "+table+ " "+
                                    "AFTER UPDATE " +
                                    "AS " +
                                    "UPDATE Tlogin " +
@@ -39,5 +39,6 @@ namespace FakturaWpf.Tools
             else
                 return false;
         }
+
     }
 }

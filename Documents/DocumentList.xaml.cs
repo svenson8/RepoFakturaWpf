@@ -42,7 +42,7 @@ namespace FakturaWpf.Documents
             MdiControl.CloseMdi(typeof(DocumentList), TreeName());
         }
 
-        public void OnRefresh()
+        public void OnRefresh(object obj = null)
         {
             throw new NotImplementedException();
         }

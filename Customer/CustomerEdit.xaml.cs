@@ -21,12 +21,23 @@ namespace FakturaWpf.Customer
     /// </summary>
     public partial class CustomerEdit : UserControl, IMdiControl
     {
+        private CustomerClass customer;
+
         public CustomerEdit(int id)
         {
             InitializeComponent();
+
+            InitBinding(id);
         }
 
+        void InitBinding(int id)
+        {
+            customer = new CustomerClass(id);
+            customer.ACTIVE = "T";
 
+            GR_Cus.DataContext = customer;
+
+        }
 
 
         public void Close(object sender, RoutedEventArgs e)
@@ -34,7 +45,7 @@ namespace FakturaWpf.Customer
             MdiControl.CloseMdi(typeof(CustomerEdit), TreeName());
         }
 
-        public void OnRefresh()
+        public void OnRefresh(object obj = null)
         {
             throw new NotImplementedException();
         }
@@ -42,6 +53,19 @@ namespace FakturaWpf.Customer
         public string TreeName()
         {
             return "Edycja kontrahenta";
+        }
+
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            if (customer.SaveCustomer())
+            {
+                Various.InfoOk("Klient zapisany", "Informacja");
+                MdiControl.RefreshMdi(typeof(CustomerList));
+            }
+            else
+                Various.Warning("Błąd zapisu danych", "");
+
+            Close(sender, e);
         }
     }
 }

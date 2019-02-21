@@ -131,9 +131,10 @@ namespace FakturaWpf.Customer
             MdiControl.CloseMdi(typeof(CustomerList), TreeName());
         }
 
-        public void OnRefresh()
+        public void OnRefresh(object obj = null)
         {
-            throw new NotImplementedException();
+            listU = null;
+            LoadData();
         }
 
         public string TreeName()
@@ -170,6 +171,12 @@ namespace FakturaWpf.Customer
         {
             LoadData();
         }
+
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
+            // Usuwanie
+        }
+
     }
 
     public class NameConverter : IMultiValueConverter

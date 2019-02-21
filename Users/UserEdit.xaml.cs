@@ -86,7 +86,7 @@ namespace FakturaWpf.Users
             MdiControl.CloseMdi(typeof(UserEdit), TreeName());
         }
 
-        public void OnRefresh()
+        public void OnRefresh(object obj = null)
         {
             throw new NotImplementedException();
         }
