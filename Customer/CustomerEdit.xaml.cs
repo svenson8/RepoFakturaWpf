@@ -60,11 +60,16 @@ namespace FakturaWpf.Customer
             if (customer.SaveCustomer())
             {
                 Various.InfoOk("Klient zapisany", "Informacja");
-                MdiControl.RefreshMdi(typeof(CustomerList));
+                MdiControl.RefreshMdi(typeof(CustomerList), customer);
             }
             else
                 Various.Warning("Błąd zapisu danych", "");
 
+            Close(sender, e);
+        }
+
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
             Close(sender, e);
         }
     }

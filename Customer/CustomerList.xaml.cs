@@ -82,7 +82,7 @@ namespace FakturaWpf.Customer
                 listU = cl.ReadUsers();
             }
 
-            List<CustomerClass> lpom = listU;
+            List<CustomerClass> lpom = listU.Select(x => x).ToList();
 
             if ((TX_Search.Text.Length > 0) || (CB_Choice.comboBox.SelectedIndex == 7))
             {
@@ -133,7 +133,15 @@ namespace FakturaWpf.Customer
 
         public void OnRefresh(object obj = null)
         {
-            listU = null;
+            CustomerClass csMod = ((CustomerClass)obj);
+
+            var index = listU.FindIndex(x => x.ID == csMod.ID);
+
+            if (index > -1)
+                listU[index] = csMod;
+            else
+                listU.Add(csMod);
+
             LoadData();
         }
 

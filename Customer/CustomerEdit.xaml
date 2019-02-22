@@ -35,7 +35,7 @@
         <Label x:Name="label1" Content="Regon" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Width="44" />
         <TextBox x:Name="TX_Regon" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="1" Margin="0,6,0,5" Text="{Binding KLIREGON}" />
         <Label x:Name="label2" Content="Nazwa" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Width="45" />
-        <TextBox x:Name="TX_Name" HorizontalAlignment="Left" Width="533" Grid.Column="1" Grid.Row="2" Margin="0,6,-58,5" Grid.ColumnSpan="2" Text="{Binding KLINAZWA}"/>
+        <TextBox x:Name="TX_Name" HorizontalAlignment="Left" Width="533" Grid.Column="1" Grid.Row="2" Margin="0,6,-58,5" Grid.ColumnSpan="2" Text="{Binding KLINAZ}"/>
         <Label x:Name="label3" Content="Nazwa skrócona" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3" Width="96" />
         <TextBox x:Name="TX_NameShort" HorizontalAlignment="Left" Width="533" Grid.Column="1" Grid.Row="3" Margin="0,6,-56,5" Grid.ColumnSpan="2" Text="{Binding KLINAZSKROT}"/>
         <Label x:Name="label4" Content="Ulica" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4" Width="36" />
@@ -72,7 +72,7 @@
                                  myImageSource="{StaticResource ImgSave}" myClick="MyButton_myClick" />
 
         <my:MyButton Grid.Row="14" Grid.Column="2" myText="Esc Anuluj" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                  myImageSource="{StaticResource ImgCancel}"/>
+                                  myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick_1"/>
 
     </Grid>
 </UserControl>

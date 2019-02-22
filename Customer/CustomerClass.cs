@@ -71,6 +71,7 @@ namespace FakturaWpf.Customer
                     }
                 }
             }
+            nQ.NReader.Close();
         }
 
         public Boolean SaveCustomer()
@@ -95,7 +96,19 @@ namespace FakturaWpf.Customer
             }
 
             NQuery nQ = new NQuery(bfs.GetResult(this.ID), list);
+            SetLastInserted();
             return (nQ.WellDone);            
+        }
+
+        void SetLastInserted()
+        {
+            if (this.ID <= 0)
+            {
+                NQueryReader nQ = new NQueryReader("select MAX(ID) from " + TABLENAME);
+                nQ.NReader.Read();
+                this.ID = nQ.NReader.GetInt32(0);
+                nQ.NReader.Close();
+            }
         }
 
 
@@ -117,6 +130,7 @@ namespace FakturaWpf.Customer
                 }
                 listU.Add(u);
             }
+            nQ.NReader.Close();
             return listU;
         }
 

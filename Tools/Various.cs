@@ -168,12 +168,12 @@ namespace FakturaWpf
             ExpandRecursively(mainTree.Items, true);
         }
 
-        public static void RefreshMdi(Type myClass)
+        public static void RefreshMdi(Type myClass, object obj=null)
         {
             MdiChild md = FindChild(myClass);
 
             if (md != null)
-                ((IMdiControl)md.Content).OnRefresh();
+                ((IMdiControl)md.Content).OnRefresh(obj);
         }
 
         private static void ExpandRecursively(ItemCollection itemsControl, bool expand)
