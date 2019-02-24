@@ -1,4 +1,5 @@
 ﻿using FakturaWpf.Tools;
+using FakturaWpf.WebApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +72,13 @@ namespace FakturaWpf.Customer
         private void MyButton_myClick_1(object sender, RoutedEventArgs e)
         {
             Close(sender, e);
+        }
+
+        private void Btn_Gus_myClick(object sender, RoutedEventArgs e)
+        {
+            GusSearch gs = new GusSearch();
+
+            gs.SendAsync();
         }
     }
 }

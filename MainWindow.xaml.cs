@@ -29,7 +29,6 @@ namespace FakturaWpf
         public MainWindow()
         {
             InitializeComponent();
-            MdiControl.FindMainContainer();
         }
 
 

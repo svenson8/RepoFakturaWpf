@@ -32,6 +32,7 @@
         </Grid.RowDefinitions>
         <Label x:Name="label" Content="NIP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Width="29" />
         <TextBox x:Name="TX_Nip" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="0" Margin="0,6,0,5" Text="{Binding KLINIP}"/>
+        <my:MyButton x:Name="btn_Gus" Grid.Column="2" Grid.Row="0" myText="Gus" HorizontalAlignment="Left" myClick="Btn_Gus_myClick" />
         <Label x:Name="label1" Content="Regon" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Width="44" />
         <TextBox x:Name="TX_Regon" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="1" Margin="0,6,0,5" Text="{Binding KLIREGON}" />
         <Label x:Name="label2" Content="Nazwa" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Width="45" />

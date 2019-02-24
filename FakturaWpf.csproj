@@ -82,6 +82,7 @@
       <DependentUpon>MyCombobox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\IMdiControl.cs" />
+    <Compile Include="Tools\MdiControl.cs" />
     <Compile Include="Tools\MyProgressBar.xaml.cs">
       <DependentUpon>MyProgressBar.xaml</DependentUpon>
     </Compile>
@@ -90,6 +91,7 @@
       <DependentUpon>ServerConf.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\DatabaseConnect.cs" />
+    <Compile Include="Tools\TreeControl.cs" />
     <Compile Include="Tools\Various.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -101,6 +103,7 @@
     <Compile Include="Users\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WebApi\GusSearch.cs" />
     <Page Include="Customer\CustomerEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
