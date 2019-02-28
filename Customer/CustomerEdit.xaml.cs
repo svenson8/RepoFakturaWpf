@@ -74,11 +74,14 @@ namespace FakturaWpf.Customer
             Close(sender, e);
         }
 
-        private void Btn_Gus_myClick(object sender, RoutedEventArgs e)
+        private async void Btn_Gus_myClick(object sender, RoutedEventArgs e)
         {
-            GusSearch gs = new GusSearch();
 
-            gs.SendAsync();
+            GusSearch gs = new GusSearch();
+            CustomerClass cs = await gs.StartGusSearching("9511995388", "", "");
+           // CustomerClass cs = await gs.StartGusSearching("6572647042", "", "");
+
+
         }
     }
 }

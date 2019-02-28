@@ -90,6 +90,16 @@ namespace FakturaWpf
             return Application.Current.TryFindResource(resname) as BitmapImage;
         }
 
+        public static string StringBeetween(string main, string first, string second)
+        {
+            string FinalString;
+            int Pos1 = main.IndexOf(first) + (first).Length;
+            int Pos2 = main.IndexOf(second);
+            FinalString = main.Substring(Pos1, Pos2 - Pos1);
+
+            return FinalString;
+        }
+
     
 
       }

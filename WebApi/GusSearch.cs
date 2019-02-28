@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Customer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -25,36 +26,52 @@ namespace FakturaWpf.WebApi
         {
             fErrorMessage = "";
             fSearchResult = new XmlDocument();
-
-//        FRequest:= TStringStream.Create('', TEncoding.UTF8);
-//        FResponse:= TStringStream.Create('', TEncoding.UTF8);
         }
 
-        private Boolean Login()
+        private async Task<Boolean> Login() 
         {
             string body;
             body = "<ns:pKluczUzytkownika>" + userKey + "</ns:pKluczUzytkownika>" + Environment.NewLine;
-            //  FSessionId = GetResponse("Zaloguj", body);
+            fSessionId = await GetResponse("Zaloguj", body);
             return (fSessionId != "");
         }
 
-        private void Logout()
+        private async Task Logout()
         {
             string body;
             body = "<ns:pIdentyfikatorSesji>" + fSessionId + "</ns:pIdentyfikatorSesji>" + Environment.NewLine;
-            //GetResponse('Wyloguj', body);
+            await GetResponse("Wyloguj", body);
         }
 
 
-        private void GetErrorMessage()
+        private async Task GetErrorMessage()
         {
             string body;
             body = "<ns:DaneKomunikat/>" + Environment.NewLine;
-            //  FErrorMessage:= GetResponse('DaneKomunikat', body);
+            fErrorMessage = await GetResponse("DaneKomunikat", body);
 
         }
 
-        private Boolean SearchGustByData(string nip, string regon, string krs)
+        private async Task<Boolean> FullReport(string regon)
+        {
+            string body;
+            body =  "<ns:pRegon>" + regon + "</ns:pRegon>" + Environment.NewLine;
+            body += "<ns:pRegon>" + regon + "</ns:pRegon>" + Environment.NewLine;
+            body += "<ns:pNazwaRaportu>PublDaneRaportPrawna</ns:pNazwaRaportu>" + Environment.NewLine;
+
+              try{
+                  fSearchResult.LoadXml(await GetResponse("DanePobierzPelnyRaport", body)); }
+              catch{ }
+
+              if (fSearchResult.ChildNodes.Count == 0)
+                  await GetErrorMessage();
+
+              return (fSearchResult.ChildNodes.Count != 0); 
+            await GetErrorMessage();
+            return false;
+        }
+
+        private async Task<Boolean> SearchGustByData(string nip, string regon, string krs)
         {
             string searchFor = "";
             string body = "";
@@ -71,17 +88,18 @@ namespace FakturaWpf.WebApi
             body =  "<ns:pParametryWyszukiwania>" + Environment.NewLine;
             body += searchFor;
             body += "</ns:pParametryWyszukiwania>" + Environment.NewLine;
-          //  fSearchResult.LoadXml(GetResponse("DaneSzukaj", body));
+
+            try {
+                fSearchResult.LoadXml(await GetResponse("DaneSzukaj", body)); }
+            catch { }
 
             if (fSearchResult.ChildNodes.Count == 0)
-                GetErrorMessage();
+                await GetErrorMessage();
 
             return (fSearchResult.ChildNodes.Count != 0);
-
-
         }
 
-        private async string GetResponse(string action, string body)
+        private async Task<string> GetResponse(string action, string body)
         {
             fErrorMessage = "";
             //set FRequest
@@ -106,72 +124,83 @@ namespace FakturaWpf.WebApi
             if (fSessionId != "")
               client.DefaultRequestHeaders.Add("sid", fSessionId);
 
-            var response = await client.PostAsync(sendUri, fRequest);
-
-            var responseString = await response.Content.ReadAsStringAsync();
             //send Request
-            FResponse.Clear;
-                        FHttp.Post(WSDLUrl, FRequest, FResponse);
+            var response = await client.PostAsync(sendUri, fRequest);
+            var responseString = await response.Content.ReadAsStringAsync();
+            
+            if (responseString.IndexOf("<" + action + "Result>") > 0) 
+                {
+                var strout = Various.StringBeetween(responseString, "<" + action + "Result>", "</" + action + "Result>");
+                strout = strout.Replace("&lt;", "<");
+                strout = strout.Replace("&gt;", ">");
+                strout = strout.Replace("&#xD;", "");
+                return strout;
+            }
+            else
+                return "";  
 
-                    //get Response text from Response
-                    Result:= FResponse.DataString;
-                    p:= Pos('<' + Action + 'Result>', Result);
-                        if p > 0 then
-                        begin
-                Delete(Result, 1, p + Length(Action) + 7);
-                    p:= Pos('</' + Action + 'Result>', Result);
-                        if p > 0 then
-                        begin
-                    Result:= Copy(Result, 1, p - 1);
-                    Result:= StringReplace(Result, '&lt;', '<', [rfReplaceAll, rfIgnoreCase]);
-                    Result:= StringReplace(Result, '&gt;', '>', [rfReplaceAll, rfIgnoreCase]);
-                    Result:= StringReplace(Result, '&#xD;', '', [rfReplaceAll, rfIgnoreCase]);
-                        end
-                else
-                    Result:= '';
-                        end
-                else
-                Result:= '';
-                        FRequest.Clear;
-                        FResponse.Clear;
-                        end;
-
-
-
-
-
-            var restr = @"<soap:Envelope xmlns:soap=""http://www.w3.org/2003/05/soap-envelope"" xmlns:ns=""http://CIS/BIR/PUBL/2014/07""> " +
-                           @"<soap:Header xmlns:wsa=""http://www.w3.org/2005/08/addressing""> " +
-                           "<wsa:To>https://wyszukiwarkaregontest.stat.gov.pl/wsBIR/UslugaBIRzewnPubl.svc</wsa:To> " +
-                           "<wsa:Action>http://CIS/BIR/PUBL/2014/07/IUslugaBIRzewnPubl/Zaloguj</wsa:Action> " +
-                           "</soap:Header> " +
-                           "    <soap:Body> " +
-                           "        <ns:Zaloguj> " +
-                           "            <ns:pKluczUzytkownika>abcde12345abcde12345</ns:pKluczUzytkownika> " +
-                           "        </ns:Zaloguj> " +
-                           "    </soap:Body> " +
-                           "</soap:Envelope> ";
-        }
         }
 
-       /* public async Task SendAsync()
+        public async Task<CustomerClass> StartGusSearching(string nip, string regon, string krs)
         {
+            CustomerClass ansCus = new CustomerClass();
 
+            try
+            {                
+                if (await Login())
+                {
+                    if (await SearchGustByData(nip, regon, krs))
+                    {
+                        var root = "/root/dane/";
+                        ansCus.KLINIP = nip;
+                        ansCus.KLINAZ = fSearchResult.DocumentElement.SelectSingleNode(root + "Nazwa").InnerText;
+                        ansCus.KLIULICA = fSearchResult.DocumentElement.SelectSingleNode(root + "Ulica").InnerText;
+                        ansCus.KLINRDOMU = "";
+                        ansCus.KLIKOD = fSearchResult.DocumentElement.SelectSingleNode(root + "KodPocztowy").InnerText;
+                        ansCus.KLIMIEJSC = fSearchResult.DocumentElement.SelectSingleNode(root + "Miejscowosc").InnerText;
+                        //ansCus.KLIWOJID = GetWojIdFromstring(fSearchResult.DocumentElement.SelectSingleNode(root + "Wojewodztwo").InnerText);
+                        ansCus.KLIPOWIAT = fSearchResult.DocumentElement.SelectSingleNode(root + "Powiat").InnerText;
+                        ansCus.KLIGMINA = fSearchResult.DocumentElement.SelectSingleNode(root + "Gmina").InnerText;
 
+                        if ((fSearchResult.DocumentElement.SelectSingleNode(root + "Regon") != null) &&
+                            (fSearchResult.DocumentElement.SelectSingleNode(root + "Regon").InnerText != ""))
+                        {
+                            var reg = fSearchResult.DocumentElement.SelectSingleNode(root + "Regon").InnerText;
+                            if (await FullReport(reg))
+                            {
+                                ansCus.KLINIP = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_nip").InnerText;
+                                ansCus.KLINAZ = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_nazwa").InnerText;
+                                ansCus.KLIULICA = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzUlica_Nazwa").InnerText;
+                                ansCus.KLINRDOMU = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzNumerNieruchomosci").InnerText;
+                                ansCus.KLINRLOK = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzNumerLokalu").InnerText;
+                                ansCus.KLIKOD = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzKodPocztowy").InnerText;
+                                ansCus.KLIMIEJSC = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzMiejscowosc_Nazwa").InnerText;
+                                // ansCus.KLIKRAJID  := fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzKraj_Nazwa").InnerText;
+                                //ansCus.KLIWOJID   := fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzWojewodztwo_Nazwa").InnerText;
+                                ansCus.KLIPOWIAT = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzPowiat_Nazwa").InnerText;
+                                ansCus.KLIGMINA = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzGmina_Nazwa").InnerText;
+                            }
+                            else
+                                ansCus.KLIUWAGI = fErrorMessage;
+                        }
 
-          //  TakeLogKey(responseString);
-        }  */
+                        if (ansCus.KLINIP?.Length < 3) ansCus.KLINIP = nip;
+                        if (ansCus.KLIREGON?.Length < 3) ansCus.KLIREGON = regon;
 
-        private void TakeLogKey(string answer)
-        {
-            int firstStringPosition = answer.IndexOf("<ZalogujResult>");
-            int secondStringPosition = answer.IndexOf("</ZalogujResult>");
-            string stringBetweenTwoStrings = answer.Substring(firstStringPosition,
-                secondStringPosition - firstStringPosition + 7);
+                    }
+                    else
+                        ansCus.KLIUWAGI = fErrorMessage;
 
-            Various.InfoOk(stringBetweenTwoStrings);
+                    await Logout();
+                }
+
+             
+            } catch (Exception Ex)
+            {
+                Various.Warning(Ex.Message, "Błąd ...");
+            }
+            return ansCus;
         }
-
-        
+                
     }
 }
