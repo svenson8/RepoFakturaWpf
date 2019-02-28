@@ -67,8 +67,7 @@ namespace FakturaWpf.WebApi
                   await GetErrorMessage();
 
               return (fSearchResult.ChildNodes.Count != 0); 
-            await GetErrorMessage();
-            return false;
+
         }
 
         private async Task<Boolean> SearchGustByData(string nip, string regon, string krs)
@@ -76,13 +75,13 @@ namespace FakturaWpf.WebApi
             string searchFor = "";
             string body = "";
 
-            if (nip.Length > 3)
+            if (nip?.Length > 3)
                 searchFor = "  <dat:Nip>" + nip.Trim() + "</dat:Nip>" + Environment.NewLine;
 
-            if (regon.Length > 3)
+            if (regon?.Length > 3)
                 searchFor = "  <dat:Regon>" + regon.Trim() + "</dat:Regon>" + Environment.NewLine;
 
-            if (krs.Length > 3) 
+            if (krs?.Length > 3) 
               searchFor = "  <dat:Krs>" + krs.Trim() + "</dat:Krs>" + Environment.NewLine;
 
             body =  "<ns:pParametryWyszukiwania>" + Environment.NewLine;
@@ -141,18 +140,15 @@ namespace FakturaWpf.WebApi
 
         }
 
-        public async Task<CustomerClass> StartGusSearching(string nip, string regon, string krs)
+        public async Task<CustomerClass> StartGusSearching(CustomerClass ansCus)
         {
-            CustomerClass ansCus = new CustomerClass();
-
             try
             {                
                 if (await Login())
                 {
-                    if (await SearchGustByData(nip, regon, krs))
+                    if (await SearchGustByData(ansCus.KLINIP, ansCus.KLIREGON, ""))
                     {
                         var root = "/root/dane/";
-                        ansCus.KLINIP = nip;
                         ansCus.KLINAZ = fSearchResult.DocumentElement.SelectSingleNode(root + "Nazwa").InnerText;
                         ansCus.KLIULICA = fSearchResult.DocumentElement.SelectSingleNode(root + "Ulica").InnerText;
                         ansCus.KLINRDOMU = "";
@@ -180,13 +176,7 @@ namespace FakturaWpf.WebApi
                                 ansCus.KLIPOWIAT = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzPowiat_Nazwa").InnerText;
                                 ansCus.KLIGMINA = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzGmina_Nazwa").InnerText;
                             }
-                            else
-                                ansCus.KLIUWAGI = fErrorMessage;
                         }
-
-                        if (ansCus.KLINIP?.Length < 3) ansCus.KLINIP = nip;
-                        if (ansCus.KLIREGON?.Length < 3) ansCus.KLIREGON = regon;
-
                     }
                     else
                         ansCus.KLIUWAGI = fErrorMessage;

@@ -28,16 +28,16 @@ namespace FakturaWpf.Customer
         {
             InitializeComponent();
 
-            InitBinding(id);
-        }
-
-        void InitBinding(int id)
-        {
             customer = new CustomerClass(id);
             customer.ACTIVE = "T";
 
-            GR_Cus.DataContext = customer;
+            InitBinding();
+        }
 
+        void InitBinding()
+        {
+            GR_Cus.DataContext = null;
+            GR_Cus.DataContext = customer;
         }
 
 
@@ -78,9 +78,15 @@ namespace FakturaWpf.Customer
         {
 
             GusSearch gs = new GusSearch();
-            CustomerClass cs = await gs.StartGusSearching("9511995388", "", "");
-           // CustomerClass cs = await gs.StartGusSearching("6572647042", "", "");
+            CustomerClass cs = await gs.StartGusSearching(customer);
 
+            if ((customer.KLIUWAGI != "") && (customer.KLIUWAGI != null))
+            {
+                Various.Warning(customer.KLIUWAGI, "Ostrzeżenie");
+                customer.KLIUWAGI = "";
+            }
+
+            InitBinding();
 
         }
     }
