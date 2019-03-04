@@ -131,6 +131,8 @@ namespace FakturaWpf
         }
     }
 
+
+
     public class IniFile
     {
         public string path;

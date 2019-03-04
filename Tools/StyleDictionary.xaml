@@ -157,7 +157,12 @@
     </ContextMenu>
 
     <Style TargetType="TextBox">
-       <Setter Property="ContextMenu" Value="{StaticResource MyClipboardContextMenu}" /> 
+       <Setter Property="ContextMenu" Value="{StaticResource MyClipboardContextMenu}" />
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="#FFFFD156"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="PasswordBox">
@@ -166,5 +171,6 @@
 
 
     <local:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
-    
+  
+
 </ResourceDictionary>

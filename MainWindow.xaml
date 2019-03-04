@@ -54,7 +54,7 @@
                 </LinearGradientBrush>
             </TreeView.Background>
             <TreeViewItem Header="AKTYWNE OKNA" Margin="0,0,5,0">
-            </TreeViewItem>       
+            </TreeViewItem>
         </TreeView>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem Width="736">
