@@ -79,7 +79,7 @@ namespace FakturaWpf.Customer
             if (listU == null)
             {
                 CustomerClass cl = new CustomerClass();
-                listU = cl.ReadUsers();
+                listU = cl.ReadListData().OfType<CustomerClass>().ToList(); 
             }
 
             List<CustomerClass> lpom = listU.Select(x => x).ToList();

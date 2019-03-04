@@ -57,7 +57,8 @@ namespace FakturaWpf
             list.Add(new Params("DMODDATE", SqlDbType.DateTime, 0));
             list.Add(new Params("ACTIVE",   SqlDbType.VarChar,  1));
 
-            return TableCheck(TABLENAME, list);
+            //  return TableCheck(TABLENAME, list);
+            return true;
         }
 
 
@@ -145,6 +146,11 @@ namespace FakturaWpf
 
               NQuery nQ = new NQuery("delete from "+TABLENAME+" where ID = @ID", list); 
             return (nQ.WellDone); 
+        }
+
+        public override int GetLengthOfStringField(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

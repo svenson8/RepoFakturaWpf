@@ -39,10 +39,10 @@ namespace FakturaWpf
         private Boolean CheckDbStructure()
         {
             Boolean result;
-            result  = UserClass.ThisTableCheck();
+          //  result  = UserClass.ThisTableCheck();
             result = Scripts.InsertTrigger(UserClass.TABLENAME);
             result = Scripts.UpdateTrigger(UserClass.TABLENAME);
-            result = CustomerClass.ThisTableCheck();
+            result = new CustomerClass().TableCheck();
             result = Scripts.InsertTrigger(CustomerClass.TABLENAME);
             result = Scripts.UpdateTrigger(CustomerClass.TABLENAME);
 

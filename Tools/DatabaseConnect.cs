@@ -7,10 +7,11 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Data;
 using System.Windows;
+using System.Reflection;
 
 namespace FakturaWpf
 {
-    public class DatabaseConnect
+    public abstract class DatabaseConnect
     {
         public static string ConnectionString = "";
         public static SqlConnection conn;
@@ -119,9 +120,23 @@ namespace FakturaWpf
                 NewConnect(database);
         }
 
+        public abstract int GetLengthOfStringField(string name);
 
-        public static Boolean TableCheck(string tableName, List<Params> list)
+
+        public virtual Boolean TableCheck(string tableName, Type typ, Func<string, int> met)//, List<Params> list)
         {
+
+            List<Params> list = new List<Params>();
+            PropertyInfo[] property = typ.GetProperties();
+
+            foreach (PropertyInfo prop in property.Where(p => p.MemberType == MemberTypes.Property))
+            {
+
+                list.Add(new Params(prop.Name,
+                                    GetSqlTypeFromVariable(prop.PropertyType),
+                                    met(prop.Name)));
+            }
+
             NQueryReader nq = new NQueryReader("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N" + "'" + tableName + "'");
             Boolean exist = false;
             Boolean result = true;
@@ -162,7 +177,7 @@ namespace FakturaWpf
             return result;
         }
 
-        public static SqlDbType GetSqlTypeFromVariable(Type type)
+        public SqlDbType GetSqlTypeFromVariable(Type type)
         {            
             if (type == typeof(string))
               return SqlDbType.VarChar;
@@ -175,6 +190,83 @@ namespace FakturaWpf
 
             return SqlDbType.Int;
         }
+
+        public void ReadData(object obj, string table, int id)
+        {
+            NQueryReader nQ = new NQueryReader("select * from " + table + " where ID=" + id.ToString());
+
+            while (nQ.NReader.Read())
+            {
+                foreach (PropertyInfo propf in obj.GetType().GetProperties())
+                {
+                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    {
+                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                        propf.SetValue(obj, nQ.NReader[propf.Name]);
+                    }
+                }
+            }
+            nQ.NReader.Close();
+        }
+
+        public virtual List<object> ReadListData(object obj, string table, object[] args)
+        {
+            NQueryReader nQ = new NQueryReader("select * from " + table);
+            List<object> listU = new List<object>();
+
+            while (nQ.NReader.Read())
+            {
+                Object u = Activator.CreateInstance(obj.GetType(), args?.ToArray());
+                foreach (PropertyInfo propf in u.GetType().GetProperties())
+                {
+                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    {
+                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                        propf.SetValue(u, nQ.NReader[propf.Name]);
+                    }
+                }
+                listU.Add(u);
+            }
+            nQ.NReader.Close();
+            return listU;
+        }
+
+        public virtual int SaveCustomer(int ID, string table, Type typ, object obj)
+        {
+
+            BuildSaveString bfs = new BuildSaveString(ID.Equals(0), table);
+
+            List<Params> list = new List<Params>();
+            PropertyInfo[] property = typ.GetProperties();
+
+            foreach (PropertyInfo prop in property.Where(p => p.MemberType == MemberTypes.Property))
+            {
+                if (prop.Name != nameof(ID))
+                {
+                    list.Add(new Params("@" + prop.Name,
+                                        GetSqlTypeFromVariable(prop.PropertyType),
+                                        prop.GetValue(obj, null)));
+
+                    bfs.AddString(prop.Name);
+                }
+
+            }
+
+            NQuery nQ = new NQuery(bfs.GetResult(ID), list);
+            if (ID <= 0)
+            {
+                NQueryReader nQ1 = new NQueryReader("select MAX(ID) from " + table);
+                nQ1.NReader.Read();
+                ID = nQ1.NReader.GetInt32(0);
+                nQ1.NReader.Close();
+            }
+
+            if (!nQ.WellDone)
+                ID = 0;
+
+            return (ID);
+        }
+
     }
 
 
@@ -196,6 +288,11 @@ namespace FakturaWpf
                 WellDone = false;
                 Various.Warning("Błąd zapisu danych: " +ex.Message, "Błąd Zapisu");
             }
+        }
+
+        public override int GetLengthOfStringField(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -243,7 +340,12 @@ namespace FakturaWpf
                 Various.Warning("Błąd odczytu danych: "+ex.Message, "Błąd odczytu");
             }
 
-        } 
+        }
+
+        public override int GetLengthOfStringField(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class BuildSaveString

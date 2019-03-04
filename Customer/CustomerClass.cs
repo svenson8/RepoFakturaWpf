@@ -49,111 +49,32 @@ namespace FakturaWpf.Customer
         {
             this.ID = id;
             if (this.ID > 0)
-                ReadCustomer();
+                ReadData(this, TABLENAME, this.ID);
 
             this.DATAW = DateTime.Now;
             this.DMODDATE = DateTime.Now;
             this.KLIDOWODDATA = DateTime.Now;
         }
 
-        void ReadCustomer()
+        public override int SaveCustomer(int ID, string table=null, Type typ=null, object obj=null)
         {
-            NQueryReader nQ = new NQueryReader("select * from " + TABLENAME+" where ID="+this.ID.ToString());
-
-            while (nQ.NReader.Read())
-            {
-                foreach (PropertyInfo propf in this.GetType().GetProperties())
-                {
-                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
-                    {
-                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
-                        propf.SetValue(this, nQ.NReader[propf.Name]);
-                    }
-                }
-            }
-            nQ.NReader.Close();
+            this.ID = base.SaveCustomer(this.ID, TABLENAME, typeof(CustomerClass), this);
+            return this.ID;
         }
 
-        public Boolean SaveCustomer()
+        public override List<object> ReadListData(object obj=null, string table=null, object[] args=null)
         {
-
-            BuildSaveString bfs = new BuildSaveString(this.ID.Equals(0), TABLENAME);
-            
-            List<Params> list = new List<Params>();
-            PropertyInfo[] property = typeof(CustomerClass).GetProperties();
-
-            foreach (PropertyInfo prop in property.Where(p => p.MemberType == MemberTypes.Property))
-            {
-                if (prop.Name != nameof(this.ID))
-                {
-                    list.Add(new Params("@" + prop.Name,
-                                        GetSqlTypeFromVariable(prop.PropertyType),
-                                        prop.GetValue(this, null)));
-
-                    bfs.AddString(prop.Name);
-                }
-
-            }
-
-            NQuery nQ = new NQuery(bfs.GetResult(this.ID), list);
-            SetLastInserted();
-            return (nQ.WellDone);            
-        }
-
-        void SetLastInserted()
-        {
-            if (this.ID <= 0)
-            {
-                NQueryReader nQ = new NQueryReader("select MAX(ID) from " + TABLENAME);
-                nQ.NReader.Read();
-                this.ID = nQ.NReader.GetInt32(0);
-                nQ.NReader.Close();
-            }
+            return base.ReadListData(this, TABLENAME, new object[] { 0});
         }
 
 
-        public List<CustomerClass> ReadUsers()
-        {
-            NQueryReader nQ = new NQueryReader("select * from " + TABLENAME);
-            List<CustomerClass> listU = new List<CustomerClass>();
-
-            while (nQ.NReader.Read())
-            {
-                CustomerClass u = new CustomerClass();
-                foreach (PropertyInfo propf in u.GetType().GetProperties())
-                {
-                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
-                    {
-                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
-                        propf.SetValue(u, nQ.NReader[propf.Name]);
-                    }
-                }
-                listU.Add(u);
-            }
-            nQ.NReader.Close();
-            return listU;
+        public override bool TableCheck(string tableName=null, Type typ=null, Func<string, int> met=null)
+        {                  
+            return base.TableCheck(TABLENAME, typeof(CustomerClass), GetLengthOfStringField);            
         }
 
-        public static Boolean ThisTableCheck()
-        {
 
-            List<Params> list = new List<Params>();
-            PropertyInfo[] property = typeof(CustomerClass).GetProperties();
-
-            foreach (PropertyInfo prop in property.Where(p => p.MemberType == MemberTypes.Property))
-            {
-
-                list.Add(new Params(prop.Name,
-                                    GetSqlTypeFromVariable(prop.PropertyType),
-                                    GetLengthOfStringField(prop.Name)));               
-            }
-                  
-
-
-            return TableCheck(TABLENAME, list);
-            
-        }
-        private static int GetLengthOfStringField(string name)
+        public override int GetLengthOfStringField(string name)
         {
             switch (name)
             {
