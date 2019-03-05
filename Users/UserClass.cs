@@ -148,9 +148,6 @@ namespace FakturaWpf
             return (nQ.WellDone); 
         }
 
-        public override int GetLengthOfStringField(string name)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

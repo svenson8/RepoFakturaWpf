@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Tools;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FakturaWpf.Customer
 {
-    class CustomerClass :DatabaseConnect
+    class CustomerClass :DatabaseConnect, IClassControl
     {
           public int ID { get; set; }
           public string KLINAZ { get; set; }
@@ -49,32 +50,15 @@ namespace FakturaWpf.Customer
         {
             this.ID = id;
             if (this.ID > 0)
-                ReadData(this, TABLENAME, this.ID);
+                ThisReadData();
 
             this.DATAW = DateTime.Now;
             this.DMODDATE = DateTime.Now;
             this.KLIDOWODDATA = DateTime.Now;
         }
 
-        public override int SaveCustomer(int ID, string table=null, Type typ=null, object obj=null)
-        {
-            this.ID = base.SaveCustomer(this.ID, TABLENAME, typeof(CustomerClass), this);
-            return this.ID;
-        }
 
-        public override List<object> ReadListData(object obj=null, string table=null, object[] args=null)
-        {
-            return base.ReadListData(this, TABLENAME, new object[] { 0});
-        }
-
-
-        public override bool TableCheck(string tableName=null, Type typ=null, Func<string, int> met=null)
-        {                  
-            return base.TableCheck(TABLENAME, typeof(CustomerClass), GetLengthOfStringField);            
-        }
-
-
-        public override int GetLengthOfStringField(string name)
+        public  int GetLengthOfStringField(string name)
         {
             switch (name)
             {
@@ -106,9 +90,26 @@ namespace FakturaWpf.Customer
             }
         }
 
+        public List<object> ThisReadListData()
+        {
+            return ReadListData(this, TABLENAME, new object[] { 0 });
+        }
 
+        public bool ThisSaveData()
+        {
+            this.ID = SaveData(this.ID, TABLENAME, typeof(CustomerClass), this);
+            return (this.ID > 0);
+        }
 
+        public void ThisReadData()
+        {
+            ReadData(this, TABLENAME, this.ID);
+        }
 
+        public bool ThisTableCheck()
+        {
+            return TableCheck(TABLENAME, typeof(CustomerClass), GetLengthOfStringField);
+        }
     }
 
 

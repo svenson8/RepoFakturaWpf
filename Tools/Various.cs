@@ -66,17 +66,25 @@ namespace FakturaWpf
             }            
         }
 
-        public static void FillWithFiltrItems(ComboBox cb)
+        public static void FillWithFiltrItems(ComboBox cb, int typ)
         {
             cb.Items.Clear();
-            cb.Items.Add("Wg początku nazwy");
-            cb.Items.Add("Wg fragmentu nazwy");
-            cb.Items.Add("Wg pesel");
-            cb.Items.Add("Wg NIPu");
-            cb.Items.Add("Wg miejscowości");
-            cb.Items.Add("Wg grupy");
-            cb.Items.Add("Wg fragmentu adresu");
-            cb.Items.Add("W kolejności wpisania");
+            if (typ >= 1)
+                cb.Items.Add("Wg początku nazwy");
+            if (typ >= 2)
+                cb.Items.Add("Wg fragmentu nazwy");
+            if (typ >= 3)
+                cb.Items.Add("Wg pesel");
+            if (typ >= 4)
+                cb.Items.Add("Wg NIPu");
+            if (typ >= 5)
+                cb.Items.Add("Wg miejscowości");
+            if (typ >= 6)
+                cb.Items.Add("Wg grupy");
+            if (typ >= 7)
+                cb.Items.Add("Wg fragmentu adresu");
+            if (typ >= 8)
+                cb.Items.Add("W kolejności wpisania");
         }
 
         public static void RestartApp()

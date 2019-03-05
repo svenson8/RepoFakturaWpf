@@ -120,8 +120,6 @@ namespace FakturaWpf
                 NewConnect(database);
         }
 
-        public abstract int GetLengthOfStringField(string name);
-
 
         public virtual Boolean TableCheck(string tableName, Type typ, Func<string, int> met)//, List<Params> list)
         {
@@ -162,9 +160,12 @@ namespace FakturaWpf
                 foreach (Params p in list)
                 {
                     string dbtype = p.type.ToString();
-                    if (p.type is SqlDbType.VarChar){
-                        dbtype = dbtype+"("+p.value.ToString()+")";                      
-                    }
+                    if (p.type is SqlDbType.VarChar)
+                        dbtype = dbtype+"("+p.value.ToString()+")";
+
+                    if (p.type is SqlDbType.Decimal)
+                        dbtype = dbtype + "(18," + p.value.ToString() + ")";
+
                     NQuery n = new NQuery("IF NOT EXISTS ( SELECT  * FROM    syscolumns WHERE   id = OBJECT_ID('" + tableName + "') AND name = '" + p.name + "') " +
                                           "ALTER TABLE " + tableName + " ADD " + p.name + " "+dbtype+" NULL");
                 }
@@ -187,6 +188,9 @@ namespace FakturaWpf
 
             if (type == typeof(DateTime))
                 return SqlDbType.DateTime;
+
+            if (type == typeof(double))
+                return SqlDbType.Decimal;
 
             return SqlDbType.Int;
         }
@@ -231,7 +235,7 @@ namespace FakturaWpf
             return listU;
         }
 
-        public virtual int SaveCustomer(int ID, string table, Type typ, object obj)
+        public virtual int SaveData(int ID, string table, Type typ, object obj)
         {
 
             BuildSaveString bfs = new BuildSaveString(ID.Equals(0), table);
@@ -290,10 +294,6 @@ namespace FakturaWpf
             }
         }
 
-        public override int GetLengthOfStringField(string name)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class Params
@@ -342,10 +342,6 @@ namespace FakturaWpf
 
         }
 
-        public override int GetLengthOfStringField(string name)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class BuildSaveString

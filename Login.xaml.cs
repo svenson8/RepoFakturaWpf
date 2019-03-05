@@ -1,4 +1,5 @@
 ﻿using FakturaWpf.Customer;
+using FakturaWpf.Dictionary;
 using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,13 @@ namespace FakturaWpf
         private Boolean CheckDbStructure()
         {
             Boolean result;
-          //  result  = UserClass.ThisTableCheck();
+            result  = UserClass.ThisTableCheck();
             result = Scripts.InsertTrigger(UserClass.TABLENAME);
             result = Scripts.UpdateTrigger(UserClass.TABLENAME);
-            result = new CustomerClass().TableCheck();
+            result = new CustomerClass().ThisTableCheck();
             result = Scripts.InsertTrigger(CustomerClass.TABLENAME);
             result = Scripts.UpdateTrigger(CustomerClass.TABLENAME);
+            result = new DictionaryClass().ThisTableCheck();
 
             return result;
         }

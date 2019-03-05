@@ -24,6 +24,11 @@
                         <Image Source="{StaticResource ImgCustomers}"/>
                     </MenuItem.Icon>   
                 </MenuItem>
+                <MenuItem Header="_Grupy kontrahentów" Click="MenuItem_Click_5" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgGroup}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Administracja">
                 <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">

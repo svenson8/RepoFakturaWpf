@@ -18,6 +18,7 @@ using FakturaWpf.Tools;
 using WPF.MDI;
 using System.ComponentModel;
 using FakturaWpf.Customer;
+using FakturaWpf.Dictionary;
 
 namespace FakturaWpf
 {
@@ -66,6 +67,11 @@ namespace FakturaWpf
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
             MdiControl.AddChild(typeof(CustomerList), null, "Lista kontrahentów", "ImgCustomers", 450, 700);
+        }
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(DictionaryList), null, "Grupy kontrahentów", "ImgGroup", 450, 675);
         }
     }
 }

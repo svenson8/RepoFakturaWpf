@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakturaWpf.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FakturaWpf.Dictionary
 {
-    class DictionaryClass :DatabaseConnect
+    class DictionaryClass : DatabaseConnect, IClassControl
     {
-        public int ID { get; set; } 
+        public int ID { get; set; }
         public int IUSERID { get; set; }
         public string ACTIVE { get; set; }
         public string SLRODZ { get; set; }
@@ -32,9 +33,46 @@ namespace FakturaWpf.Dictionary
 
         public const string TABLENAME = "TSlownik";
 
-        public override int GetLengthOfStringField(string name)
+        public DictionaryClass(int id =0, string rodz=null)
         {
-            throw new NotImplementedException();
+            this.SLRODZ = rodz;
+            this.ID = id;
+            if (this.ID > 0)
+                ThisReadData();
+
+        }
+
+
+        public int GetLengthOfStringField(string name)
+        {
+            if (name.Equals(nameof(ACTIVE)))
+                return 1;
+
+            if ((name.Equals("SLKOMUN8") || name.Equals("SLKOMUN9")))
+                return 4;
+
+            return 80;
+        }
+
+        public List<object> ThisReadListData()
+        {
+            return ReadListData(this, TABLENAME, new object[] { 0, "" });
+        }
+
+        public bool ThisSaveData()
+        {
+            this.ID = SaveData(this.ID, TABLENAME+" where SLRODZ ="+this.SLRODZ, typeof(DictionaryClass), this);
+            return (this.ID > 0);
+        }
+
+        public void ThisReadData()
+        {
+            ReadData(this, TABLENAME, this.ID);
+        }
+
+        public bool ThisTableCheck()
+        {
+           return TableCheck(TABLENAME, typeof(DictionaryClass), GetLengthOfStringField);
         }
     }
 

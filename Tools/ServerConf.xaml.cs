@@ -177,9 +177,5 @@ namespace FakturaWpf
                                  
         }
 
-        public override int GetLengthOfStringField(string name)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

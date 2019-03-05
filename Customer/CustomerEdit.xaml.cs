@@ -58,7 +58,7 @@ namespace FakturaWpf.Customer
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
-            if (customer.SaveCustomer(customer.ID) > 0)
+            if (customer.ThisSaveData())
             {
                 Various.InfoOk("Klient zapisany", "Informacja");
                 MdiControl.RefreshMdi(typeof(CustomerList), customer);

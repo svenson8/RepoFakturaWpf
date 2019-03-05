@@ -40,9 +40,5 @@ namespace FakturaWpf.Tools
                 return false;
         }
 
-        public override int GetLengthOfStringField(string name)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

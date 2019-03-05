@@ -73,6 +73,9 @@
       <DependentUpon>CustomerList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dictionary\DictionaryClass.cs" />
+    <Compile Include="Dictionary\DictionaryList.xaml.cs">
+      <DependentUpon>DictionaryList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Documents\DocumentList.xaml.cs">
       <DependentUpon>DocumentList.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,7 @@
     <Compile Include="MyControls\MyCombobox.xaml.cs">
       <DependentUpon>MyCombobox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\IClassControl.cs" />
     <Compile Include="Tools\IMdiControl.cs" />
     <Compile Include="Tools\MdiControl.cs" />
     <Compile Include="Tools\MyProgressBar.xaml.cs">
@@ -110,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customer\CustomerList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\DictionaryList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,6 +299,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\websearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\group.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

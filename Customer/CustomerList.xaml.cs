@@ -38,7 +38,7 @@ namespace FakturaWpf.Customer
         private void Prepare()
         {
             Various.SetAutoColumnWidth(DG_Customer, new int[] { 0, 3 });
-            Various.FillWithFiltrItems(CB_Choice.comboBox);
+            Various.FillWithFiltrItems(CB_Choice.comboBox, 8);
             CB_Choice.comboBox.SelectedIndex = 0;
 
             LoadData();
@@ -78,8 +78,8 @@ namespace FakturaWpf.Customer
         {
             if (listU == null)
             {
-                CustomerClass cl = new CustomerClass();
-                listU = cl.ReadListData().OfType<CustomerClass>().ToList(); 
+                CustomerClass cl = new CustomerClass(); 
+                listU = cl.ThisReadListData().OfType<CustomerClass>().ToList(); 
             }
 
             List<CustomerClass> lpom = listU.Select(x => x).ToList();

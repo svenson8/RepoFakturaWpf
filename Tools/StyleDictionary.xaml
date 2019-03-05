@@ -132,6 +132,7 @@
     <BitmapImage x:Key="ImgFakt"     UriSource="/Resources/faktura.ico" />
     <BitmapImage x:Key="ImgCustomers" UriSource="/Resources/customers.png" />
     <BitmapImage x:Key="ImgWebsearch" UriSource="/Resources/websearch.png" />
+    <BitmapImage x:Key="ImgGroup"     UriSource="/Resources/group.png" />
 
     <Style x:Key="MenuIcon" TargetType="Image">
         <Setter Property="Width" Value="16" />
