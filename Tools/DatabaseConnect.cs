@@ -257,7 +257,7 @@ namespace FakturaWpf
             }
 
             NQuery nQ = new NQuery(bfs.GetResult(ID), list);
-            if (ID <= 0)
+            if ((ID <= 0) && (nQ.WellDone))
             {
                 NQueryReader nQ1 = new NQueryReader("select MAX(ID) from " + table);
                 nQ1.NReader.Read();

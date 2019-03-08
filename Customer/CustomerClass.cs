@@ -44,8 +44,6 @@ namespace FakturaWpf.Customer
           public string ACTIVE { get; set; }  
 
 
-        public const string TABLENAME = "TKlient";
-
         public CustomerClass(int id = 0)
         {
             this.ID = id;
@@ -92,23 +90,28 @@ namespace FakturaWpf.Customer
 
         public List<object> ThisReadListData()
         {
-            return ReadListData(this, TABLENAME, new object[] { 0 });
+            return ReadListData(this, TableName(), new object[] { 0 });
         }
 
         public bool ThisSaveData()
         {
-            this.ID = SaveData(this.ID, TABLENAME, typeof(CustomerClass), this);
+            this.ID = SaveData(this.ID, TableName(), typeof(CustomerClass), this);
             return (this.ID > 0);
         }
 
         public void ThisReadData()
         {
-            ReadData(this, TABLENAME, this.ID);
+            ReadData(this, TableName(), this.ID);
         }
 
         public bool ThisTableCheck()
         {
-            return TableCheck(TABLENAME, typeof(CustomerClass), GetLengthOfStringField);
+            return TableCheck(TableName(), typeof(CustomerClass), GetLengthOfStringField);
+        }
+
+        public string TableName()
+        {
+            return "TKlient";
         }
     }
 

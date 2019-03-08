@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.MyControls;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,13 @@ namespace FakturaWpf.Dictionary
     public partial class DictionaryList : UserControl, IMdiControl
     {
         List<DictionaryClass> listD = null;
+        string slowkind;
 
-        public DictionaryList()
+        public DictionaryList(string slowkind)
         {
             InitializeComponent();
+
+            this.slowkind = slowkind;
             Prepare();
         }
 
@@ -41,7 +45,7 @@ namespace FakturaWpf.Dictionary
         {
             if (listD == null)
             {
-                DictionaryClass dl = new DictionaryClass();
+                DictionaryClass dl = new DictionaryClass(0, slowkind);
                 listD = dl.ThisReadListData().OfType<DictionaryClass>().ToList();
             }
 
@@ -52,10 +56,10 @@ namespace FakturaWpf.Dictionary
                 switch (CB_Choice.comboBox.SelectedIndex)
                 {
                     case 0:
-                        lpom = listD.Where(x => (x.SLRODZ == "GRUPKON") && (x.SLKOMUN1.ToUpper().StartsWith(TX_Search.Text.ToUpper()))).ToList();
+                        lpom = listD.Where(x => x.SLKOMUN1.ToUpper().StartsWith(TX_Search.Text.ToUpper())).ToList();
                         break;
                     case 1:
-                        lpom = listD.Where(x => (x.SLRODZ == "GRUPKON") && (x.SLKOMUN1.ToUpper().Contains(TX_Search.Text.ToUpper()))).ToList();
+                        lpom = listD.Where(x => x.SLKOMUN1.ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
                         break;
                 }
             }
@@ -72,7 +76,16 @@ namespace FakturaWpf.Dictionary
 
         public void OnRefresh(object obj = null)
         {
-            throw new NotImplementedException();
+            DictionaryClass dcMod = ((DictionaryClass)obj);
+
+            var index = listD.FindIndex(x => x.ID == dcMod.ID);
+
+            if (index > -1)
+                listD[index] = dcMod;
+            else
+                listD.Add(dcMod);
+
+            LoadData();
         }
 
         public string TreeName()
@@ -83,6 +96,23 @@ namespace FakturaWpf.Dictionary
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
             LoadData();
+        }
+
+        private void btIns_myClick(object sender, RoutedEventArgs e)
+        {
+            DictionaryClass dc = (DictionaryClass)DG_Dict.SelectedItem;
+
+            int id = 0;
+
+            if (((MyButton)sender).Name.Equals("btnMod"))
+            {
+                id = dc.ID;
+            }
+
+            if (id >= 0)
+            {
+                MdiControl.AddChild(typeof(DictionaryEdit), new object[] { id }, "Eydcja ...", "ImgFakt", 180, 550, TreeName());
+            }
         }
     }
 }

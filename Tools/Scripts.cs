@@ -6,10 +6,25 @@ using System.Threading.Tasks;
 
 namespace FakturaWpf.Tools
 {
+    
+
     class Scripts :DatabaseConnect
     {
+        public delegate Boolean AddTrigers(string table);
 
-        public static Boolean InsertTrigger(string table)
+        private AddTrigers _addtrig;
+
+        public Boolean Triggers(string table)
+        {
+            if (_addtrig == null)
+            {
+                _addtrig += InsertTrigger;
+                _addtrig += UpdateTrigger;
+            }
+            return _addtrig(table);
+        }
+
+        public Boolean InsertTrigger(string table)
         {
             NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER "+table+"AFterInsert ON "+table+" "+
                                    "FOR INSERT "+
@@ -25,7 +40,7 @@ namespace FakturaWpf.Tools
                 return false;
         }
 
-        public static Boolean UpdateTrigger(string table)
+        public Boolean UpdateTrigger(string table)
         {
             NQuery nQ = new NQuery("CREATE  OR ALTER TRIGGER "+table+"AFterUpdate ON "+table+ " "+
                                    "AFTER UPDATE " +

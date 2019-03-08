@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="FakturaWpf.Dictionary.DictionaryEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FakturaWpf.Dictionary"
+             xmlns:my="clr-namespace:FakturaWpf.MyControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="550">
+    <DockPanel>
+        <StackPanel x:Name="SP_SLow" DockPanel.Dock="Top">
+            <CheckBox x:Name="CH_ACTIVE" Content="Aktywny" Margin="300,10,0,0"/>
+            <Label x:Name="label" Content="Nazwa" Margin="20,0,0,0"/>
+            <TextBox x:Name="TX_Name" Text="{Binding SLKOMUN1}" Height="23" Width ="500" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="20,0,0,0"/>
+        </StackPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <my:MyButton VerticalAlignment="Bottom" x:Name="btIns" myText="Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myClick="btIns_myClick" />
+            <my:MyButton VerticalAlignment="Bottom" DockPanel.Dock="Bottom" myText="ESC Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick"/>
+        </Grid>
+    </DockPanel>
+</UserControl>

@@ -8,6 +8,7 @@ namespace FakturaWpf.Tools
 {
     interface IClassControl
     {
+        string TableName();
         int GetLengthOfStringField(string name);
         List<object> ThisReadListData();
         Boolean ThisSaveData();

@@ -66,7 +66,7 @@
                 <TextBlock Name="lblCursorPosition" />
             </StatusBarItem>
         </StatusBar>
-        <mdi:MdiContainer x:Name="MdiMain" Theme="Aero" DockPanel.Dock="Right" x:FieldModifier="public">
+        <mdi:MdiContainer x:Name="MdiMain" Theme="Aero" DockPanel.Dock="Right" x:FieldModifier="public" >
             <mdi:MdiContainer.Background>
                 <ImageBrush ImageSource="Resources/tlo.jpg"/>
             </mdi:MdiContainer.Background>

@@ -55,7 +55,7 @@ namespace FakturaWpf.Tools
             TreeControl.RemoveTreeItem(treename);
         }
 
-        public static void AddChild(Type myClass, object[] args, string title, string iconame, int height, int width, string parent = "")
+        public static void AddChild(Type myClass, object[] args, string title, string iconame, int height, int width, string parentree = "")
         {
             Object theObject = Activator.CreateInstance(myClass, args?.ToArray());
 
@@ -71,7 +71,7 @@ namespace FakturaWpf.Tools
             MdiControl.mdParent.Children.Add(md);
             md.Closing += ((IMdiControl)theObject).Close;
 
-            TreeControl.AddToTree(((IMdiControl)theObject).TreeName(), parent);
+            TreeControl.AddToTree(((IMdiControl)theObject).TreeName(), parentree);
             TreeControl.ExpandRecursively(TreeControl.mainTree.Items, true);
         }
 

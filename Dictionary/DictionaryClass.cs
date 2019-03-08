@@ -30,8 +30,8 @@ namespace FakturaWpf.Dictionary
         public string SLKOMUN20 { get; set; }
         public string SLKOMUN21 { get; set; }
         public string SLKOMUN22 { get; set; }
-
-        public const string TABLENAME = "TSlownik";
+        public DateTime DATAW { get; set; }
+        public DateTime DMODDATE { get; set; }
 
         public DictionaryClass(int id =0, string rodz=null)
         {
@@ -56,23 +56,28 @@ namespace FakturaWpf.Dictionary
 
         public List<object> ThisReadListData()
         {
-            return ReadListData(this, TABLENAME, new object[] { 0, "" });
+            return ReadListData(this, TableName(), new object[] { 0, "" });
         }
 
         public bool ThisSaveData()
         {
-            this.ID = SaveData(this.ID, TABLENAME+" where SLRODZ ="+this.SLRODZ, typeof(DictionaryClass), this);
+            this.ID = SaveData(this.ID, TableName() + " where SLRODZ ="+this.SLRODZ, typeof(DictionaryClass), this);
             return (this.ID > 0);
         }
 
         public void ThisReadData()
         {
-            ReadData(this, TABLENAME, this.ID);
+            ReadData(this, TableName(), this.ID);
         }
 
         public bool ThisTableCheck()
         {
-           return TableCheck(TABLENAME, typeof(DictionaryClass), GetLengthOfStringField);
+           return TableCheck(TableName(), typeof(DictionaryClass), GetLengthOfStringField);
+        }
+
+        public string TableName()
+        {
+           return "TSlownik";
         }
     }
 
