@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Provinces>
+	<w1>dolnośląskie</w1>
+	<w2>kujawsko-pomorskie</w2>
+	<w3>lubelskie</w3>
+	<w4>lubuskie</w4>
+	<w5>łódzkie</w5>
+	<w6>małopolskie</w6>
+	<w7>mazowieckie</w7>
+	<w8>opolskie</w8>
+	<w9>podkarpackie</w9>
+	<w10>podlaskie</w10>
+	<w11>pomorskie</w11>
+	<w12>śląskie</w12>
+	<w13>świętokrzyskie</w13>
+	<w14>warmińsko-mazurskie</w14>
+	<w15>wielkopolskie</w15>
+	<w16>zachodniopomorskie</w16>
+</Provinces>

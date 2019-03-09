@@ -249,7 +249,7 @@ namespace FakturaWpf
                 {
                     list.Add(new Params("@" + prop.Name,
                                         GetSqlTypeFromVariable(prop.PropertyType),
-                                        prop.GetValue(obj, null)));
+                                        CheckValue(prop.GetValue(obj, null))));
 
                     bfs.AddString(prop.Name);
                 }
@@ -271,6 +271,16 @@ namespace FakturaWpf
             return (ID);
         }
 
+        private object CheckValue(object ob)
+        {
+            if (ob is DateTime)
+            {
+                if ((DateTime)ob == DateTime.MinValue)
+                    return null;
+            }
+
+            return ob;
+        }
     }
 
 

@@ -111,7 +111,7 @@ namespace FakturaWpf.Dictionary
 
             if (id >= 0)
             {
-                MdiControl.AddChild(typeof(DictionaryEdit), new object[] { id }, "Eydcja ...", "ImgFakt", 180, 550, TreeName());
+                MdiControl.AddChild(typeof(DictionaryEdit), new object[] { id, slowkind }, "Eydcja ...", "ImgFakt", 180, 550, TreeName());
             }
         }
     }

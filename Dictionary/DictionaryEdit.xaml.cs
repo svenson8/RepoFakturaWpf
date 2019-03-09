@@ -23,11 +23,11 @@ namespace FakturaWpf.Dictionary
     {
         private DictionaryClass mydict;
 
-        public DictionaryEdit(int id=0)
+        public DictionaryEdit(int id=0, string slowkind = null)
         {
             InitializeComponent();
 
-            mydict = new DictionaryClass(id);
+            mydict = new DictionaryClass(id, slowkind);
             InitBinding();
         }
 

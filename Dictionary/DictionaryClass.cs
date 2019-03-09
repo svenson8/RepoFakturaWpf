@@ -20,8 +20,8 @@ namespace FakturaWpf.Dictionary
         public string SLKOMUN5 { get; set; }
         public string SLKOMUN6 { get; set; }
         public string SLKOMUN7 { get; set; }
-        public double SLKOMUN8 { get; set; }
-        public double SLKOMUN9 { get; set; }
+        public Decimal SLKOMUN8 { get; set; }
+        public Decimal SLKOMUN9 { get; set; }
         public int SLKOMUN11 { get; set; }
         public int SLKOMUN12 { get; set; }
         public DateTime SLKOMUN13 { get; set; }
@@ -39,7 +39,12 @@ namespace FakturaWpf.Dictionary
             this.ID = id;
             if (this.ID > 0)
                 ThisReadData();
-
+            else
+            {
+                this.DATAW = DateTime.Now;
+                this.DMODDATE = DateTime.Now;
+                this.ACTIVE = "T";
+            }
         }
 
 
@@ -56,12 +61,12 @@ namespace FakturaWpf.Dictionary
 
         public List<object> ThisReadListData()
         {
-            return ReadListData(this, TableName(), new object[] { 0, "" });
+            return ReadListData(this, TableName() + " where SLRODZ =" + Various.QuotedStr(this.SLRODZ), new object[] { 0, "" });
         }
 
         public bool ThisSaveData()
         {
-            this.ID = SaveData(this.ID, TableName() + " where SLRODZ ="+this.SLRODZ, typeof(DictionaryClass), this);
+            this.ID = SaveData(this.ID, TableName() , typeof(DictionaryClass), this);
             return (this.ID > 0);
         }
 
@@ -78,6 +83,11 @@ namespace FakturaWpf.Dictionary
         public string TableName()
         {
            return "TSlownik";
+        }
+
+        public void InsertProvincesFromXML()
+        {
+
         }
     }
 

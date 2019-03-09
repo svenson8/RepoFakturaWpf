@@ -310,5 +310,10 @@
   <ItemGroup>
     <Resource Include="Resources\group.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Provinces.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

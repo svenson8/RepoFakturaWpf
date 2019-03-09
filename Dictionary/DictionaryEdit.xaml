@@ -9,7 +9,7 @@
              d:DesignHeight="150" d:DesignWidth="550">
     <DockPanel>
         <StackPanel x:Name="SP_SLow" DockPanel.Dock="Top">
-            <CheckBox x:Name="CH_ACTIVE" Content="Aktywny" Margin="300,10,0,0"/>
+            <CheckBox x:Name="CH_ACTIVE" Content="Aktywny" Margin="300,10,0,0" IsChecked="{Binding ACTIVE, Converter={StaticResource YesNoToBooleanConverter}}"/>
             <Label x:Name="label" Content="Nazwa" Margin="20,0,0,0"/>
             <TextBox x:Name="TX_Name" Text="{Binding SLKOMUN1}" Height="23" Width ="500" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="20,0,0,0"/>
         </StackPanel>

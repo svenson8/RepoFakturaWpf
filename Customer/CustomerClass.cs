@@ -49,10 +49,12 @@ namespace FakturaWpf.Customer
             this.ID = id;
             if (this.ID > 0)
                 ThisReadData();
-
-            this.DATAW = DateTime.Now;
-            this.DMODDATE = DateTime.Now;
-            this.KLIDOWODDATA = DateTime.Now;
+            else
+            {
+                this.DATAW = DateTime.Now;
+                this.DMODDATE = DateTime.Now;
+                this.KLIDOWODDATA = DateTime.Now;
+            }
         }
 
 
