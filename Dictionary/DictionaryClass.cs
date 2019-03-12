@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.Properties;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,16 +98,24 @@ namespace FakturaWpf.Dictionary
             if (!nq.NCheckCount())
             {
                 XmlDocument myxml = new XmlDocument();
-                myxml.Load("pack://application:,,,/Provinces.xml");
+                myxml.LoadXml(Resources.Provinces);
                
-
-
                 if (myxml.ChildNodes.Count == 0)
                 {
-                    Various.InfoOk("nima");
+                    Various.Warning("Błąd czytania pliku z województwami");
                 }
                 else
-                    Various.InfoOk("jest");
+                {
+                    var provinces = myxml.SelectNodes("/Provinces/w");
+
+                    foreach(XmlNode pr in provinces)
+                    {
+                        DictionaryClass dpom = new DictionaryClass(0, slRodzProv);
+                        dpom.SLKOMUN1 = pr.InnerText;
+                        dpom.ThisSaveData();
+                    }                        
+                }
+                
             }
             
         }

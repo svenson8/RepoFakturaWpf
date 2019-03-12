@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Countries>
+  <Country>
+    <symbol>AL</symbol>
+    <name>Albania</name>
+  </Country>
+  <Country>
+  <symbol>AR</symbol>
+  <name>Argntyna</name>
+</Country>
+      <Country>
+  <symbol>BG</symbol>
+  <name>Belgia</name>
+</Country>
+      <Country>
+  <symbol>CZ</symbol>
+  <name>Czechy</name>
+</Country>
+      <Country>
+  <symbol>DN</symbol>
+  <name>Dania</name>
+</Country>
+      <Country>
+  <symbol>HS</symbol>
+  <name>Hiszpania</name>
+</Country>
+      <Country>
+  <symbol>ML</symbol>
+  <name>Albania</name>
+</Country>
+      <Country>
+  <symbol>FR</symbol>
+  <name>Albania</name>
+</Country>
+      <Country>
+  <symbol>AL</symbol>
+  <name>Francja</name>
+</Country>
+      <Country>
+  <symbol>PL</symbol>
+  <name>Polska</name>
+</Country>
+      <Country>
+  <symbol>NM</symbol>
+  <name>Niemcy</name>
+</Country>
+      <Country>
+  <symbol>RS</symbol>
+  <name>Rosja</name>
+</Country>
+      <Country>
+  <symbol>HL</symbol>
+  <name>Holandia</name>
+</Country>
+      <Country>
+  <symbol>BR</symbol>
+  <name>Brazylia</name>
+   </Country>
+      <Country>
+  <symbol>EG</symbol>
+  <name>Egipt</name>
+</Country>
+      <Country>
+  <symbol>LT</symbol>
+  <name>Litwa</name>
+</Country>
+      <Country>
+  <symbol>MK</symbol>
+  <name>Meksyk</name>
+</Country>
+</Countries>

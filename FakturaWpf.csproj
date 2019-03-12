@@ -311,6 +311,7 @@
     <Resource Include="Resources\group.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\MyXml\Countries.xml" />
     <Content Include="Resources\MyXml\Provinces.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

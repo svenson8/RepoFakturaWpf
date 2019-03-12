@@ -73,5 +73,10 @@ namespace FakturaWpf
         {
             MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzGrupK }, "Grupy kontrahentów", "ImgGroup", 450, 675);
         }
+
+        private void MenuItem_Click_6(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzProv }, "Lista województw", "ImgGroup", 450, 675);
+        }
     }
 }

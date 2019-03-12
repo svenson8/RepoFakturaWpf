@@ -59,5 +59,67 @@ namespace FakturaWpf.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;Countries&gt;
+        ///  &lt;Country&gt;
+        ///    &lt;symbol&gt;AL&lt;/symbol&gt;
+        ///    &lt;name&gt;Albania&lt;/name&gt;
+        ///  &lt;/Country&gt;
+        ///  &lt;Country&gt;
+        ///  &lt;symbol&gt;AR&lt;/symbol&gt;
+        ///  &lt;name&gt;Argntyna&lt;/name&gt;
+        ///&lt;/Country&gt;
+        ///      &lt;Country&gt;
+        ///  &lt;symbol&gt;BG&lt;/symbol&gt;
+        ///  &lt;name&gt;Belgia&lt;/name&gt;
+        ///&lt;/Country&gt;
+        ///      &lt;Country&gt;
+        ///  &lt;symbol&gt;CZ&lt;/symbol&gt;
+        ///  &lt;name&gt;Czechy&lt;/name&gt;
+        ///&lt;/Country&gt;
+        ///      &lt;Country&gt;
+        ///  &lt;symbol&gt;DN&lt;/symbol&gt;
+        ///  &lt;name&gt;Dania&lt;/name&gt;
+        ///&lt;/Country&gt;
+        ///      &lt;Country&gt;
+        ///  &lt;symbol&gt;HS&lt;/symbol&gt;
+        ///  &lt;name&gt;Hiszpania&lt;/name&gt;
+        ///&lt;/Country&gt;
+        ///       [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string Countries {
+            get {
+                return ResourceManager.GetString("Countries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;Provinces&gt;
+        ///	&lt;w&gt;dolnośląskie&lt;/w&gt;
+        ///	&lt;w&gt;kujawsko-pomorskie&lt;/w&gt;
+        ///	&lt;w&gt;lubelskie&lt;/w&gt;
+        ///	&lt;w&gt;lubuskie&lt;/w&gt;
+        ///	&lt;w&gt;łódzkie&lt;/w&gt;
+        ///	&lt;w&gt;małopolskie&lt;/w&gt;
+        ///	&lt;w&gt;mazowieckie&lt;/w&gt;
+        ///	&lt;w&gt;opolskie&lt;/w&gt;
+        ///	&lt;w&gt;podkarpackie&lt;/w&gt;
+        ///	&lt;w&gt;podlaskie&lt;/w&gt;
+        ///	&lt;w&gt;pomorskie&lt;/w&gt;
+        ///	&lt;w&gt;śląskie&lt;/w&gt;
+        ///	&lt;w&gt;świętokrzyskie&lt;/w&gt;
+        ///	&lt;w&gt;warmińsko-mazurskie&lt;/w&gt;
+        ///	&lt;w&gt;wielkopolskie&lt;/w&gt;
+        ///	&lt;w&gt;zachodniopomorskie&lt;/w&gt;
+        ///&lt;/Provinces&gt;.
+        /// </summary>
+        internal static string Provinces {
+            get {
+                return ResourceManager.GetString("Provinces", resourceCulture);
+            }
+        }
     }
 }
