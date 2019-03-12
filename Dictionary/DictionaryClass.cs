@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace FakturaWpf.Dictionary
 {
@@ -32,6 +33,10 @@ namespace FakturaWpf.Dictionary
         public string SLKOMUN22 { get; set; }
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
+
+        public const string slRodzGrupK   = "GRUPKON";
+        public const string slRodzProv    =  "WOJ";
+        public const string slRodzCountry = "KRAJE";
 
         public DictionaryClass(int id =0, string rodz=null)
         {
@@ -87,7 +92,23 @@ namespace FakturaWpf.Dictionary
 
         public void InsertProvincesFromXML()
         {
+            NQueryReader nq = new NQueryReader("select count(ID) from " + TableName() + " where " + nameof(SLRODZ) + " = "+Various.QuotedStr(slRodzProv));
 
+            if (!nq.NCheckCount())
+            {
+                XmlDocument myxml = new XmlDocument();
+                myxml.Load("pack://application:,,,/Provinces.xml");
+               
+
+
+                if (myxml.ChildNodes.Count == 0)
+                {
+                    Various.InfoOk("nima");
+                }
+                else
+                    Various.InfoOk("jest");
+            }
+            
         }
     }
 

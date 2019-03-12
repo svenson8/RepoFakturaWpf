@@ -352,6 +352,23 @@ namespace FakturaWpf
 
         }
 
+        public Boolean NCheckCount()
+        {
+            while (NReader.Read())
+            {
+                if (NReader.GetInt32(0) > 0)
+                {
+                    NReader.Close();
+                    return true;
+                }
+            }        
+
+            NReader.Close();
+            return false;
+        }
+
+
+
     }
 
     public class BuildSaveString

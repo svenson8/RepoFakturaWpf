@@ -71,7 +71,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DictionaryList), new object[] { "GRUPKON" }, "Grupy kontrahentów", "ImgGroup", 450, 675);
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzGrupK }, "Grupy kontrahentów", "ImgGroup", 450, 675);
         }
     }
 }

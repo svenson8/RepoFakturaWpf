@@ -52,6 +52,7 @@ namespace FakturaWpf
             DictionaryClass dc = new DictionaryClass();
             result = dc.ThisTableCheck();
             result = sc.Triggers(dc.TableName());
+            dc.InsertProvincesFromXML();
 
             return result;
         }
