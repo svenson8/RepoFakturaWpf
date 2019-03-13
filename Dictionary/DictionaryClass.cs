@@ -2,7 +2,9 @@
 using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -119,6 +121,16 @@ namespace FakturaWpf.Dictionary
             }
             
         }
+
+        public Boolean InsertCountriesFromProc()
+        {
+        
+            NQuery nq = new NQuery("EXEC[dbo].[READXML_COUNTRIES] @filepath = " +
+                                   Various.QuotedStr(System.AppDomain.CurrentDomain.BaseDirectory + "Resources\\MyXml\\Countries.xml"));
+
+            return nq.WellDone;  
+        }
+
     }
 
 

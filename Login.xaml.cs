@@ -40,7 +40,7 @@ namespace FakturaWpf
         private Boolean CheckDbStructure()
         {
             Boolean result;
-            Scripts sc = new Scripts();
+            Scripts sc = new Scripts();            
 
             result  = UserClass.ThisTableCheck();
             result = sc.Triggers(UserClass.TABLENAME);
@@ -53,6 +53,8 @@ namespace FakturaWpf
             result = dc.ThisTableCheck();
             result = sc.Triggers(dc.TableName());
             dc.InsertProvincesFromXML();
+            result = sc.AddCountryPorcedure();
+            result = dc.InsertCountriesFromProc();
 
             return result;
         }

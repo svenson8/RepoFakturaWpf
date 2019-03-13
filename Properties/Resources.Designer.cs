@@ -121,5 +121,42 @@ namespace FakturaWpf.Properties {
                 return ResourceManager.GetString("Provinces", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu 
+        ///
+        ///CREATE OR ALTER PROCEDURE [dbo].[READXML_COUNTRIES]
+        ///	@filepath varchar(100)
+        ///
+        ///AS
+        ///BEGIN
+        ///DECLARE @SQL NVARCHAR(MAX)
+        ///
+        ///SET @SQL = N&apos;
+        ///Declare @xml XML
+        ///Select @xml =
+        ///CONVERT(XML,bulkcolumn,2) FROM OPENROWSET(BULK &apos;&apos;&apos; +@filepath+ &apos;&apos;&apos;,SINGLE_BLOB) AS X
+        ///
+        ///SET ARITHABORT ON
+        ///
+        ///Insert into [TSlownik]
+        ///(
+        ///SLKOMUN1, SLKOMUN2, SLRODZ, ACTIVE, IUSERID
+        ///)
+        ///
+        ///Select
+        ///P.value(&apos;&apos;symbol[1]&apos;&apos;,&apos;&apos;VARCHAR(50)&apos;&apos;) AS symbol,
+        ///P.value(&apos;&apos;name[1]&apos;&apos;,&apos;&apos;VARCHAR(50)&apos;&apos;) AS name,
+        ///&apos;&apos;KRAJ&apos;&apos; as Kraj,
+        ///&apos;&apos;T&apos;&apos; as Act,
+        ///1 as us
+        ///
+        ///Fr [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string XML_COUNT_SCR {
+            get {
+                return ResourceManager.GetString("XML_COUNT_SCR", resourceCulture);
+            }
+        }
     }
 }

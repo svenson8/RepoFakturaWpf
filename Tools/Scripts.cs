@@ -1,6 +1,9 @@
-﻿using System;
+﻿using FakturaWpf.Properties;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,6 +56,13 @@ namespace FakturaWpf.Tools
                 return true;
             else
                 return false;
+        }
+
+        public Boolean AddCountryPorcedure()
+        {
+            string script = Resources.XML_COUNT_SCR.ToString();
+            NQuery nq = new NQuery(script);
+            return nq.WellDone;
         }
 
     }

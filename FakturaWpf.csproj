@@ -311,7 +311,12 @@
     <Resource Include="Resources\group.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\MyXml\Countries.xml" />
+    <Content Include="Resources\MyXml\Countries.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MyScripts\XML_COUNT_SCR.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\MyXml\Provinces.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
