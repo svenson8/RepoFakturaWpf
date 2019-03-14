@@ -8,6 +8,8 @@ using System.IO;
 using System.Data;
 using System.Windows;
 using System.Reflection;
+using System.Xml;
+using System.Data.SqlTypes;
 
 namespace FakturaWpf
 {
@@ -192,6 +194,9 @@ namespace FakturaWpf
             if (type == typeof(double))
                 return SqlDbType.Decimal;
 
+            if (type == typeof(XmlDocument))
+                return SqlDbType.Xml;
+
             return SqlDbType.Int;
         }
 
@@ -278,6 +283,9 @@ namespace FakturaWpf
                 if ((DateTime)ob == DateTime.MinValue)
                     return null;
             }
+
+            if (ob is XmlDocument)
+                return new SqlXml(new XmlTextReader((ob as XmlDocument).InnerXml, XmlNodeType.Document, null));
 
             return ob;
         }

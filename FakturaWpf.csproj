@@ -104,6 +104,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\XmlClass.cs" />
     <Compile Include="Users\UserClass.cs" />
     <Compile Include="Users\UserEdit.xaml.cs">
       <DependentUpon>UserEdit.xaml</DependentUpon>

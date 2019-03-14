@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FakturaWpf.Properties;
 
 namespace FakturaWpf
 {
@@ -49,12 +50,18 @@ namespace FakturaWpf
             result = cs.ThisTableCheck();
             result = sc.Triggers(cs.TableName());
 
+
+
             DictionaryClass dc = new DictionaryClass();
             result = dc.ThisTableCheck();
             result = sc.Triggers(dc.TableName());
             dc.InsertProvincesFromXML();
             result = sc.AddCountryPorcedure();
-            result = dc.InsertCountriesFromProc();
+
+            XmlClass xl = new XmlClass();
+            result = xl.ThisTableCheck();
+
+            result = xl.InsertXmlCountries(nameof(Properties.Resources.Countries));
 
             return result;
         }
