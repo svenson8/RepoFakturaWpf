@@ -124,6 +124,9 @@
   <data name="Provinces" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MyXml\Provinces.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="XML_COUNTRY_FROM_TAB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\myscripts\xml_country_from_tab.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="XML_COUNT_SCR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\myscripts\xml_count_scr.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>

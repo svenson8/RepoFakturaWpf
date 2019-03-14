@@ -50,18 +50,19 @@ namespace FakturaWpf
             result = cs.ThisTableCheck();
             result = sc.Triggers(cs.TableName());
 
+            XmlClass xl = new XmlClass();
+            result = xl.ThisTableCheck();
 
+            result = xl.InsertXmlCountries(nameof(Properties.Resources.Countries));
 
             DictionaryClass dc = new DictionaryClass();
             result = dc.ThisTableCheck();
             result = sc.Triggers(dc.TableName());
             dc.InsertProvincesFromXML();
-            result = sc.AddCountryPorcedure();
+            result = sc.AddCountryPorcedure();    // dodanie procedury wpisujacej kraje z pliku (bulkowanie) 
+            result = dc.InsertCountriesFromProc();  // wykonanie skryptu wczytujacego kraje z xml w bazie
 
-            XmlClass xl = new XmlClass();
-            result = xl.ThisTableCheck();
 
-            result = xl.InsertXmlCountries(nameof(Properties.Resources.Countries));
 
             return result;
         }

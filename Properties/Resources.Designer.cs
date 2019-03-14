@@ -158,5 +158,32 @@ namespace FakturaWpf.Properties {
                 return ResourceManager.GetString("XML_COUNT_SCR", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu --select XML.value(&apos;(//Countries/Country/name)[1]&apos;, &apos;varchar(100)&apos;) as name
+        ///-- from XML_STORE 
+        ///
+        ///Insert into [TSlownik]
+        ///(
+        ///SLKOMUN1, SLKOMUN2, SLRODZ, ACTIVE, IUSERID
+        ///)
+        ///
+        ///SELECT
+        ///   x.m.value(&apos;(name)[1]&apos;, &apos;varchar(50)&apos;) AS &apos;name&apos;,
+        ///   x.m.value(&apos;(symbol)[1]&apos;, &apos;Varchar(50)&apos;) AS &apos;symbol&apos;,
+        ///   &apos;KRAJ&apos; as Kraj,
+        ///   &apos;T&apos; as Act,
+        ///    1 as us
+        ///FROM
+        ///   XML_STORE xt 
+        ///   cross apply xt.XML.nodes( &apos;/Countries/Country&apos; ) x(m)
+        ///   where xt.ID = 1
+        ///.
+        /// </summary>
+        internal static string XML_COUNTRY_FROM_TAB {
+            get {
+                return ResourceManager.GetString("XML_COUNTRY_FROM_TAB", resourceCulture);
+            }
+        }
     }
 }

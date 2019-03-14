@@ -38,8 +38,8 @@ namespace FakturaWpf.Dictionary
         public DateTime DMODDATE { get; set; }
 
         public const string slRodzGrupK   = "GRUPKON";
-        public const string slRodzProv    =  "WOJ";
-        public const string slRodzCountry = "KRAJE";
+        public const string slRodzProv    = "WOJ";
+        public const string slRodzCountry = "KRAJ";
 
         public DictionaryClass(int id =0, string rodz=null)
         {
@@ -124,11 +124,16 @@ namespace FakturaWpf.Dictionary
 
         public Boolean InsertCountriesFromProc()
         {
-        
-            NQuery nq = new NQuery("EXEC[dbo].[READXML_COUNTRIES] @filepath = " +
-                                   Various.QuotedStr(System.AppDomain.CurrentDomain.BaseDirectory + "Resources\\MyXml\\Countries.xml"));
 
-            return nq.WellDone;  
+            NQueryReader nq = new NQueryReader("select count(ID) from " + TableName() + " where " + nameof(SLRODZ) + " = " + Various.QuotedStr(slRodzCountry));
+
+            if (!nq.NCheckCount())
+            {
+                NQuery n = new NQuery(Resources.XML_COUNTRY_FROM_TAB.ToString());
+                    return n.WellDone;
+            }
+
+            return true; 
         }
 
     }
