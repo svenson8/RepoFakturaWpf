@@ -157,22 +157,7 @@ namespace FakturaWpf.Customer
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
-            CustomerClass customer = (CustomerClass)DG_Customer.SelectedItem;  
-
-            int id = 0;
-            var title = "Redagowanie danych ";
-
-            if (((MyButton)sender).Name.Equals("btnMod"))
-            {
-                id = customer.ID;
-                title += customer.KLINAZ; 
-            }
-
-            if (id >= 0)
-            {
-                MdiControl.AddChild(typeof(CustomerEdit), new object[] { id }, title, "ImgFakt", 600, 700, TreeName());
-            }
-
+            EditPosition((((MyButton)sender).Name.Equals("btnMod")));
         }
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
@@ -182,9 +167,46 @@ namespace FakturaWpf.Customer
 
         private void MyButton_myClick_1(object sender, RoutedEventArgs e)
         {
-            // Usuwanie
+            if (Various.Question("Czy na pewno usunąć klienta ?"))
+            {
+                CustomerClass customer = (CustomerClass)DG_Customer.SelectedItem;
+
+                if (customer.DeletPosition(customer.ID, customer.TableName()))
+                {
+                    var index = listU.FindIndex(x => x.ID == customer.ID);
+                    if (index > -1)
+                        listU.RemoveAt(index);
+
+                    Various.InfoOk("Klient usunięty pomyślnie");
+
+                    LoadData();
+                }
+            }
         }
 
+        private void DG_Customer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EditPosition(true);
+        }
+
+        private void EditPosition(Boolean mod)
+        {
+            CustomerClass customer = (CustomerClass)DG_Customer.SelectedItem;
+
+            int id = 0;
+            var title = "Redagowanie danych ";
+
+            if (mod)
+            {
+                id = customer.ID;
+                title += customer.KLINAZ;
+            }
+
+            if (id >= 0)
+            {
+                MdiControl.AddChild(typeof(CustomerEdit), new object[] { id }, title, "ImgFakt", 600, 700, TreeName());
+            }
+        }
     }
 
     public class NameConverter : IMultiValueConverter

@@ -38,6 +38,7 @@ namespace FakturaWpf.Dictionary
         {
             Various.FillWithFiltrItems(CB_Choice.comboBox, 2);
             CB_Choice.comboBox.SelectedIndex = 0;
+            DGC_Code.Visibility = (slowkind == DictionaryClass.slRodzCountry) ? Visibility.Visible : Visibility.Hidden;
             LoadData();
         }
 
@@ -98,13 +99,13 @@ namespace FakturaWpf.Dictionary
             LoadData();
         }
 
-        private void btIns_myClick(object sender, RoutedEventArgs e)
+        private void EditPosition(Boolean mod)
         {
             DictionaryClass dc = (DictionaryClass)DG_Dict.SelectedItem;
 
             int id = 0;
 
-            if (((MyButton)sender).Name.Equals("btnMod"))
+            if (mod)
             {
                 id = dc.ID;
             }
@@ -112,6 +113,34 @@ namespace FakturaWpf.Dictionary
             if (id >= 0)
             {
                 MdiControl.AddChild(typeof(DictionaryEdit), new object[] { id, slowkind }, "Eydcja ...", "ImgFakt", 180, 550, TreeName());
+            }
+        }
+
+        private void btIns_myClick(object sender, RoutedEventArgs e)
+        {
+            EditPosition((((MyButton)sender).Name.Equals("btnMod")));
+        }
+
+        private void DG_Dict_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EditPosition(true);
+        }
+
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
+            if (Various.Question("Czy na pewno usunąć pozycję ?"))
+            {
+                DictionaryClass dc = (DictionaryClass)DG_Dict.SelectedItem;
+
+                if (dc.DeletPosition(dc.ID, dc.TableName()))
+                {
+                    var index = listD.FindIndex(x => x.ID == dc.ID);
+                    if (index > -1)
+                        listD.RemoveAt(index);
+
+                    Various.InfoOk("Pozycja usunięta pomyślnie");
+                    LoadData();
+                }
             }
         }
     }

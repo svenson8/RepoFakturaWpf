@@ -23,11 +23,12 @@
             <DockPanel DockPanel.Dock="Bottom">
                 <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick" />
                 <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myClick="btIns_myClick"/>
-                <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" />
+                <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick_1" />
                 <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
             </DockPanel>
-            <DataGrid x:Name="DG_Dict" Style="{StaticResource MyGridStyle}">
+            <DataGrid x:Name="DG_Dict" Style="{StaticResource MyGridStyle}" MouseDoubleClick="DG_Dict_MouseDoubleClick">
                 <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="DGC_Code" Binding="{Binding SLKOMUN2}" ClipboardContentBinding="{x:Null}" Width="40" Header="Kod"/>
                     <DataGridTextColumn Binding="{Binding SLKOMUN1}" ClipboardContentBinding="{x:Null}" Width="1*" Header="Nazwa"/>
                 </DataGrid.Columns>
 

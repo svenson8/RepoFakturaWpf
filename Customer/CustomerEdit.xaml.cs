@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.Dictionary;
+using FakturaWpf.Tools;
 using FakturaWpf.WebApi;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace FakturaWpf.Customer
     public partial class CustomerEdit : UserControl, IMdiControl
     {
         private CustomerClass customer;
+        private delegate void LoadCombos();
 
         public CustomerEdit(int id)
         {
@@ -38,6 +40,48 @@ namespace FakturaWpf.Customer
         {
             GR_Cus.DataContext = null;
             GR_Cus.DataContext = customer;
+            InitCombos();
+        }
+
+        void InitCombos()
+        {
+            LoadCombos ld = new LoadCombos(InitCBProvinces);
+            ld += InitCBCountries;
+            ld.Invoke();
+            
+
+        }
+
+        void InitCBProvinces()
+        {
+            List<DictionaryClass> ListData = new List<DictionaryClass>();
+            ListData = new DictionaryClass(0, DictionaryClass.slRodzProv).ThisReadListData().OfType<DictionaryClass>().ToList();
+
+            CB_Province.comboBox.ItemsSource = ListData;
+            CB_Province.comboBox.DisplayMemberPath = "SLKOMUN1";
+            CB_Province.comboBox.SelectedValuePath = "ID";
+
+            if (customer.ID > 0)
+                CB_Province.comboBox.SelectedValue = customer.KLIWOJID;
+            else
+                CB_Province.comboBox.SelectedIndex = 0;
+            
+        }
+
+        void InitCBCountries()
+        {
+            List<DictionaryClass> ListData = new List<DictionaryClass>();
+            ListData = new DictionaryClass(0, DictionaryClass.slRodzCountry).ThisReadListData().OfType<DictionaryClass>().ToList();
+
+            CB_Country.comboBox.ItemsSource = ListData;
+            CB_Country.comboBox.DisplayMemberPath = "SLKOMUN1";
+            CB_Country.comboBox.SelectedValuePath = "ID";
+
+            if (customer.ID > 0)
+                CB_Country.comboBox.SelectedValue = customer.KLIKRAJID;
+            else
+                CB_Country.comboBox.SelectedIndex = 0;
+
         }
 
 
@@ -58,15 +102,24 @@ namespace FakturaWpf.Customer
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
-            if (customer.ThisSaveData())
+            try
             {
-                Various.InfoOk("Klient zapisany", "Informacja");
-                MdiControl.RefreshMdi(typeof(CustomerList), customer);
-            }
-            else
-                Various.Warning("Błąd zapisu danych", "");
+                customer.KLIWOJID  = (int)(CB_Province.comboBox.SelectedValue);
+                customer.KLIKRAJID = (int)(CB_Country.comboBox.SelectedValue);
+                if (customer.ThisSaveData())
+                {
+                    Various.InfoOk("Klient zapisany", "Informacja");
+                    MdiControl.RefreshMdi(typeof(CustomerList), customer);
+                }
+                else
+                    Various.Warning("Błąd zapisu danych", "");
 
-            Close(sender, e);
+                Close(sender, e);
+            }
+            catch (Exception ex)
+            {
+                Various.Error("Błąd "+nameof(CustomerEdit)+ " MyButton_myClick :" + ex.Message, "Błąd");
+            }
         }
 
         private void MyButton_myClick_1(object sender, RoutedEventArgs e)

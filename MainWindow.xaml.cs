@@ -76,12 +76,12 @@ namespace FakturaWpf
 
         private void MenuItem_Click_6(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzProv }, "Lista województw", "ImgGroup", 450, 675);
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzProv }, "Lista województw", "ImgPoland", 450, 675);
         }
 
         private void MenuItem_Click_7(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzCountry }, "Lista Państw", "ImgGroup", 450, 675);
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzCountry }, "Lista Państw", "ImgEarth", 450, 675);
         }
     }
 }

@@ -28,6 +28,7 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="AlternationCount" Value="2" />
         <Setter Property="Background" Value="White"/>
+        <Setter Property="IsReadOnly" Value="True" />
 
         <Setter Property="CellStyle">
             <Setter.Value>
@@ -133,6 +134,8 @@
     <BitmapImage x:Key="ImgCustomers" UriSource="/Resources/customers.png" />
     <BitmapImage x:Key="ImgWebsearch" UriSource="/Resources/websearch.png" />
     <BitmapImage x:Key="ImgGroup"     UriSource="/Resources/group.png" />
+    <BitmapImage x:Key="ImgPoland"     UriSource="/Resources/poland.png" />
+    <BitmapImage x:Key="ImgEarth"     UriSource="/Resources/earth.png" />
 
     <Style x:Key="MenuIcon" TargetType="Image">
         <Setter Property="Width" Value="16" />

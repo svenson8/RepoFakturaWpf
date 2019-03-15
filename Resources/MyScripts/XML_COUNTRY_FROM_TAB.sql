@@ -15,4 +15,4 @@ SELECT
 FROM
    XML_STORE xt 
    cross apply xt.XML.nodes( '/Countries/Country' ) x(m)
-   where xt.ID = 1
+   where xt.NAME = 'Countries'

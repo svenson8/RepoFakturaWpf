@@ -27,7 +27,7 @@
             <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick_1"/>
             <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
         </DockPanel>
-        <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
+        <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" MouseDoubleClick="DG_Customer_MouseDoubleClick" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Nazwa" Width="200"/>
                 <DataGridTextColumn Binding="{Binding KLINIP}"  Header="NIP" Width="80"/>

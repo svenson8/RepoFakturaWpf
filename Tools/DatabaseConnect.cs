@@ -122,6 +122,16 @@ namespace FakturaWpf
                 NewConnect(database);
         }
 
+        public Boolean DeletPosition(int id, string table)
+        {
+            if (id > 0)
+            {
+                NQuery n = new NQuery("delete from " + table + " where ID=" + id.ToString());
+                return n.WellDone;
+            }
+            return true;
+        }
+
 
         public virtual Boolean TableCheck(string tableName, Type typ, Func<string, int> met)//, List<Params> list)
         {
