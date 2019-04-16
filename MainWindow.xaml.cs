@@ -41,7 +41,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DocumentList), null, "Lista dokumentów sprzedaży", "ImgFaktura", 450, 800);
+            MdiControl.AddChild(typeof(DocumentList), null, "Lista dokumentów sprzedaży", "ImgFaktura", 450, 1000);
           
         }
 
