@@ -83,5 +83,10 @@ namespace FakturaWpf
         {
             MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzCountry }, "Lista Państw", "ImgEarth", 450, 675);
         }
+
+        private void MenuItem_Click_8(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzDokDef }, "Lista definicji dokumentów", "ImgDocuments", 450, 675);
+        }
     }
 }

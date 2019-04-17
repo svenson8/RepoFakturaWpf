@@ -38,7 +38,12 @@
                     <MenuItem.Icon>
                         <Image Source="{StaticResource ImgEarth}"/>
                     </MenuItem.Icon>
-                </MenuItem>               
+                </MenuItem>
+                <MenuItem Header="_Defincje dokumentów" Click="MenuItem_Click_8" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgDocuments}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Administracja">
                 <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">

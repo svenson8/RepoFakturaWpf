@@ -313,6 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\earth.png" />
+    <Resource Include="Resources\documents.png" />
     <Content Include="Resources\MyScripts\XML_COUNTRY_FROM_TAB.sql" />
     <Content Include="Resources\MyXml\Countries.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
