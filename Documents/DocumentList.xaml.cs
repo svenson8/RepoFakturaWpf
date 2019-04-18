@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.Dictionary;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,23 @@ namespace FakturaWpf.Documents
             Various.FillWithYears(CB_Year.comboBox);
             Various.FillWithYears(CB_Year2.comboBox);
 
+            InitDokDef();
+
             ChangePeriodItem();
+        }
+
+        void InitDokDef()
+        {
+            List<object> ListData = new List<object>();
+            NQueryReader nq = new NQueryReader("select *, SLKOMUN2 +' '+SLKOMUN1 as concat from TSlownik " +
+                                               "where slrodz =" + Various.QuotedStr(DictionaryClass.slRodzDokDef));
+            while (nq.NReader.Read())
+                ListData.Add(new { desc = nq.NReader["concat"], field = nq.NReader["ID"] });
+
+            LB_Dok.ItemsSource = ListData;
+        //  LB_Dok.DisplayMemberPath = "desc";
+         //   LB_Dok.SelectedValuePath = "field";
+
         }
 
         private void ChangeVisibility(DependencyObject parent, Visibility vis, Control[] exceptlist)

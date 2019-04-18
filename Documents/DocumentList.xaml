@@ -9,36 +9,45 @@
              d:DesignHeight="450" d:DesignWidth="1000">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Top">
-            <DockPanel x:Name="UpperDock">
-                <Label DockPanel.Dock="Left" x:Name="label" Content="Za okres" Margin="10,6,0,0"/>
-                <MyControls:MyCombobox x:Name="CB_Period"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="110" Margin="5,6,0,0" mySelect="CB_Period_mySelect"/>
-                <Label x:Name="L_days" Content="Liczba dni" Margin="10,6,0,0"/>
-                <TextBox x:Name="TB_days" Height="23" TextWrapping="Wrap" Text="0" Width="60" TextAlignment="Right" PreviewTextInput="TB_days_PreviewTextInput" LostFocus="TB_days_LostFocus" Margin="0,-4,0,0"/>
-                <MyControls:MyCombobox x:Name="CB_Month"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="70" Margin="12,6,0,0"/>
-                <MyControls:MyCombobox x:Name="CB_Year"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="50" Margin="0,6,0,0"/>
-                <MyControls:MyCombobox x:Name="CB_Month2"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="70" Margin="12,6,0,0"/>
-                <MyControls:MyCombobox x:Name="CB_Year2"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="50" Margin="0,6,0,0"/>
-                <TextBox x:Name="TB_days2" Height="23" TextWrapping="Wrap" Text="0" Width="60" TextAlignment="Right" PreviewTextInput="TB_days_PreviewTextInput" LostFocus="TB_days_LostFocus" Margin="0,-4,0,0"/>
-                <DatePicker Name="DT_from" Width="105" Margin="0,-2,0,0" Height="25"/>
-                <DatePicker Name="DT_to" Width="105" Margin="0,-2,0,0" Height="24"/>
-                <MyControls:MyButton x:Name="Btn_Refresh" myText="F3 Odśwież"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}"  Height="40" />
-
-            </DockPanel>
-            <Grid Height="81">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="117*"/>
-                    <ColumnDefinition Width="514*"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="9*"/>
-                    <RowDefinition Height="11*"/>
-                </Grid.RowDefinitions>
-                <CheckBox x:Name="checkBox" Content="Aktywne" HorizontalAlignment="Left" Margin="22,20,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="65"/>
-                <CheckBox x:Name="checkBox1" Content="Archiwalne" HorizontalAlignment="Left" Margin="22,5,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="78"/>
-                <CheckBox x:Name="checkBox2" Content="Tylko VAT marża" Grid.Column="2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="15" Width="114"/>
-                <ListBox x:Name="listBox" Grid.Column="1" HorizontalAlignment="Left" Height="81" Margin="10,0,0,0" VerticalAlignment="Top" Width="228" Grid.RowSpan="2"/>
-            </Grid>
+            <Border BorderBrush="Gray"  BorderThickness="1 1 1 0">
+                <DockPanel x:Name="UpperDock">
+                    <Label DockPanel.Dock="Left" x:Name="label" Content="Za okres" Margin="10,6,0,0"/>
+                    <MyControls:MyCombobox x:Name="CB_Period"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="110" Margin="5,6,0,0" mySelect="CB_Period_mySelect"/>
+                    <Label x:Name="L_days" Content="Liczba dni" Margin="10,6,0,0"/>
+                    <TextBox x:Name="TB_days" Height="23" TextWrapping="Wrap" Text="0" Width="60" TextAlignment="Right" PreviewTextInput="TB_days_PreviewTextInput" LostFocus="TB_days_LostFocus" Margin="0,-4,0,0"/>
+                    <MyControls:MyCombobox x:Name="CB_Month"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="70" Margin="12,6,0,0"/>
+                    <MyControls:MyCombobox x:Name="CB_Year"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="50" Margin="0,6,0,0"/>
+                    <MyControls:MyCombobox x:Name="CB_Month2"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="70" Margin="12,6,0,0"/>
+                    <MyControls:MyCombobox x:Name="CB_Year2"  HorizontalAlignment="Left" VerticalAlignment="Top" myComboWidth="50" Margin="0,6,0,0"/>
+                    <TextBox x:Name="TB_days2" Height="23" TextWrapping="Wrap" Text="0" Width="60" TextAlignment="Right" PreviewTextInput="TB_days_PreviewTextInput" LostFocus="TB_days_LostFocus" Margin="0,-4,0,0"/>
+                    <DatePicker Name="DT_from" Width="105" Margin="0,-2,0,0" Height="25"/>
+                    <DatePicker Name="DT_to" Width="105" Margin="0,-2,0,0" Height="24"/>
+                    <MyControls:MyButton x:Name="Btn_Refresh" myText="F3 Odśwież"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}"  Height="40" />
+                </DockPanel>
+            </Border>
+            <Border BorderBrush="Gray"  BorderThickness="1">
+                <Grid Height="81">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="117*"/>
+                        <ColumnDefinition Width="514*"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="11*"/>
+                    </Grid.RowDefinitions>
+                    <CheckBox x:Name="checkBox" Content="Aktywne" HorizontalAlignment="Left" Margin="22,20,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="65"/>
+                    <CheckBox x:Name="checkBox1" Content="Archiwalne" HorizontalAlignment="Left" Margin="22,5,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="78"/>
+                    <CheckBox x:Name="checkBox2" Content="Tylko VAT marża" Grid.Column="2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="15" Width="114"/>
+                    <ListBox x:Name="LB_Dok" Grid.Column="1" HorizontalAlignment="Left" Height="81" Margin="10,0,0,0" VerticalAlignment="Top" Width="228" Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding desc}" Margin="0,-3,0,0"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
 
 
         </StackPanel>

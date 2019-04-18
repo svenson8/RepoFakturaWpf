@@ -28,7 +28,8 @@ namespace FakturaWpf.Dictionary
             InitializeComponent();
 
             mydict = new DictionaryClass(id, slowkind);
-            TX_symbol.Visibility =  (slowkind == DictionaryClass.slRodzCountry) ? Visibility.Visible:  Visibility.Hidden;
+            TX_symbol.Visibility =  ((slowkind == DictionaryClass.slRodzCountry) || (slowkind == DictionaryClass.slRodzDokDef))
+                                    ? Visibility.Visible:  Visibility.Hidden;
             InitBinding();
         }
 
