@@ -6,14 +6,24 @@
              xmlns:local="clr-namespace:FakturaWpf.Dictionary"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="550">
+             d:DesignHeight="170" d:DesignWidth="550">
     <DockPanel>
-        <StackPanel x:Name="SP_SLow" DockPanel.Dock="Top">
-            <CheckBox x:Name="CH_ACTIVE" Content="Aktywny" Margin="300,10,0,0" IsChecked="{Binding ACTIVE, Converter={StaticResource YesNoToBooleanConverter}}"/>
-            <Label x:Name="label" Content="Nazwa" Margin="15,0,0,0" HorizontalAlignment="Left"/>
-            <TextBox x:Name="TX_Name" Text="{Binding SLKOMUN1}" Height="23" Width ="500" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="20,0,0,0"/>
-            <TextBox x:Name="TX_symbol" Text="{Binding SLKOMUN2}" Height="23" Width ="44" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="20,3,0,0"/>
-        </StackPanel>
+        <Grid x:Name="GR_SLow" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />                
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <CheckBox Grid.Row="0" x:Name="CH_ACTIVE" Content="Aktywny" Margin="20,10,0,0" IsChecked="{Binding ACTIVE, Converter={StaticResource YesNoToBooleanConverter}}"/>
+            <Label Grid.Row="1" x:Name="label" Content="Nazwa" Margin="20,0,0,0" HorizontalAlignment="Left"/>
+            <TextBox Grid.Row="1" x:Name="TX_Name" Text="{Binding SLKOMUN1}" Height="23" Width ="450" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="70,0,0,0"/>
+            <Label Grid.Row="2" x:Name="Lab_sym" Content="Symbol" Margin="15,0,0,0" HorizontalAlignment="Left"/>
+            <TextBox Grid.Row="2" x:Name="TX_symbol" Text="{Binding SLKOMUN2}" Height="23" Width ="44" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="70,3,0,0"/>
+            <Label Grid.Row="3" x:Name="Lab_forma" Content="Forma płatności" Margin="15,0,0,0" HorizontalAlignment="Left"/>
+            <my:MyCombobox Grid.Row="3" x:Name="CB_PayF"  HorizontalAlignment="Left" Margin="110,3,0,0" VerticalAlignment="Top" myComboWidth="190" />
+        </Grid>
         <Grid DockPanel.Dock="Bottom">
             <my:MyButton VerticalAlignment="Bottom" x:Name="btIns" myText="Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myClick="btIns_myClick" />
             <my:MyButton VerticalAlignment="Bottom" DockPanel.Dock="Bottom" myText="ESC Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick"/>

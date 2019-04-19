@@ -109,6 +109,15 @@ namespace FakturaWpf
             cb.SelectedIndex = 0;
         }
 
+        public static void FillPayForms(ComboBox cb)
+        {
+            cb.Items.Clear();
+            cb.Items.Add("Przelew");
+            cb.Items.Add("Gotówka");
+
+            cb.SelectedIndex = 0;
+        }
+
         public static void FillWithYears(ComboBox cb)
         {
             int ystart = DateTime.Now.Year - 5;

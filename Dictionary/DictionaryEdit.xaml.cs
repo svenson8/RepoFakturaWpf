@@ -26,16 +26,27 @@ namespace FakturaWpf.Dictionary
         public DictionaryEdit(int id=0, string slowkind = null)
         {
             InitializeComponent();
+            Various.FillPayForms(CB_PayF.comboBox);
 
             mydict = new DictionaryClass(id, slowkind);
-            TX_symbol.Visibility =  ((slowkind == DictionaryClass.slRodzCountry) || (slowkind == DictionaryClass.slRodzDokDef))
-                                    ? Visibility.Visible:  Visibility.Hidden;
+            if ((slowkind != DictionaryClass.slRodzCountry) && (slowkind != DictionaryClass.slRodzDokDef))
+                GR_SLow.RowDefinitions[2].Height = new GridLength(0);
+
+            if (slowkind != DictionaryClass.slRodzDokDef)
+                GR_SLow.RowDefinitions[3].Height = new GridLength(0);
+            else
+            {
+                if ((mydict.SLKOMUN3 != null) && (mydict.SLKOMUN3.Equals("G")))
+                    CB_PayF.comboBox.SelectedIndex = 1;
+            }
+
             InitBinding();
+
         }
 
         private void InitBinding()
         {
-            SP_SLow.DataContext = mydict;
+            GR_SLow.DataContext = mydict;
         }
 
         public void Close(object sender, RoutedEventArgs e)
@@ -55,6 +66,15 @@ namespace FakturaWpf.Dictionary
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
+            if (mydict.SLRODZ == DictionaryClass.slRodzDokDef)
+            {
+                if (CB_PayF.comboBox.SelectedIndex == 1)
+                    mydict.SLKOMUN3 = "G";
+                else
+                    mydict.SLKOMUN3 = "P";
+            }
+
+
             if (mydict.ThisSaveData())
             {
                 Various.InfoOk("Słownik zapisany", "Informacja");

@@ -86,7 +86,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_8(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzDokDef }, "Lista definicji dokumentów", "ImgDocuments", 450, 675);
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzDokDef }, "Lista definicji dokumentów", "ImgDocuments", 500, 675);
         }
     }
 }
