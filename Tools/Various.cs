@@ -66,30 +66,6 @@ namespace FakturaWpf
             }            
         }
 
-        public static List<object> GetPeriodList()
-        {
-            List<object> list = new List<object>();
-
-            list.Add(new { desc = "Dziś", field = "TD" });
-            list.Add(new { desc = "Wczoraj", field = "YD" });
-            list.Add(new { desc = "Ostanie N dni", field = "LND" });
-            list.Add(new { desc = "Bieżący tydzień", field = "TW" });
-            list.Add(new { desc = "Poprzedni tydzień", field = "LW" });
-            list.Add(new { desc = "Bieżący miesiąc", field = "TM" });
-            list.Add(new { desc = "Poprzedni miesiąc", field = "LM" });
-            list.Add(new { desc = "Ostatnie N miesięcy", field = "LNM" });
-            list.Add(new { desc = "Miesiąc", field = "M" });
-            list.Add(new { desc = "Od m-ca do m-ca", field = "FMTM" });
-            list.Add(new { desc = "Bieżący rok", field = "TY" });
-            list.Add(new { desc = "Poprzedni rok", field = "LY" });
-            list.Add(new { desc = "Rok", field = "Y" });
-            list.Add(new { desc = "Od roku do roku", field = "FYTY" });
-            list.Add(new { desc = "Okres", field = "PR" });
-
-            return list;
-
-        }
-
         public static void FillWithMonths(ComboBox cb)
         {
             cb.Items.Clear();
