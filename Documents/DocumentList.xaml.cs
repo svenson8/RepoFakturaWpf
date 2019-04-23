@@ -98,5 +98,10 @@ namespace FakturaWpf.Documents
         {
             var selecteds = ListData.Where(ps => ps.IsChecked);
         }
+
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            DataPanel.GetSqlDates("dat1");
+        }
     }
 }
