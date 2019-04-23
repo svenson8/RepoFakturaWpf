@@ -7,7 +7,7 @@
              xmlns:MyControls="clr-namespace:FakturaWpf.MyControls" x:Name="US_DocumentList" x:Class="FakturaWpf.Documents.DocumentList"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
-    <DockPanel>
+    <DockPanel LastChildFill="true">
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Top">
             <Border BorderBrush="Gray"  BorderThickness="1 1 1 0">
                 <DockPanel x:Name="UpperDock">
@@ -22,7 +22,7 @@
                     <TextBox x:Name="TB_days2" Height="23" TextWrapping="Wrap" Text="0" Width="60" TextAlignment="Right" PreviewTextInput="TB_days_PreviewTextInput" LostFocus="TB_days_LostFocus" Margin="0,-4,0,0"/>
                     <DatePicker Name="DT_from" Width="105" Margin="0,-2,0,0" Height="25"/>
                     <DatePicker Name="DT_to" Width="105" Margin="0,-2,0,0" Height="24"/>
-                    <MyControls:MyButton x:Name="Btn_Refresh" myText="F3 Odśwież"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}"  Height="40" />
+                    <MyControls:MyButton x:Name="Btn_Refresh" myText="F3 Odśwież"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}"  Height="40" myClick="Btn_Refresh_myClick" />
                 </DockPanel>
             </Border>
             <Border BorderBrush="Gray"  BorderThickness="1">
@@ -42,15 +42,26 @@
                     <ListBox x:Name="LB_Dok" Grid.Column="1" HorizontalAlignment="Left" Height="81" Margin="10,0,0,0" VerticalAlignment="Top" Width="228" Grid.RowSpan="2">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding desc}" Margin="0,-3,0,0"/>
+                                <CheckBox Content="{Binding desc}" IsChecked="{Binding IsChecked}" Margin="0,-3,0,0"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
             </Border>
-
-
         </StackPanel>
-
+        <DockPanel DockPanel.Dock="Bottom">
+            <MyControls:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}"  />
+            <MyControls:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" />
+            <MyControls:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" />
+            <MyControls:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
+        </DockPanel>
+        <MyControls:MyDataPanel x:Name="DataPanel" DockPanel.Dock="Bottom"/>
+        <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Nazwa" Width="200"/>
+                <DataGridTextColumn Binding="{Binding KLINIP}"  Header="NIP" Width="80"/>
+                <DataGridTextColumn Binding="{Binding KLIPESEL}"  Header="Pesel" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </DockPanel>
 </UserControl>

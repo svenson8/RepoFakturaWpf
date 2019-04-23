@@ -88,6 +88,9 @@
     <Compile Include="MyControls\MyCombobox.xaml.cs">
       <DependentUpon>MyCombobox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyControls\MyDataPanel.xaml.cs">
+      <DependentUpon>MyDataPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\IClassControl.cs" />
     <Compile Include="Tools\IMdiControl.cs" />
     <Compile Include="Tools\MdiControl.cs" />
@@ -154,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyControls\MyCombobox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyControls\MyDataPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,10 +1,7 @@
-﻿using FakturaWpf.Dictionary;
-using FakturaWpf.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,46 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FakturaWpf.Documents
+namespace FakturaWpf.MyControls
 {
-  /*  enum Operationa
-    {
-        none = 0, // brak operacji
-    addition, // dodawanie
-    subtraction, // odejmowanie
-    multiplication, // mnożenie
-    division, // dzielenie
-    result // wynik
-    }*/
     /// <summary>
-    /// Logika interakcji dla klasy UserControl1.xaml
+    /// Logika interakcji dla klasy MyDataPanel.xaml
     /// </summary>
-    public partial class DocumentList : UserControl, IMdiControl
+    public partial class MyDataPanel : UserControl
     {
-        private class ItemDok
-        {
-            public string desc { get; set; }
-            public int id { get; set; }
-            public bool IsChecked { get; set; }
+        public string res;
 
-            public ItemDok(string d, int i, bool v)
-            {
-                this.desc = d;
-                this.id = i;
-                this.IsChecked = v;
-            }
-        }
-
-        List<ItemDok> ListData;
-
-        public DocumentList()
+        public MyDataPanel()
         {
             InitializeComponent();
-            Prepare();
-        }
 
-        private void Prepare()
-        {
             CB_Period.comboBox.ItemsSource = Various.GetPeriodList();
             CB_Period.comboBox.DisplayMemberPath = "desc";
             CB_Period.comboBox.SelectedValuePath = "field";
@@ -66,22 +36,7 @@ namespace FakturaWpf.Documents
             Various.FillWithYears(CB_Year.comboBox);
             Various.FillWithYears(CB_Year2.comboBox);
 
-            InitDokDef();
-            
             ChangePeriodItem();
-        }
-
-        void InitDokDef()
-        {
-            ListData = new List<ItemDok>();
-            NQueryReader nq = new NQueryReader("select *, SLKOMUN2 +' '+SLKOMUN1 as concat from TSlownik " +
-                                               "where slrodz =" + Various.QuotedStr(DictionaryClass.slRodzDokDef));
-            while (nq.NReader.Read())
-                ListData.Add(new ItemDok((string)nq.NReader["concat"], (int)nq.NReader["ID"], false ));
-
-            LB_Dok.ItemsSource = ListData;
-
-
         }
 
         private void ChangeVisibility(DependencyObject parent, Visibility vis, Control[] exceptlist)
@@ -113,11 +68,11 @@ namespace FakturaWpf.Documents
                              Visibility.Hidden,
                              new Control[] { label, CB_Period, Btn_Refresh });
 
-            switch(CB_Period.comboBox.SelectedValue)
+            switch (CB_Period.comboBox.SelectedValue)
             {
                 case "LND":
                     L_days.Content = "Liczba dni:";
-                    L_days.Visibility  = Visibility.Visible;
+                    L_days.Visibility = Visibility.Visible;
                     TB_days.Visibility = Visibility.Visible;
                     break;
                 case "LNM":
@@ -134,7 +89,7 @@ namespace FakturaWpf.Documents
                 case "FMTM":
                     CB_Month2.Visibility = Visibility.Visible;
                     CB_Year2.Visibility = Visibility.Visible;
-                    goto case "M";                    
+                    goto case "M";
                 case "Y":
                     TB_days.Visibility = Visibility.Visible;
                     break;
@@ -153,42 +108,42 @@ namespace FakturaWpf.Documents
 
         }
 
-
-        public void Close(object sender, RoutedEventArgs e)
-        {
-            MdiControl.CloseMdi(typeof(DocumentList), TreeName());
-        }
-
-        public void OnRefresh(object obj = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string TreeName()
-        {
-            return "Lita dokum.";
-        }
-
-        private void TB_days_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
-        }
-
-        private void TB_days_LostFocus(object sender, RoutedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox.Text == "") textBox.Text = "0";
-        }
-
         private void CB_Period_mySelect(object sender, SelectionChangedEventArgs e)
         {
             ChangePeriodItem();
         }
 
+        public static readonly RoutedEvent ClickEvent =
+            EventManager.RegisterRoutedEvent("myClickDate", RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler), typeof(MyDataPanel));
+
+        public event RoutedEventHandler myClickDate
+        {
+            add { AddHandler(ClickEvent, value); }
+            remove { RemoveHandler(ClickEvent, value); }
+        }
+
         private void Btn_Refresh_myClick(object sender, RoutedEventArgs e)
         {
-            var selecteds = ListData.Where(ps => ps.IsChecked);
+            RaiseEvent(new RoutedEventArgs(ClickEvent));
         }
+
+
+
+        /*
+                public static readonly RoutedEvent ClickEvent =
+                    EventManager.RegisterRoutedEvent("myClick", RoutingStrategy.Bubble,
+                    typeof(RoutedEventHandler), typeof(MyButton));
+
+                public event RoutedEventHandler myClick
+                {
+                    add { AddHandler(ClickEvent, value); }
+                    remove { RemoveHandler(ClickEvent, value); }
+                }
+
+                private void Button_Click(object sender, RoutedEventArgs e)
+                {
+                    RaiseEvent(new RoutedEventArgs(ClickEvent));
+                } */
     }
 }
