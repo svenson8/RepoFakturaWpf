@@ -52,10 +52,10 @@
                            VerticalAlignment="Bottom"></Label>
 
                     <my:MyButton Grid.Row="8" Grid.Column="0" myText="F5 Zapisz" HorizontalAlignment="Left" 
-                                 myImageSource="{StaticResource ImgSave}" myClick="button_Click" />
+                                 myImageSource="{StaticResource ImgSave}" myClick="button_Click" myHeight="25"/>
 
                     <my:MyButton Grid.Row="8" Grid.Column="0" myText="Esc Anuluj" HorizontalAlignment="Right" 
-                                 Margin="440,0,2,0" myImageSource="{StaticResource ImgCancel}" myClick="button2_Click"/>                    
+                                 Margin="440,0,2,0" myImageSource="{StaticResource ImgCancel}" myClick="button2_Click" myHeight="25"/>                    
 
                 </Grid>
             </TabItem>

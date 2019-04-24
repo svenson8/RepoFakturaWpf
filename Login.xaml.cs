@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FakturaWpf.Properties;
+using FakturaWpf.Documents;
 
 namespace FakturaWpf
 {
@@ -62,7 +63,9 @@ namespace FakturaWpf
             result = sc.AddCountryPorcedure();    // dodanie procedury wpisujacej kraje z pliku (bulkowanie) 
             result = dc.InsertCountriesFromProc();  // wykonanie skryptu wczytujacego kraje z xml w bazie
 
-
+            DocumentClass ds = new DocumentClass();
+            result = ds.ThisTableCheck();
+            result = sc.Triggers(ds.TableName());
 
             return result;
         }

@@ -25,7 +25,7 @@
                     </Grid.RowDefinitions>
                     <CheckBox x:Name="checkBox" Content="Aktywne" HorizontalAlignment="Left" Margin="22,20,0,0" VerticalAlignment="Top" IsChecked="True" Height="15" Width="65"/>
                     <CheckBox x:Name="checkBox1" Content="Archiwalne" HorizontalAlignment="Left" Margin="22,5,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="78"/>
-                    <CheckBox x:Name="checkBox2" Content="Tylko VAT marża" Grid.Column="1" HorizontalAlignment="Left" Margin="552,20,0,0" VerticalAlignment="Top" Height="15" Width="114"/>
+                    <CheckBox x:Name="checkBox2" Content="Tylko VAT marża" Grid.Column="1" HorizontalAlignment="Left" Margin="265,20,0,0" VerticalAlignment="Top" Height="15" Width="114"/>
                     <ListBox x:Name="LB_Dok" Grid.Column="1" HorizontalAlignment="Left" Height="81" Margin="10,0,0,0" VerticalAlignment="Top" Width="228" Grid.RowSpan="2">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -34,11 +34,14 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <MyControls:MyButton myText="F3 Odśwież" Margin="0,5,10,4"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}" Grid.Column="2" Grid.Row="1" myClick="MyButton_myClick" />
+                    <CheckBox x:Name="Ch_dewizy" Content="PLN+dewizy" Grid.Column="1" HorizontalAlignment="Left" Margin="265,8,0,0" VerticalAlignment="Top" Height="15" Width="114" Grid.Row="1"/>
+                    <CheckBox x:Name="Ch_wgdok" Content="pokaż kolumnę Wg dokumentu" Grid.Column="1" HorizontalAlignment="Left" Margin="410,20,0,0" VerticalAlignment="Top" Height="15" Width="189"/>
+                    <CheckBox x:Name="Ch_zam" Content="pokaż kolumnę Zamówienie" Grid.Column="1" HorizontalAlignment="Left" Margin="410,8,0,0" VerticalAlignment="Top" Height="15" Width="173" Grid.Row="1"/>
                 </Grid>
             </Border>
         </StackPanel>
         <DockPanel DockPanel.Dock="Bottom">
-            <MyControls:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}"  />
+            <MyControls:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick"  />
             <MyControls:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" />
             <MyControls:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" />
             <MyControls:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>

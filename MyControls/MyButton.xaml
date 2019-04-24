@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" Name="UC_Button" >
-    <Button Click="Button_Click" Style="{StaticResource MyButtonStyle}" >
+    <Button Click="Button_Click" Style="{StaticResource MyButtonStyle}" Height="{Binding ElementName=UC_Button, Path=myHeight}">
         <StackPanel Orientation="Horizontal">
             <Image Source="{Binding ElementName=UC_Button, Path=myImageSource}" 
                    Width="{Binding ElementName=UC_Button, Path=myImageWidth}" Height="{Binding ElementName=UC_Button, Path=myImageHeight}"/>

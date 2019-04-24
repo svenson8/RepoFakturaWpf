@@ -103,5 +103,12 @@ namespace FakturaWpf.Documents
         {
             DataPanel.GetSqlDates("dat1");
         }
+
+        private void btIns_myClick(object sender, RoutedEventArgs e)
+        {
+            var id  = 0;
+
+            MdiControl.AddChild(typeof(DocumentEdit), new object[] { id }, "Nowy dokument", "ImgFakt", 600, 930, TreeName());
+        }
     }
 }

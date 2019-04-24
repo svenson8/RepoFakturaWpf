@@ -25,8 +25,8 @@
             <my:MyCombobox Grid.Row="3" x:Name="CB_PayF"  HorizontalAlignment="Left" Margin="110,3,0,0" VerticalAlignment="Top" myComboWidth="190" />
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-            <my:MyButton VerticalAlignment="Bottom" x:Name="btIns" myText="Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myClick="btIns_myClick" />
-            <my:MyButton VerticalAlignment="Bottom" DockPanel.Dock="Bottom" myText="ESC Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick"/>
+            <my:MyButton VerticalAlignment="Bottom" x:Name="btIns" myText="Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myClick="btIns_myClick" myHeight="25"/>
+            <my:MyButton VerticalAlignment="Bottom" DockPanel.Dock="Bottom" myText="ESC Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick" myHeight="25"/>
         </Grid>
     </DockPanel>
 </UserControl>

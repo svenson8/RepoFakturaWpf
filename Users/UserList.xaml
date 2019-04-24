@@ -43,10 +43,10 @@
 
 
           <DockPanel VerticalAlignment="Bottom" Margin="0,300,0,0">
-            <my:MyButton x:Name="btIns" myText="Ins Dodaj" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" />
-            <my:MyButton x:Name="btnMod" myText="F6 Zmień" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}"/>
-            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick"/>
-            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
+            <my:MyButton x:Name="btIns" myText="Ins Dodaj" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myHeight="25" />
+            <my:MyButton x:Name="btnMod" myText="F6 Zmień" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="25"/>
+            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick" myHeight="25"/>
+            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="25"/>
         </DockPanel> 
     </Grid>
 </UserControl>

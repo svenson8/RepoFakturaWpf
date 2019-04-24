@@ -68,28 +68,39 @@ namespace FakturaWpf.MyControls
 
         }
 
-/*
-        public static readonly DependencyProperty ButtonWidthProperty =
-            DependencyProperty.Register("myButtonWidth", typeof(int),
-            typeof(MyButton), new FrameworkPropertyMetadata(130));
-
-        public int myButtonWidth
-        {
-            get { return Convert.ToInt32(GetValue(ButtonWidthProperty)); }
-            set { SetValue(ButtonWidthProperty, value); }
-
-        } 
-
         public static readonly DependencyProperty ButtonHeightProperty =
-            DependencyProperty.Register("myButtonHeight", typeof(int),
-            typeof(MyButton), new FrameworkPropertyMetadata(30));
+            DependencyProperty.Register("myHeight", typeof(int),
+            typeof(MyButton), new FrameworkPropertyMetadata(24));
 
-        public int myButtonHeight
+        public int myHeight
         {
-            get { return Convert.ToInt32(GetValue(ButtonHeightProperty)); }
-            set { SetValue(ButtonHeightProperty, value); }
+            get { return Convert.ToInt32(GetValue(ImageHeightProperty)); }
+            set { SetValue(ImageHeightProperty, value); }
 
-        } */
+        }
+
+        /*
+                public static readonly DependencyProperty ButtonWidthProperty =
+                    DependencyProperty.Register("myButtonWidth", typeof(int),
+                    typeof(MyButton), new FrameworkPropertyMetadata(130));
+
+                public int myButtonWidth
+                {
+                    get { return Convert.ToInt32(GetValue(ButtonWidthProperty)); }
+                    set { SetValue(ButtonWidthProperty, value); }
+
+                } 
+
+                public static readonly DependencyProperty ButtonHeightProperty =
+                    DependencyProperty.Register("myButtonHeight", typeof(int),
+                    typeof(MyButton), new FrameworkPropertyMetadata(30));
+
+                public int myButtonHeight
+                {
+                    get { return Convert.ToInt32(GetValue(ButtonHeightProperty)); }
+                    set { SetValue(ButtonHeightProperty, value); }
+
+                } */
 
 
         public static readonly RoutedEvent ClickEvent =

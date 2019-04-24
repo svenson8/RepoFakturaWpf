@@ -33,7 +33,7 @@
         <Label x:Name="label" Content="NIP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Width="29" />
         <TextBox x:Name="TX_Nip" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="0" Margin="0,6,0,5" Text="{Binding KLINIP}"/>
         <my:MyButton x:Name="btn_Gus" Grid.Column="2" Grid.Row="0" myText="Dane z Gus" HorizontalAlignment="Left" myClick="Btn_Gus_myClick"
-                     myImageSource="{StaticResource ImgWebsearch}" />
+                     myImageSource="{StaticResource ImgWebsearch}" myHeight="23" />
         <Label x:Name="label1" Content="Regon" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Width="44" />
         <TextBox x:Name="TX_Regon" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="1" Margin="0,6,0,5" Text="{Binding KLIREGON}" />
         <Label x:Name="label2" Content="Nazwa" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Width="45" />
@@ -71,10 +71,10 @@
         <TextBox x:Name="TX_Email" HorizontalAlignment="Left" Width="220" Grid.Column="1" Grid.Row="13" Margin="0,6,0,5" Text="{Binding KLIMAIL}"/>
 
         <my:MyButton Grid.Row="14" Grid.Column="0" myText="F5 Zapisz" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                                 myImageSource="{StaticResource ImgSave}" myClick="MyButton_myClick" />
+                                 myImageSource="{StaticResource ImgSave}" myClick="MyButton_myClick" myHeight="25"/>
 
         <my:MyButton Grid.Row="14" Grid.Column="2" myText="Esc Anuluj" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                  myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick_1"/>
+                                  myImageSource="{StaticResource ImgCancel}" myClick="MyButton_myClick_1" myHeight="25"/>
 
     </Grid>
 </UserControl>

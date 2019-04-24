@@ -79,6 +79,10 @@
     <Compile Include="Dictionary\DictionaryList.xaml.cs">
       <DependentUpon>DictionaryList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Documents\DocumentClass.cs" />
+    <Compile Include="Documents\DocumentEdit.xaml.cs">
+      <DependentUpon>DocumentEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Documents\DocumentList.xaml.cs">
       <DependentUpon>DocumentList.xaml</DependentUpon>
     </Compile>
@@ -129,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dictionary\DictionaryList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Documents\DocumentEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

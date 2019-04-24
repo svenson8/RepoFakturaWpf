@@ -132,54 +132,81 @@ namespace FakturaWpf.MyControls
 
         public string GetSqlDates(string field)
         {
-            switch (CB_Period.comboBox.SelectedValue)
+            try
             {
-                case "TD":
-                    dateFrom = DateTime.Now;
-                    dateTo = DateTime.Now;
-                    break;
-                case "YD":
-                    dateFrom = DateTime.Now.AddDays(-1);
-                    dateTo = DateTime.Now.AddDays(-1);
-                    break;
-                case "LND":
-                    dateFrom = DateTime.Now.AddDays(-Convert.ToDouble(TB_days.Text));
-                    dateTo = DateTime.Now;
-                    break;
-                case "TW":
-                    dateFrom = DateTime.Now.AddDays(DayOfWeek.Monday - DateTime.Now.DayOfWeek);
-                    dateTo = dateFrom.AddDays(6);
-                    break;
-                case "LW":
-                    dateFrom = DateTime.Now.AddDays(DayOfWeek.Monday - DateTime.Now.DayOfWeek -1);
-                    dateTo = dateFrom.AddDays(-6);
-                    break;
-                case "TM":
-                    dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                    dateTo = dateFrom.AddMonths(1).AddDays(-1);
-                    break;
-                case "LM":
-                    dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month-1, 1);
-                    dateTo = dateFrom.AddMonths(1).AddDays(-1);
-                    break;
-                case "LNM":
-                    dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month - Convert.ToInt32(TB_days.Text), 1);
-                    dateTo = dateFrom.AddMonths(1).AddDays(-1);
-                    break;
-                case "M":
-                    dateFrom = new DateTime(Convert.ToInt32(CB_Year.comboBox.Text), CB_Month.comboBox.SelectedIndex +1, 1);
-                    dateTo = dateFrom.AddMonths(1).AddDays(-1);
-                    break;
-                case "FMTM":
-                    dateFrom = new DateTime(Convert.ToInt32(CB_Year.comboBox.Text), CB_Month.comboBox.SelectedIndex + 1, 1);
-                    dateTo = new DateTime(Convert.ToInt32(CB_Year2.comboBox.Text), CB_Month2.comboBox.SelectedIndex + 1, 1).AddMonths(1).AddDays(-1);
-                    break;
-                case "TY":
-                    dateFrom = new DateTime(DateTime.Now.Year, 1, 1);
-                    dateTo = dateFrom.AddMonths(12).AddDays(-1);
-                    break;
+                switch (CB_Period.comboBox.SelectedValue)
+                {
+                    case "TD":
+                        dateFrom = DateTime.Now;
+                        dateTo = DateTime.Now;
+                        break;
+                    case "YD":
+                        dateFrom = DateTime.Now.AddDays(-1);
+                        dateTo = DateTime.Now.AddDays(-1);
+                        break;
+                    case "LND":
+                        dateFrom = DateTime.Now.AddDays(-Convert.ToDouble(TB_days.Text));
+                        dateTo = DateTime.Now;
+                        break;
+                    case "TW":
+                        dateFrom = DateTime.Now.AddDays(DayOfWeek.Monday - DateTime.Now.DayOfWeek);
+                        dateTo = dateFrom.AddDays(6);
+                        break;
+                    case "LW":
+                        dateFrom = DateTime.Now.AddDays(DayOfWeek.Monday - DateTime.Now.DayOfWeek - 1);
+                        dateTo = dateFrom.AddDays(-6);
+                        break;
+                    case "TM":
+                        dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                        dateTo = dateFrom.AddMonths(1).AddDays(-1);
+                        break;
+                    case "LM":
+                        dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
+                        dateTo = dateFrom.AddMonths(1).AddDays(-1);
+                        break;
+                    case "LNM":
+                        dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month - Convert.ToInt32(TB_days.Text), 1);
+                        dateTo = dateFrom.AddMonths(1).AddDays(-1);
+                        break;
+                    case "M":
+                        dateFrom = new DateTime(Convert.ToInt32(CB_Year.comboBox.Text), CB_Month.comboBox.SelectedIndex + 1, 1);
+                        dateTo = dateFrom.AddMonths(1).AddDays(-1);
+                        break;
+                    case "FMTM":
+                        dateFrom = new DateTime(Convert.ToInt32(CB_Year.comboBox.Text), CB_Month.comboBox.SelectedIndex + 1, 1);
+                        dateTo = new DateTime(Convert.ToInt32(CB_Year2.comboBox.Text), CB_Month2.comboBox.SelectedIndex + 1, 1).AddMonths(1).AddDays(-1);
+                        break;
+                    case "TY":
+                        dateFrom = new DateTime(DateTime.Now.Year, 1, 1);
+                        dateTo = dateFrom.AddMonths(12).AddDays(-1);
+                        break;
+                    case "LY":
+                        dateFrom = new DateTime(DateTime.Now.Year - 1, 1, 1);
+                        dateTo = dateFrom.AddMonths(12).AddDays(-1);
+                        break;
+                    case "Y":
+                        dateFrom = new DateTime(Convert.ToInt32(TB_days.Text), 1, 1);
+                        dateTo = dateFrom.AddMonths(12).AddDays(-1);
+                        break;
+                    case "FYTY":
+                        dateFrom = new DateTime(Convert.ToInt32(TB_days.Text), 1, 1);
+                        dateTo = new DateTime(Convert.ToInt32(TB_days2.Text), 1, 1).AddMonths(12).AddDays(-1);
+                        break;
+                    case "PR":
+                        dateFrom = DT_from.SelectedDate.Value;
+                        dateTo = DT_to.SelectedDate.Value;
+                        break;
+                }
 
             }
+            catch
+            {
+                dateFrom = DateTime.MinValue;
+                dateTo = DateTime.MinValue;
+                return null;
+            }
+
+
 
             return " " + field + " >=" + Various.QuotedStr(dateFrom.ToShortDateString()) +
                    " and " + field + " <=" + Various.QuotedStr(dateTo.ToShortDateString());
