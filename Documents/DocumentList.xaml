@@ -41,10 +41,10 @@
             </Border>
         </StackPanel>
         <DockPanel DockPanel.Dock="Bottom">
-            <MyControls:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick"  />
-            <MyControls:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" />
-            <MyControls:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" />
-            <MyControls:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}"/>
+            <MyControls:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick" myHeight="24" />
+            <MyControls:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="24" />
+            <MyControls:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myHeight="24" />
+            <MyControls:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
         </DockPanel>
 
         <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >

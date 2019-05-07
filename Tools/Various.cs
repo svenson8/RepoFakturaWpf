@@ -13,6 +13,7 @@ using WPF.MDI;
 using System.Windows.Media.Imaging;
 using FakturaWpf.Tools;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace FakturaWpf
 {
@@ -149,9 +150,22 @@ namespace FakturaWpf
             return FinalString;
         }
 
-    
+        public static void SetTodayDates(DependencyObject parent)
+        {
+            for (int x = 0; x < VisualTreeHelper.GetChildrenCount(parent); x++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, x);
+                var instance = child as Control;
 
-      }
+                if (null != instance)
+                {
+                    if (instance is DatePicker)
+                        ((DatePicker)instance).SelectedDate = DateTime.Now;
+                }
+            }
+        }
+
+    }
 
     public class YesNoToBooleanConverter : IValueConverter
     {

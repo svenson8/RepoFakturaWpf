@@ -69,6 +69,8 @@ namespace FakturaWpf.Documents
             while (nq.NReader.Read())
                 ListData.Add(new ItemDok((string)nq.NReader["concat"], (int)nq.NReader["ID"], false ));
 
+            nq.NReader.Close();
+
             LB_Dok.ItemsSource = ListData;
 
 

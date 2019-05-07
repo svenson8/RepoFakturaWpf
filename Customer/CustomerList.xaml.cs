@@ -27,6 +27,7 @@ namespace FakturaWpf.Customer
     {
 
         private List<CustomerClass> listU = null;
+        private Boolean choice;
 
         public CustomerList()
         {
@@ -41,6 +42,7 @@ namespace FakturaWpf.Customer
             Various.FillWithFiltrItems(CB_Choice.comboBox, 8);
             CB_Choice.comboBox.SelectedIndex = 0;
 
+            //btCho.Visibility = Visibility.Collapsed;
             LoadData();
         }
 
