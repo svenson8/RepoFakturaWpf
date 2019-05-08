@@ -44,6 +44,12 @@
                         <Image Source="{StaticResource ImgDocuments}"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="_Sposoby płatności" Click="MenuItem_Click_9" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgPay}"/>
+                    </MenuItem.Icon>
+                </MenuItem>                
+                
             </MenuItem>
             <MenuItem Header="Administracja">
                 <MenuItem Header="_Użytkownicy" Click="MenuItem_Click_1">

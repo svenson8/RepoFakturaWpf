@@ -35,6 +35,23 @@ namespace FakturaWpf.Documents
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
 
+        public DocumentClass(int id = 0)
+        {
+            this.ID = id;
+            if (this.ID > 0)
+                ThisReadData();
+            else
+            {
+                this.DATAW = DateTime.Now;
+                this.DMODDATE = DateTime.Now;
+                this.MDTERMINDAT = DateTime.Now;
+                this.MDDATAWYST = DateTime.Now;
+                this.MDDATASPRZ = DateTime.Now;
+                this.MDWYSTAWWGDAT = DateTime.Now;
+                this.MDZAMDAT = DateTime.Now;               
+            }
+        }
+
         public int GetLengthOfStringField(string name)
         {
             switch (name)
@@ -59,7 +76,7 @@ namespace FakturaWpf.Documents
 
         public void ThisReadData()
         {
-            throw new NotImplementedException();
+            ReadData(this, TableName(), this.ID);
         }
 
         public List<object> ThisReadListData()
@@ -69,7 +86,8 @@ namespace FakturaWpf.Documents
 
         public bool ThisSaveData()
         {
-            throw new NotImplementedException();
+            this.ID = SaveData(this.ID, TableName(), typeof(DocumentClass), this);
+            return (this.ID > 0);
         }
 
         public bool ThisTableCheck()

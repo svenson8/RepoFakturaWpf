@@ -16,28 +16,28 @@
             <Label x:Name="label" Content="Rodzaj dok." HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
             <my:MyCombobox x:Name="CB_Docs" myComboWidth="150" HorizontalAlignment="Left" Margin="10,23,0,92" Width="154" />
             <Label x:Name="label2" Content="Data wystawienia" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="101"/>
-            <DatePicker Width="105" Margin="8,21,0,92" HorizontalAlignment="Left" Grid.Column="1"/>
+            <DatePicker Width="105" Margin="8,21,0,92" HorizontalAlignment="Left" Grid.Column="1" SelectedDate="{Binding MDDATAWYST}" />
             <my:MyCombobox x:Name="CB_SellKind" myComboWidth="210" HorizontalAlignment="Left" Margin="123,23,0,92" Grid.Column="1" Width="214" />
-            <DatePicker Width="105" Margin="342,21,0,92" Grid.Column="1" HorizontalAlignment="Left"/>
+            <DatePicker Width="105" Margin="342,21,0,92" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding MDDATASPRZ}" />
             <Button Content="F2 Kontrahent" Margin="10,52,0,65" HorizontalAlignment="Left" Width="83" Click="Button_Click"/>
             <Label x:Name="label3" Content="NIP:" HorizontalAlignment="Left" Margin="98,50,0,0" VerticalAlignment="Top" Height="26" Width="31"/>
             <TextBox x:Name="TB_Nip" HorizontalAlignment="Left" Height="23" Margin="134,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="TB_Nip_Copy" HorizontalAlignment="Left" Height="23" Margin="263,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="557" Grid.ColumnSpan="2"/>
-            <Button Content="Czyść" Margin="433,54,0,64" Grid.Column="1" HorizontalAlignment="Left" Width="46"/>
+            <TextBox x:Name="TB_Name" HorizontalAlignment="Left" Height="23" Margin="263,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="557" Grid.ColumnSpan="2"/>
+            <Button Content="Czyść" Margin="433,54,0,64" Grid.Column="1" HorizontalAlignment="Left" Width="46" Click="Button_Click_1"/>
             <Label x:Name="label4" Content="Wystaw wg" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
-            <TextBox x:Name="TB_Nip_Copy1" HorizontalAlignment="Left" Height="23" Margin="85,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201"/>
+            <TextBox x:Name="TB_Set" HorizontalAlignment="Left" Height="23" Margin="85,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" Text="{Binding MDWYSTAWWG}" />
             <Label x:Name="label5" Content="z dnia" HorizontalAlignment="Left" Margin="287,80,0,0" VerticalAlignment="Top" Height="26" Width="42"/>
-            <DatePicker Width="105" Margin="329,80,0,36" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+            <DatePicker Width="105" Margin="329,80,0,36" HorizontalAlignment="Left" Grid.ColumnSpan="2" SelectedDate="{Binding MDWYSTAWWGDAT}" />
             <Label x:Name="label4_Copy" Content="Zamówienie" HorizontalAlignment="Left" Margin="69,80,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="74"/>
-            <TextBox x:Name="TB_Nip_Copy2" HorizontalAlignment="Left" Height="23" Margin="144,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207" Grid.Column="1"/>
+            <TextBox x:Name="TB_Nip_Copy2" HorizontalAlignment="Left" Height="23" Margin="144,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207" Grid.Column="1" Text="{Binding MDZAM}" />
             <Label x:Name="label5_Copy" Content="z dnia" HorizontalAlignment="Left" Margin="351,81,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="42"/>
-            <DatePicker Width="105" Margin="393,81,0,35" HorizontalAlignment="Left" Grid.Column="1"/>
+            <DatePicker Width="105" Margin="393,81,0,35" HorizontalAlignment="Left" Grid.Column="1" SelectedDate="{Binding MDZAMDAT}" />
             <Label x:Name="label4_Copy1" Content="Transakcja" HorizontalAlignment="Left" Margin="11,104,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
             <my:MyCombobox x:Name="CB_Trans" myComboWidth="350" HorizontalAlignment="Left" Margin="85,108,0,7" Width="354" Grid.ColumnSpan="2" />
         </Grid>
 
         <DockPanel DockPanel.Dock="Bottom">
-            <my:MyButton x:Name="btSave" myText="F5 Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myHeight="24"  />
+            <my:MyButton x:Name="btSave" myText="F5 Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myHeight="24" myClick="btSave_myClick"  />
             <my:MyButton myText="Esc Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
         </DockPanel>
 
@@ -50,24 +50,39 @@
                             <Label x:Name="label4_Copy2" Content="Płatność" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <my:MyCombobox x:Name="CB_Payment" myComboWidth="180" HorizontalAlignment="Left" Margin="0,0,0,4" />
                             <Label x:Name="label4_Copy3" Content="Termin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"/>
-                            <TextBox x:Name="TB_term" Margin="10,0,0,4" Text="0" HorizontalAlignment="Left" TextAlignment="Right" Width="59" />
+                            <TextBox x:Name="TB_term" Margin="10,0,0,4"  HorizontalAlignment="Left" TextAlignment="Right" Width="59" Text="{Binding MDTERMIN}" />
                             <Label Content="Do dnia" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <DatePicker x:Name="DT_TerminDat" Width="105"  HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                            <DatePicker x:Name="DT_TerminDat" Width="105"  HorizontalAlignment="Left" Margin="0,0,0,4" SelectedDate="{Binding MDTERMINDAT}" />
                         </DockPanel>
                         <DockPanel Height="Auto">
                             <Label x:Name="label4_Copy2x" Content="Gotówka" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <TextBox x:Name="TB_got" Margin="0,0,0,4" Text="0,00" HorizontalAlignment="Left" TextAlignment="Right" Width="90" />
+                            <TextBox x:Name="TB_got" Margin="0,0,0,4"  HorizontalAlignment="Left" TextAlignment="Right" Width="90" Text="{Binding MDGOTOW, StringFormat={}{0:#,#0.00} }" />
                             <Label x:Name="label4_Copy3x" Content="Wpłacający" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Top"/>
-                            <TextBox x:Name="TB_wplac" Margin="0,0,0,4"  HorizontalAlignment="Left" TextAlignment="Right" Width="200" />
+                            <TextBox x:Name="TB_wplac" Margin="0,0,0,4"  HorizontalAlignment="Left"  Width="200" Text="{Binding MDWPLACAJACY}" />
                         </DockPanel>
                         <DockPanel Height="Auto">
                             <Label x:Name="label4_Copy2xx" Content="Tytuł" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <TextBox x:Name="TB_title" Margin="20,0,0,4" HorizontalAlignment="Left" TextAlignment="Right" Width="370" Height="45" />
+                            <TextBox x:Name="TB_title" Margin="20,0,0,4" HorizontalAlignment="Left" Width="370" Height="45" Text="{Binding MDWPLACAJACY}" />
                         </DockPanel>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Uwagi" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="14*"/>
+                            <RowDefinition Height="37*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="463*"/>
+                            <ColumnDefinition Width="431*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="labelu" Grid.Row="0" Grid.Column="0" Content="Uwagi" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Top"/>
+                        <Label x:Name="labelod" Grid.Row="0" Grid.Column="1" Content="Odebrał" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Top"/>
+                        <TextBox x:Name="TB_odebr" Grid.Row="0" Grid.Column="1" Margin="70,0,0,4"  HorizontalAlignment="Left"  Width="200" Text="{Binding MDODEBRAL}" />
+                        <TextBox x:Name="TB_Warning" Grid.Row="1" HorizontalAlignment="Left" Width="884" Margin="0,3,0,14" Grid.ColumnSpan="2" Text="{Binding MDUWAGI}" />
+                    </Grid>
                 </TabItem>
+
 
             </TabControl>
         </Grid>

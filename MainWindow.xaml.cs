@@ -66,7 +66,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(CustomerList), null, "Lista kontrahentów", "ImgCustomers", 450, 700);
+            MdiControl.AddChild(typeof(CustomerList), new object[] { false }, "Lista kontrahentów", "ImgCustomers", 450, 700);
         }
 
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
@@ -87,6 +87,11 @@ namespace FakturaWpf
         private void MenuItem_Click_8(object sender, RoutedEventArgs e)
         {
             MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzDokDef }, "Lista definicji dokumentów", "ImgDocuments", 500, 675);
+        }
+
+        private void MenuItem_Click_9(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzPay }, "Lista sposobów płątności", "ImgPay", 500, 675);
         }
     }
 }

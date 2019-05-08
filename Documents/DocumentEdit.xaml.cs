@@ -23,19 +23,42 @@ namespace FakturaWpf.Documents
     /// </summary>
     public partial class DocumentEdit : UserControl, IMdiControl
     {
+        DocumentClass document; 
+
         public DocumentEdit(int id)
         {
             InitializeComponent();
+
+            document = new DocumentClass(id);
+
             InitBinding();
 
         }
 
         void InitBinding()
         {
+            DP_Main.DataContext = document;
             InitCbDoks();
             InitCbSellKind();
             InitCbTransaction();
+            InitCbPayment();
+            SetCustomer((document.ID > 0 ? new CustomerClass(document.MDKLIID) : null));
             Various.SetTodayDates(GR_up);
+        }
+
+        private void InitCbPayment()
+        {
+            List<DictionaryClass> ListData = new List<DictionaryClass>();
+            ListData = new DictionaryClass(0, DictionaryClass.slRodzPay).ThisReadListData().OfType<DictionaryClass>().ToList();
+
+            CB_Payment.comboBox.ItemsSource = ListData;
+            CB_Payment.comboBox.DisplayMemberPath = "SLKOMUN1";
+            CB_Payment.comboBox.SelectedValuePath = "ID";
+
+            if (document.ID > 0)
+                CB_Payment.comboBox.SelectedValue = document.MDRODZPLATID;
+            else
+                CB_Payment.comboBox.SelectedIndex = 0;
         }
 
         private void InitCbTransaction()
@@ -48,7 +71,10 @@ namespace FakturaWpf.Documents
             CB_Trans.comboBox.Items.Add("Odwrotne obciążenie w krajowej sprzedaży towarów");
             CB_Trans.comboBox.Items.Add("Odwrotne obciążenie, sprzedaż usług podwykonawców budowlanych");
 
-            CB_Trans.comboBox.SelectedIndex = 0;
+            if (document.ID > 0)
+                CB_Trans.comboBox.SelectedIndex = document.MDRODZTRANS;
+            else
+                CB_Trans.comboBox.SelectedIndex = 0;
         }
 
         private void InitCbSellKind()
@@ -62,7 +88,10 @@ namespace FakturaWpf.Documents
             CB_SellKind.comboBox.Items.Add("Data zakończenia usługi");
             CB_SellKind.comboBox.Items.Add("Data otrzymania należności");
 
-            CB_SellKind.comboBox.SelectedIndex = 3;
+            if (document.ID > 0)
+                CB_SellKind.comboBox.SelectedIndex = document.MDDATASPRZRODZ;
+            else
+                CB_SellKind.comboBox.SelectedIndex = 3;
         }
 
         void InitCbDoks()
@@ -79,10 +108,18 @@ namespace FakturaWpf.Documents
             CB_Docs.comboBox.DisplayMemberPath = "Desc";
             CB_Docs.comboBox.SelectedValuePath = "Id"; 
 
-            /* if (customer.ID > 0)
-                 CB_Province.comboBox.SelectedValue = customer.KLIWOJID;
-             else*/
+             if (document.ID > 0)
+                 CB_Docs.comboBox.SelectedValue = document.MDDOKDEFID;
+             else
                  CB_Docs.comboBox.SelectedIndex = 0;  
+        }
+
+        void SetCustomer(CustomerClass cs = null)
+        {
+            TB_Nip.Text  = (cs != null ? cs.KLINIP : "");
+            TB_Name.Text = (cs != null ? cs.KLINAZ : "");
+
+            document.MDKLIID = (cs != null ? cs.ID : 0);
         }
 
 
@@ -93,7 +130,7 @@ namespace FakturaWpf.Documents
 
         public void OnRefresh(object obj = null)
         {
-            throw new NotImplementedException();
+            SetCustomer((CustomerClass)obj);
         }
 
         public string TreeName()
@@ -103,7 +140,37 @@ namespace FakturaWpf.Documents
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(CustomerList), null, "Lista kontrahentów", "ImgCustomers", 450, 700, TreeName());
+            MdiControl.AddChild(typeof(CustomerList), new object[] { true }, "Lista kontrahentów", "ImgCustomers", 450, 700, TreeName());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SetCustomer();
+        }
+
+        private void btSave_myClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                document.MDDOKDEFID     = (int)CB_Docs.comboBox.SelectedValue;
+                document.MDDATASPRZRODZ = CB_SellKind.comboBox.SelectedIndex;
+                document.MDRODZTRANS    = CB_Trans.comboBox.SelectedIndex;
+                document.MDRODZPLATID   = (int)CB_Payment.comboBox.SelectedValue;
+
+                if (document.ThisSaveData())
+                {
+                    Various.InfoOk("Dokument zapisany", "Informacja");
+                  //  MdiControl.RefreshMdi(typeof(DocumentList), document);
+                }
+                else
+                    Various.Warning("Błąd zapisu danych", "");
+
+                Close(sender, e);
+             }
+            catch (Exception ex)
+            {
+                Various.Error("Błąd "+nameof(DocumentEdit)+ " btSave_myClick:" + ex.Message, "Błąd");
+            }
         }
     }
 }

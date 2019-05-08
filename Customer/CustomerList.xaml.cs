@@ -1,4 +1,5 @@
-﻿using FakturaWpf.MyControls;
+﻿using FakturaWpf.Documents;
+using FakturaWpf.MyControls;
 using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,10 @@ namespace FakturaWpf.Customer
         private List<CustomerClass> listU = null;
         private Boolean choice;
 
-        public CustomerList()
+        public CustomerList(Boolean achoice = false)
         {
             InitializeComponent();
+            choice = achoice;
             Prepare();
             
         }
@@ -42,7 +44,9 @@ namespace FakturaWpf.Customer
             Various.FillWithFiltrItems(CB_Choice.comboBox, 8);
             CB_Choice.comboBox.SelectedIndex = 0;
 
-            //btCho.Visibility = Visibility.Collapsed;
+            if (!choice)
+              btCho.Visibility = Visibility.Collapsed;
+
             LoadData();
         }
 
@@ -208,6 +212,16 @@ namespace FakturaWpf.Customer
             {
                 MdiControl.AddChild(typeof(CustomerEdit), new object[] { id }, title, "ImgFakt", 600, 700, TreeName());
             }
+        }
+
+        private void btCho_myClick(object sender, RoutedEventArgs e)
+        {
+            CustomerClass customer = (CustomerClass)DG_Customer.SelectedItem;
+
+            if (customer != null)
+              MdiControl.RefreshMdi(typeof(DocumentEdit), customer);
+
+            Close(sender, e);
         }
     }
 

@@ -327,6 +327,7 @@
     <Resource Include="Resources\group.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\payment.png" />
     <Resource Include="Resources\earth.png" />
     <Resource Include="Resources\documents.png" />
     <Resource Include="Resources\check.png" />
