@@ -32,6 +32,7 @@ namespace FakturaWpf.Documents
         public string MDUWAGI { get; set; }
         public string MDODEBRAL { get; set; }
         public string MDSTATUS { get; set; }
+        public string MDNRDOK { get; set; }
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
 
@@ -65,6 +66,7 @@ namespace FakturaWpf.Documents
                 case nameof(MDUWAGI): return 1000;
                 case nameof(MDODEBRAL): return 100;
                 case nameof(MDSTATUS): return 1;
+                case nameof(MDNRDOK): return 60;
                 default: return 100;
             }
         }

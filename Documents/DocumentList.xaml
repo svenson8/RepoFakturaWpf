@@ -49,9 +49,14 @@
 
         <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Nazwa" Width="200"/>
-                <DataGridTextColumn Binding="{Binding KLINIP}"  Header="NIP" Width="80"/>
-                <DataGridTextColumn Binding="{Binding KLIPESEL}"  Header="Pesel" Width="80"/>
+                <DataGridTextColumn  Header="" Width="30"/>
+                <DataGridTextColumn Binding="{Binding MDSTATUS}"  Header="S" Width="30"/>
+                <DataGridTextColumn Binding="{Binding MDDATAWYST}"  Header="Data" Width="80"  HeaderStyle="{StaticResource CenterHeader}"/>
+                <DataGridTextColumn Binding="{Binding MDNRDOK}"  Header="Numer" Width="150"/>
+                <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Kontrahent" Width="350"/>
+                <DataGridTextColumn Binding="{Binding NETTO}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}"/>
+                <DataGridTextColumn Binding="{Binding VAT}"  Header="Vat" Width="100" HeaderStyle="{StaticResource RightHeader}"/>
+                <DataGridTextColumn Binding="{Binding BRUTTO}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
