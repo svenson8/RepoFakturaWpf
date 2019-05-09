@@ -64,7 +64,7 @@
                         </DockPanel>
                         <DockPanel Height="Auto">
                             <Label x:Name="label4_Copy2xx" Content="Tytuł" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <TextBox x:Name="TB_title" Margin="20,0,0,4" HorizontalAlignment="Left" Width="370" Height="45" Text="{Binding MDWPLACAJACY}" />
+                            <TextBox x:Name="TB_title" Margin="20,0,0,4" HorizontalAlignment="Left" Width="370" Height="45" Text="{Binding MDTYTUL}" />
                         </DockPanel>
                     </StackPanel>
                 </TabItem>

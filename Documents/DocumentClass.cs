@@ -83,7 +83,7 @@ namespace FakturaWpf.Documents
 
         public List<object> ThisReadListData()
         {
-            throw new NotImplementedException();
+            return ReadListData(this, TableName(), new object[] { 0 });
         }
 
         public bool ThisSaveData()

@@ -47,7 +47,7 @@
             <MyControls:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
         </DockPanel>
 
-        <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
+        <DataGrid x:Name="DG_DocList" Style="{StaticResource MyGridStyle}" >
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="" Width="30"/>
                 <DataGridTextColumn Binding="{Binding MDSTATUS}"  Header="S" Width="30"/>

@@ -201,7 +201,7 @@ namespace FakturaWpf
             if (type == typeof(DateTime))
                 return SqlDbType.DateTime;
 
-            if (type == typeof(double))
+            if (type == typeof(Decimal))
                 return SqlDbType.Decimal;
 
             if (type == typeof(XmlDocument))

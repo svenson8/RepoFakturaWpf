@@ -47,6 +47,7 @@ namespace FakturaWpf.Documents
         }
 
         List<ItemDok> ListData;
+        List<DocumentClass> listD = null;
 
         public DocumentList()
         {
@@ -58,7 +59,23 @@ namespace FakturaWpf.Documents
         {
 
             InitDokDef();
+            LoadData();
            
+        }
+
+        private void LoadData()
+        {
+            if (listD == null)
+            {
+                DocumentClass dl = new DocumentClass();
+                listD = dl.ThisReadListData().OfType<DocumentClass>().ToList();
+            }
+
+            List<DocumentClass> lpom = listD.Select(x => x).ToList();
+
+            DG_DocList.ItemsSource = lpom;
+            DG_DocList.SelectedIndex = 0;
+
         }
 
         void InitDokDef()
