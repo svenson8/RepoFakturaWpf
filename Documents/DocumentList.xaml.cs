@@ -94,7 +94,24 @@ namespace FakturaWpf.Documents
         }
 
 
+        private void EditPosition(Boolean mod)
+        {
+            DocumentClass document = (DocumentClass)DG_DocList.SelectedItem;
 
+            int id = 0;
+            var title = "Redagowanie danych ";
+
+            if (mod)
+            {
+                id = document.ID;
+                title += document.MDNRDOK;
+            }
+
+            if (id >= 0)
+            {
+                MdiControl.AddChild(typeof(DocumentEdit), new object[] { id }, title, "ImgFakt", 600, 930, TreeName());
+            }
+        }
 
 
         public void Close(object sender, RoutedEventArgs e)
@@ -125,9 +142,17 @@ namespace FakturaWpf.Documents
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
-            var id  = 0;
+            EditPosition(false);
+        }
 
-            MdiControl.AddChild(typeof(DocumentEdit), new object[] { id }, "Nowy dokument", "ImgFakt", 600, 930, TreeName());
+        private void btnMod_myClick(object sender, RoutedEventArgs e)
+        {
+            EditPosition(true);
+        }
+
+        private void DG_DocList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EditPosition(true);
         }
     }
 }

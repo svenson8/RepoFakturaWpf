@@ -27,6 +27,9 @@ namespace FakturaWpf.Documents
         public int MDTERMIN { get; set; }
         public DateTime MDTERMINDAT { get; set; }
         public Decimal MDGOTOW { get; set; }
+        public Decimal MDWARNET { get; set; }
+        public Decimal MDWARVAT { get; set; }
+        public Decimal MDWARBR { get; set; }
         public string MDWPLACAJACY { get; set; }
         public string MDTYTUL { get; set; }
         public string MDUWAGI { get; set; }
@@ -59,6 +62,9 @@ namespace FakturaWpf.Documents
             {
                 case nameof(ACTIVE): return 1;
                 case nameof(MDGOTOW): return 4;
+                case nameof(MDWARNET): return 4;
+                case nameof(MDWARVAT): return 4;
+                case nameof(MDWARBR): return 4;
                 case nameof(MDWYSTAWWG): return 100;
                 case nameof(MDZAM): return 100;
                 case nameof(MDWPLACAJACY): return 100;

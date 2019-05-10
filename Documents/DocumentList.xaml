@@ -33,7 +33,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <MyControls:MyButton myText="F3 Odśwież" Margin="0,5,10,4"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}" Grid.Column="2" Grid.Row="1" myClick="MyButton_myClick" />
+                    <MyControls:MyButton myText="F3 Odśwież" Margin="0,5,10,4"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}" Grid.Column="2" Grid.Row="1" myClick="MyButton_myClick" myHeight="25"/>
                     <CheckBox x:Name="Ch_dewizy" Content="PLN+dewizy" Grid.Column="1" HorizontalAlignment="Left" Margin="265,8,0,0" VerticalAlignment="Top" Height="15" Width="114" Grid.Row="1"/>
                     <CheckBox x:Name="Ch_wgdok" Content="pokaż kolumnę Wg dokumentu" Grid.Column="1" HorizontalAlignment="Left" Margin="410,20,0,0" VerticalAlignment="Top" Height="15" Width="189"/>
                     <CheckBox x:Name="Ch_zam" Content="pokaż kolumnę Zamówienie" Grid.Column="1" HorizontalAlignment="Left" Margin="410,8,0,0" VerticalAlignment="Top" Height="15" Width="173" Grid.Row="1"/>
@@ -42,16 +42,16 @@
         </StackPanel>
         <DockPanel DockPanel.Dock="Bottom">
             <MyControls:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick" myHeight="24" />
-            <MyControls:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="24" />
+            <MyControls:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="24" myClick="btnMod_myClick" />
             <MyControls:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myHeight="24" />
             <MyControls:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
         </DockPanel>
 
-        <DataGrid x:Name="DG_DocList" Style="{StaticResource MyGridStyle}" >
+        <DataGrid x:Name="DG_DocList" Style="{StaticResource MyGridStyle}" MouseDoubleClick="DG_DocList_MouseDoubleClick" >
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="" Width="30"/>
                 <DataGridTextColumn Binding="{Binding MDSTATUS}"  Header="S" Width="30"/>
-                <DataGridTextColumn Binding="{Binding MDDATAWYST}"  Header="Data" Width="80"  HeaderStyle="{StaticResource CenterHeader}"/>
+                <DataGridTextColumn Binding="{Binding MDDATAWYST ,StringFormat='dd-MM-yyyy'}"  Header="Data" Width="80"  HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}" />
                 <DataGridTextColumn Binding="{Binding MDNRDOK}"  Header="Numer" Width="150"/>
                 <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Kontrahent" Width="350"/>
                 <DataGridTextColumn Binding="{Binding NETTO}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}"/>

@@ -81,6 +81,16 @@
         <Setter Property="VerticalContentAlignment" Value="Top"/>
     </Style>
 
+    <Style x:Key="CellCentered" TargetType="DataGridCell">
+        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#FFF5F52A"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="BorderBrush" Value="LightGray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 
