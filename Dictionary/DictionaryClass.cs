@@ -42,6 +42,7 @@ namespace FakturaWpf.Dictionary
         public const string slRodzCountry = "KRAJ";
         public const string slRodzDokDef  = "DOKDEF";
         public const string slRodzPay     = "PAY";
+        public const string slDocNumber   = "DOCNUM";
 
         public DictionaryClass(int id =0, string rodz=null)
         {

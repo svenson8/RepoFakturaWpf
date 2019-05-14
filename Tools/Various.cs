@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using FakturaWpf.Tools;
 using System.Windows.Data;
 using System.Windows.Media;
+using FakturaWpf.Dictionary;
 
 namespace FakturaWpf
 {
@@ -163,6 +164,18 @@ namespace FakturaWpf
                         ((DatePicker)instance).SelectedDate = DateTime.Now;
                 }
             }
+        }
+
+        public static string SetActualNumber(DictionaryClass dc)
+        {
+            string spom = (dc.SLKOMUN1 != null) ? dc.SLKOMUN1 : "";
+
+            spom = spom.Replace("[R]", DateTime.Now.Year.ToString());
+            spom = spom.Replace("[M]", DateTime.Now.Month.ToString());
+            spom = spom.Replace("[D]", DateTime.Now.Day.ToString());
+            spom = spom.Replace("[L]", (dc.SLKOMUN12 + 1).ToString());
+
+            return spom;
         }
 
     }

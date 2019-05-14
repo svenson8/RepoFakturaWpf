@@ -24,6 +24,7 @@ namespace FakturaWpf.Documents
     public partial class DocumentEdit : UserControl, IMdiControl
     {
         DocumentClass document; 
+        List<DictionaryClass> ListNumber;
 
         public DocumentEdit(int id)
         {
@@ -44,6 +45,27 @@ namespace FakturaWpf.Documents
             InitCbPayment();
             SetCustomer((document.ID > 0 ? new CustomerClass(document.MDKLIID) : null));
             Various.SetTodayDates(GR_up);
+            SetDocNumber();
+        }
+
+        private void SetDocNumber()
+        {
+            if (document.ID <= 0)
+            {
+                if (ListNumber == null)
+                    ListNumber = new DictionaryClass(0, DictionaryClass.slDocNumber).ThisReadListData().OfType<DictionaryClass>().ToList();
+
+                if (CB_Docs.comboBox.SelectedValue != null)
+                {
+                    DictionaryClass dc = ListNumber.Where(x => x.SLKOMUN11 == (int)CB_Docs.comboBox.SelectedValue).SingleOrDefault();
+
+                    if (dc != null)
+                        L_Nrdok.Content = Various.SetActualNumber(dc);
+                }
+            }
+            else
+                L_Nrdok.Content = document.MDNRDOK;
+
         }
 
         private void InitCbPayment()
@@ -171,6 +193,11 @@ namespace FakturaWpf.Documents
             {
                 Various.Error("Błąd "+nameof(DocumentEdit)+ " btSave_myClick:" + ex.Message, "Błąd");
             }
+        }
+
+        private void CB_Docs_mySelect(object sender, SelectionChangedEventArgs e)
+        {
+            SetDocNumber();
         }
     }
 }

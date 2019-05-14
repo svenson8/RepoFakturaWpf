@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Documents"
              xmlns:my="clr-namespace:FakturaWpf.MyControls" x:Class="FakturaWpf.Documents.DocumentNumber"
              mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="389" >
-    <Grid>
+    <Grid x:Name="GR_Main">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>
             <ColumnDefinition Width="210*"/>
@@ -19,17 +19,18 @@
             <RowDefinition Height="281*"/>
         </Grid.RowDefinitions>
         <Label x:Name="label" Grid.Row="0" Grid.Column="0" Content="Numeracja dla:" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="89"/>
-        <my:MyCombobox Grid.Row="0" Grid.Column="1" x:Name="CB_Docs" myComboWidth="150" HorizontalAlignment="Left" Margin="10,10,0,5" Width="154"  />
+        <my:MyCombobox Grid.Row="0" Grid.Column="1" x:Name="CB_Docs" myComboWidth="150" HorizontalAlignment="Left" Margin="10,10,0,5" Width="154" mySelect="CB_Docs_mySelect"  />
         <Label x:Name="label2" Grid.Row="1" Grid.Column="0" Content="Aktualny numer:" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="96"/>
-        <Label x:Name="L_AktNum" Grid.Row="1" Grid.Column="1" Content="Numer" HorizontalAlignment="Left" Margin="10,10,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="26" Width="49"/>
+        <Label x:Name="L_AktNum" Grid.Row="1" Grid.Column="1" Content="Numer" HorizontalAlignment="Left" Margin="10,10,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="26" Width="Auto"/>
+        <Button Content="Odśwież" Grid.Column="1" Margin="0,10,10,10" Grid.Row="1" HorizontalAlignment="Right" Click="Button_Click" />
         <Label x:Name="label2_Copy" Grid.Row="2" Grid.Column="0" Content="Tworzenie numeru:" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="110"/>
         <Label x:Name="label2_Copy2" Grid.Row="2" Grid.Column="1" Content="[R]  - bieżący rok&#10;[M] - bieżący miesiąc&#10;[D]  - bieżący dzień&#10;[L]   - licznik" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="77" Width="146"/>
-        <TextBox x:Name="TB_number" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195"/>
+        <TextBox x:Name="TB_number" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195" Text="{Binding SLKOMUN1}"/>
 
         <my:MyButton Grid.Row="4" Grid.Column="0" myText="F5 Zapisz" HorizontalAlignment="Left" 
-                                 myImageSource="{StaticResource ImgSave}" myHeight="25"/>
+                                 myImageSource="{StaticResource ImgSave}" myHeight="25" myClick="MyButton_myClick_1"/>
 
         <my:MyButton Grid.Row="4" Grid.Column="1" myText="Esc Anuluj" HorizontalAlignment="Right" 
-                                  myImageSource="{StaticResource ImgCancel}" myHeight="25" />
+                                  myImageSource="{StaticResource ImgCancel}" myHeight="25" myClick="MyButton_myClick" />
     </Grid>
 </UserControl>

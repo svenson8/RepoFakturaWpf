@@ -93,5 +93,10 @@ namespace FakturaWpf
         {
             MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzPay }, "Lista sposobów płątności", "ImgPay", 500, 675);
         }
+
+        private void MenuItem_Click_10(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(DocumentNumber), null, "Numeracja dokumentów", "ImgDocNum", 300, 390);
+        }
     }
 }

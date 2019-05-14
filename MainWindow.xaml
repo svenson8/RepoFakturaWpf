@@ -61,7 +61,12 @@
                     <MenuItem.Icon>
                         <Image Source="{StaticResource ImgConfig}"/>
                     </MenuItem.Icon>
-                </MenuItem>                
+                </MenuItem>
+                <MenuItem Header="_Numeracja dokumentów" Click="MenuItem_Click_10" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgDocNum}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <ToolBarPanel DockPanel.Dock="Top">
