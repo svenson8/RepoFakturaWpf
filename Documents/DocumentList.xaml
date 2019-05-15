@@ -49,14 +49,14 @@
 
         <DataGrid x:Name="DG_DocList" Style="{StaticResource MyGridStyle}" MouseDoubleClick="DG_DocList_MouseDoubleClick" >
             <DataGrid.Columns>
-                <DataGridTextColumn  Header="" Width="30"/>
-                <DataGridTextColumn Binding="{Binding MDSTATUS}"  Header="S" Width="30"/>
-                <DataGridTextColumn Binding="{Binding MDDATAWYST ,StringFormat='dd-MM-yyyy'}"  Header="Data" Width="80"  HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}" />
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="30"/>
+                <DataGridTextColumn Binding="{Binding MDSTATUS}"  Header="S" Width="30" HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}"/>
+                <DataGridTextColumn Binding="{Binding MDDATAWYST, StringFormat=dd-MM-yyyy}"  Header="Data" Width="80"  HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}" />
                 <DataGridTextColumn Binding="{Binding MDNRDOK}"  Header="Numer" Width="150"/>
                 <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Kontrahent" Width="350"/>
-                <DataGridTextColumn Binding="{Binding NETTO}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}"/>
-                <DataGridTextColumn Binding="{Binding VAT}"  Header="Vat" Width="100" HeaderStyle="{StaticResource RightHeader}"/>
-                <DataGridTextColumn Binding="{Binding BRUTTO}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}"/>
+                <DataGridTextColumn Binding="{Binding MDWARNET, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
+                <DataGridTextColumn Binding="{Binding MDWARVAT, StringFormat=\{0:#\,#0.00\}}"  Header="Vat" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
+                <DataGridTextColumn Binding="{Binding MDWARBR, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

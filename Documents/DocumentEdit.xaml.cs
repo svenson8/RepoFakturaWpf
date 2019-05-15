@@ -25,6 +25,7 @@ namespace FakturaWpf.Documents
     {
         DocumentClass document; 
         List<DictionaryClass> ListNumber;
+        DictionaryClass chosenNumber;
 
         public DocumentEdit(int id)
         {
@@ -57,14 +58,17 @@ namespace FakturaWpf.Documents
 
                 if (CB_Docs.comboBox.SelectedValue != null)
                 {
-                    DictionaryClass dc = ListNumber.Where(x => x.SLKOMUN11 == (int)CB_Docs.comboBox.SelectedValue).SingleOrDefault();
+                    chosenNumber = ListNumber.Where(x => x.SLKOMUN11 == (int)CB_Docs.comboBox.SelectedValue).SingleOrDefault();
 
-                    if (dc != null)
-                        L_Nrdok.Content = Various.SetActualNumber(dc);
+                    if (chosenNumber != null)
+                        L_Nrdok.Content = Various.SetActualNumber(chosenNumber);
                 }
             }
             else
+            {
                 L_Nrdok.Content = document.MDNRDOK;
+                CB_Docs.comboBox.IsEnabled = false;
+            }
 
         }
 
@@ -178,11 +182,18 @@ namespace FakturaWpf.Documents
                 document.MDDATASPRZRODZ = CB_SellKind.comboBox.SelectedIndex;
                 document.MDRODZTRANS    = CB_Trans.comboBox.SelectedIndex;
                 document.MDRODZPLATID   = (int)CB_Payment.comboBox.SelectedValue;
+                document.MDNRDOK        = L_Nrdok.Content.ToString();
+
+                if (document.ID <= 0)
+                {
+                    chosenNumber.SLKOMUN12 = +1;
+                    chosenNumber.ThisSaveData();
+                }
 
                 if (document.ThisSaveData())
                 {
                     Various.InfoOk("Dokument zapisany", "Informacja");
-                  //  MdiControl.RefreshMdi(typeof(DocumentList), document);
+                    MdiControl.RefreshMdi(typeof(DocumentList), document);
                 }
                 else
                     Various.Warning("Błąd zapisu danych", "");

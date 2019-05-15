@@ -121,7 +121,16 @@ namespace FakturaWpf.Documents
 
         public void OnRefresh(object obj = null)
         {
-            throw new NotImplementedException();
+            DocumentClass csMod = ((DocumentClass)obj);
+
+            var index = listD.FindIndex(x => x.ID == csMod.ID);
+
+            if (index > -1)
+                listD[index] = csMod;
+            else
+                listD.Add(csMod);
+
+            LoadData();
         }
 
         public string TreeName()

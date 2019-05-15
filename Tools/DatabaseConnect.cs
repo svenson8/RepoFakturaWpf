@@ -171,15 +171,18 @@ namespace FakturaWpf
             {
                 foreach (Params p in list)
                 {
-                    string dbtype = p.type.ToString();
-                    if (p.type is SqlDbType.VarChar)
-                        dbtype = dbtype+"("+p.value.ToString()+")";
+                    if ((int)p.value != -1)
+                    {
+                        string dbtype = p.type.ToString();
+                        if (p.type is SqlDbType.VarChar)
+                            dbtype = dbtype + "(" + p.value.ToString() + ")";
 
-                    if (p.type is SqlDbType.Decimal)
-                        dbtype = dbtype + "(18," + p.value.ToString() + ")";
+                        if (p.type is SqlDbType.Decimal)
+                            dbtype = dbtype + "(18," + p.value.ToString() + ")";
 
-                    NQuery n = new NQuery("IF NOT EXISTS ( SELECT  * FROM    syscolumns WHERE   id = OBJECT_ID('" + tableName + "') AND name = '" + p.name + "') " +
-                                          "ALTER TABLE " + tableName + " ADD " + p.name + " "+dbtype+" NULL");
+                        NQuery n = new NQuery("IF NOT EXISTS ( SELECT  * FROM    syscolumns WHERE   id = OBJECT_ID('" + tableName + "') AND name = '" + p.name + "') " +
+                                              "ALTER TABLE " + tableName + " ADD " + p.name + " " + dbtype + " NULL");
+                    }
                 }
             } else
             {

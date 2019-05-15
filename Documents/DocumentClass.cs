@@ -38,6 +38,7 @@ namespace FakturaWpf.Documents
         public string MDNRDOK { get; set; }
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
+        public string KLINAZ { get; set; }
 
         public DocumentClass(int id = 0)
         {
@@ -73,6 +74,8 @@ namespace FakturaWpf.Documents
                 case nameof(MDODEBRAL): return 100;
                 case nameof(MDSTATUS): return 1;
                 case nameof(MDNRDOK): return 60;
+
+                case nameof(KLINAZ): return -1;
                 default: return 100;
             }
         }
@@ -89,7 +92,7 @@ namespace FakturaWpf.Documents
 
         public List<object> ThisReadListData()
         {
-            return ReadListData(this, TableName(), new object[] { 0 });
+            return ReadListData(this, TableName() + " d left join TKlient t on t.ID=d.MDKLIID", new object[] { 0 });
         }
 
         public bool ThisSaveData()
