@@ -98,5 +98,10 @@ namespace FakturaWpf
         {
             MdiControl.AddChild(typeof(DocumentNumber), null, "Numeracja dokumentów", "ImgDocNum", 300, 390);
         }
+
+        private void MenuItem_Click_11(object sender, RoutedEventArgs e)
+        {
+            ////
+        }
     }
 }

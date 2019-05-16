@@ -18,6 +18,13 @@
                 <Separator />
                 <MenuItem Header="_Exit" Click="MenuItem_Click_2" />
             </MenuItem>
+            <MenuItem Header="_Asortymenty">
+                <MenuItem Header="_Lista asortymentów" Click="MenuItem_Click_11" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgStack}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="_Słowniki">
                 <MenuItem Header="_Lista kontrahentów" Click="MenuItem_Click_4" >
                     <MenuItem.Icon>

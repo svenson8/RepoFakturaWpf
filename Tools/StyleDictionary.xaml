@@ -103,6 +103,19 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="CellCheck"  TargetType="DataGridCell">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="IsEditing" Value="True" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="LightGray"/>
+            </Trigger>            
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="MyGridRowStyle" TargetType="DataGridRow">
             <Setter Property="FontSize" Value="12"/>
         <Style.Triggers>
@@ -171,6 +184,7 @@
     <BitmapImage x:Key="ImgCheck"     UriSource="/Resources/check.png" />
     <BitmapImage x:Key="ImgPay"      UriSource="/Resources/payment.png" />
     <BitmapImage x:Key="ImgDocNum"      UriSource="/Resources/docnumber.png" />
+    <BitmapImage x:Key="ImgStack"      UriSource="/Resources/stack.png" />
 
     <Style x:Key="MenuIcon" TargetType="Image">
         <Setter Property="Width" Value="16" />

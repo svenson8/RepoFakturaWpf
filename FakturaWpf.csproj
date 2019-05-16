@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Assortment\AssortmentClass.cs" />
     <Compile Include="Connected Services\GusApi\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -334,6 +335,7 @@
     <Resource Include="Resources\group.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\stack.png" />
     <Resource Include="Resources\payment.png" />
     <Resource Include="Resources\earth.png" />
     <Resource Include="Resources\documents.png" />
@@ -351,5 +353,6 @@
     </Content>
     <Resource Include="Resources\poland.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

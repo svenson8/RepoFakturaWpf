@@ -180,6 +180,9 @@ namespace FakturaWpf
                         if (p.type is SqlDbType.Decimal)
                             dbtype = dbtype + "(18," + p.value.ToString() + ")";
 
+                        if (p.type is SqlDbType.VarBinary)
+                            dbtype = dbtype + "(max)";
+
                         NQuery n = new NQuery("IF NOT EXISTS ( SELECT  * FROM    syscolumns WHERE   id = OBJECT_ID('" + tableName + "') AND name = '" + p.name + "') " +
                                               "ALTER TABLE " + tableName + " ADD " + p.name + " " + dbtype + " NULL");
                     }
@@ -210,6 +213,9 @@ namespace FakturaWpf
             if (type == typeof(XmlDocument))
                 return SqlDbType.Xml;
 
+            if (type == typeof(byte[]))
+                return SqlDbType.VarBinary;
+
             return SqlDbType.Int;
         }
 
@@ -221,19 +227,26 @@ namespace FakturaWpf
             {
                 foreach (PropertyInfo propf in obj.GetType().GetProperties())
                 {
-                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    if (ColumnExists(nQ.NReader, propf.Name))
                     {
-                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
-                        propf.SetValue(obj, nQ.NReader[propf.Name]);
+                        if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                        {
+                            Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                            propf.SetValue(obj, nQ.NReader[propf.Name]);
+                        }
                     }
                 }
             }
             nQ.NReader.Close();
         }
 
-        public virtual List<object> ReadListData(object obj, string table, object[] args)
+        public virtual List<object> ReadListData(object obj, string table, object[] args, string native=null)
         {
-            NQueryReader nQ = new NQueryReader("select * from " + table);
+            string sqlcomm = "select * from " + table;
+            if (native != null)
+                sqlcomm = native;
+
+            NQueryReader nQ = new NQueryReader(sqlcomm);
             List<object> listU = new List<object>();
 
             while (nQ.NReader.Read())
@@ -241,10 +254,13 @@ namespace FakturaWpf
                 Object u = Activator.CreateInstance(obj.GetType(), args?.ToArray());
                 foreach (PropertyInfo propf in u.GetType().GetProperties())
                 {
-                    if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                    if (ColumnExists(nQ.NReader, propf.Name))
                     {
-                        Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
-                        propf.SetValue(u, nQ.NReader[propf.Name]);
+                        if (nQ.NReader[propf.Name].GetType() != typeof(DBNull))
+                        {
+                            Convert.ChangeType(nQ.NReader[propf.Name], propf.PropertyType);  // prawdopodobnie niepotrzebne
+                            propf.SetValue(u, nQ.NReader[propf.Name]);
+                        }
                     }
                 }
                 listU.Add(u);
@@ -301,6 +317,15 @@ namespace FakturaWpf
                 return new SqlXml(new XmlTextReader((ob as XmlDocument).InnerXml, XmlNodeType.Document, null));
 
             return ob;
+        }
+
+        public bool ColumnExists(SqlDataReader reader, string columnName)
+        {
+
+            return reader.GetSchemaTable()
+                         .Rows
+                         .OfType<DataRow>()
+                         .Any(row => row["ColumnName"].ToString() == columnName);
         }
     }
 

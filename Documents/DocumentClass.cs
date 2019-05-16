@@ -39,6 +39,7 @@ namespace FakturaWpf.Documents
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
         public string KLINAZ { get; set; }
+        public bool CHECK { get; set; }
 
         public DocumentClass(int id = 0)
         {
@@ -76,6 +77,7 @@ namespace FakturaWpf.Documents
                 case nameof(MDNRDOK): return 60;
 
                 case nameof(KLINAZ): return -1;
+                case nameof(CHECK): return -1;
                 default: return 100;
             }
         }

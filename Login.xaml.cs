@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FakturaWpf.Properties;
 using FakturaWpf.Documents;
+using FakturaWpf.Assortment;
 
 namespace FakturaWpf
 {
@@ -66,6 +67,10 @@ namespace FakturaWpf
             DocumentClass ds = new DocumentClass();
             result = ds.ThisTableCheck();
             result = sc.Triggers(ds.TableName());
+
+            AssortmentClass ac = new AssortmentClass();
+            result = ac.ThisTableCheck();
+            result = sc.Triggers(ac.TableName());
 
             return result;
         }

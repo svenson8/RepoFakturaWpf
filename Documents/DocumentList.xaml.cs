@@ -69,6 +69,9 @@ namespace FakturaWpf.Documents
             {
                 DocumentClass dl = new DocumentClass();
                 listD = dl.ThisReadListData().OfType<DocumentClass>().ToList();
+
+                foreach (DocumentClass d in listD)
+                    d.CHECK = false;
             }
 
             List<DocumentClass> lpom = listD.Select(x => x).ToList();
@@ -84,7 +87,7 @@ namespace FakturaWpf.Documents
             NQueryReader nq = new NQueryReader("select *, SLKOMUN2 +' '+SLKOMUN1 as concat from TSlownik " +
                                                "where slrodz =" + Various.QuotedStr(DictionaryClass.slRodzDokDef));
             while (nq.NReader.Read())
-                ListData.Add(new ItemDok((string)nq.NReader["concat"], (int)nq.NReader["ID"], false ));
+                ListData.Add(new ItemDok((string)nq.NReader["concat"], (int)nq.NReader["ID"], true ));
 
             nq.NReader.Close();
 

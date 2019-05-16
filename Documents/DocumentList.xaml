@@ -49,7 +49,7 @@
 
         <DataGrid x:Name="DG_DocList" Style="{StaticResource MyGridStyle}" MouseDoubleClick="DG_DocList_MouseDoubleClick" >
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="30"/>
+                <DataGridCheckBoxColumn Binding="{Binding CHECK}" ClipboardContentBinding="{x:Null}" CellStyle="{StaticResource CellCheck}" Width="30"/>
                 <DataGridTextColumn Binding="{Binding MDSTATUS}"  Header="S" Width="30" HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}"/>
                 <DataGridTextColumn Binding="{Binding MDDATAWYST, StringFormat=dd-MM-yyyy}"  Header="Data" Width="80"  HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}" />
                 <DataGridTextColumn Binding="{Binding MDNRDOK}"  Header="Numer" Width="150"/>
