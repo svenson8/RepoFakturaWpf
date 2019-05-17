@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="FakturaWpf.Assortment.AssortmentList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:FakturaWpf.MyControls"
+             xmlns:local="clr-namespace:FakturaWpf.Assortment"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="810">
+    <DockPanel LastChildFill="true">
+        <Grid DockPanel.Dock="Top" Height="70" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <CheckBox x:Name="CH_archiwe" Grid.Row="0"  Content="Pokaż archiwalne" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+            <my:MyButton myText="F3 Odśwież" Margin="0,5,10,1"  HorizontalAlignment="Right" myImageSource="{StaticResource ImgRefresh}" myHeight="24" />
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label x:Name="label" Content="Szukaj" HorizontalAlignment="Left" Margin="10,4.28,0,0" VerticalAlignment="Top" />
+                <my:MyCombobox x:Name="CB_Choice"  HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" myComboWidth="190" mySelect="CB_Choice_mySelect" />
+                <my:MyCombobox x:Name="CB_ChoiceGr"  HorizontalAlignment="Left" Margin="5,4.28,0,0" VerticalAlignment="Top" myComboWidth="190"  />
+                <TextBox x:Name="TX_Search"  HorizontalAlignment="Left" Height="23" Margin="5,4.28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" />
+            </StackPanel>
+        </Grid>
+        <DockPanel DockPanel.Dock="Bottom" Height="110">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Content="Uwagi" Height="26"/>
+                <TextBox Height="51" Background="LightYellow"/>
+            </StackPanel>
+            <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}"  myHeight="24" />
+            <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="24"  />
+            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myHeight="24" />
+            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
+        </DockPanel>
+        <TreeView DockPanel.Dock="Left" x:Name="groupTV" VerticalAlignment="Stretch" Width="150">
+        </TreeView>
+        <DataGrid x:Name="DG_AsList" Style="{StaticResource MyGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Nazwa" Width="350"/>
+                <DataGridTextColumn Binding="{Binding MDWARNET, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
+                <DataGridTextColumn Binding="{Binding MDWARVAT, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
+                <DataGridTextColumn Binding="{Binding MDWARBR, StringFormat=\{0:#\,#0.00\}}"  Header="%" Width="50" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

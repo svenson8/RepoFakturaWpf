@@ -19,6 +19,7 @@ using WPF.MDI;
 using System.ComponentModel;
 using FakturaWpf.Customer;
 using FakturaWpf.Dictionary;
+using FakturaWpf.Assortment;
 
 namespace FakturaWpf
 {
@@ -101,7 +102,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_11(object sender, RoutedEventArgs e)
         {
-            ////
+            MdiControl.AddChild(typeof(AssortmentList), null, "Lista asortymentów", "ImgStack", 500, 800);
         }
     }
 }

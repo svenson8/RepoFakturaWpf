@@ -61,6 +61,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Assortment\AssortmentClass.cs" />
+    <Compile Include="Assortment\AssortmentEdit.xaml.cs">
+      <DependentUpon>AssortmentEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assortment\AssortmentList.xaml.cs">
+      <DependentUpon>AssortmentList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\GusApi\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +130,14 @@
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
     <Compile Include="WebApi\GusSearch.cs" />
+    <Page Include="Assortment\AssortmentEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assortment\AssortmentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Customer\CustomerEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

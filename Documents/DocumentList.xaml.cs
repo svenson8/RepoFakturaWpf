@@ -57,7 +57,7 @@ namespace FakturaWpf.Documents
 
         private void Prepare()
         {
-
+            Various.SetAutoColumnWidth(DG_DocList, new int[] { 3, 4 });
             InitDokDef();
             LoadData();
            
