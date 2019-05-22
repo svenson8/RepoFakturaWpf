@@ -6,22 +6,61 @@
              xmlns:local="clr-namespace:FakturaWpf.Assortment"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="880">
     <DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Bottom">
-            <my:MyButton x:Name="btSave" myText="F5 Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myHeight="24" myClick="btSave_myClick"  />
+            <my:MyButton x:Name="btSave" myText="F5 Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myHeight="24"   />
             <my:MyButton myText="Esc Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
-        </DockPanel>        
-        <Grid DockPanel.Dock="Left" Width="100" >
-            
+        </DockPanel>
+        <Grid DockPanel.Dock="Bottom" Height="102">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="351*"/>
+                <ColumnDefinition Width="89*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TB_uwagi" Height="92" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,10,10.695,0"/>
+            <Label x:Name="label3" Content="Uwagi" HorizontalAlignment="Left" Margin="10,-12,0,0" VerticalAlignment="Top" Width="77"/>
+            <Button x:Name="button1" Content="Z pliku ..." HorizontalAlignment="Left" Margin="6.305,10,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="button1_Click"/>
+            <Button x:Name="button1_Copy" Content="Czyść" HorizontalAlignment="Left" Margin="86.305,10,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+
+
+        </Grid>
+        <Grid DockPanel.Dock="Left" Width="630" Margin="0,0,0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="64*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="button" Content="F7 - Grupa" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
+            <TextBox x:Name="TB_Group" Background="LightYellow" HorizontalAlignment="Left" Height="23" Margin="101,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157"/>
+            <CheckBox x:Name="CH_aktywny" Content="Aktywny" HorizontalAlignment="Left" Margin="280,13,0,0" VerticalAlignment="Top" Height="15" Width="65"/>
+            <TextBox x:Name="TB_Numer" HorizontalAlignment="Left" Height="23" Margin="414,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52"/>
+            <Label x:Name="NumerL" Content="Numer" HorizontalAlignment="Left" Margin="367,7,0,0" VerticalAlignment="Top" Height="26" Width="47"/>
+            <TextBox x:Name="TB_Kod" HorizontalAlignment="Left" Height="23" Margin="509,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Background="LightYellow"/>
+            <Label x:Name="Numer_Copy" Content="Kod" HorizontalAlignment="Left" Margin="471,7,0,0" VerticalAlignment="Top" Height="26" Width="31"/>
+            <Label x:Name="label" Content="Nazwa" HorizontalAlignment="Left" Margin="40,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="45"/>
+            <TextBox x:Name="TB_Name" HorizontalAlignment="Left" Height="60" Margin="101,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="517"/>
+            <my:MyCombobox x:Name="CB_typ"  HorizontalAlignment="Left" Margin="101,10,0,0" VerticalAlignment="Top" myComboWidth="190" Grid.Row="2" Height="22" Width="194" />
+            <Label x:Name="label1" Content="Typ" HorizontalAlignment="Left" Margin="57,9,0,0" Grid.Row="2" VerticalAlignment="Top" Height="29" Width="28" Grid.RowSpan="2"/>
+            <my:MyCombobox x:Name="CB_vat"  HorizontalAlignment="Left" Margin="381,9,0,0" VerticalAlignment="Top" myComboWidth="80" Grid.Row="2" Height="22" Width="85" />
+            <Label x:Name="label1_Copy" Content="VAT" HorizontalAlignment="Left" Margin="344,10,0,0" Grid.Row="2" VerticalAlignment="Top" Height="29" Width="38" Grid.RowSpan="2"/>
+            <Label x:Name="label2" Content="Indeks" HorizontalAlignment="Left" Margin="47,0,0,0" Grid.Row="3" VerticalAlignment="Top" Height="26" Width="44"/>
+            <TextBox x:Name="TB_index" HorizontalAlignment="Left" Height="23" Margin="101,3,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="194"/>
+            <my:MyCombobox x:Name="CB_vat_Copy"  HorizontalAlignment="Left" Margin="381,4,0,0" VerticalAlignment="Top" myComboWidth="80" Grid.Row="3" Height="22" Width="85" />
+            <Label x:Name="label2_Copy" Content="J. miary" HorizontalAlignment="Left" Margin="332,5,0,0" Grid.Row="3" VerticalAlignment="Top" Height="26" Width="50" Grid.RowSpan="2"/>
+            <Label x:Name="label2_Co" HorizontalContentAlignment="Right" Content="PKWIU" HorizontalAlignment="Left" Margin="41,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="50"/>
+            <TextBox x:Name="TB_pkwiu" HorizontalAlignment="Left" Height="23" Margin="101,13,0,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Width="194"/>
+            <Label x:Name="label2_Co_Copy" Content="Ilość" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="41,36,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="50"/>
+            <TextBox x:Name="TB_ilosc" HorizontalAlignment="Left" Height="23" Margin="101,39,0,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Width="194"/>
+            <Label x:Name="label2_Co_Copy1" HorizontalContentAlignment="Right" Content="Cena netto" HorizontalAlignment="Left" Margin="21,2,0,0" Grid.Row="5" VerticalAlignment="Top" Height="26" Width="70"/>
+            <TextBox x:Name="TB_netto" HorizontalAlignment="Left" Height="23" Margin="101,5,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="194"/>
+            <Label x:Name="label2_Co_Copy2" Content="Cena brutto" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="10,28,0,0" Grid.Row="5" VerticalAlignment="Top" Height="26" Width="81"/>
+            <TextBox x:Name="TB_brutto" HorizontalAlignment="Left" Height="23" Margin="101,31,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="194"/>
         </Grid>
 
-
-        <Image x:Name="image"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/FakturaWpf;component/Resources/stack.png" >
-            <Image.OpacityMask>
-                <ImageBrush/>
-            </Image.OpacityMask>
-        </Image>
+        <Image x:Name="image" Stretch="Fill"/>
 
     </DockPanel>
 </UserControl>

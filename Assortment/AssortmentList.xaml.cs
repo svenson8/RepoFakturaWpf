@@ -94,5 +94,10 @@ namespace FakturaWpf.Assortment
         {
             CbChoiceChange();
         }
+
+        private void btIns_myClick(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(AssortmentEdit), null, "Edycja asortymentu", "ImgStack", 480, 880, TreeName());
+        }
     }
 }

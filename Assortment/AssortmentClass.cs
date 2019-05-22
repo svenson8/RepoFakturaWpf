@@ -25,6 +25,7 @@ namespace FakturaWpf.Assortment
         public string ASUWAGI { get; set; }
         public byte[] ASIMAGE { get; set; }
         public int ASGRUPAID { get; set; }
+        public int ASVAT { get; set; }
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
 

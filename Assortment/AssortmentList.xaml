@@ -27,7 +27,7 @@
                 <Label Content="Uwagi" Height="26"/>
                 <TextBox Height="51" Background="LightYellow"/>
             </StackPanel>
-            <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}"  myHeight="24" />
+            <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}"  myHeight="24" myClick="btIns_myClick" />
             <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="24"  />
             <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myHeight="24" />
             <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
