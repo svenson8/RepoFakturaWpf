@@ -1,4 +1,5 @@
-﻿using FakturaWpf.MyControls;
+﻿using FakturaWpf.Assortment;
+using FakturaWpf.MyControls;
 using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,14 @@ namespace FakturaWpf.Dictionary
     {
         List<DictionaryClass> listD = null;
         string slowkind;
+        private Boolean choice;
 
-        public DictionaryList(string slowkind)
+        public DictionaryList(string slowkind, Boolean achoice = false)
         {
             InitializeComponent();
 
             this.slowkind = slowkind;
+            choice = achoice;
             Prepare();
         }
 
@@ -38,7 +41,12 @@ namespace FakturaWpf.Dictionary
         {
             Various.FillWithFiltrItems(CB_Choice.comboBox, 2);
             CB_Choice.comboBox.SelectedIndex = 0;
-            DGC_Code.Visibility = (slowkind == DictionaryClass.slRodzCountry) ? Visibility.Visible : Visibility.Hidden;
+            DGC_Code.Visibility = (new[] { DictionaryClass.slRodzCountry, DictionaryClass.slRodzAsGroup }.Contains(slowkind)) ? 
+                                  Visibility.Visible : 
+                                  Visibility.Hidden;
+            if (!choice)
+                btCho.Visibility = Visibility.Collapsed;
+
             LoadData();
         }
 
@@ -142,6 +150,16 @@ namespace FakturaWpf.Dictionary
                     LoadData();
                 }
             }
+        }
+
+        private void btCho_myClick(object sender, RoutedEventArgs e)
+        {
+            DictionaryClass dict = (DictionaryClass)DG_Dict.SelectedItem;
+
+            if (dict != null)
+                MdiControl.RefreshMdi(typeof(AssortmentEdit), dict);
+
+            Close(sender, e);
         }
     }
 }

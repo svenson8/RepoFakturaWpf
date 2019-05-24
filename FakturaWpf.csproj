@@ -355,6 +355,8 @@
     <Resource Include="Resources\documents.png" />
     <Resource Include="Resources\check.png" />
     <Resource Include="Resources\docnumber.png" />
+    <Resource Include="Resources\groupas.png" />
+    <Resource Include="Resources\measure.png" />
     <Content Include="Resources\MyScripts\XML_COUNTRY_FROM_TAB.sql" />
     <Content Include="Resources\MyXml\Countries.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

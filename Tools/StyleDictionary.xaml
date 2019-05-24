@@ -182,9 +182,12 @@
     <BitmapImage x:Key="ImgEarth"     UriSource="/Resources/earth.png" />
     <BitmapImage x:Key="ImgDocuments" UriSource="/Resources/documents.png" />
     <BitmapImage x:Key="ImgCheck"     UriSource="/Resources/check.png" />
-    <BitmapImage x:Key="ImgPay"      UriSource="/Resources/payment.png" />
-    <BitmapImage x:Key="ImgDocNum"      UriSource="/Resources/docnumber.png" />
-    <BitmapImage x:Key="ImgStack"      UriSource="/Resources/stack.png" />
+    <BitmapImage x:Key="ImgPay"       UriSource="/Resources/payment.png" />
+    <BitmapImage x:Key="ImgDocNum"    UriSource="/Resources/docnumber.png" />
+    <BitmapImage x:Key="ImgStack"     UriSource="/Resources/stack.png" />
+    <BitmapImage x:Key="ImgGroupas"     UriSource="/Resources/groupas.png" />
+    <BitmapImage x:Key="ImgMeasure"     UriSource="/Resources/measure.png" />
+
 
     <Style x:Key="MenuIcon" TargetType="Image">
         <Setter Property="Width" Value="16" />

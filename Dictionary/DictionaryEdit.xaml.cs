@@ -29,7 +29,8 @@ namespace FakturaWpf.Dictionary
             Various.FillPayForms(CB_PayF.comboBox);
 
             mydict = new DictionaryClass(id, slowkind);
-            if ((slowkind != DictionaryClass.slRodzCountry) && (slowkind != DictionaryClass.slRodzDokDef))
+
+           if  (! new[] { DictionaryClass.slRodzCountry, DictionaryClass.slRodzCountry, DictionaryClass.slRodzAsGroup}.Contains(slowkind))
                 GR_SLow.RowDefinitions[2].Height = new GridLength(0);
 
             if (slowkind != DictionaryClass.slRodzDokDef)

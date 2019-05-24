@@ -90,6 +90,25 @@ namespace FakturaWpf.Assortment
             return "Lista asortymentów";
         }
 
+        private void EditPosition(Boolean mod)
+        {
+          //  AssortmentClass assort = (AssortmentClass)DG_AsList.SelectedItem;
+
+            int id = 0;
+          
+/*
+            if (mod)
+            {
+                id = document.ID;
+                title += document.MDNRDOK;
+            }  */
+
+            if (id >= 0)
+            {
+                MdiControl.AddChild(typeof(AssortmentEdit), new object[] { id }, "Edycja asortymentu", "ImgStack", 480, 880, TreeName());
+            }
+        }
+
         private void CB_Choice_mySelect(object sender, SelectionChangedEventArgs e)
         {
             CbChoiceChange();
@@ -97,7 +116,7 @@ namespace FakturaWpf.Assortment
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(AssortmentEdit), null, "Edycja asortymentu", "ImgStack", 480, 880, TreeName());
+            EditPosition(false);
         }
     }
 }

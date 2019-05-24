@@ -21,6 +21,7 @@
 
             </Grid>
             <DockPanel DockPanel.Dock="Bottom">
+                <my:MyButton x:Name="btCho" myText="Ent Wybierz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgCheck}" myImageHeight="25" myImageWidth="25" myHeight="25" myClick="btCho_myClick"/>
                 <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myClick="btIns_myClick" myHeight="25"/>
                 <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myClick="btIns_myClick" myHeight="25"/>
                 <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick_1" myHeight="25"/>

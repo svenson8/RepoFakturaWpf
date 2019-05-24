@@ -29,6 +29,19 @@ namespace FakturaWpf.Assortment
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
 
+        public AssortmentClass(int id = 0)
+        {
+            this.ID = id;
+            if (this.ID > 0)
+                ThisReadData();
+            else
+            {
+                this.DATAW = DateTime.Now;
+                this.DMODDATE = DateTime.Now;
+                this.ACTIVE = "T";
+            }
+        }
+
 
 
         public int GetLengthOfStringField(string name)
