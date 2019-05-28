@@ -130,6 +130,18 @@ namespace FakturaWpf
                 cb.Items.Add("W kolejności wpisania");
         }
 
+        public static void InitCbAssortType(ComboBox cb)
+        {
+            cb.Items.Clear();
+            cb.Items.Add("towary");
+            cb.Items.Add("usługi");
+            cb.Items.Add("materiały");
+            cb.Items.Add("wyroby");
+            cb.Items.Add("zestawy");
+
+            cb.SelectedIndex = 0;
+        }
+
         public static void RestartApp()
         {
             Application.Current.Shutdown();

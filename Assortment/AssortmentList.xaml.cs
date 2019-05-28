@@ -1,6 +1,8 @@
-﻿using FakturaWpf.Tools;
+﻿using FakturaWpf.Dictionary;
+using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,9 @@ namespace FakturaWpf.Assortment
     /// </summary>
     public partial class AssortmentList : UserControl, IMdiControl
     {
+        private List<AssortmentClass> listA;
+        private int idGroup = 0;
+
         public AssortmentList()
         {
             InitializeComponent();
@@ -32,6 +37,67 @@ namespace FakturaWpf.Assortment
             Various.SetAutoColumnWidth(DG_AsList, new int[] { 0 });
             InitCbChoice();
             CbChoiceChange();
+            FillgroupTree();
+
+            LoadData();
+        }
+
+        private void FillgroupTree()
+        {
+            TreeViewItem itemM = new TreeViewItem();
+            itemM.Header = "Grupy asortymentowe";
+            itemM.FontWeight = FontWeights.Bold;
+
+            NQueryReader nq = new NQueryReader("select *, SLKOMUN2 +' ('+SLKOMUN1+')' as concat from TSlownik " +
+                                               "where slrodz =" + Various.QuotedStr(DictionaryClass.slRodzAsGroup));
+            while (nq.NReader.Read())
+            {
+                TreeViewItem item = new TreeViewItem();
+                item.Header = (string)nq.NReader["concat"];
+                item.Tag = nq.NReader["ID"];
+                item.FontWeight = FontWeights.Normal;
+                itemM.Items.Add(item);
+            }
+            nq.NReader.Close();
+
+            groupTV.Items.Add(itemM);
+            TreeControl.ExpandRecursively(groupTV.Items, true);
+        }
+
+        private void LoadData()
+        {
+            if (listA == null)
+            {
+                AssortmentClass ac = new AssortmentClass();
+                listA = ac.ThisReadListData().OfType<AssortmentClass>().ToList();
+            }
+
+            List<AssortmentClass> lpom = listA.Select(x => x).ToList();
+
+            lpom = lpom.Where(x => x.ACTIVE == (CH_archiwe.IsChecked == false ? "T" : "N")).ToList();
+
+            if (idGroup > 0)
+                lpom = lpom.Where(x => x.ASGRUPAID == idGroup).ToList();
+
+            if ((TX_Search.Text.Length > 0) || (CB_Choice.comboBox.SelectedIndex == 2))
+            {
+                switch (CB_Choice.comboBox.SelectedIndex)
+                {
+                    case 0:
+                        lpom = lpom.Where(x => x.ASNAZWA.ToUpper().StartsWith(TX_Search.Text.ToUpper())).ToList();
+                        break;
+                    case 1:
+                        lpom = lpom.Where(x => x.ASNAZWA.ToUpper().Contains(TX_Search.Text.ToUpper())).ToList();
+                        break;
+                    case 2:
+                        lpom = lpom.Where(x => x.ASTYP == CB_ChoiceGr.comboBox.SelectedIndex).ToList();
+                        break;
+                }  
+            }; 
+
+
+            DG_AsList.ItemsSource = lpom;
+            DG_AsList.SelectedIndex = 0;
         }
 
         private void CbChoiceChange()
@@ -64,14 +130,7 @@ namespace FakturaWpf.Assortment
 
             CB_Choice.comboBox.SelectedIndex = 0;
 
-            CB_ChoiceGr.comboBox.Items.Clear();
-            CB_ChoiceGr.comboBox.Items.Add("towary");
-            CB_ChoiceGr.comboBox.Items.Add("usługi");
-            CB_ChoiceGr.comboBox.Items.Add("materiały");
-            CB_ChoiceGr.comboBox.Items.Add("wyroby");
-            CB_ChoiceGr.comboBox.Items.Add("zestawy");
-
-            CB_ChoiceGr.comboBox.SelectedIndex = 0;
+            Various.InitCbAssortType(CB_ChoiceGr.comboBox);
 
         }
 
@@ -82,7 +141,16 @@ namespace FakturaWpf.Assortment
 
         public void OnRefresh(object obj = null)
         {
-            throw new NotImplementedException();
+            AssortmentClass csMod = ((AssortmentClass)obj);
+
+            var index = listA.FindIndex(x => x.ID == csMod.ID);
+
+            if (index > -1)
+                listA[index] = csMod;
+            else
+                listA.Add(csMod);
+
+            LoadData();
         }
 
         public string TreeName()
@@ -91,17 +159,14 @@ namespace FakturaWpf.Assortment
         }
 
         private void EditPosition(Boolean mod)
-        {
-          //  AssortmentClass assort = (AssortmentClass)DG_AsList.SelectedItem;
-
+        {       
             int id = 0;
           
-/*
             if (mod)
             {
-                id = document.ID;
-                title += document.MDNRDOK;
-            }  */
+                AssortmentClass assort = (AssortmentClass)DG_AsList.SelectedItem;
+                id = assort.ID;                
+            }  
 
             if (id >= 0)
             {
@@ -117,6 +182,73 @@ namespace FakturaWpf.Assortment
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
             EditPosition(false);
+        }
+
+        private void btnMod_myClick(object sender, RoutedEventArgs e)
+        {
+            EditPosition(true);
+        }
+
+        private void DG_AsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AssortmentClass assort = (AssortmentClass)DG_AsList.SelectedItem;
+            if (assort != null)
+                TB_uwagi.Text = assort.ASUWAGI;
+        }
+
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            if (Various.Question("Czy na pewno usunąć asortyment ?"))
+            {
+                AssortmentClass asso = (AssortmentClass)DG_AsList.SelectedItem;
+
+                if (asso.DeletPosition(asso.ID, asso.TableName()))
+                {
+                    var index = listA.FindIndex(x => x.ID == asso.ID);
+                    if (index > -1)
+                        listA.RemoveAt(index);
+
+                    Various.InfoOk("Asortyment usunięty pomyślnie");
+
+                    LoadData();
+                }
+            }
+        }
+
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void groupTV_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (((TreeViewItem)e.NewValue).Tag != null)
+                idGroup = (int)((TreeViewItem)e.NewValue).Tag;
+            else
+                idGroup = 0;
+            LoadData();
+        }
+    }
+
+
+    public class PercentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value != null)
+            {
+                if (value.ToString().Equals("-1"))
+                    return "ZW";
+                else
+                    return value;
+            }
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return value;
         }
     }
 }

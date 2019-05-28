@@ -15,8 +15,7 @@
                     <Image Source="{StaticResource ImgFaktura}" />
                 </MenuItem.Icon>
                 </MenuItem>
-                <Separator />
-                <MenuItem Header="_Exit" Click="MenuItem_Click_2" />
+
             </MenuItem>
             <MenuItem Header="_Asortymenty">
                 <MenuItem Header="_Lista asortymentów" Click="MenuItem_Click_11" >
@@ -82,6 +81,12 @@
                 <MenuItem Header="_Numeracja dokumentów" Click="MenuItem_Click_10" >
                     <MenuItem.Icon>
                         <Image Source="{StaticResource ImgDocNum}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Wyjście z programu" Click="MenuItem_Click_2" >
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImgExit}"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>

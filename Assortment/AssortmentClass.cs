@@ -68,17 +68,18 @@ namespace FakturaWpf.Assortment
 
         public void ThisReadData()
         {
-            throw new NotImplementedException();
+            ReadData(this, TableName(), this.ID);
         }
 
         public List<object> ThisReadListData()
         {
-            throw new NotImplementedException();
+            return ReadListData(this, TableName(), new object[] { 0});
         }
 
         public bool ThisSaveData()
         {
-            throw new NotImplementedException();
+            this.ID = SaveData(this.ID, TableName(), typeof(AssortmentClass), this);
+            return (this.ID > 0);
         }
 
         public bool ThisTableCheck()

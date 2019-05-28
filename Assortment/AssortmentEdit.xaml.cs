@@ -3,6 +3,7 @@ using FakturaWpf.Tools;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace FakturaWpf.Assortment
     public partial class AssortmentEdit : UserControl, IMdiControl
     {
         private AssortmentClass assort;
+        private DictionaryClass dcgr;
 
         public AssortmentEdit(int id)
         {
@@ -31,7 +33,7 @@ namespace FakturaWpf.Assortment
 
             assort = new AssortmentClass(id);
             SetGroup((assort.ID > 0 ? new DictionaryClass(assort.ASGRUPAID, DictionaryClass.slRodzAsGroup) : null));
-            GR_Main.DataContext = assort;
+            DP_Main.DataContext = assort;
             InitCbType();
             InitCbVat();
             InitCbMeasure();
@@ -56,9 +58,9 @@ namespace FakturaWpf.Assortment
         private void InitCbVat()
         {
             CB_vat.comboBox.Items.Clear();
-            CB_vat.comboBox.Items.Add("23");
-            CB_vat.comboBox.Items.Add("8");
-            CB_vat.comboBox.Items.Add("5");
+            CB_vat.comboBox.Items.Add(23);
+            CB_vat.comboBox.Items.Add(8);
+            CB_vat.comboBox.Items.Add(5);
             CB_vat.comboBox.Items.Add("0");
             CB_vat.comboBox.Items.Add("ZW");
 
@@ -70,14 +72,11 @@ namespace FakturaWpf.Assortment
 
         private void InitCbType()
         {
-            CB_typ.comboBox.Items.Clear();
-            CB_typ.comboBox.Items.Add("Towar");
-            CB_typ.comboBox.Items.Add("Usługa");
+            Various.InitCbAssortType(CB_typ.comboBox);
 
             if (assort.ID > 0)
                 CB_typ.comboBox.SelectedIndex = assort.ASTYP;
-            else
-                CB_typ.comboBox.SelectedIndex = 0;
+
         }
 
         public void Close(object sender, RoutedEventArgs e)
@@ -87,14 +86,28 @@ namespace FakturaWpf.Assortment
 
         public void OnRefresh(object obj = null)
         {
-            SetGroup((DictionaryClass)obj);
+            SetGroup((DictionaryClass)obj, true);
         }
 
-        private void SetGroup(DictionaryClass dc = null)
+        private void SetGroup(DictionaryClass dc = null, bool getnumber = false)
         {
             TB_Group.Text = (dc != null ? dc.SLKOMUN1 : "");
-
             assort.ASGRUPAID = (dc != null ? dc.ID : 0);
+            dcgr = dc;
+            
+            if (getnumber)
+            {
+                NQueryReader nq = new NQueryReader("select max(ASNUMER) + 1 from " + assort.TableName());
+                nq.NReader.Read();
+                var nb = nq.NReader.GetInt32(0);
+                nq.NReader.Close();
+
+                TB_Numer.Text = nb.ToString();
+
+                if (dc != null)
+                  TB_Kod.Text = string.Format(dc.SLKOMUN2+"{0:d6}", nb);
+
+            }
         }
 
         public string TreeName()
@@ -118,13 +131,83 @@ namespace FakturaWpf.Assortment
                 bitmap.EndInit();
                 image.Source = bitmap;
             }
+
+            
         }
-
-
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzAsGroup, true}, "Lista grup asortymentowych", "ImgGroupas", 500, 675);
         }
+
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            Close(sender, e);
+        }
+
+        private void btSave_myClick(object sender, RoutedEventArgs e)
+        {
+            assort.ASTYP = CB_typ.comboBox.SelectedIndex;
+            assort.ASVAT =  (CB_vat.comboBox.SelectedValue.ToString() != "ZW" ? (int)CB_vat.comboBox.SelectedValue : -1);
+            assort.ASJM = (int)CB_jm.comboBox.SelectedValue;
+
+            if (assort.ASGRUPAID <=0)
+            {
+                Various.Warning("Nie wybrano grupy asortymentowej", "Uwaga !");
+                return;
+            }
+
+            if (assort.ThisSaveData())
+            {
+                Various.InfoOk("Assortyment zapisany", "Informacja");
+                MdiControl.RefreshMdi(typeof(AssortmentList), assort);
+                Close(sender, e);
+            }
+            else
+                Various.Warning("Błąd zapisu danych", "");
+        }
+
+        private void TB_Numer_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (dcgr != null)
+            {
+                var nb = int.Parse(TB_Numer.Text);
+                TB_Kod.Text = string.Format(dcgr.SLKOMUN2 + "{0:d6}", nb);
+            }
+        }
     }
+
+    public class ImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value != null)
+            {
+                using (var ms = new System.IO.MemoryStream((byte[])value))
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad; // here
+                    bitmap.StreamSource = ms;
+                    bitmap.EndInit();
+                    return bitmap;
+                }
+            }
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapImage)value));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                return ms.ToArray();
+            }
+        }
+    }
+
+
 }

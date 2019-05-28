@@ -53,12 +53,6 @@ namespace FakturaWpf
         }
 
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(-1);
-
-        }
-
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             ServerConf.ShowServerConf(false);
@@ -113,6 +107,11 @@ namespace FakturaWpf
         private void MenuItem_Click_13(object sender, RoutedEventArgs e)
         {
             MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzMeasure, false }, "Lista grup asortymentowych", "ImgMeasure", 500, 675);
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(-1);
         }
     }
 }
