@@ -96,7 +96,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_11(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(AssortmentList), null, "Lista asortymentów", "ImgStack", 500, 800);
+            MdiControl.AddChild(typeof(AssortmentList), new object[] { false }, "Lista asortymentów", "ImgStack", 500, 800);
         }
 
         private void MenuItem_Click_12(object sender, RoutedEventArgs e)

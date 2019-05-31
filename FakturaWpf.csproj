@@ -86,6 +86,7 @@
     <Compile Include="Dictionary\DictionaryList.xaml.cs">
       <DependentUpon>DictionaryList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Documents\DocPositionClass.cs" />
     <Compile Include="Documents\DocumentClass.cs" />
     <Compile Include="Documents\DocumentEdit.xaml.cs">
       <DependentUpon>DocumentEdit.xaml</DependentUpon>

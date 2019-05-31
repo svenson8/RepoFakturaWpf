@@ -1,4 +1,5 @@
-﻿using FakturaWpf.Customer;
+﻿using FakturaWpf.Assortment;
+using FakturaWpf.Customer;
 using FakturaWpf.Dictionary;
 using FakturaWpf.Tools;
 using System;
@@ -26,6 +27,7 @@ namespace FakturaWpf.Documents
         DocumentClass document; 
         List<DictionaryClass> ListNumber;
         DictionaryClass chosenNumber;
+        List<AssortmentClass> ListAssort;
 
         public DocumentEdit(int id)
         {
@@ -156,7 +158,19 @@ namespace FakturaWpf.Documents
 
         public void OnRefresh(object obj = null)
         {
-            SetCustomer((CustomerClass)obj);
+            if (obj is CustomerClass)
+              SetCustomer((CustomerClass)obj);
+
+            if (obj is AssortmentClass)
+                AddAssort((AssortmentClass)obj);
+        }
+
+        private void AddAssort(AssortmentClass obj)
+        {
+            if (ListAssort == null)
+                ListAssort = new List<AssortmentClass>();
+
+            ListAssort.Add(obj);
         }
 
         public string TreeName()
@@ -209,6 +223,11 @@ namespace FakturaWpf.Documents
         private void CB_Docs_mySelect(object sender, SelectionChangedEventArgs e)
         {
             SetDocNumber();
+        }
+
+        private void btIns_myClick(object sender, RoutedEventArgs e)
+        {
+            MdiControl.AddChild(typeof(AssortmentList), new object[] { true }, "Lista asortymentów", "ImgStack", 500, 800);
         }
     }
 }

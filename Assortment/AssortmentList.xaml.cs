@@ -1,4 +1,5 @@
 ﻿using FakturaWpf.Dictionary;
+using FakturaWpf.Documents;
 using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,14 @@ namespace FakturaWpf.Assortment
     {
         private List<AssortmentClass> listA;
         private int idGroup = 0;
+        private bool choice;
 
-        public AssortmentList()
+        public AssortmentList(Boolean achoice =false)
         {
             InitializeComponent();
+            choice = achoice;
             Prepare();
+
         }
 
         private void Prepare()
@@ -38,6 +42,8 @@ namespace FakturaWpf.Assortment
             InitCbChoice();
             CbChoiceChange();
             FillgroupTree();
+
+            btCho.Visibility = (choice == true ? Visibility.Visible : Visibility.Collapsed);
 
             LoadData();
         }
@@ -227,6 +233,16 @@ namespace FakturaWpf.Assortment
             else
                 idGroup = 0;
             LoadData();
+        }
+
+        private void btCho_myClick(object sender, RoutedEventArgs e)
+        {
+           AssortmentClass asso = (AssortmentClass)DG_AsList.SelectedItem;
+
+            if (asso != null)
+                MdiControl.RefreshMdi(typeof(DocumentEdit), asso);
+
+            Close(sender, e);
         }
     }
 
