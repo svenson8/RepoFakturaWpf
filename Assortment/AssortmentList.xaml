@@ -44,6 +44,7 @@
         <DataGrid x:Name="DG_AsList" Style="{StaticResource MyGridStyle}" SelectionChanged="DG_AsList_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ASNAZWA}"  Header="Nazwa" Width="350"/>
+                <DataGridTextColumn x:Name="DGT_ILOSC" Header="Ilość" Width="40"/>
                 <DataGridTextColumn Binding="{Binding ASNETTO, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
                 <DataGridTextColumn Binding="{Binding ASBRUTTO, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
                 <DataGridTextColumn Binding="{Binding ASVAT, StringFormat=\{0:#\,#0\}, Converter={StaticResource myPercentConverter}}"  Header="%" Width="50" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>

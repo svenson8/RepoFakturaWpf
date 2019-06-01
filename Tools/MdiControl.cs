@@ -65,14 +65,32 @@ namespace FakturaWpf.Tools
                 Icon = Various.GetImageFromResources(iconame),
                 Height = height,
                 Width = width,
-                Content = (UserControl)theObject,
+                Content = (UserControl)theObject,               
             };
 
             MdiControl.mdParent.Children.Add(md);
             md.Closing += ((IMdiControl)theObject).Close;
-
+         
             TreeControl.AddToTree(((IMdiControl)theObject).TreeName(), parentree);
             TreeControl.ExpandRecursively(TreeControl.mainTree.Items, true);
+
+            SetPosition(((IMdiControl)theObject).TreeName(), parentree, md);
+        }
+
+        private static void SetPosition(string treename, string parentree, MdiChild md)
+        {
+            if (parentree.Equals(""))
+            {
+                md.Position = new Point(0, 0);
+                TreeControl.FindTreeItem(TreeControl.mainTree.Items, treename).Tag = 0;
+            }
+            else
+            {
+                int tagp = (int)TreeControl.FindTreeItem(TreeControl.mainTree.Items, parentree).Tag;
+                md.Position = new Point(tagp + 30, tagp + 30);
+                TreeControl.FindTreeItem(TreeControl.mainTree.Items, treename).Tag = tagp + 30;
+            }
+
         }
 
         public static void RefreshMdi(Type myClass, object obj = null)

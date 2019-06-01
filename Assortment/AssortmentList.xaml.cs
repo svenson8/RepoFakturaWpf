@@ -44,6 +44,7 @@ namespace FakturaWpf.Assortment
             FillgroupTree();
 
             btCho.Visibility = (choice == true ? Visibility.Visible : Visibility.Collapsed);
+            DGT_ILOSC.Visibility = (choice == true ? Visibility.Visible : Visibility.Collapsed);
 
             LoadData();
         }

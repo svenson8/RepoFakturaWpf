@@ -99,7 +99,9 @@ namespace FakturaWpf.Assortment
             {
                 NQueryReader nq = new NQueryReader("select max(ASNUMER) + 1 from " + assort.TableName());
                 nq.NReader.Read();
-                var nb = nq.NReader.GetInt32(0);
+                var nb = 1;
+                if (!nq.NReader.IsDBNull(0))
+                    nb = nq.NReader.GetInt32(0);
                 nq.NReader.Close();
 
                 TB_Numer.Text = nb.ToString();
@@ -137,7 +139,7 @@ namespace FakturaWpf.Assortment
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzAsGroup, true}, "Lista grup asortymentowych", "ImgGroupas", 500, 675);
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzAsGroup, true}, "Lista grup asortymentowych", "ImgGroupas", 500, 675, TreeName());
         }
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
@@ -149,7 +151,8 @@ namespace FakturaWpf.Assortment
         {
             assort.ASTYP = CB_typ.comboBox.SelectedIndex;
             assort.ASVAT =  (CB_vat.comboBox.SelectedValue.ToString() != "ZW" ? (int)CB_vat.comboBox.SelectedValue : -1);
-            assort.ASJM = (int)CB_jm.comboBox.SelectedValue;
+            if (CB_jm.comboBox.SelectedValue != null)
+              assort.ASJM = (int)CB_jm.comboBox.SelectedValue;
 
             if (assort.ASGRUPAID <=0)
             {

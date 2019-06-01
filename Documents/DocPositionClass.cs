@@ -24,9 +24,30 @@ namespace FakturaWpf.Documents
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
 
+        public DocPositionClass(int id = 0)
+        {
+            this.ID = id;
+            if (this.ID > 0)
+                ThisReadData();
+            else
+            {
+                this.DATAW = DateTime.Now;
+                this.DMODDATE = DateTime.Now;
+            }
+        }
+
         public int GetLengthOfStringField(string name)
         {
-            throw new NotImplementedException();
+            switch (name)
+            {
+                case nameof(ACTIVE):    return 1;
+                case nameof(MPCENA):    return 4;
+                case nameof(MPWARNET):  return 4;
+                case nameof(MPWARVAT):  return 4;
+                case nameof(MPWARBR):   return 4;
+                case nameof(MPWARTOSC): return 4;
+                default: return 100;
+            }
         }
 
         public string TableName()
@@ -36,7 +57,7 @@ namespace FakturaWpf.Documents
 
         public void ThisReadData()
         {
-            throw new NotImplementedException();
+            ReadData(this, TableName(), this.ID);
         }
 
         public List<object> ThisReadListData()
@@ -46,12 +67,13 @@ namespace FakturaWpf.Documents
 
         public bool ThisSaveData()
         {
-            throw new NotImplementedException();
+            this.ID = SaveData(this.ID, TableName(), typeof(DocPositionClass), this);
+            return (this.ID > 0);
         }
 
         public bool ThisTableCheck()
         {
-            throw new NotImplementedException();
+            return TableCheck(TableName(), typeof(DocPositionClass), GetLengthOfStringField);
         }
     }
 }

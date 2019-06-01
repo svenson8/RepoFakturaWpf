@@ -227,7 +227,7 @@ namespace FakturaWpf.Documents
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(AssortmentList), new object[] { true }, "Lista asortymentów", "ImgStack", 500, 800);
+            MdiControl.AddChild(typeof(AssortmentList), new object[] { true }, "Lista asortymentów", "ImgStack", 500, 800, TreeName());
         }
     }
 }

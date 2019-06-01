@@ -68,6 +68,10 @@ namespace FakturaWpf
             result = ds.ThisTableCheck();
             result = sc.Triggers(ds.TableName());
 
+            DocPositionClass dp = new DocPositionClass();
+            result = dp.ThisTableCheck();
+            result = sc.Triggers(dp.TableName());
+
             AssortmentClass ac = new AssortmentClass();
             result = ac.ThisTableCheck();
             result = sc.Triggers(ac.TableName());
