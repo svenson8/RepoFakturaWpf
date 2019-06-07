@@ -24,7 +24,7 @@ namespace FakturaWpf.Assortment
     /// </summary>
     public partial class AssortmentList : UserControl, IMdiControl
     {
-        private List<AssortmentClass> listA;
+        private List<AssortmentClass> listA;        
         private int idGroup = 0;
         private bool choice;
 
@@ -45,6 +45,10 @@ namespace FakturaWpf.Assortment
 
             btCho.Visibility = (choice == true ? Visibility.Visible : Visibility.Collapsed);
             DGT_ILOSC.Visibility = (choice == true ? Visibility.Visible : Visibility.Collapsed);
+            DGT_NETTOWYB.Visibility = (choice == true ? Visibility.Visible : Visibility.Collapsed);
+
+            DGT_NETTO.Visibility = (choice == false ? Visibility.Visible : Visibility.Collapsed);
+            DGT_BRUTTO.Visibility = (choice == false ? Visibility.Visible : Visibility.Collapsed);
 
             LoadData();
         }
@@ -238,10 +242,18 @@ namespace FakturaWpf.Assortment
 
         private void btCho_myClick(object sender, RoutedEventArgs e)
         {
-           AssortmentClass asso = (AssortmentClass)DG_AsList.SelectedItem;
+           
+            List<AssortmentClass> lwyn = new List<AssortmentClass>();
 
-            if (asso != null)
-                MdiControl.RefreshMdi(typeof(DocumentEdit), asso);
+            foreach (AssortmentClass a in listA)
+            {
+                if (a.ASILOSCWYB > 0)
+                    lwyn.Add(a);
+            }
+
+            if (lwyn.Count > 0)
+                MdiControl.RefreshMdi(typeof(DocumentEdit), lwyn);
+
 
             Close(sender, e);
         }

@@ -41,13 +41,14 @@
         <TreeView DockPanel.Dock="Left" x:Name="groupTV" VerticalAlignment="Stretch" Width="150" SelectedItemChanged="groupTV_SelectedItemChanged">
 
         </TreeView>
-        <DataGrid x:Name="DG_AsList" Style="{StaticResource MyGridStyle}" SelectionChanged="DG_AsList_SelectionChanged">
+        <DataGrid x:Name="DG_AsList" Style="{StaticResource MyGridStyle}" SelectionChanged="DG_AsList_SelectionChanged" IsReadOnly="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ASNAZWA}"  Header="Nazwa" Width="350"/>
-                <DataGridTextColumn x:Name="DGT_ILOSC" Header="Ilość" Width="40"/>
-                <DataGridTextColumn Binding="{Binding ASNETTO, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
-                <DataGridTextColumn Binding="{Binding ASBRUTTO, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
-                <DataGridTextColumn Binding="{Binding ASVAT, StringFormat=\{0:#\,#0\}, Converter={StaticResource myPercentConverter}}"  Header="%" Width="50" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}"/>
+                <DataGridTextColumn Binding="{Binding ASNAZWA}"  Header="Nazwa" Width="350" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="DGT_ILOSC" Header="Ilość" Width="40" Binding="{Binding ASILOSCWYB, Mode=TwoWay, StringFormat=\{0:#\,#0\}}" CellStyle="{StaticResource CellEdit}"/>
+                <DataGridTextColumn x:Name="DGT_NETTOWYB" Binding="{Binding ASNETTOWYB, Mode=TwoWay, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellEdit}"/>
+                <DataGridTextColumn x:Name="DGT_NETTO" Binding="{Binding ASNETTO,  StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="DGT_BRUTTO" Binding="{Binding ASBRUTTO, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" IsReadOnly="true"/>
+                <DataGridTextColumn Binding="{Binding ASVAT, StringFormat=\{0:#\,#0\}, Converter={StaticResource myPercentConverter}}"  Header="%" Width="50" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" IsReadOnly="true"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

@@ -94,11 +94,16 @@
             <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myImageHeight="17" myImageWidth="17" myHeight="21" />
 
         </DockPanel>
-        <DataGrid x:Name="DG_Customer" Style="{StaticResource MyGridStyle}" >
+        <DataGrid x:Name="DG_Position" Style="{StaticResource MyGridStyle}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding KLINAZ}"  Header="Nazwa" Width="200"/>
-                <DataGridTextColumn Binding="{Binding KLINIP}"  Header="NIP" Width="80"/>
-                <DataGridTextColumn Binding="{Binding KLIPESEL}"  Header="Pesel" Width="80"/>
+                <DataGridTextColumn Binding="{Binding MPLP}"  Header="Lp" Width="40" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPNAZWA}"  Header="Nazwa" Width="200"  />
+                <DataGridTextColumn Binding="{Binding MPILOSC}"  Header="Ilość" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPJM}"  Header="JM" Width="40" HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}" />
+                <DataGridTextColumn Binding="{Binding MPCENA, StringFormat=\{0:#\,#0.00\}}"  Header="Cena" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPWARNET, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPWARVAT, StringFormat=\{0:#\,#0.00\}}"  Header="Vat" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPWARBR, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
             </DataGrid.Columns>
         </DataGrid>
 

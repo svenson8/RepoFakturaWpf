@@ -27,7 +27,7 @@ namespace FakturaWpf.Documents
         DocumentClass document; 
         List<DictionaryClass> ListNumber;
         DictionaryClass chosenNumber;
-        List<AssortmentClass> ListAssort;
+        List<DocPositionClass> ListPosition;
 
         public DocumentEdit(int id)
         {
@@ -48,6 +48,7 @@ namespace FakturaWpf.Documents
             InitCbPayment();
             SetCustomer((document.ID > 0 ? new CustomerClass(document.MDKLIID) : null));
             Various.SetTodayDates(GR_up);
+            Various.SetAutoColumnWidth(DG_Position, new[] { 1 });
             SetDocNumber();
         }
 
@@ -161,16 +162,43 @@ namespace FakturaWpf.Documents
             if (obj is CustomerClass)
               SetCustomer((CustomerClass)obj);
 
-            if (obj is AssortmentClass)
-                AddAssort((AssortmentClass)obj);
+            if (obj is List<AssortmentClass>)
+                AddPosition((List<AssortmentClass>)obj);
         }
 
-        private void AddAssort(AssortmentClass obj)
+        private void AddPosition(List<AssortmentClass> list)
         {
-            if (ListAssort == null)
-                ListAssort = new List<AssortmentClass>();
+            if ((list != null) && (list.Count > 0))
+            {
+                var lp = 1;
+                if (ListPosition == null)
+                    ListPosition = new List<DocPositionClass>();     
+                else
+                    lp = ListPosition.Count + 1;
 
-            ListAssort.Add(obj);
+                foreach (AssortmentClass a in list)
+                {
+                    DocPositionClass dc = new DocPositionClass();
+                    dc.MPILOSC = a.ASILOSCWYB;
+                    dc.MPLP = lp;
+                    dc.MPNAZWA = a.ASNAZWA;
+                    dc.MPILOSC = a.ASILOSC;
+                    if (a.ASJM > 0)
+                        dc.MPJM = new DictionaryClass(a.ASJM).SLKOMUN1;
+                    dc.MPCENA = a.ASNETTOWYB;
+                    dc.MPWARNET = dc.MPILOSC * dc.MPCENA;
+                    dc.MPWARVAT = ((Decimal)a.ASVAT / (Decimal)100) * (Decimal)dc.MPWARNET;
+                    dc.MPWARBR = dc.MPWARNET + dc.MPWARVAT;
+
+                    ListPosition.Add(dc);
+                    lp++;
+                }
+
+
+                DG_Position.ItemsSource = ListPosition;
+                DG_Position.SelectedIndex = 0;
+            }
+            
         }
 
         public string TreeName()

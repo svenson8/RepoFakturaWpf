@@ -24,6 +24,10 @@ namespace FakturaWpf.Documents
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
 
+        public string MPJM { get; set; }
+        public string MPNAZWA { get; set; }
+        public int MPLP { get; set; }
+
         public DocPositionClass(int id = 0)
         {
             this.ID = id;
@@ -46,6 +50,10 @@ namespace FakturaWpf.Documents
                 case nameof(MPWARVAT):  return 4;
                 case nameof(MPWARBR):   return 4;
                 case nameof(MPWARTOSC): return 4;
+
+                case nameof(MPJM):    return -1;
+                case nameof(MPNAZWA): return -1;
+                case nameof(MPLP):    return -1;
                 default: return 100;
             }
         }

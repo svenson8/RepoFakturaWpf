@@ -28,6 +28,8 @@ namespace FakturaWpf.Assortment
         public int ASVAT { get; set; }
         public DateTime DATAW { get; set; }
         public DateTime DMODDATE { get; set; }
+        public int ASILOSCWYB { get; set; }
+        public Decimal ASNETTOWYB { get; set; }
 
         public AssortmentClass(int id = 0)
         {
@@ -56,6 +58,8 @@ namespace FakturaWpf.Assortment
                 case nameof(ASUWAGI): return 1000;
                 case nameof(ASNETTO): return 4;
                 case nameof(ASBRUTTO): return 4;
+                case nameof(ASILOSCWYB): return -1;
+                case nameof(ASNETTOWYB): return -1;
 
                 default: return 100;
             }
