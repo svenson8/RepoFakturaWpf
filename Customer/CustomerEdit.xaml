@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Customer"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="520" d:DesignWidth="700" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             d:DesignHeight="520" d:DesignWidth="700" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="UserControl_PreviewKeyDown">
     <Grid x:Name="GR_Cus" Margin="0,10,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>

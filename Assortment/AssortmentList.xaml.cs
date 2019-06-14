@@ -33,6 +33,7 @@ namespace FakturaWpf.Assortment
             InitializeComponent();
             choice = achoice;
             Prepare();
+            this.Focusable = true;
 
         }
 
@@ -256,6 +257,30 @@ namespace FakturaWpf.Assortment
 
 
             Close(sender, e);
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close(sender, e);
+
+            if (e.Key == Key.Insert)
+                btIns_myClick(sender, e);
+
+            if (e.Key == Key.Delete)
+                MyButton_myClick(sender, e);
+
+            if (e.Key == Key.F6)
+                btnMod_myClick(sender, e);
+
+            if (e.Key == Key.F3)
+                MyButton_myClick_1(sender, e);
+
+            if ((e.Key == Key.Enter) && (choice == true))
+            {
+                DG_AsList.CommitEdit(DataGridEditingUnit.Row, true);
+                btCho_myClick(sender, e);
+            }
         }
     }
 

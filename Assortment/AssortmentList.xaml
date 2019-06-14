@@ -6,7 +6,7 @@
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              xmlns:local="clr-namespace:FakturaWpf.Assortment"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="810">
+             d:DesignHeight="500" d:DesignWidth="810" PreviewKeyDown="UserControl_PreviewKeyDown">
     
     <UserControl.Resources>
         <local:PercentConverter x:Key="myPercentConverter"/>

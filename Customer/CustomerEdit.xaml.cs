@@ -34,6 +34,7 @@ namespace FakturaWpf.Customer
             customer.ACTIVE = "T";
 
             InitBinding();
+            this.Focusable = true;
         }
 
         void InitBinding()
@@ -104,6 +105,11 @@ namespace FakturaWpf.Customer
         {
             try
             {
+                if (TX_Name.Text.Length == 0)
+                {
+                    Various.Warning("Nie nadano nazwy kontrahentowi", "Ostrzeżenie");
+                    return;
+                }
                 customer.KLIWOJID  = (int)(CB_Province.comboBox.SelectedValue);
                 customer.KLIKRAJID = (int)(CB_Country.comboBox.SelectedValue);
                 if (customer.ThisSaveData())
@@ -140,6 +146,16 @@ namespace FakturaWpf.Customer
             }
 
             InitBinding();
+
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+                MyButton_myClick(sender, e);
+
+            if (e.Key == Key.Escape)
+                MyButton_myClick_1(sender, e);
 
         }
     }

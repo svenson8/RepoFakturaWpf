@@ -36,7 +36,9 @@ namespace FakturaWpf
             InitializeComponent();
             InitBinding();
 
-            FindServers(); 
+            FindServers();
+            this.Focusable = true;
+            TX_Server.Focus();
         }
 
         private void FindServers()
@@ -136,6 +138,15 @@ namespace FakturaWpf
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             window.DialogResult = false;
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                button2_Click(sender, e);
+
+            if (e.Key == Key.F5)
+                button_Click(sender, e);
         }
     }
 

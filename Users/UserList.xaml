@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Users"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
-             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="UC_UserList_PreviewKeyDown">
 
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -20,7 +20,8 @@ namespace FakturaWpf
 {
     class Various
     {
-       
+        public static string[] asorttypes = {"towary", "usługi", "materiały", "wyroby", "zestawy"};
+
         public static string QuotedStr(string val)
         {
             return "'" + val + "'";
@@ -133,12 +134,10 @@ namespace FakturaWpf
         public static void InitCbAssortType(ComboBox cb)
         {
             cb.Items.Clear();
-            cb.Items.Add("towary");
-            cb.Items.Add("usługi");
-            cb.Items.Add("materiały");
-            cb.Items.Add("wyroby");
-            cb.Items.Add("zestawy");
 
+            foreach (string s in asorttypes)            
+                cb.Items.Add(s);
+            
             cb.SelectedIndex = 0;
         }
 

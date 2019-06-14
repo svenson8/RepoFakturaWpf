@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf"
-             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="UserControl_PreviewKeyDown" >
     <Grid Background="#FFE5E5E5" Name="gridServer">
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />

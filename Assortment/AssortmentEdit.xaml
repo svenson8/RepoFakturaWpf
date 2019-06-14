@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Assortment"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="880">
+             d:DesignHeight="450" d:DesignWidth="880" PreviewKeyDown="UC_AssortmentEdit_PreviewKeyDown">
 
     <UserControl.Resources>
         <local:ImageConverter x:Key="myImageConverter"/>

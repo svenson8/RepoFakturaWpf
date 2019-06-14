@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FakturaWpf.Documents
 {
-    class DocPositionClass : DatabaseConnect, IClassControl
+    public class DocPositionClass : DatabaseConnect, IClassControl
     {
         public int ID { get; set; }
         public int IUSERID { get; set; }
@@ -37,6 +37,7 @@ namespace FakturaWpf.Documents
             {
                 this.DATAW = DateTime.Now;
                 this.DMODDATE = DateTime.Now;
+                this.ACTIVE = "T";
             }
         }
 
@@ -70,7 +71,8 @@ namespace FakturaWpf.Documents
 
         public List<object> ThisReadListData()
         {
-            throw new NotImplementedException();
+            return ReadListData(this, null, new object[] { 0 }, "select d.*, t.ASNAZWA as MPNAZWA , cast(ROW_NUMBER() OVER( ORDER BY d.ID ) AS int) AS MPLP " +
+                                                                "from TDokPozycje d left outer join TTowary t on t.ID = d.ASSORTID  where d.DOKID ="+this.DOKID+" order by ID");
         }
 
         public bool ThisSaveData()

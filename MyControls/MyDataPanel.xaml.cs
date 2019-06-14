@@ -130,7 +130,7 @@ namespace FakturaWpf.MyControls
 
         }
 
-        public string GetSqlDates(string field)
+        public string GetDates(string field = null)
         {
             try
             {
@@ -207,9 +207,12 @@ namespace FakturaWpf.MyControls
             }
 
 
-
-            return " " + field + " >=" + Various.QuotedStr(dateFrom.ToShortDateString()) +
-                   " and " + field + " <=" + Various.QuotedStr(dateTo.ToShortDateString());
+            if (field != null)
+            {
+                return " " + field + " >=" + Various.QuotedStr(dateFrom.ToShortDateString()) +
+                       " and " + field + " <=" + Various.QuotedStr(dateTo.ToShortDateString());
+            } else
+                return "";
         }
 
 

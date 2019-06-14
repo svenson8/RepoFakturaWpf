@@ -37,6 +37,7 @@ namespace FakturaWpf.Assortment
             InitCbType();
             InitCbVat();
             InitCbMeasure();
+            this.Focusable = true;
 
         }
 
@@ -177,6 +178,18 @@ namespace FakturaWpf.Assortment
                 var nb = int.Parse(TB_Numer.Text);
                 TB_Kod.Text = string.Format(dcgr.SLKOMUN2 + "{0:d6}", nb);
             }
+        }
+
+        private void UC_AssortmentEdit_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+                btSave_myClick(sender, e);
+
+            if (e.Key == Key.Escape)
+                MyButton_myClick(sender, e);
+
+            if (e.Key == Key.F7)
+                button_Click(sender, e);
         }
     }
 

@@ -2,31 +2,24 @@
 using FakturaWpf.Tools;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FakturaWpf.Documents
 {
-  /*  enum Operationa
-    {
-        none = 0, // brak operacji
-    addition, // dodawanie
-    subtraction, // odejmowanie
-    multiplication, // mnożenie
-    division, // dzielenie
-    result // wynik
-    }*/
+    /*  enum Operationa
+      {
+          none = 0, // brak operacji
+      addition, // dodawanie
+      subtraction, // odejmowanie
+      multiplication, // mnożenie
+      division, // dzielenie
+      result // wynik
+      }*/
     /// <summary>
     /// Logika interakcji dla klasy UserControl1.xaml
     /// </summary>
@@ -53,12 +46,14 @@ namespace FakturaWpf.Documents
         {
             InitializeComponent();
             Prepare();
+            this.Focusable = true;
         }
 
         private void Prepare()
         {
             Various.SetAutoColumnWidth(DG_DocList, new int[] { 3, 4 });
             InitDokDef();
+            DataPanel.CB_Period.comboBox.Text = "Bieżący rok";
             LoadData();
            
         }
@@ -75,6 +70,21 @@ namespace FakturaWpf.Documents
             }
 
             List<DocumentClass> lpom = listD.Select(x => x).ToList();
+
+            lpom = lpom.Where(x => x.ACTIVE == (CH_archiwe.IsChecked == false ? "T" : "N")).ToList();
+
+            if (CH_Cancel.IsChecked == true)
+                lpom = lpom.Where(x => x.MDSTATUS == "A").ToList();
+
+            List<ItemDok> seldok = ListData.Where(ps => ps.IsChecked).ToList();
+
+            lpom = lpom.Where(x => seldok.Select(o => o.id).ToArray().Contains(x.MDDOKDEFID)).ToList();
+
+            DataPanel.GetDates();
+            lpom = lpom.Where(x => (x.MDDATAWYST >= DataPanel.dateFrom && x.MDDATAWYST <= DataPanel.dateTo)).ToList();
+
+            col_zam.Visibility = (Ch_zam.IsChecked == true ? Visibility.Visible : Visibility.Collapsed);
+            col_wg.Visibility  = (Ch_wgdok.IsChecked == true ? Visibility.Visible : Visibility.Collapsed);
 
             DG_DocList.ItemsSource = lpom;
             DG_DocList.SelectedIndex = 0;
@@ -141,15 +151,9 @@ namespace FakturaWpf.Documents
             return "Lita dokum.";
         }
 
-
-        private void Btn_Refresh_myClick(object sender, RoutedEventArgs e)
-        {
-            var selecteds = ListData.Where(ps => ps.IsChecked);
-        }
-
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
-            DataPanel.GetSqlDates("dat1");
+            LoadData();
         }
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
@@ -166,5 +170,69 @@ namespace FakturaWpf.Documents
         {
             EditPosition(true);
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentClass document = (DocumentClass)DG_DocList.SelectedItem;
+            document.MDSTATUS = "A";
+            NQuery n = new NQuery("update " + document.TableName() + " set " + nameof(document.MDSTATUS) + "='A' where ID=" + document.ID);
+            LoadData();
+        }
+
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
+            if (Various.Question("Czy na pewno usunąć dokument ?"))
+            {
+                DocumentClass doc = (DocumentClass)DG_DocList.SelectedItem;
+
+                if (doc.DeletPosition(doc.ID, doc.TableName()))
+                {
+                    var index = listD.FindIndex(x => x.ID == doc.ID);
+                    if (index > -1)
+                        listD.RemoveAt(index);
+
+                    Various.InfoOk("Dokument usunięty pomyślnie");
+
+                    LoadData();
+                }
+            }
+        }
+
+
+        private void US_DocumentList_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close(sender, e);
+
+            if (e.Key == Key.Insert)
+                btIns_myClick(sender, e);
+
+            if (e.Key == Key.Delete)
+                MyButton_myClick_1(sender, e);
+
+            if (e.Key == Key.F6)
+                btnMod_myClick(sender, e);
+
+            if (e.Key == Key.F3)
+                MyButton_myClick(sender, e);
+        }
+
+        private void MyButton_myClick_2(object sender, RoutedEventArgs e)
+        {
+              
+              PrintDialog dlgPrint = new PrintDialog();
+              WpfPrinting p = new WpfPrinting();
+              p.PrintDataGrid(null, DG_DocList, null, dlgPrint, true, false, false);
+
+                 
+
+
+        }
+
+
+
+
+
+
     }
 }

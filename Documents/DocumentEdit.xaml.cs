@@ -36,6 +36,7 @@ namespace FakturaWpf.Documents
             document = new DocumentClass(id);
 
             InitBinding();
+            this.Focusable = true;
 
         }
 
@@ -50,6 +51,16 @@ namespace FakturaWpf.Documents
             Various.SetTodayDates(GR_up);
             Various.SetAutoColumnWidth(DG_Position, new[] { 1 });
             SetDocNumber();
+            LoadPosition();
+        }
+
+        private void LoadPosition()
+        {
+            DocPositionClass dc = new DocPositionClass();
+            dc.DOKID = document.ID;
+            ListPosition =  dc.ThisReadListData().OfType<DocPositionClass>().ToList();
+
+            RefreshGrid();
         }
 
         private void SetDocNumber()
@@ -164,6 +175,50 @@ namespace FakturaWpf.Documents
 
             if (obj is List<AssortmentClass>)
                 AddPosition((List<AssortmentClass>)obj);
+
+            if (obj is DocPositionClass)
+                EditPosition((DocPositionClass)obj);
+        }
+
+        private void EditPosition(DocPositionClass dp)
+        {
+            if (dp != null)
+            {
+                var index = ListPosition.FindIndex(x => x.MPLP == dp.MPLP);
+                if (index > -1)
+                { 
+                    ListPosition[index].MPILOSC = dp.MPILOSC;
+                    ListPosition[index].MPCENA = dp.MPCENA;
+                    ListPosition[index].MPWARNET = dp.MPILOSC * dp.MPCENA;
+                    ListPosition[index].MPWARVAT = ((Decimal)ListPosition[index].MPSTAWKAVAT / (Decimal)100) * (Decimal)ListPosition[index].MPWARNET;
+                    ListPosition[index].MPWARBR = ListPosition[index].MPWARNET + ListPosition[index].MPWARVAT;
+
+                    RefreshGrid();
+                }
+
+            }
+        }
+
+        private void RefreshGrid()
+        {
+            DG_Position.ItemsSource = ListPosition;
+            DG_Position.Items.Refresh();
+            DG_Position.SelectedIndex = 0;
+
+            // Summary
+            Decimal sumNet = (Decimal)0;
+            Decimal sumVat = (Decimal)0;
+            Decimal sumBru = (Decimal)0;
+            foreach (DocPositionClass dc in ListPosition)
+            {
+                sumNet += (Decimal)dc.MPWARNET;
+                sumVat += (Decimal)dc.MPWARVAT;
+                sumBru += (Decimal)dc.MPWARBR;
+            }
+
+            l_netto.Content = string.Format("{0:0.00}", sumNet);
+            l_vat.Content = string.Format("{0:0.00}", sumVat);
+            l_brutto.Content = string.Format("{0:0.00}", sumBru);
         }
 
         private void AddPosition(List<AssortmentClass> list)
@@ -182,23 +237,37 @@ namespace FakturaWpf.Documents
                     dc.MPILOSC = a.ASILOSCWYB;
                     dc.MPLP = lp;
                     dc.MPNAZWA = a.ASNAZWA;
-                    dc.MPILOSC = a.ASILOSC;
                     if (a.ASJM > 0)
                         dc.MPJM = new DictionaryClass(a.ASJM).SLKOMUN1;
                     dc.MPCENA = a.ASNETTOWYB;
                     dc.MPWARNET = dc.MPILOSC * dc.MPCENA;
                     dc.MPWARVAT = ((Decimal)a.ASVAT / (Decimal)100) * (Decimal)dc.MPWARNET;
                     dc.MPWARBR = dc.MPWARNET + dc.MPWARVAT;
+                    dc.ASSORTID = a.ID;
+                    dc.MPSTAWKAVAT = a.ASVAT;
 
                     ListPosition.Add(dc);
                     lp++;
                 }
 
 
-                DG_Position.ItemsSource = ListPosition;
-                DG_Position.SelectedIndex = 0;
+                RefreshGrid();
             }
             
+        }
+
+        private void DeletePosition()
+        {
+            DocPositionClass docp = (DocPositionClass)DG_Position.SelectedItem;
+
+            if (docp != null)
+            {
+                var index = ListPosition.FindIndex(x => x.MPLP == docp.MPLP);
+                if (index > -1)
+                    ListPosition.RemoveAt(index);
+
+                RefreshGrid();
+            }
         }
 
         public string TreeName()
@@ -220,32 +289,59 @@ namespace FakturaWpf.Documents
         {
             try
             {
-                document.MDDOKDEFID     = (int)CB_Docs.comboBox.SelectedValue;
-                document.MDDATASPRZRODZ = CB_SellKind.comboBox.SelectedIndex;
-                document.MDRODZTRANS    = CB_Trans.comboBox.SelectedIndex;
-                document.MDRODZPLATID   = (int)CB_Payment.comboBox.SelectedValue;
-                document.MDNRDOK        = L_Nrdok.Content.ToString();
-
-                if (document.ID <= 0)
+                if (document.MDKLIID <=0)
                 {
-                    chosenNumber.SLKOMUN12 = +1;
-                    chosenNumber.ThisSaveData();
+                    Various.Warning("Nie wybrano kontrahenta", "Ostrzeżenie");
+                        return;
                 }
 
-                if (document.ThisSaveData())
+                if ((ListPosition != null) && (ListPosition.Count > 0))
                 {
-                    Various.InfoOk("Dokument zapisany", "Informacja");
-                    MdiControl.RefreshMdi(typeof(DocumentList), document);
+
+                    document.MDDOKDEFID = (int)CB_Docs.comboBox.SelectedValue;
+                    document.MDDATASPRZRODZ = CB_SellKind.comboBox.SelectedIndex;
+                    document.MDRODZTRANS = CB_Trans.comboBox.SelectedIndex;
+                    document.MDRODZPLATID = (int)CB_Payment.comboBox.SelectedValue;
+                    document.MDNRDOK = L_Nrdok.Content.ToString();
+
+                    if (document.ID <= 0)
+                    {
+                        chosenNumber.SLKOMUN12 += 1;
+                        chosenNumber.ThisSaveData();
+                    }
+
+                    if (document.ThisSaveData() && SavePositions())
+                    {
+                        Various.InfoOk("Dokument zapisany", "Informacja");
+                        MdiControl.RefreshMdi(typeof(DocumentList), document);
+                    }
+                    else
+                        Various.Warning("Błąd zapisu danych", "Błąd");
+
+                    Close(sender, e);
                 }
                 else
-                    Various.Warning("Błąd zapisu danych", "");
-
-                Close(sender, e);
+                    Various.Warning("Nie dodano żadnych pozycji sprzedażowych", "Ostrzeżenie");
              }
             catch (Exception ex)
             {
                 Various.Error("Błąd "+nameof(DocumentEdit)+ " btSave_myClick:" + ex.Message, "Błąd");
             }
+        }
+
+        private bool SavePositions()
+        {
+            bool result = true;
+            foreach (DocPositionClass dc in ListPosition)
+            {
+                dc.DOKID = document.ID;
+                result = dc.ThisSaveData();
+            }
+
+            if (result)
+                return true;
+            else
+                return false;
         }
 
         private void CB_Docs_mySelect(object sender, SelectionChangedEventArgs e)
@@ -256,6 +352,38 @@ namespace FakturaWpf.Documents
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
             MdiControl.AddChild(typeof(AssortmentList), new object[] { true }, "Lista asortymentów", "ImgStack", 500, 800, TreeName());
+        }
+
+        private void MyButton_myClick(object sender, RoutedEventArgs e)
+        {
+            DeletePosition();
+        }
+
+        private void btnMod_myClick(object sender, RoutedEventArgs e)
+        {
+            DocPositionClass docp = (DocPositionClass)DG_Position.SelectedItem;
+
+            if (docp != null)
+            {
+                MdiControl.AddChild(typeof(DocPositionEdit), new object[] { docp }, "Edycja pozycji", "ImgStack", 190, 550, TreeName());
+            }
+        }
+
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
+            Close(sender, e);
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+                btSave_myClick(sender, e);
+
+            if (e.Key == Key.Escape)
+                MyButton_myClick_1(sender, e);
+
+            if (e.Key == Key.F2)
+                Button_Click(sender, e);
         }
     }
 }

@@ -35,6 +35,7 @@ namespace FakturaWpf.Customer
             InitializeComponent();
             choice = achoice;
             Prepare();
+            this.Focusable = true;
             
         }
 
@@ -222,6 +223,37 @@ namespace FakturaWpf.Customer
               MdiControl.RefreshMdi(typeof(DocumentEdit), customer);
 
             Close(sender, e);
+        }
+
+        private void UC_CustomerList_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close(sender, e);
+
+            if (e.Key == Key.Insert)
+                EditPosition(false);
+
+            if (e.Key == Key.F6)
+                EditPosition(true);
+
+            if (e.Key == Key.Delete)
+                MyButton_myClick_1(sender, e);
+
+            if (e.Key == Key.F3)
+                MyButton_myClick(sender, e);
+
+            if ((e.Key == Key.Enter) && (choice == true))
+            {
+                btCho_myClick(sender, e);
+            }
+        }
+
+        private void MyButton_myClick_2(object sender, RoutedEventArgs e)
+        {
+            PrintDialog dlgPrint = new PrintDialog();
+            WpfPrinting p = new WpfPrinting();
+            p.PrintDataGrid(null, DG_Customer, null, dlgPrint, true, false, false);
+
         }
     }
 

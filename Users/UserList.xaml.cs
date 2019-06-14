@@ -36,7 +36,7 @@ namespace FakturaWpf.Users
             InitializeComponent();
 
             LoadData();
-
+            this.Focusable = true;
 
         }
 
@@ -88,17 +88,22 @@ namespace FakturaWpf.Users
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
- 
+
+            EditPosition(((MyButton)sender).Name.Equals("btnMod"));
+        }
+
+        private void EditPosition(bool mod)
+        {
             int id = 0;
 
-            if (((MyButton)sender).Name.Equals("btnMod"))
+            if (mod)
             {
                 GetId(out id);
             }
 
             if (id >= 0)
             {
-                MdiControl.AddChild(typeof(UserEdit), new object[] {id}, "Dane użytkownika", "ImgFakt", 395, 575, TreeName());
+                MdiControl.AddChild(typeof(UserEdit), new object[] { id }, "Dane użytkownika", "ImgFakt", 395, 575, TreeName());
             }
         }
 
@@ -137,6 +142,26 @@ namespace FakturaWpf.Users
         public string TreeName()
         {
             return "Lista użytkow.";
+        }
+
+        private void UC_UserList_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close(sender, e);
+
+            if (e.Key == Key.Insert)
+                EditPosition(false);
+
+            if (e.Key == Key.F6)
+                EditPosition(true);
+
+            if (e.Key == Key.Delete)
+                MyButton_myClick(sender, e);
+
+            if (e.Key == Key.F3)
+                button5_Click(sender, e);
+
+
         }
     }
 }

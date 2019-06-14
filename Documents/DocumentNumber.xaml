@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakturaWpf.Documents"
              xmlns:my="clr-namespace:FakturaWpf.MyControls" x:Class="FakturaWpf.Documents.DocumentNumber"
-             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="389" >
+             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="389" PreviewKeyDown="UserControl_PreviewKeyDown" >
     <Grid x:Name="GR_Main">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>

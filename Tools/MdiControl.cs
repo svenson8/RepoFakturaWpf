@@ -70,7 +70,7 @@ namespace FakturaWpf.Tools
 
             MdiControl.mdParent.Children.Add(md);
             md.Closing += ((IMdiControl)theObject).Close;
-         
+
             TreeControl.AddToTree(((IMdiControl)theObject).TreeName(), parentree);
             TreeControl.ExpandRecursively(TreeControl.mainTree.Items, true);
 

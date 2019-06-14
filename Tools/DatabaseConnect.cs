@@ -10,6 +10,7 @@ using System.Windows;
 using System.Reflection;
 using System.Xml;
 using System.Data.SqlTypes;
+using FakturaWpf.Tools;
 
 namespace FakturaWpf
 {
@@ -281,11 +282,14 @@ namespace FakturaWpf
             {
                 if (prop.Name != nameof(ID))
                 {
-                    list.Add(new Params("@" + prop.Name,
-                                        GetSqlTypeFromVariable(prop.PropertyType),
-                                        CheckValue(prop.GetValue(obj, null))));
+                    if (((IClassControl)obj).GetLengthOfStringField(prop.Name) != -1)
+                    {
+                        list.Add(new Params("@" + prop.Name,
+                                            GetSqlTypeFromVariable(prop.PropertyType),
+                                            CheckValue(prop.GetValue(obj, null))));
 
-                    bfs.AddString(prop.Name);
+                        bfs.AddString(prop.Name);
+                    }
                 }
 
             }

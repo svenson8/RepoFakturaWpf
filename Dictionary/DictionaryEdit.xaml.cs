@@ -42,6 +42,7 @@ namespace FakturaWpf.Dictionary
             }
 
             InitBinding();
+            this.Focusable = true;
 
         }
 
@@ -67,6 +68,12 @@ namespace FakturaWpf.Dictionary
 
         private void btIns_myClick(object sender, RoutedEventArgs e)
         {
+            if (TX_Name.Text.Length == 0)
+            {
+                Various.Warning("Nie nadano nazwy", "Ostrzeżenie");
+                return;
+            }
+
             if (mydict.SLRODZ == DictionaryClass.slRodzDokDef)
             {
                 if (CB_PayF.comboBox.SelectedIndex == 1)
@@ -90,6 +97,16 @@ namespace FakturaWpf.Dictionary
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
             Close(sender, e);
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+                btIns_myClick(sender, e);
+
+            if (e.Key == Key.Escape)
+                MyButton_myClick(sender, e);
+
         }
     }
 }

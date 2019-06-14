@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Documents"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="900">
+             d:DesignHeight="550" d:DesignWidth="900" PreviewKeyDown="UserControl_PreviewKeyDown">
     <DockPanel x:Name="DP_Main" LastChildFill="True">
         <Grid x:Name="GR_up" DockPanel.Dock="Top" Height="140">
             <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
 
         <DockPanel DockPanel.Dock="Bottom">
             <my:MyButton x:Name="btSave" myText="F5 Zapisz" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgSave}" myHeight="24" myClick="btSave_myClick"  />
-            <my:MyButton myText="Esc Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24"/>
+            <my:MyButton myText="Esc Anuluj" HorizontalAlignment="Right" Margin="0,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="24" myClick="MyButton_myClick_1"/>
         </DockPanel>
 
 
@@ -90,9 +90,20 @@
         </Grid>
         <DockPanel DockPanel.Dock="Bottom" Height="30">
             <my:MyButton x:Name="btIns" myText="Ins Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myImageHeight="17" myImageWidth="17" myHeight="21" myClick="btIns_myClick"  />
-            <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myImageHeight="17" myImageWidth="17" myHeight="21" />
-            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myImageHeight="17" myImageWidth="17" myHeight="21" />
-
+            <my:MyButton x:Name="btnMod" myText="F6 Zmień" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myImageHeight="17" myImageWidth="17" myHeight="21" myClick="btnMod_myClick" />
+            <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myImageHeight="17" myImageWidth="17" myHeight="21" myClick="MyButton_myClick" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="252"/>
+                    <ColumnDefinition Width="109"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Label FontWeight="Bold" Margin="80,0,0,0" Grid.Column="0">Podsumowanie:</Label>
+                <Label HorizontalAlignment="Right" x:Name="l_netto" FontWeight="Bold"  Grid.Column="1" >Netto</Label>
+                <Label HorizontalAlignment="Right" x:Name="l_vat" FontWeight="Bold" Grid.Column="2" >Vat</Label>
+                <Label HorizontalAlignment="Right" x:Name="l_brutto" FontWeight="Bold"  Grid.Column="3">Brutto</Label>
+            </Grid>
         </DockPanel>
         <DataGrid x:Name="DG_Position" Style="{StaticResource MyGridStyle}" >
             <DataGrid.Columns>
@@ -100,10 +111,10 @@
                 <DataGridTextColumn Binding="{Binding MPNAZWA}"  Header="Nazwa" Width="200"  />
                 <DataGridTextColumn Binding="{Binding MPILOSC}"  Header="Ilość" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
                 <DataGridTextColumn Binding="{Binding MPJM}"  Header="JM" Width="40" HeaderStyle="{StaticResource CenterHeader}" CellStyle="{StaticResource CellCentered}" />
-                <DataGridTextColumn Binding="{Binding MPCENA, StringFormat=\{0:#\,#0.00\}}"  Header="Cena" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
-                <DataGridTextColumn Binding="{Binding MPWARNET, StringFormat=\{0:#\,#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
-                <DataGridTextColumn Binding="{Binding MPWARVAT, StringFormat=\{0:#\,#0.00\}}"  Header="Vat" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
-                <DataGridTextColumn Binding="{Binding MPWARBR, StringFormat=\{0:#\,#0.00\}}"  Header="Brutto" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPCENA, StringFormat=\{0:#\#0.00\}}"  Header="Cena" Width="80" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPWARNET, StringFormat=\{0:#\#0.00\}}"  Header="Netto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPWARVAT, StringFormat=\{0:#\#0.00\}}"  Header="Vat" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
+                <DataGridTextColumn Binding="{Binding MPWARBR, StringFormat=\{0:#\#0.00\}}"  Header="Brutto" Width="100" HeaderStyle="{StaticResource RightHeader}" CellStyle="{StaticResource CellRight}" />
             </DataGrid.Columns>
         </DataGrid>
 

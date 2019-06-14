@@ -54,7 +54,8 @@ namespace FakturaWpf.Documents
                 this.MDDATAWYST = DateTime.Now;
                 this.MDDATASPRZ = DateTime.Now;
                 this.MDWYSTAWWGDAT = DateTime.Now;
-                this.MDZAMDAT = DateTime.Now;               
+                this.MDZAMDAT = DateTime.Now;
+                this.ACTIVE = "T";
             }
         }
 

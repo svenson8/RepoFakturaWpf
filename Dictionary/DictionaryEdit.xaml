@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Dictionary"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="170" d:DesignWidth="550">
+             d:DesignHeight="170" d:DesignWidth="550" PreviewKeyDown="UserControl_PreviewKeyDown">
     <DockPanel>
         <Grid x:Name="GR_SLow" DockPanel.Dock="Top">
             <Grid.RowDefinitions>

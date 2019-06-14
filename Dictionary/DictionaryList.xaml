@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FakturaWpf.Dictionary"
              xmlns:my="clr-namespace:FakturaWpf.MyControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="675" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             d:DesignHeight="450" d:DesignWidth="675" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="UserControl_PreviewKeyDown">
     <Grid>
         <DockPanel LastChildFill="True">
             <Grid DockPanel.Dock="Top" Height="40">

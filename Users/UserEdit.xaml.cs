@@ -31,6 +31,7 @@ namespace FakturaWpf.Users
             InitializeComponent();
 
             InitBinding(id);
+            this.Focusable = true;
         }
 
         private void InitBinding(int id)
@@ -60,6 +61,12 @@ namespace FakturaWpf.Users
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            if (TX_Name.Text.Length == 0)
+            {
+                Various.Warning("Nie podano nazwy użytkownika", "Ostrzeżenie");
+                return;
+            }
+
             if (CheckPassword())
             {
 
@@ -94,6 +101,16 @@ namespace FakturaWpf.Users
         public string TreeName()
         {
             return "Dane użytkow.";
+        }
+
+        private void UC_UserEdit_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+                button_Click(sender, e);
+
+            if (e.Key == Key.Escape)
+                button2_Click(sender, e);
+
         }
     }
 }

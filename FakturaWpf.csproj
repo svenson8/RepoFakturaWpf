@@ -34,9 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
@@ -87,6 +89,9 @@
       <DependentUpon>DictionaryList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Documents\DocPositionClass.cs" />
+    <Compile Include="Documents\DocPositionEdit.xaml.cs">
+      <DependentUpon>DocPositionEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Documents\DocumentClass.cs" />
     <Compile Include="Documents\DocumentEdit.xaml.cs">
       <DependentUpon>DocumentEdit.xaml</DependentUpon>
@@ -122,6 +127,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\WpfPrinting.cs" />
     <Compile Include="Tools\XmlClass.cs" />
     <Compile Include="Users\UserClass.cs" />
     <Compile Include="Users\UserEdit.xaml.cs">
@@ -152,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dictionary\DictionaryList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Documents\DocPositionEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

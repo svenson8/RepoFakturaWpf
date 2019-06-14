@@ -29,6 +29,7 @@ namespace FakturaWpf.Documents
         {
             InitializeComponent();
             Prepare();
+            this.Focusable = true;
         }
 
         private void Prepare()
@@ -145,6 +146,15 @@ namespace FakturaWpf.Documents
                 Various.Warning("Błąd zapisu danych");
 
             Close(sender, e);
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                MyButton_myClick(sender, e);
+
+            if (e.Key == Key.F5)
+                MyButton_myClick_1(sender, e);
         }
     }
 }

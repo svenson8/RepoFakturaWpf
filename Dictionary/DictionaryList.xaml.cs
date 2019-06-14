@@ -34,6 +34,7 @@ namespace FakturaWpf.Dictionary
             this.slowkind = slowkind;
             choice = achoice;
             Prepare();
+            this.Focusable = true;
         }
 
 
@@ -160,6 +161,29 @@ namespace FakturaWpf.Dictionary
                 MdiControl.RefreshMdi(typeof(AssortmentEdit), dict);
 
             Close(sender, e);
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close(sender, e);
+
+            if (e.Key == Key.Insert)
+                EditPosition(false);
+
+            if (e.Key == Key.F6)
+                EditPosition(true);
+
+            if (e.Key == Key.Delete)
+                MyButton_myClick_1(sender, e);
+
+            if (e.Key == Key.F3)
+                MyButton_myClick(sender, e);
+
+            if ((e.Key == Key.Enter) && (choice == true))
+            {
+                btCho_myClick(sender, e);
+            }
         }
     }
 }
