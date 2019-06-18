@@ -310,6 +310,10 @@ namespace FakturaWpf.Documents
                         chosenNumber.ThisSaveData();
                     }
 
+                    document.MDWARNET = ListPosition.Sum(x => x.MPWARNET);
+                    document.MDWARVAT = ListPosition.Sum(x => x.MPWARVAT);
+                    document.MDWARBR = ListPosition.Sum(x => x.MPWARBR);
+
                     if (document.ThisSaveData() && SavePositions())
                     {
                         Various.InfoOk("Dokument zapisany", "Informacja");

@@ -65,7 +65,8 @@ namespace FakturaWpf.Tools
                 Icon = Various.GetImageFromResources(iconame),
                 Height = height,
                 Width = width,
-                Content = (UserControl)theObject,               
+                Content = (UserControl)theObject,
+                MaxHeight = mdParent.ActualHeight - 20,
             };
 
             MdiControl.mdParent.Children.Add(md);

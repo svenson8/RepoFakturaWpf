@@ -29,54 +29,82 @@ namespace FakturaWpf.Assortment
 
         public AssortmentEdit(int id)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            assort = new AssortmentClass(id);
-            SetGroup((assort.ID > 0 ? new DictionaryClass(assort.ASGRUPAID, DictionaryClass.slRodzAsGroup) : null));
-            DP_Main.DataContext = assort;
-            InitCbType();
-            InitCbVat();
-            InitCbMeasure();
-            this.Focusable = true;
+                assort = new AssortmentClass(id);
+                SetGroup((assort.ID > 0 ? new DictionaryClass(assort.ASGRUPAID, DictionaryClass.slRodzAsGroup) : null));
+                DP_Main.DataContext = assort;
+                InitCbType();
+                InitCbVat();
+                InitCbMeasure();
+                this.Focusable = true;
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("AsortmentEdit: " + ex.Message, "Błąd");
+            }
 
         }
 
         private void InitCbMeasure()
         {
-            List<DictionaryClass> ListData = new List<DictionaryClass>();
-            ListData = new DictionaryClass(0, DictionaryClass.slRodzMeasure).ThisReadListData().OfType<DictionaryClass>().ToList();
+            try
+            {
+                List<DictionaryClass> ListData = new List<DictionaryClass>();
+                ListData = new DictionaryClass(0, DictionaryClass.slRodzMeasure).ThisReadListData().OfType<DictionaryClass>().ToList();
 
-            CB_jm.comboBox.ItemsSource = ListData;
-            CB_jm.comboBox.DisplayMemberPath = "SLKOMUN1";
-            CB_jm.comboBox.SelectedValuePath = "ID";
+                CB_jm.comboBox.ItemsSource = ListData;
+                CB_jm.comboBox.DisplayMemberPath = "SLKOMUN1";
+                CB_jm.comboBox.SelectedValuePath = "ID";
 
-            if (assort.ID > 0)
-                CB_jm.comboBox.SelectedValue = assort.ASJM;
-            else
-                CB_jm.comboBox.SelectedIndex = 0;
+                if (assort.ID > 0)
+                    CB_jm.comboBox.SelectedValue = assort.ASJM;
+                else
+                    CB_jm.comboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("AssortmentEdit.InitCbMeasure: " + ex.Message, "Błąd");
+            }
         }
 
         private void InitCbVat()
         {
-            CB_vat.comboBox.Items.Clear();
-            CB_vat.comboBox.Items.Add(23);
-            CB_vat.comboBox.Items.Add(8);
-            CB_vat.comboBox.Items.Add(5);
-            CB_vat.comboBox.Items.Add("0");
-            CB_vat.comboBox.Items.Add("ZW");
+            try
+            {
+                CB_vat.comboBox.Items.Clear();
+                CB_vat.comboBox.Items.Add(23);
+                CB_vat.comboBox.Items.Add(8);
+                CB_vat.comboBox.Items.Add(5);
+                CB_vat.comboBox.Items.Add("0");
+                CB_vat.comboBox.Items.Add("ZW");
 
-            if (assort.ID > 0)
-                CB_vat.comboBox.Text = (assort.ASVAT == -1 ? "ZW" : assort.ASVAT.ToString());
-            else
-                CB_vat.comboBox.SelectedIndex = 0;
+                if (assort.ID > 0)
+                    CB_vat.comboBox.Text = (assort.ASVAT == -1 ? "ZW" : assort.ASVAT.ToString());
+                else
+                    CB_vat.comboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("AssortmentEdit.InitCbVat: " + ex.Message, "Błąd");
+            }
         }
 
         private void InitCbType()
         {
-            Various.InitCbAssortType(CB_typ.comboBox);
+            try
+            {
+                Various.InitCbAssortType(CB_typ.comboBox);
 
-            if (assort.ID > 0)
-                CB_typ.comboBox.SelectedIndex = assort.ASTYP;
+                if (assort.ID > 0)
+                    CB_typ.comboBox.SelectedIndex = assort.ASTYP;
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("AssortmentEdit.InitCbType: " + ex.Message, "Błąd");
+            }
 
         }
 

@@ -143,9 +143,14 @@ namespace FakturaWpf.Customer
             {
                 Various.Warning(customer.KLIUWAGI, "Ostrzeżenie");
                 customer.KLIUWAGI = "";
+            } else
+            {
+                InitBinding();
+                CB_Country.comboBox.Text = "Polska";
+                CB_Province.comboBox.Text = customer.WOJTXT.ToLower();
             }
 
-            InitBinding();
+ 
 
         }
 

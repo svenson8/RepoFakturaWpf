@@ -65,5 +65,23 @@ namespace FakturaWpf.Tools
             return nq.WellDone;
         }
 
+        public Boolean AddSumProcedure()
+        {
+            string script = "CREATE OR ALTER PROCEDURE GET_SUM " + 
+                            "@ID_DOK varchar(100) " +
+                            "AS " +
+                            "BEGIN " +
+                            "  DECLARE @sumnet decimal(18, 4); " +
+                            "            DECLARE @sumvat decimal(18, 4); " +
+                            "            DECLARE @sumbr  decimal(18, 4); " +
+                            "            DECLARE @strSQL varchar(2000) " +
+
+                            "SET @strSQL = 'select sum(MDWARNET), sum(MDWARVAT), sum(MDWARBR) from TDOKumnety where ID IN (' + @ID_DOK + ')' " +
+                            "EXECUTE(@strSQL) " +
+                            "END ";
+            NQuery nq = new NQuery(script);
+            return nq.WellDone;
+        }
+
     }
 }

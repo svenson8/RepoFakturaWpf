@@ -110,7 +110,7 @@
             </TreeViewItem>
         </TreeView>
         <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem Width="736">
+            <StatusBarItem>
                 <TextBlock Name="lblCursorPosition" />
             </StatusBarItem>
         </StatusBar>

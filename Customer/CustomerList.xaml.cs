@@ -250,9 +250,17 @@ namespace FakturaWpf.Customer
 
         private void MyButton_myClick_2(object sender, RoutedEventArgs e)
         {
-            PrintDialog dlgPrint = new PrintDialog();
-            WpfPrinting p = new WpfPrinting();
-            p.PrintDataGrid(null, DG_Customer, null, dlgPrint, true, false, false);
+            try
+            {
+                PrintDialog dlgPrint = new PrintDialog();
+                WpfPrinting p = new WpfPrinting();
+
+                p.PrintDataGrid(Various.GetHeader("Lista kontrahentów"), DG_Customer, null, dlgPrint, false, false, false);
+            }
+            catch
+            {
+                Various.Error("CustomerList.MyButton_myClick_2");
+            }
 
         }
     }

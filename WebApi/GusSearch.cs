@@ -154,7 +154,7 @@ namespace FakturaWpf.WebApi
                         ansCus.KLINRDOMU = "";
                         ansCus.KLIKOD = fSearchResult.DocumentElement.SelectSingleNode(root + "KodPocztowy").InnerText;
                         ansCus.KLIMIEJSC = fSearchResult.DocumentElement.SelectSingleNode(root + "Miejscowosc").InnerText;
-                        //ansCus.KLIWOJID = GetWojIdFromstring(fSearchResult.DocumentElement.SelectSingleNode(root + "Wojewodztwo").InnerText);
+                        ansCus.WOJTXT = fSearchResult.DocumentElement.SelectSingleNode(root + "Wojewodztwo").InnerText;
                         ansCus.KLIPOWIAT = fSearchResult.DocumentElement.SelectSingleNode(root + "Powiat").InnerText;
                         ansCus.KLIGMINA = fSearchResult.DocumentElement.SelectSingleNode(root + "Gmina").InnerText;
 
@@ -172,7 +172,7 @@ namespace FakturaWpf.WebApi
                                 ansCus.KLIKOD = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzKodPocztowy").InnerText;
                                 ansCus.KLIMIEJSC = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzMiejscowosc_Nazwa").InnerText;
                                 // ansCus.KLIKRAJID  := fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzKraj_Nazwa").InnerText;
-                                //ansCus.KLIWOJID   := fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzWojewodztwo_Nazwa").InnerText;
+                                ansCus.WOJTXT   = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzWojewodztwo_Nazwa").InnerText;
                                 ansCus.KLIPOWIAT = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzPowiat_Nazwa").InnerText;
                                 ansCus.KLIGMINA = fSearchResult.DocumentElement.SelectSingleNode(root + "praw_adSiedzGmina_Nazwa").InnerText;
                             }

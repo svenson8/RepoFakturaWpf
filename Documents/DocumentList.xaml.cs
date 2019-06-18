@@ -89,6 +89,22 @@ namespace FakturaWpf.Documents
             DG_DocList.ItemsSource = lpom;
             DG_DocList.SelectedIndex = 0;
 
+            LoadSumFromProcedure(lpom);
+
+        }
+
+        private void LoadSumFromProcedure(List<DocumentClass> l)
+        {
+
+            NQueryReader nq = new NQueryReader("Declare @tablevar table(net decimal(18,4), vat decimal(18,4), br decimal(18,4)); " +
+                                               "insert into @tablevar exec GET_SUM " + Various.QuotedStr(string.Join(",", l.Select(x => x.ID).ToList())) +
+                                               "SELECT * FROM @tablevar");
+            while (nq.NReader.Read())
+            {
+                l_netto.Content = string.Format("{0:0.00}", nq.NReader.GetDecimal(0));
+                l_vat.Content = string.Format("{0:0.00}", nq.NReader.GetDecimal(1));
+                l_brutto.Content = string.Format("{0:0.00}", nq.NReader.GetDecimal(2));
+            }
         }
 
         void InitDokDef()
@@ -219,20 +235,18 @@ namespace FakturaWpf.Documents
 
         private void MyButton_myClick_2(object sender, RoutedEventArgs e)
         {
-              
-              PrintDialog dlgPrint = new PrintDialog();
-              WpfPrinting p = new WpfPrinting();
-              p.PrintDataGrid(null, DG_DocList, null, dlgPrint, true, false, false);
+            try
+            {
+                PrintDialog dlgPrint = new PrintDialog();
+                WpfPrinting p = new WpfPrinting();
 
-                 
-
-
+                p.PrintDataGrid(Various.GetHeader("Lista dokumentów"), DG_DocList, null, dlgPrint, true, false, false);
+            }
+            catch
+            {
+                Various.Error("Błąd druku");
+            }
         }
-
-
-
-
-
 
     }
 }

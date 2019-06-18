@@ -63,6 +63,7 @@ namespace FakturaWpf
             dc.InsertProvincesFromXML();
             result = sc.AddCountryPorcedure();    // dodanie procedury wpisujacej kraje z pliku (bulkowanie) 
             result = dc.InsertCountriesFromProc();  // wykonanie skryptu wczytujacego kraje z xml w bazie
+            result = sc.AddSumProcedure();
 
             DocumentClass ds = new DocumentClass();
             result = ds.ThisTableCheck();

@@ -33,11 +33,17 @@ namespace FakturaWpf.Users
 
         public UserList()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            LoadData();
-            this.Focusable = true;
-
+                LoadData();
+                this.Focusable = true;
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("UserList.UserList: " + ex.Message, "Błąd");
+            }
         }
 
         void LoadData()
@@ -56,6 +62,9 @@ namespace FakturaWpf.Users
                 if (TX_Surname.Text != String.Empty)
                     sques += " and NAZWISKO like '%" + TX_Surname.Text + "%'";
 
+                if (CH_Active.IsChecked == true)
+                    sques += " and ACTIVE =" + Various.QuotedStr("N");
+
                 NQueryReader nq = new NQueryReader(sques);
 
                 dt = new DataTable();
@@ -68,7 +77,7 @@ namespace FakturaWpf.Users
             }
             catch (Exception ex)
             {
-                Various.Warning(ex.Message, "Błąd");
+                Various.Warning("UserList.LoadData: "+ex.Message, "Błąd");
             }
 
         }
@@ -94,16 +103,23 @@ namespace FakturaWpf.Users
 
         private void EditPosition(bool mod)
         {
-            int id = 0;
-
-            if (mod)
+            try
             {
-                GetId(out id);
+                int id = 0;
+
+                if (mod)
+                {
+                    GetId(out id);
+                }
+
+                if (id >= 0)
+                {
+                    MdiControl.AddChild(typeof(UserEdit), new object[] { id }, "Dane użytkownika", "ImgFakt", 395, 575, TreeName());
+                }
             }
-
-            if (id >= 0)
+            catch (Exception ex)
             {
-                MdiControl.AddChild(typeof(UserEdit), new object[] { id }, "Dane użytkownika", "ImgFakt", 395, 575, TreeName());
+                Various.Warning("UserList.EditPosition: " + ex.Message, "Błąd");
             }
         }
 
@@ -114,7 +130,14 @@ namespace FakturaWpf.Users
 
         public void Close(object sender, RoutedEventArgs e)
         {
-            MdiControl.CloseMdi(typeof(UserList), TreeName());
+            try
+            {
+                MdiControl.CloseMdi(typeof(UserList), TreeName());
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("UserList.Close: " + ex.Message, "Błąd");
+            }
         }
 
         public void OnRefresh(object obj = null)
@@ -124,18 +147,25 @@ namespace FakturaWpf.Users
 
         private void MyButton_myClick(object sender, RoutedEventArgs e)
         {
-            GetId(out int id);
-
-            if (id > 0)
+            try
             {
-                if (Various.Question("Czy na pewno usunąć użytkownika ?" + ((DataRowView)DG_User.SelectedItem)["NAZWA"], "Pytanie"))
-                  {
-                    if (UserClass.DeleteUser(id))
+                GetId(out int id);
+
+                if (id > 0)
+                {
+                    if (Various.Question("Czy na pewno usunąć użytkownika ?" + ((DataRowView)DG_User.SelectedItem)["NAZWA"], "Pytanie"))
                     {
-                        Various.InfoOk("Użytkownik usunięty");
-                        LoadData();
+                        if (UserClass.DeleteUser(id))
+                        {
+                            Various.InfoOk("Użytkownik usunięty");
+                            LoadData();
+                        }
                     }
-                  }
+                }
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("UserList.MyButton_myCilck: " + ex.Message, "Błąd");
             }
         }
 
@@ -146,22 +176,43 @@ namespace FakturaWpf.Users
 
         private void UC_UserList_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
-                Close(sender, e);
+            try
+            {
+                if (e.Key == Key.Escape)
+                    Close(sender, e);
 
-            if (e.Key == Key.Insert)
-                EditPosition(false);
+                if (e.Key == Key.Insert)
+                    EditPosition(false);
 
-            if (e.Key == Key.F6)
-                EditPosition(true);
+                if (e.Key == Key.F6)
+                    EditPosition(true);
 
-            if (e.Key == Key.Delete)
-                MyButton_myClick(sender, e);
+                if (e.Key == Key.Delete)
+                    MyButton_myClick(sender, e);
 
-            if (e.Key == Key.F3)
-                button5_Click(sender, e);
+                if (e.Key == Key.F3)
+                    button5_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("UserList.UC_UserList_PreviewKeyDown: " + ex.Message, "Błąd");
+            }
 
+        }
 
+        private void MyButton_myClick_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PrintDialog dlgPrint = new PrintDialog();
+                WpfPrinting p = new WpfPrinting();
+
+                p.PrintDataGrid(Various.GetHeader("Lista użytkowników"), DG_User, null, dlgPrint, false, false, false);
+            }
+            catch
+            {
+                Various.Error("UserList.MyButton_myClick_1");
+            }
         }
     }
 }

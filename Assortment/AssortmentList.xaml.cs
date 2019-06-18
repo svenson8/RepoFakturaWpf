@@ -282,6 +282,21 @@ namespace FakturaWpf.Assortment
                 btCho_myClick(sender, e);
             }
         }
+
+        private void MyButton_myClick_2(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PrintDialog dlgPrint = new PrintDialog();
+                WpfPrinting p = new WpfPrinting();
+
+                p.PrintDataGrid(Various.GetHeader("Lista asortymentów"), DG_AsList, null, dlgPrint, false, false, false);
+            }
+            catch
+            {
+                Various.Error("AsortmentLis.MyButton_myClick_2");
+            }
+        }
     }
 
 

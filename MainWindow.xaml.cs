@@ -31,6 +31,7 @@ namespace FakturaWpf
         public MainWindow()
         {
             InitializeComponent();
+            lblCursorPosition.Text = "Zalogowano: " + UserClass.UserACTLogin;
         }
 
 
@@ -106,7 +107,7 @@ namespace FakturaWpf
 
         private void MenuItem_Click_13(object sender, RoutedEventArgs e)
         {
-            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzMeasure, false }, "Lista grup asortymentowych", "ImgMeasure", 500, 675);
+            MdiControl.AddChild(typeof(DictionaryList), new object[] { DictionaryClass.slRodzMeasure, false }, "Lista jednostek miar", "ImgMeasure", 500, 675);
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)

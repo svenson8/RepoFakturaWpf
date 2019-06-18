@@ -33,14 +33,21 @@ namespace FakturaWpf.Assortment
 
         public AssortmentClass(int id = 0)
         {
-            this.ID = id;
-            if (this.ID > 0)
-                ThisReadData();
-            else
+            try
             {
-                this.DATAW = DateTime.Now;
-                this.DMODDATE = DateTime.Now;
-                this.ACTIVE = "T";
+                this.ID = id;
+                if (this.ID > 0)
+                    ThisReadData();
+                else
+                {
+                    this.DATAW = DateTime.Now;
+                    this.DMODDATE = DateTime.Now;
+                    this.ACTIVE = "T";
+                }
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("AsortmentClass: " + ex.Message, "Błąd");
             }
         }
 
@@ -48,25 +55,33 @@ namespace FakturaWpf.Assortment
 
         public int GetLengthOfStringField(string name)
         {
-            switch (name)
+            try
             {
-                case nameof(ACTIVE): return 1;
-                case nameof(ASKOD): return 10;
-                case nameof(ASNAZWA): return 300;
-                case nameof(ASINDEX): return 30;
-                case nameof(ASPKWIU): return 20;
-                case nameof(ASUWAGI): return 1000;
-                case nameof(ASNETTO): return 4;
-                case nameof(ASBRUTTO): return 4;
-                case nameof(ASILOSCWYB): return -1;
-                case nameof(ASNETTOWYB): return -1;
+                switch (name)
+                {
+                    case nameof(ACTIVE): return 1;
+                    case nameof(ASKOD): return 10;
+                    case nameof(ASNAZWA): return 300;
+                    case nameof(ASINDEX): return 30;
+                    case nameof(ASPKWIU): return 20;
+                    case nameof(ASUWAGI): return 1000;
+                    case nameof(ASNETTO): return 4;
+                    case nameof(ASBRUTTO): return 4;
+                    case nameof(ASILOSCWYB): return -1;
+                    case nameof(ASNETTOWYB): return -1;
 
-                default: return 100;
+                    default: return 100;
+                }
+            }
+            catch (Exception ex)
+            {
+                Various.Warning("AsortmentClass.GetLengthOfStringField: " + ex.Message, "Błąd");
+                return 0;
             }
         }
 
         public string TableName()
-        {
+        {                       
             return "TTowary";
         }
 

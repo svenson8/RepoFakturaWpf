@@ -61,6 +61,9 @@ namespace FakturaWpf.Dictionary
 
             List<DictionaryClass> lpom = listD.Select(x => x).ToList();
 
+            if (ch_active.IsChecked == true)
+                lpom = lpom.Where(x => x.ACTIVE == "N").ToList();
+
             if (TX_Search.Text.Length > 0)
             {
                 switch (CB_Choice.comboBox.SelectedIndex)
@@ -183,6 +186,22 @@ namespace FakturaWpf.Dictionary
             if ((e.Key == Key.Enter) && (choice == true))
             {
                 btCho_myClick(sender, e);
+            }
+        }
+
+        private void MyButton_myClick_2(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PrintDialog dlgPrint = new PrintDialog();
+                WpfPrinting p = new WpfPrinting();
+
+                string title = MdiControl.FindChild(typeof(DictionaryList)).Title;
+                p.PrintDataGrid(Various.GetHeader(title), DG_Dict, null, dlgPrint, false, false, false);
+            }
+            catch
+            {
+                Various.Error("DictionaryList.MyButton_myClick_2");
             }
         }
     }

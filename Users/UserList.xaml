@@ -36,8 +36,8 @@
                 <DataGridTextColumn Binding="{Binding NAZWA}" Header="Login" Width="100"/>
                 <DataGridTextColumn Binding="{Binding IMIE}" Header="Imię" Width="140" />
                 <DataGridTextColumn Binding="{Binding NAZWISKO}" Header="Nazwisko" Width="200"/>
-                <DataGridTextColumn Binding="{Binding DATAW}"  Header="Data wprow." Width="80"/>
-                <DataGridTextColumn Binding="{Binding DMODDATE}" Header="Data ostat. &#x0a;zmiany" Width="80"/>
+                <DataGridTextColumn Binding="{Binding DATAW, StringFormat=dd-MM-yyyy}"  Header="Data wprow." Width="80"/>
+                <DataGridTextColumn Binding="{Binding DMODDATE, StringFormat=dd-MM-yyyy}" Header="Data ostat. &#x0a;zmiany" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -46,7 +46,7 @@
             <my:MyButton x:Name="btIns" myText="Ins Dodaj" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgIns}" myHeight="25" />
             <my:MyButton x:Name="btnMod" myText="F6 Zmień" myClick="button_Click" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgEdt}" myHeight="25"/>
             <my:MyButton myText="Del Usuń" HorizontalAlignment="Left" Margin="3,5,0,0" myImageSource="{StaticResource ImgDel}" myClick="MyButton_myClick" myHeight="25"/>
-            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="25"/>
+            <my:MyButton myText="F9 Drukuj" HorizontalAlignment="Right" Margin="300,5,0,0" myImageSource="{StaticResource ImgPrint}" myHeight="25" myClick="MyButton_myClick_1"/>
         </DockPanel> 
     </Grid>
 </UserControl>

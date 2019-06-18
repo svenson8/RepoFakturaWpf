@@ -43,6 +43,8 @@ namespace FakturaWpf.Customer
           public DateTime DMODDATE { get; set; }
           public string ACTIVE { get; set; }  
 
+          public string WOJTXT { get; set; }
+
 
         public CustomerClass(int id = 0)
         {
@@ -86,6 +88,7 @@ namespace FakturaWpf.Customer
                 case nameof(KLIPOWIAT): return 100;
                 case nameof(KLIGMINA): return 100;
                 case nameof(KLIPOCZTA): return 100;
+                case nameof(WOJTXT): return -1;
                 default: return 100;
             }
         }

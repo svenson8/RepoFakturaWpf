@@ -189,6 +189,19 @@ namespace FakturaWpf
             return spom;
         }
 
+        public static TextBox GetHeader(string txt)
+        {
+            TextBox t = new TextBox();
+            t.Text = txt;
+            t.Width = 100;
+            t.Height = 300;
+            t.FontWeight = FontWeights.Bold;
+            t.BorderThickness = new Thickness(0, 0, 0, 0);
+            t.FontSize = 16;
+
+            return t;
+        }
+
     }
 
     public class YesNoToBooleanConverter : IValueConverter
