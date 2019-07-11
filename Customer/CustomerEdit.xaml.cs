@@ -147,6 +147,7 @@ namespace FakturaWpf.Customer
             {
                 InitBinding();
                 CB_Country.comboBox.Text = "Polska";
+                if (customer.WOJTXT != null)
                 CB_Province.comboBox.Text = customer.WOJTXT.ToLower();
             }
 

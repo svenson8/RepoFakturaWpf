@@ -160,6 +160,7 @@ namespace FakturaWpf.Documents
             TB_Name.Text = (cs != null ? cs.KLINAZ : "");
 
             document.MDKLIID = (cs != null ? cs.ID : 0);
+            document.KLINAZ  = (cs != null ? cs.KLINAZ : "");
         }
 
 
