@@ -93,7 +93,7 @@
         </Menu>
         <ToolBarPanel DockPanel.Dock="Top">
             <ToolBar x:Name="ToolBarMain">
-                <Button Content="Faktura" />
+                <Button Content="WCF conn" Click="Button_Click" />
                 <Button Content="Sprzedaż" />
                 <Button Content="Zakup" />
             </ToolBar>

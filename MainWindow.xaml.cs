@@ -20,6 +20,7 @@ using System.ComponentModel;
 using FakturaWpf.Customer;
 using FakturaWpf.Dictionary;
 using FakturaWpf.Assortment;
+using System.ServiceModel;
 
 namespace FakturaWpf
 {
@@ -113,6 +114,19 @@ namespace FakturaWpf
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
             Environment.Exit(-1);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Uri adres = new Uri("http://localhost:2222/Hello");
+            using (var c = new ChannelFactory<IMyWcf>(
+              new BasicHttpBinding(),
+              new EndpointAddress(adres)))
+            {
+                var s = c.CreateChannel();
+                Various.InfoOk(s.Hello());
+                Various.InfoOk(s.AddNumbers(5, 8).ToString());
+            }
         }
     }
 }

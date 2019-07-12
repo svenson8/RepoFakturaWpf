@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Tools\IClassControl.cs" />
     <Compile Include="Tools\IMdiControl.cs" />
+    <Compile Include="Tools\IMyWcf.cs" />
     <Compile Include="Tools\MdiControl.cs" />
     <Compile Include="Tools\MyProgressBar.xaml.cs">
       <DependentUpon>MyProgressBar.xaml</DependentUpon>
@@ -380,6 +381,5 @@
     </Content>
     <Resource Include="Resources\poland.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
