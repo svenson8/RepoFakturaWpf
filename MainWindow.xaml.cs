@@ -118,15 +118,64 @@ namespace FakturaWpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Uri adres = new Uri("http://localhost:2222/Hello");
-            using (var c = new ChannelFactory<IMyWcf>(
-              new BasicHttpBinding(),
-              new EndpointAddress(adres)))
+            /*  Uri adres = new Uri("http://localhost:2222/Hello");
+              using (var c = new ChannelFactory<IMyWcf>(
+                new BasicHttpBinding(),
+                new EndpointAddress(adres))) */
+            /*   Uri adres = new Uri("net.tcp://localhost:2222/Hello");
+               using (var c = new ChannelFactory<IMyWcf>(
+                 new NetTcpBinding(),
+                 new EndpointAddress(adres))) */
+            /*    using (var c = new ChannelFactory<IMyWcf>(""))
+                {
+                    var s = c.CreateChannel();
+                    Various.InfoOk(s.Hello());
+                    Various.InfoOk(s.AddNumbers(5, 8).ToString());
+                    Various.InfoOk(s.GetCustomerById(5).FirstName);
+
+                    Various.InfoOk(s.GetValue(2000.0M).ToString());
+                    List<decimal> valuesList = new List<decimal>(){
+                    2000.0M, 2200.0M, 2400.0M,
+                    2600.0M, 2800.0M, 3000.0M
+                    };
+                    List<decimal> returnValues = s.GetValues(valuesList);
+                    foreach (var value in returnValues)
+                        Various.InfoOk(value.ToString());
+
+
+                } */
+
+            /*  KnowType
+             *  var binding = new BasicHttpBinding();
+              ChannelFactory<IContainerSvc> factory = new ChannelFactory<IContainerSvc>(binding);
+              EndpointAddress address = new EndpointAddress("http://localhost:8000/ContainerSvc");
+              IContainerSvc container = factory.CreateChannel(address);
+              var list = container.GetSomeData();
+              foreach (var item in list.Items)
+                  Console.WriteLine(item.Name) */
+
+            //Klasa nasłuchowa
+            var listener = new Listener();
+
+            //Tworzymy fabrykę kanałów i sam kanał
+            using (var factory = new DuplexChannelFactory<IRegister>(listener, ""))
+            using (var baseChannel = (IClientChannel)factory.CreateChannel())
             {
-                var s = c.CreateChannel();
-                Various.InfoOk(s.Hello());
-                Various.InfoOk(s.AddNumbers(5, 8).ToString());
+                IRegister channel = (IRegister)baseChannel;
+                //Uruchamiamy zadanie na serwerze,
+                //zostaniemy poinformowani o zakończeniu
+                channel.RunTask();
+
+                //Wykonujemy inne operacje
+                Various.InfoOk("Do other stuff...");
+
+                //Czekamy na odpowiedź
+                listener.FinishedEvent.WaitOne();
+                //Otrzmyalimy odpowiedź, możemy spokojnie zakończyć pracę
+                Various.InfoOk("Exit...");
             }
+           // Console.ReadLine();
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel; // Container
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -7,12 +8,9 @@ using System.Threading.Tasks;
 
 
     [ServiceContract]
-    public interface IMyWcf
+    public interface IContainerSvc
     {
         [OperationContract]
-        string Hello();
-
-        [OperationContract]
-        int AddNumbers(int a, int b);
+        Container GetSomeData();
     }
 

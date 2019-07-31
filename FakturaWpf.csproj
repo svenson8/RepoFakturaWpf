@@ -102,6 +102,7 @@
     <Compile Include="Documents\DocumentNumber.xaml.cs">
       <DependentUpon>DocumentNumber.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WcfCommunicate\IContainerSvc.cs" />
     <Compile Include="MyControls\MyButton.xaml.cs">
       <DependentUpon>MyButton.xaml</DependentUpon>
     </Compile>
@@ -113,7 +114,8 @@
     </Compile>
     <Compile Include="Tools\IClassControl.cs" />
     <Compile Include="Tools\IMdiControl.cs" />
-    <Compile Include="Tools\IMyWcf.cs" />
+    <Compile Include="WcfCommunicate\CustomerWcf.cs" />
+    <Compile Include="WcfCommunicate\IMyWcf.cs" />
     <Compile Include="Tools\MdiControl.cs" />
     <Compile Include="Tools\MyProgressBar.xaml.cs">
       <DependentUpon>MyProgressBar.xaml</DependentUpon>
@@ -137,6 +139,9 @@
     <Compile Include="Users\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WcfCommunicate\INotify.cs" />
+    <Compile Include="WcfCommunicate\IRegister.cs" />
+    <Compile Include="WcfCommunicate\Listener.cs" />
     <Compile Include="WebApi\GusSearch.cs" />
     <Page Include="Assortment\AssortmentEdit.xaml">
       <SubType>Designer</SubType>
@@ -277,7 +282,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\add.png" />
